@@ -7,6 +7,24 @@ There are three valid template types enabled by tasty:
 - `entity-template`:
 - `system-template`:
 
+# Setup
+This repository is setup to work with pyenv and poetry:
+- [pyenv](https://github.com/pyenv/pyenv#installation) for managing python versions
+- [poetry](https://python-poetry.org/docs/#installation) for managing environment
+- [pre-commit](https://pre-commit.com/#install) for managing code styling
+
+## Using Poetry
+Once poetry is installed:
+- `poetry config virtualenvs.in-project true` setting to create a .venv dir in your project and install dependencies there (similar to `.bundle/install`)
+- Clone this repo, cd into it
+- `pyenv local 3.7.4`
+- `poetry install` add `--no-dev` flag if don't want development requirements and `--no-root` if don't want to install the current project
+- `poetry run pre-commit install` install git hooks
+- `poetry run pre-commit run --all-files` run pre-commit through poetry
+- `poetry add [package]` adds package as dependency, specify `--dev` flag if dev dependency
+- `poetry shell` enter a virtual environment through poetry
+
+
 ## Working with tasty graphs
 ```python
 import tasty.graphs as tg
