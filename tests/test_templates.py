@@ -152,29 +152,29 @@ class TestHaystackGetEntities:
         # -- Setup
         ont = tg.load_ontology('Haystack', '3.9.9')
         entity_type = 'discharge-air-flow-sensor-point'
-        tags = tt._get_namespaced_terms(ont, entity_type)
+        valid_namespaced_terms = tt._get_namespaced_terms(ont, entity_type)
 
         # -- Act
-        valid_entities, typing_properties = tt._haystack_get_entities_and_typing_properties(ont, tags)
-        valid_entities_list = list(valid_entities)
-        valid_typing_properties_list = list(typing_properties)
+        entity_types, typing_properties = tt._haystack_get_entities_and_typing_properties(ont, valid_namespaced_terms)
+        entity_types_list = list(entity_types)
+        typing_properties_list = list(typing_properties)
 
         # -- Assert
-        assert len(valid_entities) == 1
+        assert len(entity_types) == 1
         assert len(typing_properties) == 4
-        assert isinstance(valid_entities, set)
-        assert tc.PHIOT_3_9_9, 'point' == valid_entities_list[0]
-        assert (tc.PHSCIENCE_3_9_9, 'air') in valid_typing_properties_list
+        assert isinstance(entity_types, set)
+        assert tc.PHIOT_3_9_9, 'point' == entity_types_list[0]
+        assert (tc.PHSCIENCE_3_9_9, 'air') in typing_properties_list
 
     def test_passes_when_multiple_valid_entities(self):
         # -- Setup
         ont = tg.load_ontology('Haystack', '3.9.9')
         entity_type = 'fan-motor-sensor-point'
         tags = tt._get_namespaced_terms(ont, entity_type)
-        valid_entities = tt._haystack_get_entities_and_typing_properties(ont, tags)
+        entity_types, typing_properties = tt._haystack_get_entities_and_typing_properties(ont, tags)
 
         # -- Act
-        assert len(valid_entities) == 2
+        assert len(entity_types) == 2
 
 
 class TestEntityTemplate:
@@ -221,7 +221,7 @@ class TestResolveTelemetryPointsToEntityTemplates:
         assert tel in template.keys()
 
         # -- Act
-        points = template["telemetry_point_types"]
+        points = template[tel]
         schema = template['schema']
         version = template['version']
         entity_templates = tt.resolve_telemetry_points_to_entity_templates(points, schema, version)

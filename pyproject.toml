@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "tasty"
 version = "0.1.0a0"
-description = ""
+description = "Provides an SDK for building up semantic metadata models using a templating framework."
 authors = ["corymosiman12 <cory.mosiman12@gmail.com>"]
 
 [tool.poetry.dependencies]

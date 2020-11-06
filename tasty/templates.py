@@ -8,15 +8,10 @@ from jsonschema import validate
 from rdflib.namespace import Namespace
 from rdflib import Graph
 
-from tasty import graphs as tg
+import tasty.graphs as tg
+import tasty.constants as tc
 import tasty.exceptions as te
 
-
-# class Template:
-#     def __init__(self, template_type: str, name: str):
-#         self.template_type: str = template_type
-#         self.name: str = name
-#
 
 class EntityTemplate:
     def __init__(self, entity_type: Set, typing_properties: Set, properties: dict):
@@ -24,48 +19,107 @@ class EntityTemplate:
         self.typing_properties = typing_properties
         self.other_properties = properties
 
-    def get_entity_type(self) -> Set:
+    def get_entity_type(self) -> Set[str]:
+        """
+        Just get terms, no namespaces
+        :return: [Set[str]]
+        """
         terms = set()
         for et in self.entity_type:
-            ns, t = et
-            terms.add(t)
+            ns, term = et
+            terms.add(term)
         return terms
 
-    def get_typing_info(self) -> Set:
+    def get_typing_info(self) -> Set[str]:
+        """
+        Get terms for the entity_type and typing_properties, no namespaces
+        :return: [Set[str]]
+        """
         terms = set()
         for et in self.entity_type:
-            ns, t = et
-            terms.add(t)
+            ns, term = et
+            terms.add(term)
         for tp in self.typing_properties:
-            ns, t = tp
-            terms.add(t)
+            ns, term = tp
+            terms.add(term)
         return terms
 
     def get_other_properties(self) -> dict:
+        """
+        Get other_properties as hash map of keys, values, no namespaces
+        :return: [dict]
+        """
         properties = {}
         for k, v in self.other_properties.items():
-            ns, t = k
-            properties[t] = v
+            ns, term = k
+            properties[term] = v
         return properties
 
     def get_all_metadata_simple(self) -> dict:
+        """
+        Get hash map of all metadata, no namespaces
+        :return: [dict]
+        """
         meta = self.get_other_properties()
         typing_info = self.get_typing_info()
         for info in typing_info:
             meta[info] = None
         return meta
 
+    def get_namespaces(self) -> Set[Namespace]:
+        """
+        Get all unique Namespaces for the entity template
+        :return: [Set[Namespace]]
+        """
+        all_ns = set()
+        for et in self.entity_type:
+            ns, term = et
+            all_ns.add(ns)
+        for tp in self.typing_properties:
+            ns, term = tp
+            all_ns.add(ns)
+        for op in self.other_properties:
+            ns, term = op
+            all_ns.add(ns)
+        return all_ns
+
 
 class PointGroupTemplate:
-    def __init__(self):
-        self.telemetry_points: List[EntityTemplate] = None
+    def __init__(self, template: dict):
+        self.template = template
+        self.template_schema: dict = None
+        self.is_valid: bool = False
+        self.validation_error: str = None
+        self.id: str = None
+        self.symbol: str = None
+        self.description: str = None
+        self.schema: str = None
+        self.version: str = None
+        self.telemetry_points: dict = None
+        self.telemetry_point_entities: List[EntityTemplate] = None
+        self.validate_template_against_schema()
 
-    def add_telemetry_templates(self, telemetry_templates: dict):
-        pass
+    def validate_template_against_schema(self, schema_path=os.path.join(tc.SCHEMAS_DIR, 'template.schema.json')) -> None:
+        self.template_schema = load_template_schema(path_to_file=schema_path)
+        self.is_valid, self.validation_error = validate_template_against_schema(self.template, self.schema)
+        if not self.is_valid:
+            raise te.TemplateValidationError(self.validation_error)
 
-    def resolve_points(self):
-        pass
+    def populate_template_basics(self) -> None:
+        """
+        Only populate template if valid
+        :return:
+        """
+        if self.is_valid:
+            self.id = self.template['id']
+            self.symbol = self.template['symbol']
+            self.description = self.template['description']
+            self.schema = self.template['schema']
+            self.version = self.template['version']
+            self.telemetry_points = self.template['telemetry_point_types']
 
+    def populate_telemetry_templates(self) -> None:
+        self.telemetry_point_entities = resolve_telemetry_points_to_entity_templates(self.telemetry_points, self.schema, self.version)
 
 # class TemplateLibrary:
 #     def __init__(self):
@@ -120,10 +174,6 @@ def load_template_schema(path_to_file: str) -> dict:
     return schema
 
 
-def get_template_type(template: dict) -> str:
-    return template["template_type"]
-
-
 def resolve_telemetry_points_to_entity_templates(telemetry_point_types: dict, schema: str, version: str) -> List[
         EntityTemplate]:
     ont = tg.load_ontology(schema, version)
@@ -131,9 +181,9 @@ def resolve_telemetry_points_to_entity_templates(telemetry_point_types: dict, sc
     for point_type, properties in telemetry_point_types.items():
         if schema == 'Haystack':
             valid_namespaced_terms = _get_namespaced_terms(ont, point_type)
-            entities, typing_properties = _haystack_get_entities_and_typing_properties(ont, valid_namespaced_terms)
+            entity_types, typing_properties = _haystack_get_entities_and_typing_properties(ont, valid_namespaced_terms)
             other_properties = _haystack_get_other_properties(ont, properties)
-        entity_templates.append(EntityTemplate(entities, typing_properties, other_properties))
+        entity_templates.append(EntityTemplate(entity_types, typing_properties, other_properties))
     return entity_templates
 
 
@@ -160,8 +210,9 @@ def _get_namespaced_terms(ontology: Graph, terms: str) -> Set[Tuple[Namespace, s
     return valid_namespaced_terms
 
 
-def _haystack_get_entities_and_typing_properties(ontology: Graph, valid_namespaced_terms: Set[Tuple[Namespace, str]]) -> Set[
-        Tuple[Namespace, str]]:
+def _haystack_get_entities_and_typing_properties(ontology: Graph, valid_namespaced_terms: Set[Tuple[Namespace, str]]) -> \
+        Set[
+            Tuple[Namespace, str]]:
     """
     Return all tags which subclass from an entity
     :param ontology:
