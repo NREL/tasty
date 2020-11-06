@@ -1,0 +1,18 @@
+---
+- id: 4aa753fc-ab1b-47d0-984f-121fa0cfa0e9
+  symbol: SD
+  description: Single duct VAV type, with basic airflow control.
+  template_type: point-group-template
+  schema: Haystack
+  version: 3.9.9
+  telemetry_point_types:
+    discharge-air-flow-sensor-point:
+      curVal:
+      kind: Number
+      unit: cfm
+    discharge-air-flow-sp-point:
+      kind: Number
+      unit: cfm
+    damper-cmd-point:
+      kind: Number
+      unit: percent

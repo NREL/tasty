@@ -1,0 +1,46 @@
+{
+  "$id": "https://example.com/address.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "An address similar to http://microformats.org/wiki/h-card",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "symbol": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "template_type": {
+      "type": "string",
+      "enum": ["point-group-template", "entity-template", "system-template"]
+    },
+    "schema": {
+      "type": "string",
+      "enum": ["Brick", "Haystack"]
+    },
+    "version": {
+      "type": "string",
+      "enum": [
+        "1.1",
+        "3.9.9"
+      ]
+    },
+    "telemetry_point_types": {
+      "type": "object",
+      "properties": {
+
+      }
+    }
+  },
+  "required": [
+    "id",
+    "symbol",
+    "description",
+    "template_type",
+    "schema",
+    "version"
+  ]
+}
