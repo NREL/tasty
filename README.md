@@ -72,3 +72,7 @@ telemetry_point_types = {
 
 entity_templates = tt.resolve_telemetry_points_to_entity_templates(telemetry_point_types, 'Haystack', '3.9.9')
 ```
+
+# Running tests
+
+- `poetry run pytest`
