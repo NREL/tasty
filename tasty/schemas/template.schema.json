@@ -28,6 +28,12 @@
         "3.9.9"
       ]
     },
+    "extends": {
+      "type": "string"
+    },
+    "fields": {
+      "type": "object"
+    },
     "telemetry_point_types": {
       "type": "object",
       "properties": {
