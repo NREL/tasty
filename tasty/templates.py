@@ -52,6 +52,24 @@ class EntityTemplate:
                     templates.add(template)
         return list(templates)
 
+    @classmethod
+    def find_with_classes(cls, namespaced_classes: Set[Tuple[Namespace, str]]):
+        """
+        Search all registered templates and return the objects with atleast
+        the classes defined.
+            Example: namespaced_classes = {(NS1, cur-point), (NS1, his-point)}
+            entity_classes1 = {(NS1, cur-point), (NS1, his-point), (NS1, writable-point)} -> would be added
+            entity_classes2 = {(NS1, cur-point)} -> would not be added
+        :param namespaced_classes: [Set[Tuple[Namespace, str]]] A set of 2-term tuples, where the str term represents the
+         class to find, something like 'cur-point' or 'Discharge_Air_Flow_Sensor'
+        :return: [List[EntityTemplate]] a list of EntityTemplate objects matching the description
+        """
+        templates = set()
+        for template in cls.all_templates:
+            if namespaced_classes <= template.entity_classes:
+                templates.add(template)
+        return list(templates)
+
     def get_simple_classes(self) -> Set[str]:
         """
         Just get terms, no namespaces
@@ -120,9 +138,12 @@ class EntityTemplate:
 class PointGroupTemplate:
     all_templates = set()
 
+    # TODO:
+    #   1. Add methodology to determine if 2 PGT's are similar / equivalent
+
     def __init__(self, template: dict):
         """
-
+        Initialize a new PointGroupTemplate
         :param template: [dict] See the template.schema.json for expected keys.
         """
         self._template = template
@@ -277,7 +298,7 @@ def resolve_telemetry_points_to_entity_templates(telemetry_point_types: dict, sc
     return set(entity_templates)
 
 
-def get_namespaced_terms(ontology: Graph, terms: [str, dict]) -> Set[Tuple[Namespace, str]]:
+def get_namespaced_terms(ontology: Graph, terms: [str, dict]) -> Set:
     """
     TODO: document function
     :param ontology: [Graph] A loaded ontology

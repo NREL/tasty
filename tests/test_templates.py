@@ -4,6 +4,7 @@ import pytest
 from unittest import TestCase
 from rdflib.namespace import Namespace
 from frozendict import frozendict
+import pickle
 
 import tasty.templates as tt
 import tasty.constants as tc
@@ -395,7 +396,19 @@ class TestPointGroupTemplate:
         template_data, pgt = populate_pgt_from_file(file)
         out_file = prep_for_write(OUTPUT_DIR, file, 'pickle', 'pkl')
 
-        pgt.write(out_file)
+        pgt.pickle(out_file)
 
         # -- Assert - pickled object exists
         assert os.path.isfile(out_file)
+
+        with open(out_file, 'rb') as f:
+            pgt_out = pickle.load(f)
+
+        assert isinstance(pgt_out, tt.PointGroupTemplate)
+
+        # These are now different objects, so will not be equivalent
+        assert pgt_out != pgt
+
+        # Need a way to check that these two are equivalen / similar,
+        # even though they're not the same object, they still represent
+        # the same information
