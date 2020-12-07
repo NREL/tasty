@@ -15,9 +15,9 @@
     },
     "template_type": {
       "type": "string",
-      "enum": ["point-group-template", "entity-template", "system-template"]
+      "enum": ["point-group-template", "equipment-template", "system-template"]
     },
-    "schema": {
+    "schema_name": {
       "type": "string",
       "enum": ["Brick", "Haystack"]
     },
@@ -40,7 +40,7 @@
     "symbol",
     "description",
     "template_type",
-    "schema",
+    "schema_name",
     "version"
   ]
 }

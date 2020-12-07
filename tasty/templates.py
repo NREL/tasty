@@ -1,12 +1,17 @@
 import os
+from itertools import permutations
+from copy import deepcopy
+import pickle
 
 from typing import List, Set, Tuple
+from frozendict import frozendict
 import yaml
 import json
 import jsonschema
 from jsonschema import validate
 from rdflib.namespace import Namespace
 from rdflib import Graph
+import time
 
 import tasty.graphs as tg
 import tasty.constants as tc
@@ -14,29 +19,57 @@ import tasty.exceptions as te
 
 
 class EntityTemplate:
-    def __init__(self, entity_type: Set, typing_properties: Set, properties: dict):
-        self.entity_type = entity_type
-        self.typing_properties = typing_properties
-        self.other_properties = properties
+    all_templates = set()
 
-    def get_entity_type(self) -> Set[str]:
+    def __init__(self, entity_classes: Set, typing_properties: Set, fields: Set[Tuple[Namespace, str, dict]]):
+        self.entity_classes = entity_classes
+        self.typing_properties = typing_properties
+        self.fields = fields
+        self.register_template(self)
+
+    @classmethod
+    def register_template(cls, template):
+        """
+        Add the template to the set of templates available
+        :param template: [EntityTemplate] the EntityTemplate to register
+        :return:
+        """
+        cls.all_templates.add(template)
+
+    @classmethod
+    def find_with_class(cls, namespaced_class: Tuple[Namespace, str]):
+        """
+        Search all registered templates and return the objects with the
+        class defined.
+        :param namespaced_class: [Tuple[Namespace, str]] A 2-term tuple, where the str term represents the
+         class to find, something like 'cur-point' or 'Discharge_Air_Flow_Sensor'
+        :return: [List[EntityTemplate]] a list of EntityTemplate objects matching the description
+        """
+        templates = set()
+        for template in cls.all_templates:
+            for et in template.entity_classes:
+                if et == namespaced_class:
+                    templates.add(template)
+        return list(templates)
+
+    def get_simple_classes(self) -> Set[str]:
         """
         Just get terms, no namespaces
         :return: [Set[str]]
         """
         terms = set()
-        for et in self.entity_type:
+        for et in self.entity_classes:
             ns, term = et
             terms.add(term)
         return terms
 
-    def get_typing_info(self) -> Set[str]:
+    def get_simple_typing_info(self) -> Set[str]:
         """
-        Get terms for the entity_type and typing_properties, no namespaces
+        Get terms for the entity_class and typing_properties, no namespaces
         :return: [Set[str]]
         """
         terms = set()
-        for et in self.entity_type:
+        for et in self.entity_classes:
             ns, term = et
             terms.add(term)
         for tp in self.typing_properties:
@@ -44,27 +77,24 @@ class EntityTemplate:
             terms.add(term)
         return terms
 
-    def get_other_properties(self) -> dict:
+    def get_simple_fields(self) -> dict:
         """
         Get other_properties as hash map of keys, values, no namespaces
         :return: [dict]
         """
-        properties = {}
-        for k, v in self.other_properties.items():
-            ns, term = k
-            properties[term] = v
-        return properties
-
-    def get_all_metadata_simple(self) -> dict:
-        """
-        Get hash map of all metadata, no namespaces
-        :return: [dict]
-        """
-        meta = self.get_other_properties()
-        typing_info = self.get_typing_info()
-        for info in typing_info:
-            meta[info] = None
-        return meta
+        fields = {}
+        for field in self.fields:
+            ns, term, meta = field
+            fields[term] = {}
+            for k, v in meta.items():
+                # if tuple, the first item is the Namespace,
+                # the second item is the term of interest
+                # i.e. (Namespace(https://...), 'number')
+                if isinstance(v, Tuple):
+                    fields[term][k] = v[1]
+                else:
+                    fields[term][k] = v
+        return fields
 
     def get_namespaces(self) -> Set[Namespace]:
         """
@@ -72,36 +102,51 @@ class EntityTemplate:
         :return: [Set[Namespace]]
         """
         all_ns = set()
-        for et in self.entity_type:
-            ns, term = et
+        for ec in self.entity_classes:
+            ns, term = ec
             all_ns.add(ns)
         for tp in self.typing_properties:
             ns, term = tp
             all_ns.add(ns)
-        for op in self.other_properties:
-            ns, term = op
+        for field in self.fields:
+            ns, term, meta = field
             all_ns.add(ns)
+            for k, v in meta.items():
+                if isinstance(v, Tuple):
+                    all_ns.add(v[0])
         return all_ns
 
 
 class PointGroupTemplate:
+    all_templates = set()
+
     def __init__(self, template: dict):
-        self.template = template
+        """
+
+        :param template: [dict] See the template.schema.json for expected keys.
+        """
+        self._template = template
+        self._id: str = None
+        self._symbol: str = None
+        self._description: str = None
+        self._schema_name: str = None
+        self._schema_version: str = None
+        self._telemetry_points: dict = None
         self.template_schema: dict = None
         self.is_valid: bool = False
         self.validation_error: str = None
-        self.id: str = None
-        self.symbol: str = None
-        self.description: str = None
-        self.schema: str = None
-        self.version: str = None
-        self.telemetry_points: dict = None
-        self.telemetry_point_entities: List[EntityTemplate] = None
-        self.validate_template_against_schema()
+        self.telemetry_point_entities: Set[EntityTemplate] = set()
+        if bool(self._template):
+            self.validate_template_against_schema()
 
-    def validate_template_against_schema(self, schema_path=os.path.join(tc.SCHEMAS_DIR, 'template.schema.json')) -> None:
+    @classmethod
+    def register_template(cls, template):
+        cls.all_templates.add(template)
+
+    def validate_template_against_schema(self,
+                                         schema_path=os.path.join(tc.SCHEMAS_DIR, 'template.schema.json')) -> None:
         self.template_schema = load_template_schema(path_to_file=schema_path)
-        self.is_valid, self.validation_error = validate_template_against_schema(self.template, self.schema)
+        self.is_valid, self.validation_error = validate_template_against_schema(self._template, self.template_schema)
         if not self.is_valid:
             raise te.TemplateValidationError(self.validation_error)
 
@@ -111,27 +156,57 @@ class PointGroupTemplate:
         :return:
         """
         if self.is_valid:
-            self.id = self.template['id']
-            self.symbol = self.template['symbol']
-            self.description = self.template['description']
-            self.schema = self.template['schema']
-            self.version = self.template['version']
-            self.telemetry_points = self.template['telemetry_point_types']
+            self._id = self._template['id']  # str
+            self._symbol = self._template['symbol']  # str
+            self._description = self._template['description']  # str
+            self._schema_name = self._template['schema_name']  # str
+            self._schema_version = self._template['version']  # str
+            self._telemetry_points = self._template['telemetry_point_types']  # dict (yaml object)
+            self.register_template(self)
+        else:
+            print("Template is not valid. Template basics not populated, nor is template registered to all_templates.")
 
     def populate_telemetry_templates(self) -> None:
-        self.telemetry_point_entities = resolve_telemetry_points_to_entity_templates(self.telemetry_points, self.schema, self.version)
+        self.telemetry_point_entities = resolve_telemetry_points_to_entity_templates(self._telemetry_points,
+                                                                                     self._schema_name,
+                                                                                     self._schema_version)
 
-# class TemplateLibrary:
-#     def __init__(self):
-#         self.name_space: str
-#         self.templates: List[Template] = []
-#
-#     def add_templates(self, templates: List[Template]):
-#         for t in templates:
-#             self.templates.append(t)
-#
-#     def add_template(self, template: Template):
-#         self.templates.append(template)
+    def add_telemetry_point_to_template(self, entity_template: EntityTemplate) -> None:
+        """
+        Update the set of telemetry_point_entities with a new EntityTemplate
+        :param entity_template: [EntityTemplate] a new entity to add to this point group
+        :return:
+        """
+        if isinstance(entity_template, EntityTemplate):
+            self.telemetry_point_entities.add(entity_template)
+
+    def write(self, file_path: str) -> None:
+        """
+        Write the _template data to the file as yaml.
+        :param file_path: [str] full/path/to/file.yaml
+        :return:
+        """
+        if self.is_valid:
+            if not os.path.isdir(os.path.dirname(file_path)):
+                os.makedirs(os.path.dirname(file_path))
+            with open(file_path, 'w+') as f:
+                yaml.dump(self._template, f)
+        else:
+            print("Template is not valid. Will not be written to disk.")
+
+    def pickle(self, file_path: str) -> None:
+        """
+        Pickle the current template
+        :param file_path: [str] full/path/to/file.yaml
+        :return:
+        """
+        if self.is_valid:
+            if not os.path.isdir(os.path.dirname(file_path)):
+                os.makedirs(os.path.dirname(file_path))
+            with open(file_path, 'wb+') as f:
+                pickle.dump(self, f)
+        else:
+            print("Template is not valid. Will not be pickled.")
 
 
 def validate_template_against_schema(instance: dict, schema: dict) -> Tuple[bool, str]:
@@ -174,70 +249,167 @@ def load_template_schema(path_to_file: str) -> dict:
     return schema
 
 
-def resolve_telemetry_points_to_entity_templates(telemetry_point_types: dict, schema: str, version: str) -> List[
+def resolve_telemetry_points_to_entity_templates(telemetry_point_types: dict, schema_name: str, version: str) -> Set[
         EntityTemplate]:
-    ont = tg.load_ontology(schema, version)
-    entity_templates: List = []
-    for point_type, properties in telemetry_point_types.items():
-        if schema == 'Haystack':
-            valid_namespaced_terms = _get_namespaced_terms(ont, point_type)
-            entity_types, typing_properties = _haystack_get_entities_and_typing_properties(ont, valid_namespaced_terms)
-            other_properties = _haystack_get_other_properties(ont, properties)
-        entity_templates.append(EntityTemplate(entity_types, typing_properties, other_properties))
-    return entity_templates
-
-
-def _get_namespaced_terms(ontology: Graph, terms: str) -> Set[Tuple[Namespace, str]]:
     """
-    Return a (Namespace, term) for each candidate term, delimited by '-'
+    Resolve each telemetry point (a key in the dict) to an EntityTemplate and return the set of created entity templates.
+    Used in the PointGroupTemplate validator
+    :param telemetry_point_types: [dict]
+    :param schema_name: [str] One of the supported Schema names, see tasty/schemas/template.schema.json
+    :param version:
+    :return:
+    """
+    ont = tg.load_ontology(schema_name, version)
+    entity_templates = set()
+    print(telemetry_point_types)
+    for typing_metadata, properties in telemetry_point_types.items():
+        ns_terms = get_namespaced_terms(ont, typing_metadata)
+        ns_fields = get_namespaced_terms(ont, properties)
+        if schema_name == 'Haystack':
+            structured_terms = hget_entity_classes(ont, ns_terms)
+            if len(structured_terms['fields']) > 0:
+                print(f"The following fields were found but will not be used: {structured_terms['fields']}.")
+            et = EntityTemplate(structured_terms['classes'], structured_terms['markers'], ns_fields)
+        elif schema_name == 'Brick':
+            et = EntityTemplate(ns_terms, set(), ns_fields)
+        entity_templates.add(et)
+
+    return set(entity_templates)
+
+
+def get_namespaced_terms(ontology: Graph, terms: [str, dict]) -> Set[Tuple[Namespace, str]]:
+    """
+    TODO: document function
     :param ontology: [Graph] A loaded ontology
-    :param terms: [str] A Brick class, such as 'Discharge_Air_Temperature_Sensor' or a set of Haystack tags,
-                    formatted as 'discharge-air-temp-sensor-point'
+    :param terms: [str] A Brick class, such as 'Discharge_Air_Temperature_Sensor' a set of Haystack tags,
+                    such as 'discharge-air-temp-sensor-point', or a dict of fields, such as:
+                    {field1: {_kind: number}, field2: {val: cfm}}
     :return:
     """
     valid_namespaced_terms = set()
-    candidate_terms = set(terms.split("-"))
-    for candidate in candidate_terms:
-        ns = tg.get_namespaces_given_term(ontology, candidate)
-        if len(ns) == 1:
-            ns = ns[0]
-            valid_namespaced_terms.add((ns, candidate))
-        elif len(ns) == 0:
-            raise te.TermNotFoundError(f"Candidate '{candidate}' not found in any namespaces in the provided ontology")
-        else:
-            raise te.MultipleTermsFoundError(
-                f"Candidate '{candidate}' found in multiple namespaces: {[x[0] for x in ns]}")
+    if isinstance(terms, str):
+        candidate_terms = set(terms.split("-"))
+        for candidate in candidate_terms:
+            ns = tg.get_namespaces_given_term(ontology, candidate)
+            if has_one_namespace(ns, candidate):
+                valid_namespaced_terms.add((ns[0], candidate))
+    elif isinstance(terms, dict):
+        for candidate, meta in terms.items():
+            candidate_ns = tg.get_namespaces_given_term(ontology, candidate)
+            if has_one_namespace(candidate_ns, candidate):
+
+                # Create a deepcopy so as to not impact original template
+                meta_copy = deepcopy(meta)
+                if isinstance(meta, dict) and '_kind' in meta.keys():
+                    meta_ns = tg.get_namespaces_given_term(ontology, meta_copy['_kind'])
+                    if has_one_namespace(meta_ns, meta['_kind']):
+                        meta_copy['_kind'] = (meta_ns[0], meta['_kind'])
+                        valid_namespaced_terms.add((candidate_ns[0], candidate, frozendict(meta_copy)))
+                elif isinstance(meta, (int, float, bool, str)):
+                    valid_namespaced_terms.add((candidate_ns[0], candidate, frozendict({'val': meta})))
+
     return valid_namespaced_terms
 
 
-def _haystack_get_entities_and_typing_properties(ontology: Graph, valid_namespaced_terms: Set[Tuple[Namespace, str]]) -> \
-        Set[
-            Tuple[Namespace, str]]:
-    """
-    Return all tags which subclass from an entity
-    :param ontology:
-    :param valid_namespaced_terms:
-    :return:
-    """
-    q = """SELECT ?e WHERE {?e rdfs:subClassOf* ph:entity}"""
+def has_one_namespace(ns, candidate):
+    if len(ns) == 1:
+        return True
+    elif len(ns) == 0:
+        raise te.TermNotFoundError(
+            f"Candidate '{candidate}' not found in any namespaces in the provided ontology")
+    else:
+        raise te.MultipleTermsFoundError(
+            f"Candidate '{candidate}' found in multiple namespaces: {[x[0] for x in ns]}")
+
+
+def hget_entity_classes(ontology, candidates):
+    # Begin by finding entity subclasses
+    q = f"SELECT ?e WHERE {{ ?e rdfs:subClassOf* ph:entity }}"
     match = ontology.query(q)
-    all_entities = [m[0] for m in match]
-    valid_entities = set()
-    typing_properties = set()
-    for tag in valid_namespaced_terms:
+    current_subclasses = [m[0] for m in match]
+    dont_search = [tc.RDF, tc.OWL, tc.RDFS, tc.SKOS, tc.SH, tc.XML, tc.XMLS]
+    namespaces = [Namespace(uri) for prefix, uri in ontology.namespaces() if Namespace(uri) not in dont_search]
+
+    # The following creates permutations of all lengths
+    # and finds all that are in current_subclasses.  It
+    # tests it using each namespace found in the ontology
+    # It is expensive but works.
+    # namespaces = [a, b]
+    # only_terms = [cur, point]
+    #   a:cur subclass* of entity? False
+    #   b:cur subclass* of entity? False
+    #   a:point subclass* of entity? True
+    #   a:cur-point subclass* of entity? True
+    #   b:cur-point subclass* of entity? False
+    #   ...
+    classes = set()
+    only_terms = set([t for ns, t in candidates])
+    added_candidates = set()
+    st = time.time()
+    for n in range(1, len(candidates)):
+        perm = permutations(only_terms, n)
+        for p in list(perm):
+            new_candidate = '-'.join(p)
+            for ns in namespaces:
+                if ns[new_candidate] in current_subclasses:
+                    classes.add((ns, new_candidate))
+                    for each_term_used in p:
+                        added_candidates.add(each_term_used)
+    total_time = time.time() - st
+    print(f"Permutation time: {total_time:.2f} seconds")
+    # This logic figures out which terms were not used in
+    # the classes and separates those out.
+    not_classes = only_terms - added_candidates
+    not_class_candidates = set()
+    for term in not_classes:
+        for c in candidates:
+            ns, t = c
+            if term == t:
+                not_class_candidates.add(c)
+    # Finally, we ensure that all of these are still atleast 'typing'
+    # properties and not expected to have literals or scalars
+    q = f"SELECT ?e WHERE {{ ?e rdfs:subClassOf* ph:marker }}"
+    match = ontology.query(q)
+    markers = set([m[0] for m in match])
+    present_markers = set()
+    fields = set()
+    for tag in not_class_candidates:
         ns, t = tag
-        if ns[t] in all_entities:
-            valid_entities.add(tag)
+        if ns[t] in markers:
+            present_markers.add(tag)
         else:
-            typing_properties.add(tag)
-    return valid_entities, typing_properties
+            fields.add((ns, t, frozendict({'val': None})))
+
+    # This logic determines which of the classes are subclasses of eachother
+    # and only keeps the lowest subclass in each 'branch',
+    # i.e. cur-point, writable-p)oint, point => keeps cur-point, writable-point
+    to_remove = set()
+    for c in classes:
+        ns, t = c
+        prefix = get_prefix(ontology.namespaces(), c)
+        q = f"SELECT ?e WHERE {{ ?e rdfs:subClassOf* {prefix}:{t} }}"
+        match = ontology.query(q)
+        current_subclasses = set([m[0] for m in match])
+
+        # Need to remove current class from subclasses
+        current_subclasses.discard(ns[t])
+        for c2 in classes:
+            ns2, t2 = c2
+            if ns2[t2] in current_subclasses:
+                to_remove.add(c)
+    classes = classes - to_remove
+    structured = {
+        'classes': classes,
+        'markers': present_markers,
+        'fields': fields
+    }
+    return structured
 
 
-def _haystack_get_other_properties(ontology: Graph, properties: dict) -> dict:
-    other_properties = {}
-    for k, v in properties.items():
-        ns_term = list(_get_namespaced_terms(ontology, k))
-        ns_term = ns_term[0]
-        print(ns_term)
-        other_properties[ns_term] = v
-    return other_properties
+def get_prefix(namespaces, term):
+    ns, t = term
+    for namespace in namespaces:
+        prefix, uri = namespace
+        if uri.encode() == ns.encode():
+            return prefix
+    return None

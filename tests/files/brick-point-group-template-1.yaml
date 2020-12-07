@@ -1,0 +1,13 @@
+---
+- id: 1bfa596d-9ff0-4253-be7e-3f7432870ec4
+  symbol: SD
+  description: Expected point group for a single duct VAV type with basic airflow control.
+  template_type: point-group-template
+  schema_name: Brick
+  version: "1.1"
+  telemetry_point_types:
+    # Use empty flow mapping where no additional metadata present,
+    # else is inferred as NoneType
+    Discharge_Air_Flow_Sensor: {}
+    Discharge_Air_Flow_Setpoint: {}
+    Damper_Position_Command: {}

@@ -3,8 +3,8 @@ import pytest
 
 from rdflib import Graph
 
-from tasty import graphs as tg
-from tasty import constants as tc
+import tasty.graphs as tg
+import tasty.constants as tc
 
 
 class TestGetVersionedGraph:

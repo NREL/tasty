@@ -7,3 +7,9 @@ __pycache__
 # Poetry things
 .venv
 dist
+
+# Tasty
+output
+
+# temporary ignores
+tests/files/test.hayson.json

@@ -3,16 +3,18 @@
   symbol: SD
   description: Single duct VAV type, with basic airflow control.
   template_type: point-group-template
-  schema: Haystack
+  schema_name: Haystack
   version: 3.9.9
   telemetry_point_types:
     discharge-air-flow-sensor-point:
       curVal:
-      kind: Number
-      unit: cfm
-    discharge-air-flow-sp-point:
-      kind: Number
-      unit: cfm
+        _kind: number
+        val: null
+      unit:
+        _kind: str
+        val: cfm
+    # Use empty flow mapping where no additional metadata present,
+    # else is inferred as NoneType
+    discharge-air-flow-sp-point: {}
     damper-cmd-point:
-      kind: Number
       unit: percent

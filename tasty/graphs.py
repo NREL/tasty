@@ -4,7 +4,7 @@ from typing import List
 from rdflib import Graph
 from rdflib.namespace import Namespace
 
-from tasty import constants as tc
+import tasty.constants as tc
 
 
 def get_versioned_graph(schema: str, version: str) -> Graph:

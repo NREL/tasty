@@ -79,6 +79,14 @@ python-versions = "*"
 version = "3.0.12"
 
 [[package]]
+category = "main"
+description = "An immutable dictionary"
+name = "frozendict"
+optional = false
+python-versions = "*"
+version = "1.2"
+
+[[package]]
 category = "dev"
 description = "File identification library for Python"
 name = "identify"
@@ -404,7 +412,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pytest-cov", "jaraco.test (>=3.2.0)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
 [metadata]
-content-hash = "2c0de6415d991d9a14106a5deb3c41169fd28ba6d054d3bc6c598dd891b3e0d3"
+content-hash = "6a9551fc7bb3f27a2bb0483e6d7420c7ee2ee9efbf095c2c1996e6a965f30d7a"
 lock-version = "1.0"
 python-versions = "^3.7"
 
@@ -444,6 +452,9 @@ distlib = [
 filelock = [
     {file = "filelock-3.0.12-py3-none-any.whl", hash = "sha256:929b7d63ec5b7d6b71b0fa5ac14e030b3f70b75747cef1b10da9b879fef15836"},
     {file = "filelock-3.0.12.tar.gz", hash = "sha256:18d82244ee114f543149c66a6e0c14e9c4f8a1044b5cdaadd0f82159d6a6ff59"},
+]
+frozendict = [
+    {file = "frozendict-1.2.tar.gz", hash = "sha256:774179f22db2ef8a106e9c38d4d1f8503864603db08de2e33be5b778230f6e45"},
 ]
 identify = [
     {file = "identify-1.5.9-py2.py3-none-any.whl", hash = "sha256:5dd84ac64a9a115b8e0b27d1756b244b882ad264c3c423f42af8235a6e71ca12"},

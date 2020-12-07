@@ -1,60 +1,26 @@
 # tasty
 
-Provides an SDK for building up semantic metadata models using a templating framework.
+Tasty was created to:
+1. Get Metadata Schema and Modeling tools into as many projects as possible.
+1. Provide a consistent methodology to define templates for "buildings things" (equipment, points, systems, etc.)
+1. Provide and SDK for building up Metadata Models using these templates.
 
-There are three valid template types enabled by tasty:
-- `point-group-template`: very similar to the [ABSTRACT.yaml](https://github.com/google/digitalbuildings/blob/master/ontology/yaml/resources/HVAC/entity_types/ABSTRACT.yaml) used in the GDB project
-- `entity-template`:
-- `system-template`:
+# Core Concepts
+- We are talking about things in / around / inside / outside / upsidownsides of buildings:
+    - Things have classes
+    - Things have properties
+    - Things have relationships to other things
+- We don't need more metadata standards, we need better metadata tooling:
+    - One-size fits all validation doesn't work
+    - Use-case oriented validation is needed
+    - Haystack, Brick, Google Digital Buildings - all do things well
+    - Giving people the tools to build things well will inherently provide more consistent implementations.
 
 
-## Working with tasty graphs
-```python
-import tasty.graphs as tg
+# Usage and Examples
+- See [Usage](./examples/Usage.md)
+-
 
-# Load an ontology into a new rdflib Graph
-brick_ont = tg.load_ontology(schema='Brick', version='1.1')
-haystack_ont = tg.load_ontology(schema='Haystack', version='3.9.9')
-
-# Get the namespace for a term
-ns = tg.get_namespaces_given_term(ontology=brick_ont, term='Discharge_Air')
-# returns: [Namespace('https://brickschema.org/schema/1.1/Brick#')]
-ns = tg.get_namespaces_given_term
-```
-
-## Working with tasty templates
-```python
-import os
-import tasty.constants as tc
-import tasty.templates as tt
-
-# Load in template from file, validate against the template schema
-template_file = './tests/files/point-group-template-1.yaml'
-schema_file = os.path.join(tc.SCHEMAS_DIR, 'template.schema.json')
-template = tt.load_template_file(template_file)
-template_schema = tt.load_template_schema(schema_file)
-
-is_valid, err = tt.validate_template_against_schema(instance=template[0], schema=template_schema)
-
-# Define telemetry points with additional metadata and create new EntityTemplates for each point type defined
-telemetry_point_types = {
-    "damper-cmd-point": {
-        "kind": "Number",
-        "unit": "percent"
-    },
-    "discharge-air-flow-sensor-point": {
-        "curVal": None,
-        "kind": "Number",
-        "unit": "cfm"
-    },
-    "discharge-air-flow-sp-point": {
-        "kind": "Number",
-        "unit": "cfm"
-    }
-}
-
-entity_templates = tt.resolve_telemetry_points_to_entity_templates(telemetry_point_types, 'Haystack', '3.9.9')
-```
 
 # Setup
 This repository is setup to work with pyenv and poetry:
