@@ -19,7 +19,6 @@ Tasty was created to:
 
 # Usage and Examples
 - See [Usage](./examples/Usage.md)
--
 
 
 # Setup

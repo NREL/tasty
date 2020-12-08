@@ -10,14 +10,15 @@ import tasty.templates as tt
 import tasty.constants as tc
 import tasty.graphs as tg
 import tasty.exceptions as te
-from tests.conftest import populate_pgt_from_file, prep_for_write
+from tests.conftest import populate_pgt_from_file, prep_for_write, reset_pgt_all_templates_to_empty_set
 
 FILES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files')
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output')
 HAYSTACK_PGT_FILE_01 = os.path.join(FILES_DIR, 'haystack-point-group-template-1.yaml')
 BRICK_PGT_FILE_01 = os.path.join(FILES_DIR, 'brick-point-group-template-1.yaml')
+HAYSTACK_EQ_FILE_01 = os.path.join(FILES_DIR, 'haystack-equipment-template-1.yaml')
+BRICK_EQ_FILE_01 = os.path.join(FILES_DIR, 'brick-equipment-template-1.yaml')
 SCHEMA_FILE_PATH = os.path.join(tc.SCHEMAS_DIR, 'template.schema.json')
-
 
 if not os.path.isdir(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)
@@ -285,7 +286,7 @@ class TestEntityTemplate:
             tc.BRICK_1_1
         }
 
-        et = tt.EntityTemplate(ns_terms, set(), {})
+        et = tt.EntityTemplate(ns_terms, set(), set())
         assert et.get_simple_classes() == simple_classes  # Only a single class
         assert et.get_simple_typing_info() == simple_typing_info  # Additional typing info not relevant for Brick at this time
         assert et.get_simple_fields() == simple_fields  # No DataTypeProperties available in Brick as of 1.1
@@ -360,7 +361,7 @@ class TestPointGroupTemplate:
         assert bool(pgt.template_schema)
 
         # -- Setup
-        pgt.populate_telemetry_templates()
+        pgt.resolve_telemetry_point_types()
 
         # -- Assert
         assert len(pgt.telemetry_point_entities) == 3
@@ -412,3 +413,58 @@ class TestPointGroupTemplate:
         # Need a way to check that these two are equivalen / similar,
         # even though they're not the same object, they still represent
         # the same information
+
+    @pytest.mark.parametrize('file, symbol, schema, version', [
+        (HAYSTACK_PGT_FILE_01, 'SD', 'Haystack', '3.9.9'),
+        (BRICK_PGT_FILE_01, 'SD', 'Brick', '1.1'),
+    ])
+    def test_find_given_symbol_schema_version(self, file, symbol, schema, version):
+        # -- Setup - reset all PGTs registered
+        reset_pgt_all_templates_to_empty_set()
+        _template, pgt = populate_pgt_from_file(file)
+
+        # -- Assert - since all_templates was reset to empty set, and we are only creating a single
+        # PGT, there should just be 1 for each of these.
+        found = tt.PointGroupTemplate.find_given_symbol_schema_version(symbol, version, schema)
+        assert len(found) == 1
+        assert found[0] == pgt
+
+    def test_find_given_symbol(self):
+        # -- Setup - reset all PGTs registered
+        symbol = 'SD'
+        reset_pgt_all_templates_to_empty_set()
+        _haystack_template, hpgt = populate_pgt_from_file(HAYSTACK_PGT_FILE_01)
+        _brick_template, bpgt = populate_pgt_from_file(BRICK_PGT_FILE_01)
+
+        found = tt.PointGroupTemplate.find_given_symbol(symbol)
+        assert len(found) == 2
+        assert hpgt in found
+        assert bpgt in found
+
+
+class TestEquipmentTemplate:
+    @pytest.mark.parametrize('file, expected_type', [
+        (HAYSTACK_EQ_FILE_01, (tc.PHIOT_3_9_9, 'coolingOnly-vav')),
+        (BRICK_EQ_FILE_01, (tc.BRICK_1_1, 'Variable_Air_Volume_Box')),
+    ])
+    def test_populate_from_file_extension_resolves(self, file, expected_type):
+        # -- Setup
+        templates = tt.load_template_file(file)
+        assert len(templates) == 1
+
+        template_data = templates[0]
+        eq = tt.EquipmentTemplate(template_data)
+
+        # -- Assert - equipment template is valid
+        assert eq.is_valid
+
+        # -- Setup - populate basics
+        eq.populate_template_basics()
+        eq.resolve_extends()
+
+        assert eq.extends == expected_type
+
+    # @pytest.mark.parametrize('file', [
+    #     HAYSTACK_EQ_FILE_01,
+    # ])
+    # def test_resolve_telemetry_point_types(self, file):

@@ -19,6 +19,7 @@ import tasty.exceptions as te
 
 
 class EntityTemplate:
+    # TODO: consider renaming - maybe this isn't as similar to a Template as the others
     all_templates = set()
 
     def __init__(self, entity_classes: Set, typing_properties: Set, fields: Set[Tuple[Namespace, str, dict]]):
@@ -135,17 +136,8 @@ class EntityTemplate:
         return all_ns
 
 
-class PointGroupTemplate:
-    all_templates = set()
-
-    # TODO:
-    #   1. Add methodology to determine if 2 PGT's are similar / equivalent
-
+class BaseTemplate:
     def __init__(self, template: dict):
-        """
-        Initialize a new PointGroupTemplate
-        :param template: [dict] See the template.schema.json for expected keys.
-        """
         self._template = template
         self._id: str = None
         self._symbol: str = None
@@ -156,18 +148,17 @@ class PointGroupTemplate:
         self.template_schema: dict = None
         self.is_valid: bool = False
         self.validation_error: str = None
-        self.telemetry_point_entities: Set[EntityTemplate] = set()
-        if bool(self._template):
-            self.validate_template_against_schema()
-
-    @classmethod
-    def register_template(cls, template):
-        cls.all_templates.add(template)
 
     def validate_template_against_schema(self,
                                          schema_path=os.path.join(tc.SCHEMAS_DIR, 'template.schema.json')) -> None:
+        """
+        Validate self._template (dict) against the JSON schema.
+        :param schema_path: [str] full/path/to/schema.json
+        :return:
+        """
         self.template_schema = load_template_schema(path_to_file=schema_path)
-        self.is_valid, self.validation_error = validate_template_against_schema(self._template, self.template_schema)
+        self.is_valid, self.validation_error = validate_template_against_schema(self._template,
+                                                                                self.template_schema)
         if not self.is_valid:
             raise te.TemplateValidationError(self.validation_error)
 
@@ -183,11 +174,167 @@ class PointGroupTemplate:
             self._schema_name = self._template['schema_name']  # str
             self._schema_version = self._template['version']  # str
             self._telemetry_points = self._template['telemetry_point_types']  # dict (yaml object)
-            self.register_template(self)
         else:
-            print("Template is not valid. Template basics not populated, nor is template registered to all_templates.")
+            print(
+                "[tasty.templates.BaseTemplate] Template is not valid. Template basics not populated, nor is template registered to all_templates.")
 
-    def populate_telemetry_templates(self) -> None:
+
+class EquipmentTemplate(BaseTemplate):
+    """
+    Template for a piece of equipment based on a class definition from Project Haystack or Brick Schema.
+    The 'base class' is defined by the 'extends' key in the template.  This must resolve to:
+    - Haystack: rdfs:subClassOf* phIoT:equip
+    - Brick: rdfs:subClassOf* brick:Equipment
+    The Equipment template defines expected telemetry point types to associate with it, either through:
+        - a PointGroupTemplate symbol (i.e. SD).
+        - a telemetry_point_type definition (i.e. SD).
+    """
+    all_templates = set()
+
+    def __init__(self, template: dict):
+        super().__init__(template)
+        self._extends: str = None
+        self.extends: Tuple[Namespace, str] = None
+        self.point_group_templates: Set[PointGroupTemplate] = set()
+        self.telemetry_point_entities: Set[EntityTemplate] = set()
+        if bool(self._template):
+            self.validate_template_against_schema()
+
+    @classmethod
+    def register_template(cls, template):
+        """
+        Register the template to make it available externally.
+        :param template: [EquipmentTemplate]
+        :return:
+        """
+        if isinstance(template, EquipmentTemplate):
+            cls.all_templates.add(template)
+        else:
+            raise te.TemplateRegistrationError(
+                f"Can only register an EquipmentTemplate.  Attempted to register a {type(template)}")
+
+    def resolve_extends(self) -> None:
+        """
+        Resolve the value of 'extends' to a valid equipment class.
+        Sets self.extends = (Namespace, term) when found.
+        :return:
+        """
+        if 'extends' not in self._template.keys():
+            self.is_valid = False
+            raise te.TemplateValidationError(f"Equipment Template with ID: {self._id} must define an 'extends' key.")
+        else:
+            self._extends = self._template['extends']
+            ont = tg.load_ontology(self._schema_name, self._schema_version)
+            ns_terms = get_namespaced_terms(ont, self._extends)
+            if self._schema_name == 'Haystack':
+                structured_terms = hget_entity_classes(ont, ns_terms)
+                classes = structured_terms['classes']
+                if len(classes) != 1:
+                    raise te.MultipleTermsFoundError(
+                        "Equipment definitions should only extend a single Haystack class"
+                    )
+                equipment_class = list(classes)[0]
+                q = """SELECT ?e WHERE {{ ?e rdfs:subClassOf* phIoT:equip }}"""
+            elif self._schema_name == 'Brick':
+                if len(ns_terms) != 1:
+                    raise te.MultipleTermsFoundError(
+                        "Equipment definitions should only extend a single Brick class"
+                    )
+                equipment_class = list(ns_terms)[0]
+                q = """SELECT ?e WHERE {{ ?e rdfs:subClassOf* brick:Equipment }}"""
+            match = ont.query(q)
+            equip_subclasses = [m[0] for m in match]
+            ns, t = equipment_class
+            if ns[t] not in equip_subclasses:
+                raise te.TemplateValidationError(
+                    f"Equipment Template with ID: {self._id} cannot extend {self._extends}. It does not match based on the query: {q}")
+            else:
+                self.extends = equipment_class
+
+    # def resolve_telemetry_point_types(self):
+    #     available_pgts = PointGroupTemplate.
+
+
+class PointGroupTemplate(BaseTemplate):
+    all_templates = set()  # type: set
+
+    # TODO:
+    #   1. Add methodology to determine if 2 PGT's are similar / equivalent
+    #   Class Methods:
+    #       2. find_with_entities(Set(EntityTemplates)) -> return PGTs
+    #       3. find_with_symbol(symbol) -> return PGTs
+    def __init__(self, template: dict):
+        """
+        Initialize a new PointGroupTemplate
+        :param template: [dict] See the template.schema.json for expected keys.
+        """
+        super().__init__(template)
+        self.telemetry_point_entities: Set[EntityTemplate] = set()
+        if bool(self._template):
+            self.validate_template_against_schema()
+
+    @classmethod
+    def register_template(cls, template) -> None:
+        """
+        Register the template to make it available externally.
+        :param template: [PointGroupTemplate]
+        :return:
+        """
+        if isinstance(template, PointGroupTemplate):
+            cls.all_templates.add(template)
+        else:
+            raise te.TemplateRegistrationError(
+                f"Can only register a PointGroupTemplate.  Attempted to register a {type(template)}")
+
+    @classmethod
+    def find_given_symbol_schema_version(cls, symbol, schema_version, schema_name):
+        """
+        Find all PointGroupTemplates with the given characteristics.
+        This should *hopefully* resolve to just 1, although not guaranteed.
+        TODO: decide if a unique combination of [symbol, schema_version, schema_name] should
+            occur only once.  Initial thought is YES.
+        :param symbol: [str]
+        :param schema_version: [str]
+        :param schema_name: [str]
+        :return: [List[PointGroupTemplate]]
+        """
+        found_templates = []
+        for pgt in cls.all_templates:
+            if pgt._symbol == symbol and pgt._schema_version == schema_version and pgt._schema_name == schema_name:
+                found_templates.append(pgt)
+        return found_templates
+
+    @classmethod
+    def find_given_symbol(cls, symbol):
+        """
+        Find all PointGroupTemplates with the given symbol.
+        This will likely return multiple, as symbols themselves may only be unique
+        in the context of a given [symbol, schema, version] set
+        :param symbol: [str]
+        :return: [List[PointGroupTemplate]]
+        """
+        found_templates = []
+        for pgt in cls.all_templates:
+            if pgt._symbol == symbol:
+                found_templates.append(pgt)
+        return found_templates
+
+    def populate_template_basics(self) -> None:
+        """
+        See BaseTemplate.populate_template_basics
+        Registers the Class if valid.
+        :return:
+        """
+        super().populate_template_basics()
+        if self.is_valid:
+            self.register_template(self)
+
+    def resolve_telemetry_point_types(self) -> None:
+        """
+        Wrapper around: resolve_telemetry_points_to_entity_templates.
+        Uses keys found in the template to run.
+        :return:
+        """
         self.telemetry_point_entities = resolve_telemetry_points_to_entity_templates(self._telemetry_points,
                                                                                      self._schema_name,
                                                                                      self._schema_version)
@@ -213,7 +360,7 @@ class PointGroupTemplate:
             with open(file_path, 'w+') as f:
                 yaml.dump(self._template, f)
         else:
-            print("Template is not valid. Will not be written to disk.")
+            print("[tasty.templates.PointGroupTemplate] Template is not valid. Will not be written to disk.")
 
     def pickle(self, file_path: str) -> None:
         """
@@ -227,7 +374,7 @@ class PointGroupTemplate:
             with open(file_path, 'wb+') as f:
                 pickle.dump(self, f)
         else:
-            print("Template is not valid. Will not be pickled.")
+            print("[tasty.templates.PointGroupTemplate] Template is not valid. Will not be pickled.")
 
 
 def validate_template_against_schema(instance: dict, schema: dict) -> Tuple[bool, str]:
@@ -282,14 +429,14 @@ def resolve_telemetry_points_to_entity_templates(telemetry_point_types: dict, sc
     """
     ont = tg.load_ontology(schema_name, version)
     entity_templates = set()
-    print(telemetry_point_types)
     for typing_metadata, properties in telemetry_point_types.items():
         ns_terms = get_namespaced_terms(ont, typing_metadata)
         ns_fields = get_namespaced_terms(ont, properties)
         if schema_name == 'Haystack':
             structured_terms = hget_entity_classes(ont, ns_terms)
             if len(structured_terms['fields']) > 0:
-                print(f"The following fields were found but will not be used: {structured_terms['fields']}.")
+                print(
+                    f"[tasty.templates.resolve_telemetry_point_to_entity_templates] The following fields were found but will not be used: {structured_terms['fields']}.")
             et = EntityTemplate(structured_terms['classes'], structured_terms['markers'], ns_fields)
         elif schema_name == 'Brick':
             et = EntityTemplate(ns_terms, set(), ns_fields)
@@ -318,7 +465,6 @@ def get_namespaced_terms(ontology: Graph, terms: [str, dict]) -> Set:
         for candidate, meta in terms.items():
             candidate_ns = tg.get_namespaces_given_term(ontology, candidate)
             if has_one_namespace(candidate_ns, candidate):
-
                 # Create a deepcopy so as to not impact original template
                 meta_copy = deepcopy(meta)
                 if isinstance(meta, dict) and '_kind' in meta.keys():
@@ -333,6 +479,12 @@ def get_namespaced_terms(ontology: Graph, terms: [str, dict]) -> Set:
 
 
 def has_one_namespace(ns, candidate):
+    """
+    Run after tg.get_namespaces_given_term to validate only a single ns was found
+    :param ns: [List[Namespace]]
+    :param candidate: [str]
+    :return:
+    """
     if len(ns) == 1:
         return True
     elif len(ns) == 0:
@@ -344,6 +496,23 @@ def has_one_namespace(ns, candidate):
 
 
 def hget_entity_classes(ontology, candidates):
+    """
+    Given a 'string-of-haystack-tags', determine valid classes, markers, and fields.  See return.
+    :param ontology: [Graph] a loaded ontology
+    :param candidates: [str] a '-' delimited string, where each term is a haystack concept to figure out
+    :return: [dict[str, Set]] The returned dict has structure as follows:
+        {
+            A set of namespaced valid entity classes
+            'classes': {(Namespace, term), (Namespace, term) ...},
+
+            A set of namespaced valid markers NOT used in entity class typing.  These must subClass* from ph:marker
+            'markers': {(Namespace, term), ...}
+
+            A set of namespaced fields.  These are terms that are NOT markers, but are Datatype Properties.
+            The third term in the tuple always specifies a 'val' of None (i.e. just expect the property to be defined)
+            'fields': {(Namespace, term, frozendict({'val': None})), ...}
+        }
+    """
     # Begin by finding entity subclasses
     q = f"SELECT ?e WHERE {{ ?e rdfs:subClassOf* ph:entity }}"
     match = ontology.query(q)
@@ -367,9 +536,9 @@ def hget_entity_classes(ontology, candidates):
     only_terms = set([t for ns, t in candidates])
     added_candidates = set()
     st = time.time()
-    for n in range(1, len(candidates)):
-        perm = permutations(only_terms, n)
-        for p in list(perm):
+    for n in range(1, len(candidates) + 1):
+        perm = list(permutations(only_terms, n))
+        for p in perm:
             new_candidate = '-'.join(p)
             for ns in namespaces:
                 if ns[new_candidate] in current_subclasses:
@@ -377,7 +546,7 @@ def hget_entity_classes(ontology, candidates):
                     for each_term_used in p:
                         added_candidates.add(each_term_used)
     total_time = time.time() - st
-    print(f"Permutation time: {total_time:.2f} seconds")
+    print(f"[tasty.templates.hget_entity_classes] Permutation time: {total_time:.2f} seconds")
     # This logic figures out which terms were not used in
     # the classes and separates those out.
     not_classes = only_terms - added_candidates
@@ -428,6 +597,13 @@ def hget_entity_classes(ontology, candidates):
 
 
 def get_prefix(namespaces, term):
+    """
+    Return the prefix for the term given namespaces in the ontology.
+    :param namespaces: [List[Namespace]]
+    :param term: [str] term
+    :return: [str] if found, the prefix
+    :return: [None] if not found
+    """
     ns, t = term
     for namespace in namespaces:
         prefix, uri = namespace

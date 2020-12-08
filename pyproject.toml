@@ -17,6 +17,7 @@ frozendict = "^1.2"
 pytest = "^5.2"
 pre-commit = "^2.8.2"
 tox = "^3.20.1"
+jupyter = "^1.0.0"
 
 [build-system]
 requires = ["poetry>=0.12"]

@@ -11,5 +11,8 @@ dist
 # Tasty
 output
 
+# Jupyter
+.ipynb_checkpoints
+
 # temporary ignores
 tests/files/test.hayson.json

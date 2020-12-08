@@ -4,10 +4,7 @@ import tasty.templates as tt
 import tasty.constants as tc
 import tasty.graphs as tg
 
-####
-# Section 1 - Setup
-####
-# Define an output directory
+
 output_dir = os.path.join(os.path.dirname(__file__), 'outputs')
 if not os.path.isdir(output_dir):
     os.makedirs(output_dir)
@@ -32,17 +29,9 @@ ns_fields = tt.get_namespaced_terms(ont, fields)
 
 structured_terms = tt.hget_entity_classes(ont, ns_terms)
 
-####
-# Section 2 - Create basic Entity Template
-####
 # Here we use the ns_fields.
 et = tt.EntityTemplate(structured_terms['classes'], structured_terms['markers'], ns_fields)
 
-###
-# Section 3 - Create PointGroupTemplate on the fly with a predefined Entity Template
-###
-# To create a grouping of points, we use the concept
-# of a PointGroupTemplate.
 
 # In the following, we populate the PGT with an empty dictionary
 # and then add the above EntityTemplate to it.
@@ -54,9 +43,7 @@ pgt.add_telemetry_point_to_template(et)
 # The PointGroupTemplate is not valid:
 print(f"pgt valid? {pgt.is_valid}")
 
-###
-# Section 4 - Create valid PointGroupTemplate based on the templating schema
-###
+
 # A PointGroupTemplate is instantiated from a dictionary with
 # the proper keys.  It looks as follows (this is a similar Python dict representation
 # of the tests/files/haystack-point-group-template-1.yaml, slightly modified)
@@ -96,7 +83,7 @@ print(f"pgt valid? {pgt_valid.is_valid}")
 # 1. the template basics
 # 2. the telemetry points
 pgt_valid.populate_template_basics()
-pgt_valid.populate_telemetry_templates()
+pgt_valid.resolve_telemetry_point_types()
 # For each point type (i.e. key in 'telemetry_point_types'),
 # an Entity Template is created and registered within the class.
 

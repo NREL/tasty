@@ -6,14 +6,14 @@
   schema_name: Haystack
   version: 3.9.9
   extends: coolingOnly-vav
-  properties:
-    - singleDuct:
-        _kind: "marker"
-    - ratedAirflow:
-        _kind: "number"
-        val: 123
+  fields:
+    singleDuct:
+      _kind: "marker"
+    ratedAirflow:
+      _kind: "number"
+      val: 123
   telemetry_point_types:
-    - SD
-    - damper-cmd-point:
-        - curVal:
-            _kind: "bool"
+    SD: {}
+    damper-cmd-point:
+      curVal:
+        _kind: "bool"

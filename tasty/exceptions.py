@@ -20,3 +20,8 @@ class MultipleTermsFoundError(TastyError):
 class TemplateValidationError(TastyError):
     def __init__(self, message):
         super().__init__(message)
+
+
+class TemplateRegistrationError(TastyError):
+    def __init__(self, message):
+        super().__init__(message)
