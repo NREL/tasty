@@ -23,7 +23,7 @@ class EntityTemplate:
     instances = set()  # type: Set[EntityTemplate]
 
     # TODO: maybe there is a better way to do this with __hash__?
-    def __new__(cls, entity_classes, typing_properties, fields, schema_name, schema_version):
+    def __new__(cls, entity_classes, schema_name, schema_version, typing_properties, fields):
         """
         We only create a new object if an 'equivalent' object doesn't already exist.
         If the equivalent object does exist, we return that instead.
@@ -34,26 +34,30 @@ class EntityTemplate:
         :param schema_version:
         :return: [EntityTemplate]
         """
-        equivalent = cls.get_equivalent(entity_classes, typing_properties, fields, schema_name, schema_version)
+        equivalent = cls.get_equivalent(entity_classes, schema_name, schema_version, typing_properties, fields)
         if equivalent:
-            print(f"{__name__} Equivalent EntityTemplate already exists and was returned.")
+            print(f"{__name__}.{__class__.__name__} Equivalent EntityTemplate already exists and was returned.")
             return equivalent
         else:
-            print(f"{__name__} New EntityTemplate created.")
             return super().__new__(cls)
 
-    def __init__(self, entity_classes: Set, typing_properties: Set, fields: Set[Tuple[Namespace, str, dict]],
-                 schema_name: str, schema_version: str):
+    def __init__(self, entity_classes: Set[Tuple[Namespace, str]], schema_name: str, schema_version: str,
+                 typing_properties: Set,
+                 fields: Set[Tuple[Namespace, str, dict]]):
         self.entity_classes = entity_classes
-        self.typing_properties = typing_properties
-        self.fields = fields
         self.schema_name = schema_name
         self.schema_version = schema_version
-        self.register_template(self)
+        self.typing_properties = typing_properties
+        self.fields = fields
+        self.is_valid = False
+        self.validate_data()
+        if self.is_valid:
+            print(f"{__name__}.{__class__.__name__} created and is valid: {self.schema_name}, {self.schema_version}, {self.get_simple_classes()}")
+            self.register_template(self)
 
     @classmethod
-    def get_equivalent(cls, entity_classes: Set, typing_properties: Set, fields: Set[Tuple[Namespace, str, dict]],
-                       schema_name: str, schema_version: str):
+    def get_equivalent(cls, entity_classes: Set, schema_name: str, schema_version: str, typing_properties: Set,
+                       fields: Set[Tuple[Namespace, str, dict]]):
         has_equivalent = False
         for et in cls.instances:
             if (
@@ -108,6 +112,33 @@ class EntityTemplate:
             if namespaced_classes <= template.entity_classes:
                 templates.add(template)
         return list(templates)
+
+    def validate_data(self):
+        # Check entity_classes
+        if not isinstance(self.entity_classes, set) or len(self.entity_classes) == 0:
+            raise ValueError("entity_classes must be a set and have atleast one item.")
+        elif len(self.entity_classes) > 0:
+            for ec in self.entity_classes:
+                if not isinstance(ec, Tuple):
+                    raise ValueError("each element in entity_classes must be a Tuple")
+                elif not len(ec) == 2:
+                    raise ValueError("each Tuple in entity_classes must have 2 elements")
+                elif not isinstance(ec[0], Namespace) or not isinstance(ec[1], str):
+                    raise ValueError("each element in entity_classes must contain a (Namespace, str) tuple")
+
+        # Check schema_name
+        if not isinstance(self.schema_name, str):
+            raise ValueError("schema_name must be a string")
+        elif not bool(self.schema_name):
+            raise ValueError("schema_name must be non-empty")
+
+        # Check schema_version
+        if not isinstance(self.schema_version, str):
+            raise ValueError("schema_version must be a string")
+        elif not bool(self.schema_version):
+            raise ValueError("schema_version must be non-empty")
+
+        self.is_valid = True
 
     def get_simple_classes(self) -> Set[str]:
         """
@@ -233,8 +264,6 @@ class BaseTemplate:
         if not self.is_valid:
             raise te.TemplateValidationError(self.validation_error)
         else:
-            print(template_type)
-            print(self._template['template_type'])
             if self._template['template_type'] != template_type:
                 raise te.TemplateValidationError(
                     f"template_type must be: {template_type}"
@@ -276,10 +305,10 @@ class EquipmentTemplate(BaseTemplate):
         super().__init__(**kwargs)
         self._extends: str = None
         self.extends: Tuple[Namespace, str] = None
+        self.fully_resolved = False
         self.point_group_templates: Set[PointGroupTemplate] = set()
-        self.telemetry_point_entities: Set[EntityTemplate] = set()
+        self.telemetry_point_entity_templates: Set[EntityTemplate] = set()
         if self.has_minimum_keys(self._template):
-            print("Validating")
             self.validate_template_against_schema(template_type='equipment-template')
 
     @classmethod
@@ -334,23 +363,44 @@ class EquipmentTemplate(BaseTemplate):
                 self.extends = equipment_class
 
     def resolve_telemetry_point_types(self):
+        ont = tg.load_ontology(self._schema_name, self._schema_version)
         for point_type_or_symbol, data in self._telemetry_points.items():
-            available_pgts = PointGroupTemplate.find_given_symbol_schema_version(point_type_or_symbol,
-                                                                                 self._schema_name,
-                                                                                 self._schema_version)
-            if len(available_pgts) == 0:
-                # TODO: Check if thing is point class
-                print(f"[tasty.templates.EquipmentTemplate] No PointGroupTemplate found for {point_type_or_symbol}")
-            elif len(available_pgts) > 1:
-                te.TastyError(
-                    f"""Multiple PointGroupTemplates with: symbol ({point_type_or_symbol}),
-                    schema: ({self._schema_name}), version: ({self._schema_version}) found.
-                    Unable to resolve for EquipmentTemplate ID: {self._id}"""
-                )
-            else:
-                pgt = available_pgts[0]
-                print(f"[tasty.templates.EquipmentTemplate] Found PointGroupTemplate with id: {pgt._id}")
-                self.point_group_templates.add(pgt)
+            if isinstance(data, type(None)):
+                available_pgts = PointGroupTemplate.find_given_symbol_schema_version(point_type_or_symbol,
+                                                                                     self._schema_name,
+                                                                                     self._schema_version)
+                if len(available_pgts) == 0:
+                    print(
+                        f"[tasty.templates.EquipmentTemplate] No PointGroupTemplate found for {self._schema_name}, {self._schema_version}, {point_type_or_symbol}. Make sure PGTs have been loaded")
+                elif len(available_pgts) > 1:
+                    te.TastyError(
+                        f"""Multiple PointGroupTemplates with: symbol ({point_type_or_symbol}),
+                        schema: ({self._schema_name}), version: ({self._schema_version}) found.
+                        Unable to resolve for EquipmentTemplate ID: {self._id}
+                        """
+                    )
+                else:
+                    pgt = available_pgts[0]
+                    print(f"[tasty.templates.EquipmentTemplate] Found PointGroupTemplate with id: {pgt._id}")
+                    self.point_group_templates.add(pgt)
+            elif isinstance(data, dict):
+                et = resolve_to_entity_template(ont, point_type_or_symbol, data, self._schema_name,
+                                                self._schema_version)
+                if et:
+                    self.telemetry_point_entity_templates.add(et)
+        total_to_resolve = len(self.telemetry_point_entity_templates) + len(self.point_group_templates)
+        if total_to_resolve == len(self._telemetry_points):
+            print(f"[tasty.templates.EquipmentTemplate] Fully Resolved")
+            self.fully_resolved = True
+
+    def get_all_points_as_entity_templates(self) -> Set[EntityTemplate]:
+        to_return = set()
+        for pgt in self.point_group_templates:
+            for et in pgt.telemetry_point_entity_templates:
+                to_return.add(et)
+        for et in self.telemetry_point_entity_templates:
+            to_return.add(et)
+        return to_return
 
 
 class PointGroupTemplate(BaseTemplate):
@@ -368,7 +418,7 @@ class PointGroupTemplate(BaseTemplate):
         :param template: [dict] See the template.schema.json for expected keys.
         """
         super().__init__(**kwargs)
-        self.telemetry_point_entities: Set[EntityTemplate] = set()
+        self.telemetry_point_entity_templates: Set[EntityTemplate] = set()
         if self.has_minimum_keys(self._template):
             self.validate_template_against_schema(template_type='point-group-template')
 
@@ -434,18 +484,18 @@ class PointGroupTemplate(BaseTemplate):
         Uses keys found in the template to run.
         :return:
         """
-        self.telemetry_point_entities = resolve_telemetry_points_to_entity_templates(self._telemetry_points,
-                                                                                     self._schema_name,
-                                                                                     self._schema_version)
+        self.telemetry_point_entity_templates = resolve_telemetry_points_to_entity_templates(self._telemetry_points,
+                                                                                             self._schema_name,
+                                                                                             self._schema_version)
 
     def add_telemetry_point_to_template(self, entity_template: EntityTemplate) -> None:
         """
-        Update the set of telemetry_point_entities with a new EntityTemplate
+        Update the set of telemetry_point_entity_templates with a new EntityTemplate
         :param entity_template: [EntityTemplate] a new entity to add to this point group
         :return:
         """
         if isinstance(entity_template, EntityTemplate):
-            self.telemetry_point_entities.add(entity_template)
+            self.telemetry_point_entity_templates.add(entity_template)
 
     def write(self, file_path: str) -> None:
         """
@@ -515,20 +565,25 @@ def resolve_telemetry_points_to_entity_templates(telemetry_point_types: dict, sc
     ont = tg.load_ontology(schema_name, version)
     entity_templates = set()
     for typing_metadata, properties in telemetry_point_types.items():
-        ns_terms = get_namespaced_terms(ont, typing_metadata)
-        ns_fields = get_namespaced_terms(ont, properties)
-        if schema_name == 'Haystack':
-            structured_terms = hget_entity_classes(ont, ns_terms)
-            if len(structured_terms['fields']) > 0:
-                print(
-                    f"[tasty.templates.resolve_telemetry_point_to_entity_templates] The following fields were found but will not be used: {structured_terms['fields']}.")
-            et = EntityTemplate(structured_terms['classes'], structured_terms['markers'], ns_fields, schema_name,
-                                version)
-        elif schema_name == 'Brick':
-            et = EntityTemplate(ns_terms, set(), ns_fields, schema_name, version)
-        entity_templates.add(et)
-
+        et = resolve_to_entity_template(ont, typing_metadata, properties, schema_name, version)
+        if et:
+            entity_templates.add(et)
     return set(entity_templates)
+
+
+def resolve_to_entity_template(ont, typing_metadata, properties, schema_name, version):
+    et = False
+    ns_terms = get_namespaced_terms(ont, typing_metadata)
+    ns_fields = get_namespaced_terms(ont, properties)
+    if schema_name == 'Haystack':
+        structured_terms = hget_entity_classes(ont, ns_terms)
+        if len(structured_terms['fields']) > 0:
+            print(
+                f"[tasty.templates.resolve_to_entity_template] The following fields were found but will not be used: {structured_terms['fields']}.")
+        et = EntityTemplate(structured_terms['classes'], schema_name, version, structured_terms['markers'], ns_fields)
+    elif schema_name == 'Brick':
+        et = EntityTemplate(ns_terms, schema_name, version, set(), ns_fields)
+    return et
 
 
 def get_namespaced_terms(ontology: Graph, terms: [str, dict]) -> Set:
