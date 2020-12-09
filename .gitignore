@@ -10,6 +10,7 @@ dist
 
 # Tasty
 output
+debug.py
 
 # Jupyter
 .ipynb_checkpoints
