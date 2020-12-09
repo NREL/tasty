@@ -1,4 +1,5 @@
 import os
+import uuid
 
 import tasty.templates as tt
 import tasty.constants as tc
@@ -32,11 +33,13 @@ structured_terms = tt.hget_entity_classes(ont, ns_terms)
 # Here we use the ns_fields.
 et = tt.EntityTemplate(structured_terms['classes'], structured_terms['markers'], ns_fields, 'Haystack', '3.9.9')
 
-# In the following, we populate the PGT with an empty dictionary
+# In the following, we populate a PGT with just a new id.
 # and then add the above EntityTemplate to it.
 # Although this is valid, mainly it's best to
 # populate from a valid PGT - see below
-pgt = tt.PointGroupTemplate({})
+
+minimum_data = {'id': str(uuid.uuid4())}
+pgt = tt.PointGroupTemplate(**minimum_data)
 pgt.add_telemetry_point_to_template(et)
 
 # The PointGroupTemplate is not valid:
@@ -73,7 +76,7 @@ pgt_dict = {
 
 # since the dict is not empty, this will automatically attempt
 # to validate the template against the template schema
-pgt_valid = tt.PointGroupTemplate(pgt_dict)
+pgt_valid = tt.PointGroupTemplate(**pgt_dict)
 
 print(f"pgt valid? {pgt_valid.is_valid}")
 

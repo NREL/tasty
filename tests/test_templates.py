@@ -45,7 +45,6 @@ class TestTemplateFunctions:
         assert isinstance(template, dict)
         assert isinstance(template['telemetry_point_types'], dict)
         for k, v in template['telemetry_point_types'].items():
-            print(type(v))
             # Objects (dicts) with a key but no value defined
             assert isinstance(v, dict)
 
@@ -68,7 +67,7 @@ class TestTemplateFunctions:
     @pytest.mark.parametrize("key,error_message", [
         ("id", "'id' is a required property"),
         ("symbol", "'symbol' is a required property"),
-        ("description", "'description' is a required property"),
+        ("template_type", "'template_type' is a required property"),
     ])
     def test_file_is_not_valid_if_keys_missing(self, key, error_message):
         # -- Setup
@@ -494,4 +493,3 @@ class TestEquipmentTemplate:
         # -- Setup
         eqt = populate_equipment_template_from_file(file)
         eqt.resolve_telemetry_point_types()
-        print(eqt._template)

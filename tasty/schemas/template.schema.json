@@ -44,7 +44,6 @@
   "required": [
     "id",
     "symbol",
-    "description",
     "template_type",
     "schema_name",
     "version"

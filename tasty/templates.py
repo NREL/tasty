@@ -183,31 +183,45 @@ class BaseTemplate:
             # Throws ValueError if not valid UUID
             uid = uuid.UUID(str(template_id))
             if not uid.version == 4:
-                raise te.TastyError(f"{__name__}.{__class__.__name__} ID must be valid UUID4, got: {template_id} - version: {uid.version}")
+                raise te.TastyError(
+                    f"{__name__}.{__class__.__name__} ID must be valid UUID4, got: {template_id} - version: {uid.version}")
             if template_id in cls._instance_ids:
                 raise te.TastyError(f"{__name__}.{__class__.__name__} with ID: {template_id} already exists.")
             else:
-                print(cls._instance_ids)
                 cls._instance_ids.add(template_id)
                 return super().__new__(cls)
         else:
             raise te.TastyError(f"{__name__}.{__class__.__name__} must have an ID")
 
     def __init__(self, **kwargs):
-        print(kwargs)
+        # Required kwargs
         self._template = kwargs
         self._id: str = None
         self._symbol: str = None
-        self._description: str = None
+        self._template_type: str = None
         self._schema_name: str = None
         self._schema_version: str = None
-        self._telemetry_points: dict = None
+
+        # Not required kwargs
+        self._description: str = None
+        self._telemetry_points: dict = {}
+
+        # Others
         self.template_schema: dict = None
         self.is_valid: bool = False
         self.validation_error: str = None
 
+    @staticmethod
+    def has_minimum_keys(template):
+        required = set(['id', 'symbol', 'template_type', 'schema_name', 'version'])
+        if required <= set(template.keys()):
+            return True
+        else:
+            return False
+
     def validate_template_against_schema(self,
-                                         schema_path=os.path.join(tc.SCHEMAS_DIR, 'template.schema.json')) -> None:
+                                         schema_path=os.path.join(tc.SCHEMAS_DIR, 'template.schema.json'),
+                                         template_type=None) -> None:
         """
         Validate self._template (dict) against the JSON schema.
         :param schema_path: [str] full/path/to/schema.json
@@ -218,6 +232,11 @@ class BaseTemplate:
                                                                                 self.template_schema)
         if not self.is_valid:
             raise te.TemplateValidationError(self.validation_error)
+        else:
+            if self._template['template_type'] != template_type:
+                raise te.TemplateValidationError(
+                    f"template_type must be: {template_type}"
+                )
 
     def populate_template_basics(self) -> None:
         """
@@ -227,10 +246,13 @@ class BaseTemplate:
         if self.is_valid:
             self._id = self._template['id']  # str
             self._symbol = self._template['symbol']  # str
-            self._description = self._template['description']  # str
+            self._template_type = self._template['template_type']  # str
             self._schema_name = self._template['schema_name']  # str
             self._schema_version = self._template['version']  # str
-            self._telemetry_points = self._template['telemetry_point_types']  # dict (yaml object)
+
+            # Not required
+            self._description = self._template.get('description', '')  # str
+            self._telemetry_points = self._template.get('telemetry_point_types', {})  # dict (yaml object)
         else:
             print(
                 "[tasty.templates.BaseTemplate] Template is not valid. Template basics not populated, nor is template registered to instances.")
@@ -254,8 +276,8 @@ class EquipmentTemplate(BaseTemplate):
         self.extends: Tuple[Namespace, str] = None
         self.point_group_templates: Set[PointGroupTemplate] = set()
         self.telemetry_point_entities: Set[EntityTemplate] = set()
-        if bool(self._template):
-            self.validate_template_against_schema()
+        if self.has_minimum_keys(self._template):
+            self.validate_template_against_schema(template_type='equipment-template')
 
     @classmethod
     def register_template(cls, template):
@@ -344,9 +366,8 @@ class PointGroupTemplate(BaseTemplate):
         """
         super().__init__(**kwargs)
         self.telemetry_point_entities: Set[EntityTemplate] = set()
-        print(self._template)
-        if bool(self._template):
-            self.validate_template_against_schema()
+        if self.has_minimum_keys(self._template):
+            self.validate_template_against_schema(template_type='point-group-template')
 
     @classmethod
     def register_template(cls, template) -> None:
