@@ -9,5 +9,7 @@
   extends: Variable_Air_Volume_Box
   fields: {}
   telemetry_point_types:
-    SD: {}
+    # In Equipment Templates, where we look to resolve a PointGroupTemplate
+    # we specifically DO NOT use flow syntax to get a NoneType
+    SD:
     Damper_Position_Command: {}

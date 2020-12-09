@@ -13,7 +13,9 @@
       _kind: "number"
       val: 123
   telemetry_point_types:
-    SD: {}
+    # In Equipment Templates, where we look to resolve a PointGroupTemplate
+    # we specifically DO NOT use flow syntax to get a NoneType
+    SD:
     damper-cmd-point:
       curVal:
         _kind: "bool"
