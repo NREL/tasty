@@ -224,21 +224,49 @@ class TestHGetEntityClasses:
 
 
 class TestEntityTemplate:
+    @pytest.mark.parametrize('classes, schema_name, version, error', [
+        (set(), '', '', "entity_classes must be a set and have atleast one item."),
+        (set([True]), '', '', 'each element in entity_classes must be a Tuple'),
+        (set([('asdf', 'asdf')]), '', '', 'each element in entity_classes must contain a (Namespace, str) tuple'),
+        (set([(tc.BRICK_1_1, True)]), '', '', 'each element in entity_classes must contain a (Namespace, str) tuple'),
+        (set([(tc.BRICK_1_1, 'string')]), True, '', 'schema_name must be a string'),
+        (set([(tc.BRICK_1_1, 'string')]), '', '', 'schema_name must be non-empty'),
+        (set([(tc.BRICK_1_1, 'string')]), 'schema-name', True, 'schema_version must be a string'),
+        (set([(tc.BRICK_1_1, 'string')]), 'schema-name', '', 'schema_version must be non-empty'),
+    ])
+    def test_bad_templates_throw_errors(self, classes, schema_name, version, error):
+        try:
+            tt.EntityTemplate(classes, schema_name, version, set(), set())
 
-    def test_blank_template_methods_dont_fail(self):
-        et = tt.EntityTemplate(set(), set(), set(), '', '')
-        assert et.get_simple_classes() == set()
-        assert et.get_simple_typing_info() == set()
-        assert et.get_simple_fields() == {}
-        assert et.get_namespaces() == set()
+            # should not get here
+            assert False
+        except ValueError as e:
+            assert str(e) == error
+        assert len(tt.EntityTemplate.instances) == 0
+
+    def test_minimum_template_is_valid_and_in_instances(self, minimum_entity_template):
+        # -- Setup
+        et = minimum_entity_template
+        assert et.is_valid
         assert et in tt.EntityTemplate.instances  # checks the template was registered
 
-    def test_initialize_equivalent_returns_original(self):
-        et1 = tt.EntityTemplate(set(), set(), set(), 'Haystack', '')
-        et2 = tt.EntityTemplate(set(), set(), set(), 'Haystack', '')
+    def test_minimum_template_methods_dont_fail(self, minimum_entity_template):
+        # -- Setup expectations
+        simple_classes = set(['Damper_Position_Command'])
+
+        et = minimum_entity_template
+        assert et.get_simple_classes() == simple_classes
+        assert et.get_simple_typing_info() == simple_classes
+        assert et.get_simple_fields() == {}
+        assert et.get_namespaces() == set([tc.BRICK_1_1])
+
+    def test_initialize_equivalent_returns_original(self, minimum_entity_template):
+        et1 = minimum_entity_template
+        et2 = minimum_entity_template
         assert et1 is et2
 
     def test_initialize_similar_does_not_return_original(self):
+        classes = set([(tc.BRICK_1_1, 'Damper_Position_Command')])
         schema_name = 'Haystack'
         schema_version = '3.9.9'
         ont = tg.load_ontology(schema_name, schema_version)
@@ -256,8 +284,8 @@ class TestEntityTemplate:
         }
         ns_fields1 = tt.get_namespaced_terms(ont, fields1)
         ns_fields2 = tt.get_namespaced_terms(ont, fields2)
-        et1 = tt.EntityTemplate(set(), set(), ns_fields1, schema_name, schema_version)
-        et2 = tt.EntityTemplate(set(), set(), ns_fields2, schema_name, schema_version)
+        et1 = tt.EntityTemplate(classes, schema_name, schema_version, set(), ns_fields1)
+        et2 = tt.EntityTemplate(classes, schema_name, schema_version, set(), ns_fields2)
         assert et1 is not et2
 
     def test_create_new_haystack_entity_template(self, haystack_entity_template):
@@ -412,7 +440,7 @@ class TestPointGroupTemplate:
         pgt.resolve_telemetry_point_types()
 
         # -- Assert
-        assert len(pgt.telemetry_point_entities) == 3
+        assert len(pgt.telemetry_point_entity_templates) == 3
 
     @pytest.mark.parametrize('file', [
         HAYSTACK_PGT_FILE_01,
@@ -501,15 +529,29 @@ class TestEquipmentTemplate:
 
         assert eq.extends == expected_type
 
-    @pytest.mark.parametrize('file', [
-        HAYSTACK_EQ_FILE_01,
+    @pytest.mark.parametrize('pgt_file, eqt_file', [
+        (HAYSTACK_PGT_FILE_01, HAYSTACK_EQ_FILE_01),
+        (BRICK_PGT_FILE_01, BRICK_EQ_FILE_01)
     ])
-    def test_resolve_telemetry_point_types(self, file):
+    def test_resolve_telemetry_point_types(self, pgt_file, eqt_file):
         # -- Setup - reset PGTs to 0 and populate
         reset_base_template_instance_ids()
         reset_point_group_template_registration()
-        _haystack_template, hpgt = populate_point_group_template_from_file(HAYSTACK_PGT_FILE_01)
 
         # -- Setup
-        eqt = populate_equipment_template_from_file(file)
+        eqt = populate_equipment_template_from_file(eqt_file)
         eqt.resolve_telemetry_point_types()
+
+        # -- Assert - An entity template will have resolved
+        assert len(eqt.telemetry_point_entity_templates) == 1
+        # -- Assert - The PGT will not have resolved
+        assert len(eqt.point_group_templates) == 0
+
+        # -- Setup - We now create a PGT and try to resolve again
+        _haystack_template, hpgt = populate_point_group_template_from_file(pgt_file)
+        eqt.resolve_telemetry_point_types()
+
+        # -- Assert - they should have both resolved and
+        assert len(eqt.point_group_templates) == 1
+        assert len(eqt.telemetry_point_entity_templates) == 1
+        assert eqt.fully_resolved

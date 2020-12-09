@@ -31,7 +31,7 @@ ns_fields = tt.get_namespaced_terms(ont, fields)
 structured_terms = tt.hget_entity_classes(ont, ns_terms)
 
 # Here we use the ns_fields.
-et = tt.EntityTemplate(structured_terms['classes'], structured_terms['markers'], ns_fields, 'Haystack', '3.9.9')
+et = tt.EntityTemplate(structured_terms['classes'], 'Haystack', '3.9.9', structured_terms['markers'], ns_fields)
 
 # In the following, we populate a PGT with just a new id.
 # and then add the above EntityTemplate to it.
@@ -50,8 +50,8 @@ print(f"pgt valid? {pgt.is_valid}")
 # of the tests/files/haystack-point-group-template-1.yaml, slightly modified)
 
 pgt_dict = {
-    'id': '4aa753fc-ab1b-47d0-984f-121fa0cfa0e9',
-    'symbol': 'SD',
+    'id': 'b08b7f2b-288e-4a0c-a825-c252b6464148',
+    'symbol': 'SD_MODIFIED',
     'description': 'Single duct VAV type, with basic airflow control.',
     'template_type': 'point-group-template',
     'schema_name': 'Haystack',
@@ -115,7 +115,7 @@ print(f"There are {len(et_of_interest)} EntityTemplates based on the {to_find} c
 # 2. We can find all Point Group Templates that have those entities of interest:
 for et in et_of_interest:
     for pgt in tt.PointGroupTemplate.instances:
-        if et in pgt.telemetry_point_entities:
+        if et in pgt.telemetry_point_entity_templates:
             print(f"EntityTemplate with typing info: {et.get_simple_typing_info()} found in PGT: {pgt._id}")
 
 eqt_dict = {
@@ -136,7 +136,7 @@ eqt_dict = {
         }
     },
     'telemetry_point_types': {
-        'SD': {},
+        'SD': None,
         'damper-cmd-point': {
             'curVal': {
                 '_kind': 'bool'
