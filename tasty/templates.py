@@ -233,6 +233,8 @@ class BaseTemplate:
         if not self.is_valid:
             raise te.TemplateValidationError(self.validation_error)
         else:
+            print(template_type)
+            print(self._template['template_type'])
             if self._template['template_type'] != template_type:
                 raise te.TemplateValidationError(
                     f"template_type must be: {template_type}"
@@ -277,6 +279,7 @@ class EquipmentTemplate(BaseTemplate):
         self.point_group_templates: Set[PointGroupTemplate] = set()
         self.telemetry_point_entities: Set[EntityTemplate] = set()
         if self.has_minimum_keys(self._template):
+            print("Validating")
             self.validate_template_against_schema(template_type='equipment-template')
 
     @classmethod

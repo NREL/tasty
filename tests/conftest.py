@@ -1,4 +1,5 @@
 import os
+import uuid
 
 import pytest
 import tasty.templates as tt
@@ -51,12 +52,6 @@ def reset_point_group_template_registration():
     # NEVER DO THIS IN PRACTICE
     tt.PointGroupTemplate.instances = set()
     assert len(tt.PointGroupTemplate.instances) == 0
-
-
-def reset_entity_template_registration():
-    # NEVER DO THIS IN PRACTICE
-    tt.EntityTemplate.instances = set()
-    assert len(tt.EntityTemplate.instances) == 0
 
 
 @pytest.fixture
@@ -114,3 +109,27 @@ def bad_uuids():
 @pytest.fixture
 def my_uuid4():
     return '794a4888-162b-468d-bb39-2afbe90ecd34'
+
+
+@pytest.fixture
+def equipment_template_bad_template_type():
+    t = {
+        'id': str(uuid.uuid4()),
+        'symbol': 'ABCDE',
+        'template_type': 'point-group-template',
+        'schema_name': 'Haystack',
+        'version': '3.9.9'
+    }
+    return t
+
+
+@pytest.fixture
+def point_group_template_bad_template_type():
+    t = {
+        'id': str(uuid.uuid4()),
+        'symbol': 'ABCDE',
+        'template_type': 'equipment-template',
+        'schema_name': 'Haystack',
+        'version': '3.9.9'
+    }
+    return t

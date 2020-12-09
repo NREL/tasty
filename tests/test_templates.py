@@ -9,8 +9,9 @@ import tasty.templates as tt
 import tasty.constants as tc
 import tasty.graphs as tg
 import tasty.exceptions as te
-from tests.conftest import populate_point_group_template_from_file, prep_for_write, \
-    reset_point_group_template_registration, populate_equipment_template_from_file, reset_base_template_instance_ids
+from tests.conftest import populate_point_group_template_from_file, populate_equipment_template_from_file, \
+    prep_for_write, reset_base_template_instance_ids, reset_point_group_template_registration
+
 
 FILES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files')
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output')
@@ -371,6 +372,15 @@ class TestBaseTemplate:
 
 
 class TestPointGroupTemplate:
+    def test_bad_template_type_throws_template_validation_error(self, point_group_template_bad_template_type):
+        try:
+            tt.PointGroupTemplate(**point_group_template_bad_template_type)
+
+            # Should not reach here
+            assert False is True
+        except te.TemplateValidationError as e:
+            assert str(e) == 'template_type must be: point-group-template'
+
     @pytest.mark.parametrize('file', [
         HAYSTACK_PGT_FILE_01,
         BRICK_PGT_FILE_01
@@ -459,6 +469,16 @@ class TestPointGroupTemplate:
 
 
 class TestEquipmentTemplate:
+
+    def test_bad_template_type_throws_template_validation_error(self, equipment_template_bad_template_type):
+        try:
+            tt.EquipmentTemplate(**equipment_template_bad_template_type)
+
+            # Should not reach here
+            assert False is True
+        except te.TemplateValidationError as e:
+            assert str(e) == 'template_type must be: equipment-template'
+
     @pytest.mark.parametrize('file, expected_type', [
         (HAYSTACK_EQ_FILE_01, (tc.PHIOT_3_9_9, 'coolingOnly-vav')),
         (BRICK_EQ_FILE_01, (tc.BRICK_1_1, 'Variable_Air_Volume_Box')),
