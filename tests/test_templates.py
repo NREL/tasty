@@ -10,7 +10,7 @@ import tasty.constants as tc
 import tasty.graphs as tg
 import tasty.exceptions as te
 from tests.conftest import populate_point_group_template_from_file, prep_for_write, \
-    reset_point_group_template_registration, populate_equipment_template_from_file, reset_entity_template_registration
+    reset_point_group_template_registration, populate_equipment_template_from_file, reset_base_template_instance_ids
 
 FILES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files')
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output')
@@ -334,6 +334,43 @@ class TestResolveTelemetryPointsToEntityTemplates:
         assert len(entity_templates) == expected_number_entity_templates
 
 
+class TestBaseTemplate:
+    def test_empty_initialization_throws_error(self):
+        try:
+            tt.BaseTemplate()
+        except te.TastyError as e:
+            # -- Assert
+            assert str(e) == "tasty.templates.BaseTemplate must have an ID"
+
+    def test_template_id_must_be_uuid(self, bad_ids):
+        for id in bad_ids:
+            template = {'id': id}
+            try:
+                tt.BaseTemplate(**template)
+            except ValueError as e:
+                assert str(e) == f"badly formed hexadecimal UUID string"
+
+    def test_template_id_must_be_uuid4(self, bad_uuids):
+        for id in bad_uuids:
+            template = {'id': id[0]}
+            try:
+                tt.BaseTemplate(**template)
+            except te.TastyError as e:
+                assert str(e) == f"tasty.templates.BaseTemplate ID must be valid UUID4, got: {id[0]} - version: {id[1]}"
+
+    def test_template_with_same_ids_throws_error(self, my_uuid4):
+        template = {'id': my_uuid4}
+
+        # Should not throw error
+        tt.BaseTemplate(**template)
+
+        # Should throw error
+        try:
+            tt.BaseTemplate(**template)
+        except te.TastyError as e:
+            assert str(e) == f"tasty.templates.BaseTemplate with ID: {my_uuid4} already exists."
+
+
 class TestPointGroupTemplate:
     @pytest.mark.parametrize('file', [
         HAYSTACK_PGT_FILE_01,
@@ -345,7 +382,7 @@ class TestPointGroupTemplate:
         assert len(templates) == 1
 
         template_data = templates[0]
-        pgt = tt.PointGroupTemplate(template_data)
+        pgt = tt.PointGroupTemplate(**template_data)
 
         # -- Assert - template validates against schema
         assert pgt.is_valid
@@ -373,6 +410,7 @@ class TestPointGroupTemplate:
         BRICK_PGT_FILE_01
     ])
     def test_write(self, file):
+        reset_base_template_instance_ids()
         # -- Setup
         template_data, pgt = populate_point_group_template_from_file(file)
         out_file = prep_for_write(OUTPUT_DIR, file, 'out', 'yaml')
@@ -397,6 +435,7 @@ class TestPointGroupTemplate:
     ])
     def test_find_given_symbol_schema_version(self, file, symbol, schema, version):
         # -- Setup - reset all PGTs registered
+        reset_base_template_instance_ids()
         reset_point_group_template_registration()
         _template, pgt = populate_point_group_template_from_file(file)
 
@@ -409,6 +448,7 @@ class TestPointGroupTemplate:
     def test_find_given_symbol(self):
         # -- Setup - reset all PGTs registered
         symbol = 'SD'
+        reset_base_template_instance_ids()
         reset_point_group_template_registration()
         _haystack_template, hpgt = populate_point_group_template_from_file(HAYSTACK_PGT_FILE_01)
         _brick_template, bpgt = populate_point_group_template_from_file(BRICK_PGT_FILE_01)
@@ -426,11 +466,12 @@ class TestEquipmentTemplate:
     ])
     def test_populate_from_file_extension_resolves(self, file, expected_type):
         # -- Setup
+        reset_base_template_instance_ids()
         templates = tt.load_template_file(file)
         assert len(templates) == 1
 
         template_data = templates[0]
-        eq = tt.EquipmentTemplate(template_data)
+        eq = tt.EquipmentTemplate(**template_data)
 
         # -- Assert - equipment template is valid
         assert eq.is_valid
@@ -446,6 +487,7 @@ class TestEquipmentTemplate:
     ])
     def test_resolve_telemetry_point_types(self, file):
         # -- Setup - reset PGTs to 0 and populate
+        reset_base_template_instance_ids()
         reset_point_group_template_registration()
         _haystack_template, hpgt = populate_point_group_template_from_file(HAYSTACK_PGT_FILE_01)
 

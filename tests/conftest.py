@@ -11,7 +11,7 @@ def populate_point_group_template_from_file(file_path):
     assert len(templates) == 1
 
     template_data = templates[0]
-    pgt = tt.PointGroupTemplate(template_data)
+    pgt = tt.PointGroupTemplate(**template_data)
     pgt.populate_template_basics()
     pgt.resolve_telemetry_point_types()
 
@@ -23,7 +23,7 @@ def populate_equipment_template_from_file(file_path):
     assert len(templates) == 1
 
     template_data = templates[0]
-    eq = tt.EquipmentTemplate(template_data)
+    eq = tt.EquipmentTemplate(**template_data)
     assert eq.is_valid
 
     # -- Setup - populate basics
@@ -41,12 +41,20 @@ def prep_for_write(output_dir, file, write_type, ext):
     return out_file
 
 
+def reset_base_template_instance_ids():
+    # NEVER DO THIS IN PRACTICE
+    tt.BaseTemplate._instance_ids = set()
+    assert len(tt.BaseTemplate._instance_ids) == 0
+
+
 def reset_point_group_template_registration():
+    # NEVER DO THIS IN PRACTICE
     tt.PointGroupTemplate.instances = set()
     assert len(tt.PointGroupTemplate.instances) == 0
 
 
 def reset_entity_template_registration():
+    # NEVER DO THIS IN PRACTICE
     tt.EntityTemplate.instances = set()
     assert len(tt.EntityTemplate.instances) == 0
 
@@ -89,3 +97,20 @@ def brick_entity_template():
 
     et = tt.EntityTemplate(ns_terms, set(), set(), schema_name, schema_version)
     return et
+
+
+@pytest.fixture
+def bad_ids():
+    return [1, 'sdf', {}, []]
+
+
+@pytest.fixture
+def bad_uuids():
+    return [
+        ('d72ef4fe-3a4d-11eb-8926-3af9d38d2919', 1),
+    ]
+
+
+@pytest.fixture
+def my_uuid4():
+    return '794a4888-162b-468d-bb39-2afbe90ecd34'

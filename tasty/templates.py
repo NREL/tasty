@@ -1,6 +1,7 @@
 import os
 from itertools import permutations
 from copy import deepcopy
+import uuid
 
 from typing import List, Set, Tuple
 from frozendict import frozendict
@@ -35,10 +36,10 @@ class EntityTemplate:
         """
         equivalent = cls.get_equivalent(entity_classes, typing_properties, fields, schema_name, schema_version)
         if equivalent:
-            print("[templates.EntityTemplate.__new__] Equivalent EntityTemplate already exists and was returned.")
+            print(f"{__name__} Equivalent EntityTemplate already exists and was returned.")
             return equivalent
         else:
-            print("[templates.EntityTemplate.__new__] New EntityTemplate created.")
+            print(f"{__name__} New EntityTemplate created.")
             return super().__new__(cls)
 
     def __init__(self, entity_classes: Set, typing_properties: Set, fields: Set[Tuple[Namespace, str, dict]],
@@ -174,8 +175,27 @@ class EntityTemplate:
 
 
 class BaseTemplate:
-    def __init__(self, template: dict):
-        self._template = template
+    _instance_ids = set()
+
+    def __new__(cls, **kwargs):
+        if 'id' in kwargs:
+            template_id = kwargs['id']
+            # Throws ValueError if not valid UUID
+            uid = uuid.UUID(str(template_id))
+            if not uid.version == 4:
+                raise te.TastyError(f"{__name__}.{__class__.__name__} ID must be valid UUID4, got: {template_id} - version: {uid.version}")
+            if template_id in cls._instance_ids:
+                raise te.TastyError(f"{__name__}.{__class__.__name__} with ID: {template_id} already exists.")
+            else:
+                print(cls._instance_ids)
+                cls._instance_ids.add(template_id)
+                return super().__new__(cls)
+        else:
+            raise te.TastyError(f"{__name__}.{__class__.__name__} must have an ID")
+
+    def __init__(self, **kwargs):
+        print(kwargs)
+        self._template = kwargs
         self._id: str = None
         self._symbol: str = None
         self._description: str = None
@@ -228,8 +248,8 @@ class EquipmentTemplate(BaseTemplate):
     """
     instances = set()
 
-    def __init__(self, template: dict):
-        super().__init__(template)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._extends: str = None
         self.extends: Tuple[Namespace, str] = None
         self.point_group_templates: Set[PointGroupTemplate] = set()
@@ -316,13 +336,15 @@ class PointGroupTemplate(BaseTemplate):
     #   Class Methods:
     #       2. find_with_entities(Set(EntityTemplates)) -> return PGTs
     #       ~~3. find_with_symbol(symbol) -> return PGTs~~
-    def __init__(self, template: dict):
+
+    def __init__(self, **kwargs):
         """
         Initialize a new PointGroupTemplate
         :param template: [dict] See the template.schema.json for expected keys.
         """
-        super().__init__(template)
+        super().__init__(**kwargs)
         self.telemetry_point_entities: Set[EntityTemplate] = set()
+        print(self._template)
         if bool(self._template):
             self.validate_template_against_schema()
 
