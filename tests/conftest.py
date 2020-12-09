@@ -4,6 +4,7 @@ import uuid
 import pytest
 import tasty.templates as tt
 import tasty.graphs as tg
+import tasty.constants as tc
 
 
 def populate_point_group_template_from_file(file_path):
@@ -55,6 +56,13 @@ def reset_point_group_template_registration():
 
 
 @pytest.fixture
+def minimum_entity_template():
+    classes = set([(tc.BRICK_1_1, 'Damper_Position_Command')])
+    et = tt.EntityTemplate(classes, 'Brick', '1.1', set(), set())
+    return et
+
+
+@pytest.fixture
 def haystack_entity_template():
     # -- Setup
     schema_name = 'Haystack'
@@ -73,11 +81,8 @@ def haystack_entity_template():
     ns_fields = tt.get_namespaced_terms(ont, fields)
     structured_terms = tt.hget_entity_classes(ont, ns_terms)
 
-    et = tt.EntityTemplate(structured_terms['classes'],
-                           structured_terms['markers'],
-                           ns_fields,
-                           schema_name,
-                           schema_version)
+    et = tt.EntityTemplate(structured_terms['classes'], schema_name, schema_version, structured_terms['markers'],
+                           ns_fields)
     return et
 
 
@@ -90,7 +95,7 @@ def brick_entity_template():
     point_type_string = 'Discharge_Air_Flow_Sensor'
     ns_terms = tt.get_namespaced_terms(ont, point_type_string)
 
-    et = tt.EntityTemplate(ns_terms, set(), set(), schema_name, schema_version)
+    et = tt.EntityTemplate(ns_terms, schema_name, schema_version, set(), set())
     return et
 
 
