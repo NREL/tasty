@@ -4,10 +4,10 @@ import tasty.templates as tt
 import tasty.constants as tc
 import tasty.graphs as tg
 
-
 output_dir = os.path.join(os.path.dirname(__file__), 'outputs')
 if not os.path.isdir(output_dir):
     os.makedirs(output_dir)
+
 
 # Get a base graph
 ont = tg.load_ontology('Haystack', '3.9.9')
@@ -30,8 +30,7 @@ ns_fields = tt.get_namespaced_terms(ont, fields)
 structured_terms = tt.hget_entity_classes(ont, ns_terms)
 
 # Here we use the ns_fields.
-et = tt.EntityTemplate(structured_terms['classes'], structured_terms['markers'], ns_fields)
-
+et = tt.EntityTemplate(structured_terms['classes'], structured_terms['markers'], ns_fields, 'Haystack', '3.9.9')
 
 # In the following, we populate the PGT with an empty dictionary
 # and then add the above EntityTemplate to it.
@@ -42,7 +41,6 @@ pgt.add_telemetry_point_to_template(et)
 
 # The PointGroupTemplate is not valid:
 print(f"pgt valid? {pgt.is_valid}")
-
 
 # A PointGroupTemplate is instantiated from a dictionary with
 # the proper keys.  It looks as follows (this is a similar Python dict representation
@@ -113,6 +111,33 @@ print(f"There are {len(et_of_interest)} EntityTemplates based on the {to_find} c
 
 # 2. We can find all Point Group Templates that have those entities of interest:
 for et in et_of_interest:
-    for pgt in tt.PointGroupTemplate.all_templates:
+    for pgt in tt.PointGroupTemplate.instances:
         if et in pgt.telemetry_point_entities:
             print(f"EntityTemplate with typing info: {et.get_simple_typing_info()} found in PGT: {pgt._id}")
+
+eqt_dict = {
+    'id': '4aa753fc-ab1b-47d0-984f-121fa0cfa0e9',
+    'symbol': 'VAV_CO_SD',
+    'description': 'Single duct, cooling only VAV',
+    'template_type': 'equipment-template',
+    'schema_name': 'Haystack',
+    'version': '3.9.9',
+    'extends': 'coolingOnly-vav',
+    'fields': {
+        'singleDuct': {
+            '_kind': 'marker'
+        },
+        'ratedAirflow': {
+            '_kind': 'number',
+            'val': 123
+        }
+    },
+    'telemetry_point_types': {
+        'SD': {},
+        'damper-cmd-point': {
+            'curVal': {
+                '_kind': 'bool'
+            }
+        }
+    }
+}
