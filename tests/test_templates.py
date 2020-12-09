@@ -4,13 +4,13 @@ import pytest
 from unittest import TestCase
 from rdflib.namespace import Namespace
 from frozendict import frozendict
-import pickle
 
 import tasty.templates as tt
 import tasty.constants as tc
 import tasty.graphs as tg
 import tasty.exceptions as te
-from tests.conftest import populate_pgt_from_file, prep_for_write, reset_pgt_all_templates_to_empty_set
+from tests.conftest import populate_point_group_template_from_file, prep_for_write, \
+    reset_point_group_template_registration, populate_equipment_template_from_file, reset_entity_template_registration
 
 FILES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files')
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output')
@@ -225,30 +225,42 @@ class TestHGetEntityClasses:
 
 class TestEntityTemplate:
 
-    # This is done at the onset, as classes remain in memory space per TestClass
-    #
-    def test_register_template(self):
-        assert len(tt.EntityTemplate.all_templates) == 0
-
     def test_blank_template_methods_dont_fail(self):
-        et = tt.EntityTemplate(entity_classes=set(), typing_properties=set(), fields=set())
+        et = tt.EntityTemplate(set(), set(), set(), '', '')
         assert et.get_simple_classes() == set()
         assert et.get_simple_typing_info() == set()
         assert et.get_simple_fields() == {}
         assert et.get_namespaces() == set()
-        assert et in tt.EntityTemplate.all_templates  # checks the template was registered
+        assert et in tt.EntityTemplate.instances  # checks the template was registered
 
-    def test_create_new_haystack_entity_template(self):
-        # -- Setup
-        ont = tg.load_ontology('Haystack', '3.9.9')
-        point_type_string = 'cur-his-discharge-air-temp-sensor-point'
-        fields = {
+    def test_initialize_equivalent_returns_original(self):
+        et1 = tt.EntityTemplate(set(), set(), set(), 'Haystack', '')
+        et2 = tt.EntityTemplate(set(), set(), set(), 'Haystack', '')
+        assert et1 is et2
+
+    def test_initialize_similar_does_not_return_original(self):
+        schema_name = 'Haystack'
+        schema_version = '3.9.9'
+        ont = tg.load_ontology(schema_name, schema_version)
+        fields1 = {
             'curVal': {
                 '_kind': 'number',
                 'val': None
-            },
-            'unit': 'cfm'
+            }
         }
+        fields2 = {
+            'curVal': {
+                '_kind': 'number',
+                'val': 1
+            }
+        }
+        ns_fields1 = tt.get_namespaced_terms(ont, fields1)
+        ns_fields2 = tt.get_namespaced_terms(ont, fields2)
+        et1 = tt.EntityTemplate(set(), set(), ns_fields1, schema_name, schema_version)
+        et2 = tt.EntityTemplate(set(), set(), ns_fields2, schema_name, schema_version)
+        assert et1 is not et2
+
+    def test_create_new_haystack_entity_template(self, haystack_entity_template):
         # -- Setup - define expectations
         simple_classes = {'his-point', 'cur-point'}
         simple_typing_info = {'discharge', 'air', 'temp', 'sensor', 'his-point', 'cur-point'}
@@ -259,26 +271,16 @@ class TestEntityTemplate:
             tc.PHSCIENCE_3_9_9
         }
 
-        # -- Act
-        ns_terms = tt.get_namespaced_terms(ont, point_type_string)
-        ns_fields = tt.get_namespaced_terms(ont, fields)
-        structured_terms = tt.hget_entity_classes(ont, ns_terms)
-
-        # -- Assert
-        et = tt.EntityTemplate(structured_terms['classes'], structured_terms['markers'], ns_fields)
+        et = haystack_entity_template
         assert et.get_simple_classes() == simple_classes
         assert et.get_simple_typing_info() == simple_typing_info
         assert et.get_simple_fields() == simple_fields
         assert et.get_namespaces() == all_ns
-        assert et in tt.EntityTemplate.all_templates  # checks the template was registered
+        assert et in tt.EntityTemplate.instances  # checks the template was registered
 
-    def test_create_new_brick_entity_template(self):
-        # -- Setup
-        ont = tg.load_ontology('Brick', '1.1')
-        point_type_string = 'Discharge_Air_Flow_Sensor'
-        ns_terms = tt.get_namespaced_terms(ont, point_type_string)
-
+    def test_create_new_brick_entity_template(self, brick_entity_template):
         # -- Setup - define expectations
+        point_type_string = 'Discharge_Air_Flow_Sensor'
         simple_classes = {point_type_string}
         simple_typing_info = {point_type_string}
         simple_fields = {}
@@ -286,12 +288,12 @@ class TestEntityTemplate:
             tc.BRICK_1_1
         }
 
-        et = tt.EntityTemplate(ns_terms, set(), set())
+        et = brick_entity_template
         assert et.get_simple_classes() == simple_classes  # Only a single class
         assert et.get_simple_typing_info() == simple_typing_info  # Additional typing info not relevant for Brick at this time
         assert et.get_simple_fields() == simple_fields  # No DataTypeProperties available in Brick as of 1.1
         assert et.get_namespaces() == all_ns
-        assert et in tt.EntityTemplate.all_templates  # checks the template was registered
+        assert et in tt.EntityTemplate.instances  # checks the template was registered
 
     @pytest.mark.parametrize('class_to_find, expected_number_templates', [
         ((tc.PHIOT_3_9_9, 'cur-point'), 1),
@@ -372,7 +374,7 @@ class TestPointGroupTemplate:
     ])
     def test_write(self, file):
         # -- Setup
-        template_data, pgt = populate_pgt_from_file(file)
+        template_data, pgt = populate_point_group_template_from_file(file)
         out_file = prep_for_write(OUTPUT_DIR, file, 'out', 'yaml')
 
         pgt.write(out_file)
@@ -389,52 +391,27 @@ class TestPointGroupTemplate:
         # -- Assert - the data should be the same as originally loaded
         assert output_template == template_data
 
-    @pytest.mark.parametrize('file', [
-        HAYSTACK_PGT_FILE_01,
-        BRICK_PGT_FILE_01
-    ])
-    def test_pickle(self, file):
-        template_data, pgt = populate_pgt_from_file(file)
-        out_file = prep_for_write(OUTPUT_DIR, file, 'pickle', 'pkl')
-
-        pgt.pickle(out_file)
-
-        # -- Assert - pickled object exists
-        assert os.path.isfile(out_file)
-
-        with open(out_file, 'rb') as f:
-            pgt_out = pickle.load(f)
-
-        assert isinstance(pgt_out, tt.PointGroupTemplate)
-
-        # These are now different objects, so will not be equivalent
-        assert pgt_out != pgt
-
-        # Need a way to check that these two are equivalen / similar,
-        # even though they're not the same object, they still represent
-        # the same information
-
     @pytest.mark.parametrize('file, symbol, schema, version', [
         (HAYSTACK_PGT_FILE_01, 'SD', 'Haystack', '3.9.9'),
         (BRICK_PGT_FILE_01, 'SD', 'Brick', '1.1'),
     ])
     def test_find_given_symbol_schema_version(self, file, symbol, schema, version):
         # -- Setup - reset all PGTs registered
-        reset_pgt_all_templates_to_empty_set()
-        _template, pgt = populate_pgt_from_file(file)
+        reset_point_group_template_registration()
+        _template, pgt = populate_point_group_template_from_file(file)
 
-        # -- Assert - since all_templates was reset to empty set, and we are only creating a single
+        # -- Assert - since instances was reset to empty set, and we are only creating a single
         # PGT, there should just be 1 for each of these.
-        found = tt.PointGroupTemplate.find_given_symbol_schema_version(symbol, version, schema)
+        found = tt.PointGroupTemplate.find_given_symbol_schema_version(symbol, schema, version)
         assert len(found) == 1
         assert found[0] == pgt
 
     def test_find_given_symbol(self):
         # -- Setup - reset all PGTs registered
         symbol = 'SD'
-        reset_pgt_all_templates_to_empty_set()
-        _haystack_template, hpgt = populate_pgt_from_file(HAYSTACK_PGT_FILE_01)
-        _brick_template, bpgt = populate_pgt_from_file(BRICK_PGT_FILE_01)
+        reset_point_group_template_registration()
+        _haystack_template, hpgt = populate_point_group_template_from_file(HAYSTACK_PGT_FILE_01)
+        _brick_template, bpgt = populate_point_group_template_from_file(BRICK_PGT_FILE_01)
 
         found = tt.PointGroupTemplate.find_given_symbol(symbol)
         assert len(found) == 2
@@ -464,7 +441,15 @@ class TestEquipmentTemplate:
 
         assert eq.extends == expected_type
 
-    # @pytest.mark.parametrize('file', [
-    #     HAYSTACK_EQ_FILE_01,
-    # ])
-    # def test_resolve_telemetry_point_types(self, file):
+    @pytest.mark.parametrize('file', [
+        HAYSTACK_EQ_FILE_01,
+    ])
+    def test_resolve_telemetry_point_types(self, file):
+        # -- Setup - reset PGTs to 0 and populate
+        reset_point_group_template_registration()
+        _haystack_template, hpgt = populate_point_group_template_from_file(HAYSTACK_PGT_FILE_01)
+
+        # -- Setup
+        eqt = populate_equipment_template_from_file(file)
+        eqt.resolve_telemetry_point_types()
+        print(eqt._template)
