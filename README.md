@@ -18,7 +18,7 @@ Tasty was created to:
 
 
 # Usage and Examples
-- See [Usage](./examples/Usage.md)
+- See [Usage](examples/README.md)
 
 
 # Setup
