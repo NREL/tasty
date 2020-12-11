@@ -176,7 +176,7 @@ class TestGetNamespacedTerms(TestCase):
 
 
 class TestHGetEntityClasses:
-    @pytest.mark.parametrize("tagset, classes, markers, fields", [
+    @pytest.mark.parametrize("tagset, classes, markers, properties", [
         (
             'cur-air-writable-motor-temp-sensor-point', {
                 (tc.PHIOT_3_9_9, 'cur-point'),
@@ -213,14 +213,14 @@ class TestHGetEntityClasses:
             }
         )
     ])
-    def test_resolves_as_expected(self, tagset, classes, markers, fields):
+    def test_resolves_as_expected(self, tagset, classes, markers, properties):
         ont = tg.load_ontology('Haystack', '3.9.9')
         valid_namespaced_terms = tt.get_namespaced_terms(ont, tagset)
         structured = tt.hget_entity_classes(ont, set(valid_namespaced_terms))
-        assert list(structured.keys()) == ['classes', 'markers', 'fields']
+        assert list(structured.keys()) == ['classes', 'markers', 'properties']
         assert structured['classes'] == classes
         assert structured['markers'] == markers
-        assert structured['fields'] == fields
+        assert structured['properties'] == properties
 
 
 class TestEntityTemplate:
@@ -257,7 +257,7 @@ class TestEntityTemplate:
         et = minimum_entity_template
         assert et.get_simple_classes() == simple_classes
         assert et.get_simple_typing_info() == simple_classes
-        assert et.get_simple_fields() == {}
+        assert et.get_simple_properties() == {}
         assert et.get_namespaces() == set([tc.BRICK_1_1])
 
     def test_initialize_equivalent_returns_original(self, minimum_entity_template):
@@ -270,29 +270,29 @@ class TestEntityTemplate:
         schema_name = 'Haystack'
         schema_version = '3.9.9'
         ont = tg.load_ontology(schema_name, schema_version)
-        fields1 = {
+        properties1 = {
             'curVal': {
                 '_kind': 'number',
                 'val': None
             }
         }
-        fields2 = {
+        properties2 = {
             'curVal': {
                 '_kind': 'number',
                 'val': 1
             }
         }
-        ns_fields1 = tt.get_namespaced_terms(ont, fields1)
-        ns_fields2 = tt.get_namespaced_terms(ont, fields2)
-        et1 = tt.EntityTemplate(classes, schema_name, schema_version, set(), ns_fields1)
-        et2 = tt.EntityTemplate(classes, schema_name, schema_version, set(), ns_fields2)
+        ns_properties1 = tt.get_namespaced_terms(ont, properties1)
+        ns_properties2 = tt.get_namespaced_terms(ont, properties2)
+        et1 = tt.EntityTemplate(classes, schema_name, schema_version, set(), ns_properties1)
+        et2 = tt.EntityTemplate(classes, schema_name, schema_version, set(), ns_properties2)
         assert et1 is not et2
 
     def test_create_new_haystack_entity_template(self, haystack_entity_template):
         # -- Setup - define expectations
         simple_classes = {'his-point', 'cur-point'}
         simple_typing_info = {'discharge', 'air', 'temp', 'sensor', 'his-point', 'cur-point'}
-        simple_fields = {'curVal': {'_kind': 'number', 'val': None}, 'unit': {'val': 'cfm'}}
+        simple_properties = {'curVal': {'_kind': 'number', 'val': None}, 'unit': {'val': 'cfm'}}
         all_ns = {
             tc.PH_3_9_9,
             tc.PHIOT_3_9_9,
@@ -302,7 +302,7 @@ class TestEntityTemplate:
         et = haystack_entity_template
         assert et.get_simple_classes() == simple_classes
         assert et.get_simple_typing_info() == simple_typing_info
-        assert et.get_simple_fields() == simple_fields
+        assert et.get_simple_properties() == simple_properties
         assert et.get_namespaces() == all_ns
         assert et in tt.EntityTemplate.instances  # checks the template was registered
 
@@ -311,7 +311,7 @@ class TestEntityTemplate:
         point_type_string = 'Discharge_Air_Flow_Sensor'
         simple_classes = {point_type_string}
         simple_typing_info = {point_type_string}
-        simple_fields = {}
+        simple_properties = {}
         all_ns = {
             tc.BRICK_1_1
         }
@@ -319,7 +319,7 @@ class TestEntityTemplate:
         et = brick_entity_template
         assert et.get_simple_classes() == simple_classes  # Only a single class
         assert et.get_simple_typing_info() == simple_typing_info  # Additional typing info not relevant for Brick at this time
-        assert et.get_simple_fields() == simple_fields  # No DataTypeProperties available in Brick as of 1.1
+        assert et.get_simple_properties() == simple_properties  # No DataTypeProperties available in Brick as of 1.1
         assert et.get_namespaces() == all_ns
         assert et in tt.EntityTemplate.instances  # checks the template was registered
 
@@ -511,7 +511,7 @@ class TestEquipmentTemplate:
         (HAYSTACK_EQ_FILE_01, (tc.PHIOT_3_9_9, 'coolingOnly-vav')),
         (BRICK_EQ_FILE_01, (tc.BRICK_1_1, 'Variable_Air_Volume_Box')),
     ])
-    def test_populate_from_file_extension_resolves(self, file, expected_type):
+    def test_template_extension_resolves_to_expected_equip_class(self, file, expected_type):
         # -- Setup
         reset_base_template_instance_ids()
         templates = tt.load_template_file(file)
@@ -540,12 +540,14 @@ class TestEquipmentTemplate:
 
         # -- Setup
         eqt = populate_equipment_template_from_file(eqt_file)
+        print(eqt._template)
         eqt.resolve_telemetry_point_types()
 
         # -- Assert - An entity template will have resolved
         assert len(eqt.telemetry_point_entity_templates) == 1
         # -- Assert - The PGT will not have resolved
         assert len(eqt.point_group_templates) == 0
+        assert not eqt.fully_resolved
 
         # -- Setup - We now create a PGT and try to resolve again
         _haystack_template, hpgt = populate_point_group_template_from_file(pgt_file)
@@ -555,3 +557,5 @@ class TestEquipmentTemplate:
         assert len(eqt.point_group_templates) == 1
         assert len(eqt.telemetry_point_entity_templates) == 1
         assert eqt.fully_resolved
+        for et in eqt.get_all_points_as_entity_templates():
+            print(et.get_simple_classes())

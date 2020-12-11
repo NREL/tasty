@@ -69,7 +69,7 @@ def haystack_entity_template():
     schema_version = '3.9.9'
     ont = tg.load_ontology(schema_name, schema_version)
     point_type_string = 'cur-his-discharge-air-temp-sensor-point'
-    fields = {
+    properties = {
         'curVal': {
             '_kind': 'number',
             'val': None
@@ -78,11 +78,11 @@ def haystack_entity_template():
     }
     # -- Act
     ns_terms = tt.get_namespaced_terms(ont, point_type_string)
-    ns_fields = tt.get_namespaced_terms(ont, fields)
+    ns_properties = tt.get_namespaced_terms(ont, properties)
     structured_terms = tt.hget_entity_classes(ont, ns_terms)
 
     et = tt.EntityTemplate(structured_terms['classes'], schema_name, schema_version, structured_terms['markers'],
-                           ns_fields)
+                           ns_properties)
     return et
 
 

@@ -15,7 +15,7 @@ ont = tg.load_ontology('Haystack', '3.9.9')
 point_type_string = 'cur-air-writable-motor-curVal-sensor-point'
 
 # Define expected Datatype properties.
-fields = {
+properties = {
     'curVal': {
         '_kind': 'number',
         'val': None
@@ -26,12 +26,12 @@ fields = {
 # Resolve content to namespaced terms based on the loaded ontology.
 # Result of the below is a set like: {(Namespace, term), (Namespace, term), ...}
 ns_terms = tt.get_namespaced_terms(ont, point_type_string)
-ns_fields = tt.get_namespaced_terms(ont, fields)
+ns_properties = tt.get_namespaced_terms(ont, properties)
 
 structured_terms = tt.hget_entity_classes(ont, ns_terms)
 
-# Here we use the ns_fields.
-et = tt.EntityTemplate(structured_terms['classes'], 'Haystack', '3.9.9', structured_terms['markers'], ns_fields)
+# Here we use the ns_properties.
+et = tt.EntityTemplate(structured_terms['classes'], 'Haystack', '3.9.9', structured_terms['markers'], ns_properties)
 
 # In the following, we populate a PGT with just a new id.
 # and then add the above EntityTemplate to it.
@@ -126,7 +126,7 @@ eqt_dict = {
     'schema_name': 'Haystack',
     'version': '3.9.9',
     'extends': 'coolingOnly-vav',
-    'fields': {
+    'properties': {
         'singleDuct': {
             '_kind': 'marker'
         },

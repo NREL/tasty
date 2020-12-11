@@ -7,7 +7,7 @@
   # For Brick, encode version as a str, else gets interpreted as a number
   version: '1.1'
   extends: Variable_Air_Volume_Box
-  fields: {}
+  properties: {}
   telemetry_point_types:
     # In Equipment Templates, where we look to resolve a PointGroupTemplate
     # we specifically DO NOT use flow syntax to get a NoneType

@@ -6,7 +6,7 @@
   schema_name: Haystack
   version: 3.9.9
   extends: coolingOnly-vav
-  fields:
+  properties:
     singleDuct:
       _kind: "marker"
     ratedAirflow:

@@ -31,7 +31,7 @@
     "extends": {
       "type": "string"
     },
-    "fields": {
+    "properties": {
       "type": "object"
     },
     "telemetry_point_types": {

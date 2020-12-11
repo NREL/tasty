@@ -23,18 +23,18 @@ class EntityTemplate:
     instances = set()  # type: Set[EntityTemplate]
 
     # TODO: maybe there is a better way to do this with __hash__?
-    def __new__(cls, entity_classes, schema_name, schema_version, typing_properties, fields):
+    def __new__(cls, entity_classes, schema_name, schema_version, typing_properties, properties):
         """
         We only create a new object if an 'equivalent' object doesn't already exist.
         If the equivalent object does exist, we return that instead.
         :param entity_classes:
         :param typing_properties:
-        :param fields:
+        :param properties:
         :param schema_name:
         :param schema_version:
         :return: [EntityTemplate]
         """
-        equivalent = cls.get_equivalent(entity_classes, schema_name, schema_version, typing_properties, fields)
+        equivalent = cls.get_equivalent(entity_classes, schema_name, schema_version, typing_properties, properties)
         if equivalent:
             print(f"{__name__}.{__class__.__name__} Equivalent EntityTemplate already exists and was returned.")
             return equivalent
@@ -43,12 +43,12 @@ class EntityTemplate:
 
     def __init__(self, entity_classes: Set[Tuple[Namespace, str]], schema_name: str, schema_version: str,
                  typing_properties: Set,
-                 fields: Set[Tuple[Namespace, str, dict]]):
+                 properties: Set[Tuple[Namespace, str, dict]]):
         self.entity_classes = entity_classes
         self.schema_name = schema_name
         self.schema_version = schema_version
         self.typing_properties = typing_properties
-        self.fields = fields
+        self.properties = properties
         self.is_valid = False
         self.validate_data()
         if self.is_valid:
@@ -57,13 +57,13 @@ class EntityTemplate:
 
     @classmethod
     def get_equivalent(cls, entity_classes: Set, schema_name: str, schema_version: str, typing_properties: Set,
-                       fields: Set[Tuple[Namespace, str, dict]]):
+                       properties: Set[Tuple[Namespace, str, dict]]):
         has_equivalent = False
         for et in cls.instances:
             if (
                     et.entity_classes == entity_classes
                     and et.typing_properties == typing_properties
-                    and et.fields == fields
+                    and et.properties == properties
                     and et.schema_name == schema_name
                     and et.schema_version == schema_version
             ):
@@ -165,24 +165,24 @@ class EntityTemplate:
             terms.add(term)
         return terms
 
-    def get_simple_fields(self) -> dict:
+    def get_simple_properties(self) -> dict:
         """
         Get other_properties as hash map of keys, values, no namespaces
         :return: [dict]
         """
-        fields = {}
-        for field in self.fields:
+        properties = {}
+        for field in self.properties:
             ns, term, meta = field
-            fields[term] = {}
+            properties[term] = {}
             for k, v in meta.items():
                 # if tuple, the first item is the Namespace,
                 # the second item is the term of interest
                 # i.e. (Namespace(https://...), 'number')
                 if isinstance(v, Tuple):
-                    fields[term][k] = v[1]
+                    properties[term][k] = v[1]
                 else:
-                    fields[term][k] = v
-        return fields
+                    properties[term][k] = v
+        return properties
 
     def get_namespaces(self) -> Set[Namespace]:
         """
@@ -196,7 +196,7 @@ class EntityTemplate:
         for tp in self.typing_properties:
             ns, term = tp
             all_ns.add(ns)
-        for field in self.fields:
+        for field in self.properties:
             ns, term, meta = field
             all_ns.add(ns)
             for k, v in meta.items():
@@ -574,15 +574,15 @@ def resolve_telemetry_points_to_entity_templates(telemetry_point_types: dict, sc
 def resolve_to_entity_template(ont, typing_metadata, properties, schema_name, version):
     et = False
     ns_terms = get_namespaced_terms(ont, typing_metadata)
-    ns_fields = get_namespaced_terms(ont, properties)
+    ns_properties = get_namespaced_terms(ont, properties)
     if schema_name == 'Haystack':
         structured_terms = hget_entity_classes(ont, ns_terms)
-        if len(structured_terms['fields']) > 0:
+        if len(structured_terms['properties']) > 0:
             print(
-                f"[tasty.templates.resolve_to_entity_template] The following fields were found but will not be used: {structured_terms['fields']}.")
-        et = EntityTemplate(structured_terms['classes'], schema_name, version, structured_terms['markers'], ns_fields)
+                f"[tasty.templates.resolve_to_entity_template] The following properties were found but will not be used: {structured_terms['properties']}.")
+        et = EntityTemplate(structured_terms['classes'], schema_name, version, structured_terms['markers'], ns_properties)
     elif schema_name == 'Brick':
-        et = EntityTemplate(ns_terms, schema_name, version, set(), ns_fields)
+        et = EntityTemplate(ns_terms, schema_name, version, set(), ns_properties)
     return et
 
 
@@ -591,7 +591,7 @@ def get_namespaced_terms(ontology: Graph, terms: [str, dict]) -> Set:
     TODO: document function
     :param ontology: [Graph] A loaded ontology
     :param terms: [str] A Brick class, such as 'Discharge_Air_Temperature_Sensor' a set of Haystack tags,
-                    such as 'discharge-air-temp-sensor-point', or a dict of fields, such as:
+                    such as 'discharge-air-temp-sensor-point', or a dict of properties, such as:
                     {field1: {_kind: number}, field2: {val: cfm}}
     :return:
     """
@@ -638,7 +638,7 @@ def has_one_namespace(ns, candidate):
 
 def hget_entity_classes(ontology, candidates):
     """
-    Given a 'string-of-haystack-tags', determine valid classes, markers, and fields.  See return.
+    Given a 'string-of-haystack-tags', determine valid classes, markers, and properties.  See return.
     :param ontology: [Graph] a loaded ontology
     :param candidates: [str] a '-' delimited string, where each term is a haystack concept to figure out
     :return: [dict[str, Set]] The returned dict has structure as follows:
@@ -649,9 +649,9 @@ def hget_entity_classes(ontology, candidates):
             A set of namespaced valid markers NOT used in entity class typing.  These must subClass* from ph:marker
             'markers': {(Namespace, term), ...}
 
-            A set of namespaced fields.  These are terms that are NOT markers, but are Datatype Properties.
+            A set of namespaced properties.  These are terms that are NOT markers, but are Datatype Properties.
             The third term in the tuple always specifies a 'val' of None (i.e. just expect the property to be defined)
-            'fields': {(Namespace, term, frozendict({'val': None})), ...}
+            'properties': {(Namespace, term, frozendict({'val': None})), ...}
         }
     """
     # Begin by finding entity subclasses
@@ -703,13 +703,13 @@ def hget_entity_classes(ontology, candidates):
     match = ontology.query(q)
     markers = set([m[0] for m in match])
     present_markers = set()
-    fields = set()
+    properties = set()
     for tag in not_class_candidates:
         ns, t = tag
         if ns[t] in markers:
             present_markers.add(tag)
         else:
-            fields.add((ns, t, frozendict({'val': None})))
+            properties.add((ns, t, frozendict({'val': None})))
 
     # This logic determines which of the classes are subclasses of eachother
     # and only keeps the lowest subclass in each 'branch',
@@ -732,7 +732,7 @@ def hget_entity_classes(ontology, candidates):
     structured = {
         'classes': classes,
         'markers': present_markers,
-        'fields': fields
+        'properties': properties
     }
     return structured
 
