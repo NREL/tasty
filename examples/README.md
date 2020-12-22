@@ -4,3 +4,10 @@ Examples are provided in two ways:
 1. Scripts - run and enter into scripts interactively: `poetry run python -i examples/scripts/templates-01.py`
 
 _Note: Since Tasty uses some class methods and variables, make sure to restart your Jupyter Python kernel to clear out instances if you are getting unexpected results_
+
+# Order
+The examples in the notebooks build on one another in the following order:
+- Basics
+- EntityTemplates
+- PointGroupTemplates
+- EquipmentTemplates
