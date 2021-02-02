@@ -138,3 +138,19 @@ def point_group_template_bad_template_type():
         'version': '3.9.9'
     }
     return t
+
+
+@pytest.fixture
+def get_occupancy_mode_data():
+    g = tg.get_versioned_graph('Haystack', '3.9.9')
+    f = os.path.join(os.path.dirname(__file__), 'files/data/occupancy_mode_data.ttl')
+    g.parse(f, format='turtle')
+    return g
+
+
+@pytest.fixture
+def get_occupancy_mode_shapes():
+    g = tg.get_versioned_graph('Haystack', '3.9.9')
+    f = os.path.join(os.path.dirname(__file__), 'files/shapes/occupancy_mode_shapes.ttl')
+    g.parse(f, format='turtle')
+    return g

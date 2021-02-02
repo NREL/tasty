@@ -1,0 +1,91 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.9#> .
+@prefix ph: <https://project-haystack.org/def/ph/3.9.9#> .
+@prefix ex: <https://project-haystack.org/datashapes#> .
+@prefix sample: <urn:sample/> .
+
+# Shape for an AHU with two expected point types.
+# Point types are defined by:
+#  - OccupancyModeStandby
+#  - OccupancyModeBinary
+ex:AhuOccupancyShape a sh:NodeShape ;
+    sh:property [
+        sh:path [ sh:inversePath phIoT:equipRef ] ;
+        sh:qualifiedValueShape ex:OccupancyModeStandby ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedMaxCount 1 ;
+        sh:qualifiedValueShapesDisjoint true ;
+    ] ;
+    sh:property [
+        sh:path [ sh:inversePath phIoT:equipRef ] ;
+        sh:qualifiedValueShape ex:OccupancyModeBinary ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedMaxCount 1 ;
+        sh:qualifiedValueShapesDisjoint true ;
+    ] .
+
+ex:OccupancyModeStandby a sh:NodeShape ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:occ
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:mode
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:sp
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:point
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:enum ;
+            sh:qualifiedValueShape [
+                sh:hasValue "Occupied,Unoccupied,Standby"
+            ];
+            sh:qualifiedMinCount 1 ;
+        ]
+.
+
+ex:OccupancyModeBinary a sh:NodeShape ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:occupied
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:point
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:sp
+            ];
+            sh:qualifiedMinCount 1 ;
+        ]
+.

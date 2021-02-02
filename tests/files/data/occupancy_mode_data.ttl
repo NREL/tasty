@@ -1,0 +1,28 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.9#> .
+@prefix ph: <https://project-haystack.org/def/ph/3.9.9#> .
+@prefix sample: <urn:sample/> .
+
+#### AHU-01 and Points
+sample:AHU-01 a phIoT:ahu ;
+    ph:hasTag phIoT:ahu,
+        phIoT:equip .
+
+# OccupancyModeStandby Point Type
+sample:AHU-01-Point-01 a phIoT:point ;
+    ph:hasTag phIoT:point,
+        phIoT:occ,
+        phIoT:mode,
+        phIoT:sp ;
+    ph:enum "Occupied,Unoccupied,Standby" ;
+    phIoT:equipRef sample:AHU-01 .
+
+# OccupancyModeBinary Point Type
+sample:AHU-01-Point-02 a phIoT:point ;
+    ph:hasTag phIoT:point,
+        phIoT:occupied,
+        phIoT:sp ;
+    phIoT:equipRef sample:AHU-01 .
