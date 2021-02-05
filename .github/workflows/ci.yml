@@ -26,11 +26,10 @@ jobs:
 
     - name: Print CWD
       run: |
-        poetry config virtualenvs.in-project true
         poetry run python -c "import os; print(os.getcwd())"
         ls
 
     - name: Run tests with poetry and pytest
       run: |
         poetry install
-        poetry run pytest
+        poetry run tox
