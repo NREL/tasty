@@ -26,6 +26,7 @@ jobs:
 
     - name: Print CWD
       run: |
+        poetry config virtualenvs.in-project true
         poetry run python -c "import os; print(os.getcwd())"
         ls
 
