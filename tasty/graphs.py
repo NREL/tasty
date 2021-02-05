@@ -1,5 +1,4 @@
 import os
-import pkgutil
 
 from typing import List
 from rdflib import Graph
@@ -32,7 +31,6 @@ def load_ontology(schema: str, version: str) -> Graph:
     :return:
     """
     g = get_versioned_graph(schema, version)
-    pkgutil.get_data(__name__, )
     schema_path = os.path.join(tc.SCHEMAS_DIR, schema.lower())
     if schema == 'Haystack':
         schema_path = os.path.join(schema_path, f"defs_{version.replace('.','_')}.ttl")
