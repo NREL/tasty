@@ -119,5 +119,3 @@ def test_invalid_occupancy_mode_binary(get_occupancy_mode_data, get_occupancy_mo
         writer = csv.writer(f)
         for row in results_query:
             writer.writerow(row)
-        # csv_results.serialize(f)
-    # print(results_query.to_)
