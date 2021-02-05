@@ -32,4 +32,4 @@ jobs:
     - name: Run tests with poetry and pytest
       run: |
         poetry install
-        poetry run pytest -k TestLoadOntology
+        poetry run pytest
