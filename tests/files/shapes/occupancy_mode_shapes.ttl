@@ -15,6 +15,10 @@
 ex:AhuOccupancyShape a sh:NodeShape ;
     sh:property [
         sh:path [ sh:inversePath phIoT:equipRef ] ;
+        sh:minCount 2 ;
+    ] ;
+    sh:property [
+        sh:path [ sh:inversePath phIoT:equipRef ] ;
         sh:qualifiedValueShape ex:OccupancyModeStandby ;
         sh:qualifiedMinCount 1 ;
         sh:qualifiedMaxCount 1 ;
