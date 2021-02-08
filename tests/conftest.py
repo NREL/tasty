@@ -1,5 +1,6 @@
 import os
 import uuid
+import csv
 
 import pytest
 import tasty.templates as tt
@@ -154,3 +155,72 @@ def get_occupancy_mode_shapes():
     f = os.path.join(os.path.dirname(__file__), 'files/shapes/occupancy_mode_shapes.ttl')
     g.parse(f, format='turtle')
     return g
+
+
+def get_single_node_validation_query():
+    # -- This query returns us three values that looks like:
+    #    (focus_node, path, missing_value)
+    q = ''' SELECT ?focus ?path ?val WHERE {
+        ?vr a sh:ValidationReport .
+        ?vr sh:result ?r .
+        ?r sh:focusNode ?focus .
+        ?r sh:resultPath ?path .
+        ?r sh:sourceShape ?shape .
+        ?shape sh:qualifiedValueShape ?vs .
+        ?vs sh:hasValue ?val .
+        }
+    '''
+    return q
+
+
+def get_parent_node_validation_query():
+    # -- This query returns us a triple that looks like:
+    #   (focus_node, inverse_path, constraint_triggered, shape)
+    q = ''' SELECT ?focus ?inverse_path ?constraint ?shape WHERE {
+        ?vr a sh:ValidationReport .
+        ?vr sh:result ?r .
+        ?r sh:focusNode ?focus .
+        ?r sh:resultPath ?path .
+        ?path sh:inversePath ?inverse_path .
+        ?r sh:sourceConstraintComponent ?constraint .
+        ?r sh:sourceShape ?source_shape .
+        ?source_shape sh:qualifiedValueShape ?shape .
+        }
+    '''
+    return q
+
+
+def get_min_count_validation_query():
+    # -- This query returns us a triple that looks like:
+    #   (focus_node, inverse_path, constraint_triggered, shape)
+    q = ''' SELECT ?focus ?inverse_path ?constraint ?message WHERE {
+        ?vr a sh:ValidationReport .
+        ?vr sh:result ?r .
+        ?r sh:focusNode ?focus .
+        ?r sh:resultPath ?path .
+        ?path sh:inversePath ?inverse_path .
+        ?r sh:sourceConstraintComponent ?constraint .
+        ?r sh:resultMessage ?message .
+        }
+    '''
+    return q
+
+
+def assert_remove_markers(remove_markers, results_query, point):
+    print(f"Remove: {remove_markers}")
+    for row in results_query:
+        assert len(results_query) == len(remove_markers)
+        for marker in remove_markers:
+            # subject should always be the point
+            assert row[0] == point
+            # predicate should always be hasTag
+            assert row[1] == tc.PH_3_9_9.hasTag
+            # object should be the removed marker
+            assert row[2] in [tc.PHIOT_3_9_9[m] for m in remove_markers]
+
+
+def write_csv(results_query, output_file):
+    with open(output_file.replace('.ttl', '.csv'), 'w+') as f:
+        writer = csv.writer(f)
+        for row in results_query:
+            writer.writerow(row)
