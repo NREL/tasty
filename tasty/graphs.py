@@ -31,12 +31,14 @@ def load_ontology(schema: str, version: str) -> Graph:
     :return:
     """
     g = get_versioned_graph(schema, version)
-    schema_path = os.path.join(tc.SCHEMAS_DIR, schema, version)
+    schema_path = os.path.join(tc.SCHEMAS_DIR, schema.lower())
     if schema == 'Haystack':
-        schema_path = os.path.join(schema_path, 'defs.ttl')
+        schema_path = os.path.join(schema_path, f"defs_{version.replace('.','_')}.ttl")
     elif schema == 'Brick':
-        schema_path = os.path.join(schema_path, 'Brick.ttl')
-    g.parse(schema_path, format='ttl')
+        schema_path = os.path.join(schema_path, f"Brick_{version.replace('.','_')}.ttl")
+    with open(schema_path, 'r') as f:
+        data = f.read()
+    g.parse(data=data, format='ttl')
     return g
 
 
