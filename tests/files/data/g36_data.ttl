@@ -1,0 +1,86 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.9#> .
+@prefix ph: <https://project-haystack.org/def/ph/3.9.9#> .
+@prefix phScience: <https://project-haystack.org/def/phScience/3.9.9#> .
+@prefix sample: <urn:sample/> .
+
+sample:VAV-01 a phIoT:coolingOnly-vav ;
+    ph:hasTag phIoT:vav,
+        phIoT:coolingOnly,
+        phIoT:equip .
+
+sample:VAV-01-DamperPositionCommand a phIoT:point ;
+    ph:hasTag phIoT:damper,
+        phIoT:cmd,
+        phIoT:point ;
+    phIoT:equipRef sample:VAV-01 .
+
+sample:VAV-01-DischargeAirFlowSensor a phIoT:point ;
+    ph:hasTag phIoT:discharge,
+        phScience:air,
+        phScience:flow,
+        phIoT:sensor,
+        phIoT:point ;
+    phIoT:equipRef sample:VAV-01 .
+
+sample:VAV-01-ZoneAirTemperatureSensor a phIoT:point ;
+    ph:hasTag phIoT:zone,
+        phScience:air,
+        phScience:temp,
+        phIoT:sensor,
+        phIoT:point ;
+    phIoT:equipRef sample:VAV-01 .
+
+sample:VAV-01-ZoneAirTemperatureOverrideCommand a phIoT:point ;
+    ph:hasTag phIoT:zone,
+        phScience:air,
+        phScience:temp,
+        phIoT:cmd,
+        phIoT:point,
+        # TODO: custom
+        phIoT:override ;
+    phIoT:equipRef sample:VAV-01 .
+
+sample:VAV-01-OccupancySensor a phIoT:point ;
+    ph:hasTag phIoT:occupied,
+        phIoT:sensor,
+        phIoT:point ;
+    phIoT:equipRef sample:VAV-01 .
+
+sample:VAV-01-WindowOverrideCommand a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:point,
+        # TODO: custom
+        phIoT:window,
+        # TODO: custom
+        phIoT:override ;
+    phIoT:equipRef sample:VAV-01 .
+
+sample:VAV-01-ZoneAirTemperatureOverrideSetpoint a phIoT:point ;
+    ph:hasTag phIoT:zone,
+        phScience:air,
+        phScience:temp,
+        phIoT:sp,
+        phIoT:point,
+        # TODO: custom
+        phIoT:override ;
+    phIoT:equipRef sample:VAV-01 .
+
+sample:VAV-01-ZoneAirCO2Sensor a phIoT:point ;
+    ph:hasTag phIoT:zone,
+        phScience:air,
+        phScience:co2,
+        phIoT:sensor,
+        phIoT:point ;
+    phIoT:equipRef sample:VAV-01 .
+
+sample:VAV-01-ZoneAirCO2Setpoint a phIoT:point ;
+    ph:hasTag phIoT:zone,
+        phScience:air,
+        phScience:co2,
+        phIoT:sp,
+        phIoT:point ;
+    phIoT:equipRef sample:VAV-01 .

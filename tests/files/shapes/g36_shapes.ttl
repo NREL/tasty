@@ -1,0 +1,413 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.9#> .
+@prefix ph: <https://project-haystack.org/def/ph/3.9.9#> .
+@prefix phScience: <https://project-haystack.org/def/phScience/3.9.9#> .
+@prefix phShapes: <https://project-haystack.org/datashapes/core#> .
+
+phShapes:G36-VavTerminalUnitCoolingOnlyShape a sh:NodeShape ;
+    sh:property [
+        sh:path [ sh:inversePath phIoT:equipRef ] ;
+        sh:minCount 3 ;
+    ] ;
+    sh:property [
+        sh:path [ sh:inversePath phIoT:equipRef ] ;
+        sh:qualifiedValueShape phShapes:DamperPositionCommandShape ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedMaxCount 1 ;
+        sh:qualifiedValueShapesDisjoint true ;
+    ] ;
+    sh:property [
+        sh:path [ sh:inversePath phIoT:equipRef ] ;
+        sh:qualifiedValueShape phShapes:DischargeAirFlowSensorShape ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedMaxCount 1 ;
+        sh:qualifiedValueShapesDisjoint true ;
+    ] ;
+    sh:property [
+        sh:path [ sh:inversePath phIoT:equipRef ] ;
+        sh:qualifiedValueShape phShapes:ZoneAirTemperatureSensorShape ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedMaxCount 1 ;
+        sh:qualifiedValueShapesDisjoint true ;
+    ] ;
+    # WARNINGS
+    sh:property [
+        sh:path [ sh:inversePath phIoT:equipRef ] ;
+        sh:qualifiedValueShape phShapes:ZoneAirTemperatureOverrideCommandShape ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedMaxCount 1 ;
+        sh:qualifiedValueShapesDisjoint true ;
+        sh:severity sh:Warning ;
+    ] ;
+    sh:property [
+        sh:path [ sh:inversePath phIoT:equipRef ] ;
+        sh:qualifiedValueShape phShapes:OccupancySensorShape ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedMaxCount 1 ;
+        sh:qualifiedValueShapesDisjoint true ;
+        sh:severity sh:Warning ;
+    ] ;
+    sh:property [
+        sh:path [ sh:inversePath phIoT:equipRef ] ;
+        sh:qualifiedValueShape phShapes:WindowOverrideCommandShape ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedMaxCount 1 ;
+        sh:qualifiedValueShapesDisjoint true ;
+        sh:severity sh:Warning ;
+    ] ;
+    sh:property [
+        sh:path [ sh:inversePath phIoT:equipRef ] ;
+        sh:qualifiedValueShape phShapes:ZoneAirTemperatureOverrideSetpointShape ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedMaxCount 1 ;
+        sh:qualifiedValueShapesDisjoint true ;
+        sh:severity sh:Warning ;
+    ] ;
+    sh:property [
+        sh:path [ sh:inversePath phIoT:equipRef ] ;
+        sh:qualifiedValueShape phShapes:ZoneAirCO2SensorShape ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedMaxCount 1 ;
+        sh:qualifiedValueShapesDisjoint true ;
+        sh:severity sh:Warning ;
+    ] ;
+    sh:property [
+        sh:path [ sh:inversePath phIoT:equipRef ] ;
+        sh:qualifiedValueShape phShapes:ZoneAirCO2SetpointShape ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedMaxCount 1 ;
+        sh:qualifiedValueShapesDisjoint true ;
+        sh:severity sh:Warning ;
+    ]
+.
+
+
+# Table 4.1; VAV box damper position; AO; modulating actuator
+phShapes:DamperPositionCommandShape a sh:NodeShape ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:damper
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:cmd
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:point
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+.
+
+phShapes:DischargeAirFlowSensorShape a sh:NodeShape ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:discharge
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phScience:air
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phScience:flow
+            ];
+            sh:qualifiedMinCount 1 ;
+        ];
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:sensor
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:point
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+.
+
+phShapes:ZoneAirTemperatureSensorShape a sh:NodeShape ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:zone
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phScience:air
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phScience:temp
+            ];
+            sh:qualifiedMinCount 1 ;
+        ];
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:sensor
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:point
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+.
+
+phShapes:ZoneAirTemperatureOverrideCommandShape a sh:NodeShape ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:zone
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phScience:air
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phScience:temp
+            ];
+            sh:qualifiedMinCount 1 ;
+        ];
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:cmd
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:point
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    # TODO: discuss and add to standard if applicable
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:override
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+.
+
+phShapes:OccupancySensorShape a sh:NodeShape ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:occupied
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:sensor
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:point
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+.
+
+phShapes:WindowOverrideCommandShape a sh:NodeShape ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:cmd
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:point
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    # TODO: discuss and add to standard if applicable
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:window
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    # TODO: discuss and add to standard if applicable
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:override
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+.
+
+phShapes:ZoneAirTemperatureOverrideSetpointShape a sh:NodeShape ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:zone
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phScience:air
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phScience:temp
+            ];
+            sh:qualifiedMinCount 1 ;
+        ];
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:sp
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:point
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    # TODO: discuss and add to standard if applicable
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:override
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+.
+
+phShapes:ZoneAirCO2SensorShape a sh:NodeShape ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:zone
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phScience:air
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phScience:co2
+            ];
+            sh:qualifiedMinCount 1 ;
+        ];
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:sensor
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:point
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+.
+
+phShapes:ZoneAirCO2SetpointShape a sh:NodeShape ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:zone
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phScience:air
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phScience:co2
+            ];
+            sh:qualifiedMinCount 1 ;
+        ];
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:sp
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+    sh:property [
+            sh:path ph:hasTag ;
+            sh:qualifiedValueShape [
+                sh:hasValue phIoT:point
+            ];
+            sh:qualifiedMinCount 1 ;
+        ] ;
+.
