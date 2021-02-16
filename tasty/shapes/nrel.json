@@ -1,0 +1,27 @@
+{
+  "prefix": "nrel",
+  "namespace": "https://project-haystack.org/datashapes/nrel#",
+  "shapes": [
+    {
+      "name": "OccupancyModeStandbyShape",
+      "tags": ["occ", "mode", "sp", "point"],
+      "vals": {
+        "enum": "Occupied,Unoccupied,Standby"
+      }
+    },
+    {
+      "name": "OccupancyModeBinaryShape",
+      "tags": ["occupied", "sp", "point"]
+    },
+    {
+      "name": "AhuOccupancyShape",
+      "requires": [
+        {
+          "path": "equipRef",
+          "path-type": "inverse",
+          "shapes": ["OccupancyModeStandbyShape", "OccupancyModeBinaryShape"]
+        }
+      ]
+    }
+  ]
+}
