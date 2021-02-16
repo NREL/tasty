@@ -222,6 +222,17 @@ def get_min_count_validation_query():
     return q
 
 
+def get_severity_query():
+    q = ''' SELECT ?focus ?severity WHERE {
+        ?vr a sh:ValidationReport .
+        ?vr sh:result ?r .
+        ?r sh:focusNode ?focus .
+        ?r sh:resultSeverity ?severity .
+        }
+    '''
+    return q
+
+
 def assert_remove_markers(remove_markers, results_query, point, ont_graph=tg.load_ontology('Haystack', '3.9.9')):
     print(f"Remove: {remove_markers}")
     namespaced_terms = []

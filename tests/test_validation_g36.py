@@ -7,7 +7,8 @@ from pyshacl import validate
 from tasty import constants as tc
 from tasty import graphs as tg
 from tasty import templates as tt
-from tests.conftest import get_single_node_validation_query, assert_remove_markers, write_csv
+from tests.conftest import get_single_node_validation_query, assert_remove_markers, write_csv, \
+    get_parent_node_validation_query, get_severity_query
 
 SAMPLE = Namespace('urn:sample/')
 PH_SHAPES = Namespace('https://project-haystack.org/datashapes/core#')
@@ -116,3 +117,53 @@ class TestG36VavCoolingOnly:
 
         # -- Assert conforms
         assert conforms
+
+    @pytest.mark.parametrize('shape_name, target_node, remove_from_node, remove_markers, severity', [
+        [
+            PH_SHAPES['G36-VavTerminalUnitCoolingOnlyShape'], SAMPLE['VAV-01'], SAMPLE['VAV-01-DamperPositionCommand'],
+            ['damper'], tc.SH.Violation
+        ],
+        [
+            PH_SHAPES['G36-VavTerminalUnitCoolingOnlyShape'], SAMPLE['VAV-01'],
+            SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand'],
+            ['zone'], tc.SH.Warning
+        ]
+    ])
+    def test_is_invalid(self, get_g36_data, get_g36_shapes, shape_name, target_node, remove_from_node, remove_markers,
+                        severity):
+        # -- Setup
+        data_graph = get_g36_data
+        shapes_graph = get_g36_shapes
+        ont_graph = tg.load_ontology('Haystack', '3.9.9')
+        validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
+        if not os.path.isdir(validate_dir):
+            os.mkdir(validate_dir)
+
+        # -- Setup
+        shapes_graph.add((shape_name, tc.SH.targetNode, target_node))
+        for marker in remove_markers:
+            ns = tg.get_namespaces_given_term(ont_graph, marker)
+            if tt.has_one_namespace(ns, marker):
+                ns = ns[0]
+                data_graph.remove((remove_from_node, tc.PH_3_9_9.hasTag, ns[marker]))
+
+        result = validate(data_graph, shacl_graph=shapes_graph, ont_graph=ont_graph)
+        conforms, results_graph, results = result
+
+        # -- Serialize results
+        f = 'TestG36VavCoolingOnly_' + '_'.join(remove_markers) + '_remove.ttl'
+        output_file = os.path.join(validate_dir, f)
+        results_graph.serialize(output_file, format='turtle')
+
+        # -- Assert does not conform
+        assert not conforms
+
+        results_query = results_graph.query(get_parent_node_validation_query())
+
+        violation_level = results_graph.query(get_severity_query())
+
+        assert len(list(violation_level)) == 1
+        assert (target_node, severity) in violation_level
+
+        # Write output to CSV for human readability
+        write_csv(results_query, output_file)
