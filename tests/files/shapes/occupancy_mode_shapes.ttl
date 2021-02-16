@@ -6,7 +6,6 @@
 @prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.9#> .
 @prefix ph: <https://project-haystack.org/def/ph/3.9.9#> .
 @prefix ex: <https://project-haystack.org/datashapes#> .
-@prefix sample: <urn:sample/> .
 
 # Shape for an AHU with two expected point types.
 # Point types are defined by:
