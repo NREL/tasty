@@ -157,6 +157,22 @@ def get_occupancy_mode_shapes():
     return g
 
 
+@pytest.fixture
+def get_g36_data():
+    g = tg.get_versioned_graph('Haystack', '3.9.9')
+    f = os.path.join(os.path.dirname(__file__), 'files/data/g36_data.ttl')
+    g.parse(f, format='turtle')
+    return g
+
+
+@pytest.fixture
+def get_g36_shapes():
+    g = tg.get_versioned_graph('Haystack', '3.9.9')
+    f = os.path.join(os.path.dirname(__file__), 'files/shapes/g36_shapes.ttl')
+    g.parse(f, format='turtle')
+    return g
+
+
 def get_single_node_validation_query():
     # -- This query returns us three values that looks like:
     #    (focus_node, path, missing_value)
@@ -206,8 +222,14 @@ def get_min_count_validation_query():
     return q
 
 
-def assert_remove_markers(remove_markers, results_query, point):
+def assert_remove_markers(remove_markers, results_query, point, ont_graph=tg.load_ontology('Haystack', '3.9.9')):
     print(f"Remove: {remove_markers}")
+    namespaced_terms = []
+    for marker in remove_markers:
+        ns = tg.get_namespaces_given_term(ont_graph, marker)
+        if tt.has_one_namespace(ns, marker):
+            ns = ns[0]
+            namespaced_terms.append(ns[marker])
     for row in results_query:
         assert len(results_query) == len(remove_markers)
         for marker in remove_markers:
@@ -216,7 +238,7 @@ def assert_remove_markers(remove_markers, results_query, point):
             # predicate should always be hasTag
             assert row[1] == tc.PH_3_9_9.hasTag
             # object should be the removed marker
-            assert row[2] in [tc.PHIOT_3_9_9[m] for m in remove_markers]
+            assert row[2] in namespaced_terms
 
 
 def write_csv(results_query, output_file):
