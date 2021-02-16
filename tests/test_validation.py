@@ -90,8 +90,7 @@ class TestOccupancyModeStandby:
 
     @pytest.mark.parametrize('remove_markers', [
         ['occ'],
-        ['mode'],
-        ['mode', 'sp']
+        ['occ', 'sp']
     ])
     def test_is_invalid(self, get_occupancy_mode_data, get_occupancy_mode_shapes, remove_markers):
         # -- Setup
