@@ -115,7 +115,7 @@ class BrickPointDefs(EntityDefs):
         }'''
 
 
-class BrickEquipmenDefs(EntityDefs):
+class BrickEquipmentDefs(EntityDefs):
     def __init__(self, version):
         super().__init__(tc.BRICK, version)
         self.query = '''SELECT ?n ?doc WHERE {

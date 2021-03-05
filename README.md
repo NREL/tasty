@@ -19,7 +19,7 @@ There are also some simple classes that can take advantage of the types built-in
 from rdflib import Namespace
 import tasty.constants as tc
 import tasty.graphs as tg
-from tasty.entities import HaystackPointDefs, HaystackEquipDefs, BrickPointDefs, BrickEquipmenDefs
+from tasty.entities import HaystackPointDefs, HaystackEquipDefs, BrickPointDefs, BrickEquipmentDefs
 
 # Create a namespace and load in a blank Brick / Haystack graph
 EX = Namespace('example.com#')
@@ -30,7 +30,7 @@ bg = tg.get_versioned_graph(tc.BRICK, tc.V1_1)
 hp = HaystackPointDefs(tc.V3_9_10)
 bp = BrickPointDefs(tc.V1_1)
 he = HaystackEquipDefs(tc.V3_9_10)
-be = BrickEquipmenDefs(tc.V1_1)
+be = BrickEquipmentDefs(tc.V1_1)
 
 # Bind all of the first class types as attributes
 # to the classes
