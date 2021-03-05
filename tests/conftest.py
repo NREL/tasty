@@ -3,9 +3,11 @@ import uuid
 import csv
 
 import pytest
+
 import tasty.templates as tt
 import tasty.graphs as tg
 import tasty.constants as tc
+from tasty.generated import generated_dir
 
 
 def populate_point_group_template_from_file(file_path):
@@ -59,7 +61,7 @@ def reset_point_group_template_registration():
 @pytest.fixture
 def minimum_entity_template():
     classes = set([(tc.BRICK_1_1, 'Damper_Position_Command')])
-    et = tt.EntityTemplate(classes, 'Brick', '1.1', set(), set())
+    et = tt.EntityTemplate(classes, tc.BRICK, tc.V1_1, set(), set())
     return et
 
 
@@ -143,7 +145,7 @@ def point_group_template_bad_template_type():
 
 @pytest.fixture
 def get_occupancy_mode_data():
-    g = tg.get_versioned_graph('Haystack', '3.9.9')
+    g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_9)
     f = os.path.join(os.path.dirname(__file__), 'files/data/occupancy_mode_data.ttl')
     g.parse(f, format='turtle')
     return g
@@ -151,7 +153,7 @@ def get_occupancy_mode_data():
 
 @pytest.fixture
 def get_occupancy_mode_shapes():
-    g = tg.get_versioned_graph('Haystack', '3.9.9')
+    g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_9)
     f = os.path.join(os.path.dirname(__file__), 'files/shapes/occupancy_mode_shapes.ttl')
     g.parse(f, format='turtle')
     return g
@@ -159,16 +161,32 @@ def get_occupancy_mode_shapes():
 
 @pytest.fixture
 def get_g36_data():
-    g = tg.get_versioned_graph('Haystack', '3.9.9')
+    g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_9)
     f = os.path.join(os.path.dirname(__file__), 'files/data/g36_data.ttl')
     g.parse(f, format='turtle')
     return g
 
 
 @pytest.fixture
+def get_g36_data2():
+    g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
+    f = os.path.join(os.path.dirname(__file__), 'files/data/g36_data_3_9_10.ttl')
+    g.parse(f, format='turtle')
+    return g
+
+
+@pytest.fixture
 def get_g36_shapes():
-    g = tg.get_versioned_graph('Haystack', '3.9.9')
+    g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_9)
     f = os.path.join(os.path.dirname(__file__), 'files/shapes/g36_shapes.ttl')
+    g.parse(f, format='turtle')
+    return g
+
+
+@pytest.fixture
+def get_core_shapes2():
+    g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
+    f = os.path.join(generated_dir, 'core_v2.ttl')
     g.parse(f, format='turtle')
     return g
 
@@ -233,21 +251,21 @@ def get_severity_query():
     return q
 
 
-def assert_remove_markers(remove_markers, results_query, point, ont_graph=tg.load_ontology('Haystack', '3.9.9')):
+def assert_remove_markers(remove_markers, results_query, point, ont_graph=tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)):
     print(f"Remove: {remove_markers}")
     namespaced_terms = []
     for marker in remove_markers:
-        ns = tg.get_namespaces_given_term(ont_graph, marker)
-        if tt.has_one_namespace(ns, marker):
-            ns = ns[0]
-            namespaced_terms.append(ns[marker])
+        ns_term = tg.get_namespaced_term(ont_graph, marker)
+        if ns_term:
+            namespaced_terms.append(ns_term)
     for row in results_query:
+        print(row)
         assert len(results_query) == len(remove_markers)
         for marker in remove_markers:
             # subject should always be the point
             assert row[0] == point
             # predicate should always be hasTag
-            assert row[1] == tc.PH_3_9_9.hasTag
+            assert row[1] == tc.PH_DEFAULT.hasTag
             # object should be the removed marker
             assert row[2] in namespaced_terms
 
