@@ -1,0 +1,79 @@
+{
+  "prefix": "phShapes",
+  "namespace": "https://project-haystack.org/datashapes/core#",
+  "shapes": [
+    {
+      "name": "damper-cmd-shape",
+      "type": ["point"],
+      "tags": ["damper", "cmd"]
+    },
+    {
+      "name": "zone-air-temp-sensor-shape",
+      "type": ["air-temp-sensor"],
+      "tags": ["zone"]
+    },
+    {
+      "name": "zone-air-temp-override-cmd-shape",
+      "type": ["point"],
+      "tags": ["zone", "air", "temp", "cmd"],
+      "tags-custom": ["override"]
+    },
+    {
+      "name": "occupancy-sensor-shape",
+      "type": ["point"],
+      "tags": ["occupied", "sensor", "point"]
+    },
+    {
+      "name": "window-override-cmd-shape",
+      "type": ["point"],
+      "tags": ["cmd"],
+      "tags-custom": ["window", "override"]
+    },
+    {
+      "name": "zone-air-temp-override-sp-shape",
+      "type": ["air-temp-sp"],
+      "tags": ["zone"],
+      "tags-custom": ["override"]
+    },
+    {
+      "name": "zone-air-co2-sensor-shape",
+      "type": ["point"],
+      "tags": ["zone", "air", "co2", "sensor"]
+    },
+    {
+      "name": "zone-air-co2-sp-shape",
+      "type": ["point"],
+      "tags": ["zone", "air", "co2", "sp"]
+    },
+    {
+      "name": "CoolingOnlyVAV-Shape-001",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "type": ["discharge-air-flow-sensor"],
+            "shapes": [
+              "damper-cmd-shape",
+              "zone-air-temp-sensor-shape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "zone-air-temp-override-cmd-shape",
+              "occupancy-sensor-shape",
+              "window-override-cmd-shape",
+              "zone-air-temp-override-sp-shape",
+              "zone-air-co2-sensor-shape",
+              "zone-air-co2-sp-shape"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
