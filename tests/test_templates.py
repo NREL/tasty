@@ -106,7 +106,7 @@ class TestTemplateFunctions:
 class TestGetNamespacedTerms(TestCase):
     def test_resolves_typical_haystack_tagset(self):
         # -- Setup
-        ont = tg.load_ontology('Haystack', '3.9.9')
+        ont = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         entity_type = 'discharge-air-flow-sensor-point'
 
         # -- Act
@@ -123,7 +123,7 @@ class TestGetNamespacedTerms(TestCase):
 
     def test_ignores_duplicate_term_in_haystack_tagset(self):
         # -- Setup
-        ont = tg.load_ontology('Haystack', '3.9.9')
+        ont = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         entity_type = 'discharge-air-discharge-flow-sensor-point'
 
         # -- Act
@@ -134,7 +134,7 @@ class TestGetNamespacedTerms(TestCase):
 
     def test_resolves_brick_class(self):
         # -- Setup
-        ont = tg.load_ontology('Brick', '1.1')
+        ont = tg.load_ontology(tc.BRICK, tc.V1_1)
         entity_type = 'Discharge_Air_Flow_Sensor'
 
         # -- Act
@@ -149,7 +149,7 @@ class TestGetNamespacedTerms(TestCase):
 
     def test_errors_when_term_not_found(self):
         # -- Setup
-        ont = tg.load_ontology('Haystack', '3.9.9')
+        ont = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         entity_type = 'this-sensor'
 
         # -- Act
@@ -161,7 +161,7 @@ class TestGetNamespacedTerms(TestCase):
 
     def test_errors_when_term_found_in_multiple_namespaces(self):
         # -- Setup
-        ont = tg.load_ontology('Brick', '1.1')
+        ont = tg.load_ontology(tc.BRICK, tc.V1_1)
         entity_type = 'Discharge-Temperature'
 
         # -- Act
@@ -214,7 +214,7 @@ class TestHGetEntityClasses:
         )
     ])
     def test_resolves_as_expected(self, tagset, classes, markers, properties):
-        ont = tg.load_ontology('Haystack', '3.9.9')
+        ont = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         valid_namespaced_terms = tt.get_namespaced_terms(ont, tagset)
         structured = tt.hget_entity_classes(ont, set(valid_namespaced_terms))
         assert list(structured.keys()) == ['classes', 'markers', 'properties']
@@ -329,7 +329,7 @@ class TestEntityTemplate:
     ])
     def test_find_with_class(self, class_to_find, expected_number_templates):
         # -- Setup
-        tg.load_ontology('Haystack', '3.9.9')
+        tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         found = tt.EntityTemplate.find_with_class(class_to_find)
 
         # -- Assert
@@ -467,8 +467,8 @@ class TestPointGroupTemplate:
         assert output_template == template_data
 
     @pytest.mark.parametrize('file, symbol, schema, version', [
-        (HAYSTACK_PGT_FILE_01, 'SD', 'Haystack', '3.9.9'),
-        (BRICK_PGT_FILE_01, 'SD', 'Brick', '1.1'),
+        (HAYSTACK_PGT_FILE_01, 'SD', tc.HAYSTACK, tc.V3_9_9),
+        (BRICK_PGT_FILE_01, 'SD', tc.BRICK, tc.V1_1),
     ])
     def test_find_given_symbol_schema_version(self, file, symbol, schema, version):
         # -- Setup - reset all PGTs registered
