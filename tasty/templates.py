@@ -9,8 +9,7 @@ import yaml
 import json
 import jsonschema
 from jsonschema import validate
-from rdflib.namespace import Namespace
-from rdflib import Graph
+from rdflib import Graph, Namespace, RDF, OWL, RDFS, SKOS, SH, XMLNS, XSD
 import time
 
 import tasty.graphs as tg
@@ -600,40 +599,23 @@ def get_namespaced_terms(ontology: Graph, terms: [str, dict]) -> Set:
         candidate_terms = set(terms.split("-"))
         for candidate in candidate_terms:
             ns = tg.get_namespaces_given_term(ontology, candidate)
-            if has_one_namespace(ns, candidate):
+            if tg.has_one_namespace(ns, candidate):
                 valid_namespaced_terms.add((ns[0], candidate))
     elif isinstance(terms, dict):
         for candidate, meta in terms.items():
             candidate_ns = tg.get_namespaces_given_term(ontology, candidate)
-            if has_one_namespace(candidate_ns, candidate):
+            if tg.has_one_namespace(candidate_ns, candidate):
                 # Create a deepcopy so as to not impact original template
                 meta_copy = deepcopy(meta)
                 if isinstance(meta, dict) and '_kind' in meta.keys():
                     meta_ns = tg.get_namespaces_given_term(ontology, meta_copy['_kind'])
-                    if has_one_namespace(meta_ns, meta['_kind']):
+                    if tg.has_one_namespace(meta_ns, meta['_kind']):
                         meta_copy['_kind'] = (meta_ns[0], meta['_kind'])
                         valid_namespaced_terms.add((candidate_ns[0], candidate, frozendict(meta_copy)))
                 elif isinstance(meta, (int, float, bool, str)):
                     valid_namespaced_terms.add((candidate_ns[0], candidate, frozendict({'val': meta})))
 
     return valid_namespaced_terms
-
-
-def has_one_namespace(ns, candidate):
-    """
-    Run after tg.get_namespaces_given_term to validate only a single ns was found
-    :param ns: [List[Namespace]]
-    :param candidate: [str]
-    :return:
-    """
-    if len(ns) == 1:
-        return True
-    elif len(ns) == 0:
-        raise te.TermNotFoundError(
-            f"Candidate '{candidate}' not found in any namespaces in the provided ontology")
-    else:
-        raise te.MultipleTermsFoundError(
-            f"Candidate '{candidate}' found in multiple namespaces: {[x[0] for x in ns]}")
 
 
 def hget_entity_classes(ontology, candidates):
@@ -658,7 +640,7 @@ def hget_entity_classes(ontology, candidates):
     q = f"SELECT ?e WHERE {{ ?e rdfs:subClassOf* ph:entity }}"
     match = ontology.query(q)
     current_subclasses = [m[0] for m in match]
-    dont_search = [tc.RDF, tc.OWL, tc.RDFS, tc.SKOS, tc.SH, tc.XML, tc.XMLS]
+    dont_search = [RDF, OWL, RDFS, SKOS, SH, XMLNS, XSD]
     namespaces = [Namespace(uri) for prefix, uri in ontology.namespaces() if Namespace(uri) not in dont_search]
 
     # The following creates permutations of all lengths

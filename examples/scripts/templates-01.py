@@ -11,7 +11,7 @@ if not os.path.isdir(output_dir):
 
 
 # Get a base graph
-ont = tg.load_ontology('Haystack', '3.9.9')
+ont = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
 point_type_string = 'cur-air-writable-motor-curVal-sensor-point'
 
 # Define expected Datatype properties.
@@ -31,7 +31,7 @@ ns_properties = tt.get_namespaced_terms(ont, properties)
 structured_terms = tt.hget_entity_classes(ont, ns_terms)
 
 # Here we use the ns_properties.
-et = tt.EntityTemplate(structured_terms['classes'], 'Haystack', '3.9.9', structured_terms['markers'], ns_properties)
+et = tt.EntityTemplate(structured_terms['classes'], tc.HAYSTACK, tc.V3_9_9, structured_terms['markers'], ns_properties)
 
 # In the following, we populate a PGT with just a new id.
 # and then add the above EntityTemplate to it.
