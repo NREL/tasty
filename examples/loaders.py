@@ -2,11 +2,12 @@
 
 import tasty.templates as tt
 import tasty.graphs as tg
+import tasty.constants as tc
 
 
 def initialize_pgt_notebook():
-    haystack_ont = tg.load_ontology('Haystack', '3.9.9')
-    brick_ont = tg.load_ontology('Brick', '1.1')
+    haystack_ont = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
+    brick_ont = tg.load_ontology(tc.BRICK, tc.V1_1)
 
     point_type_string = 'cur-writable-motor-run-curVal-sensor-point'
     haystack_namespaced_terms = tt.get_namespaced_terms(haystack_ont, point_type_string)
