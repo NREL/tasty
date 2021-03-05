@@ -1,10 +1,10 @@
 import os
 
 from typing import List
-from rdflib import Graph
-from rdflib.namespace import Namespace
+from rdflib import Graph, Namespace, OWL, RDF, RDFS, SKOS, SH
 
 import tasty.constants as tc
+from tasty import exceptions as te
 
 
 def get_versioned_graph(schema: str, version: str) -> Graph:
@@ -33,9 +33,9 @@ def load_ontology(schema: str, version: str) -> Graph:
     g = get_versioned_graph(schema, version)
     schema_path = os.path.join(tc.SCHEMAS_DIR, schema.lower())
     if schema == 'Haystack':
-        schema_path = os.path.join(schema_path, f"defs_{version.replace('.','_')}.ttl")
+        schema_path = os.path.join(schema_path, f"defs_{version.replace('.', '_')}.ttl")
     elif schema == 'Brick':
-        schema_path = os.path.join(schema_path, f"Brick_{version.replace('.','_')}.ttl")
+        schema_path = os.path.join(schema_path, f"Brick_{version.replace('.', '_')}.ttl")
     with open(schema_path, 'r') as f:
         data = f.read()
     g.parse(data=data, format='ttl')
@@ -50,28 +50,33 @@ def bind_versioned_prefixes(graph: Graph, schema: str, version: str) -> None:
     :param version: [str] A valid version from SUPPORTED_SCHEMAS
     :return:
     """
-    if schema == 'Brick':
-        if version == '1.1':
+    if schema == tc.BRICK:
+        if version == tc.V1_1:
             graph.bind("brick", tc.BRICK_1_1)
             graph.bind("tag", tc.TAG_1_1)
             graph.bind("bsh", tc.BSH_1_1)
-    elif schema == 'Haystack':
-        if version == '3.9.9':
+    elif schema == tc.HAYSTACK:
+        if version == tc.V3_9_9:
             graph.bind("ph", tc.PH_3_9_9)
             graph.bind("phIct", tc.PHICT_3_9_9)
             graph.bind("phScience", tc.PHSCIENCE_3_9_9)
             graph.bind("phIoT", tc.PHIOT_3_9_9)
+        elif version == tc.V3_9_10:
+            graph.bind("ph", tc.PH_3_9_10)
+            graph.bind("phIct", tc.PHICT_3_9_10)
+            graph.bind("phScience", tc.PHSCIENCE_3_9_10)
+            graph.bind("phIoT", tc.PHIOT_3_9_10)
 
 
 def bind_prefixes(graph: Graph) -> None:
     """
     Associate common prefixes with the graph
     """
-    graph.bind("rdf", tc.RDF)
-    graph.bind("owl", tc.OWL)
-    graph.bind("rdfs", tc.RDFS)
-    graph.bind("skos", tc.SKOS)
-    graph.bind("sh", tc.SH)
+    graph.bind("rdf", RDF)
+    graph.bind("owl", OWL)
+    graph.bind("rdfs", RDFS)
+    graph.bind("skos", SKOS)
+    graph.bind("sh", SH)
 
 
 def is_valid_schema_and_version(schema: str, version: str) -> bool:
@@ -111,3 +116,28 @@ def get_namespaces_given_term(ontology: Graph, term: str) -> List[Namespace]:
         if gn[term] in subjects:
             matched_namespaces.append(gn)
     return matched_namespaces
+
+
+def has_one_namespace(ns, candidate):
+    """
+    Run after tg.get_namespaces_given_term to validate only a single ns was found
+    :param ns: [List[Namespace]]
+    :param candidate: [str]
+    :return:
+    """
+    if len(ns) == 1:
+        return True
+    elif len(ns) == 0:
+        raise te.TermNotFoundError(
+            f"Candidate '{candidate}' not found in any namespaces in the provided ontology")
+    else:
+        raise te.MultipleTermsFoundError(
+            f"Candidate '{candidate}' found in multiple namespaces: {[x[0] for x in ns]}")
+
+
+def get_namespaced_term(ontology: Graph, term: str) -> Namespace:
+    potential_namespaces = get_namespaces_given_term(ontology, term)
+    if has_one_namespace(potential_namespaces, term):
+        ns = potential_namespaces[0]
+        return ns[term]
+    return False
