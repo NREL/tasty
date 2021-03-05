@@ -31,6 +31,7 @@ class Instance:
     def gen_uuid(self) -> None:
         if self._id is None:
             self._id = uuid4()
+        return self._id
 
     def set_namespace(self, ns: [str, Namespace]):
         assert isinstance(ns, (str, Namespace)), "ns must be a string or Namespace type"
@@ -46,7 +47,7 @@ class Instance:
         self.graph = g
         if self.node is None:
             self.node = self._namespace[str(self._id)]
-        self.g.add((self.node, RDF.type, self._type_uri))
+        self.graph.add((self.node, RDF.type, self._type_uri))
         return True
 
     # def sync(self):
