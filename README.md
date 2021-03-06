@@ -15,6 +15,7 @@ poetry run python tasty/generate_shapes.py v2
 - Create a simple csv file to input your data
 ```bash
 poetry run python tasty/generate_input_file.py
+
 # optionally merge in existing data
 poetry run python tasty/generate_input_file.py path/to/haystack-data.rdf
 ```
