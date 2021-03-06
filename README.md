@@ -1,18 +1,28 @@
 # tasty
 
-Tasty was created to:
-1. Get Metadata Schema and Modeling tools into as many projects as possible.
-1. Provide a consistent methodology for:
-    1. Building metadata models
-    1. Validating metadat models
-1. Provide an SDK to accomplish the above
+Tasty was created to simplify the generation and validation of metadata related to buildings.
 
 # Getting started
-1. Build the core shapes: `poetry run python tasty/generate_shapes.py`
-1. Create a csv file to input your data: `poetry run python tasty/generate_input_file.py`
-    1. Optionally merge in ids from an existing file: `poetry run python tasty/generate_input_file.py path/to/haystack-data.rdf` (support RDF only at this point)
-1. For each entity, mark an `X` corresponding to the shape you want the entity to validate against. Save the file.
-1. Validate the file: `poetry run python tasty/validate.py path/to/haystack-data.rdf`
+Once poetry is installed
+
+- Build the core shapes:
+```bash
+# build the core shapes (v1 = 3.9.9, v2 = 3.9.10)
+poetry run python tasty/generate_shapes.py v1
+poetry run python tasty/generate_shapes.py v2
+```
+
+- Create a simple csv file to input your data (optionally merge in existing data)
+```bash
+poetry run python tasty/generate_input_file.py
+poetry run python tasty/generate_input_file.py path/to/haystack-data.rdf
+```
+
+- For each entity, mark an `X` in the cell according to the shape you want the entity to validate against. Save the file.
+- Validate the file
+```bash
+poetry run python tasty/validate.py path/to/haystack-data.rdf
+```
 
 There are also some simple classes that can take advantage of the types built-in to Brick / Haystack to build new graphs:
 ```python
