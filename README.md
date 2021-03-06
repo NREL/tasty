@@ -26,7 +26,8 @@ poetry run python tasty/generate_input_file.py path/to/haystack-data.rdf
 poetry run python tasty/validate.py path/to/haystack-data.rdf
 ```
 
-There are also some simple classes that can take advantage of the types built-in to Brick / Haystack to build new graphs:
+## Python
+There are also some simple classes that can take advantage of the types built-in to Brick / Haystack.
 ```python
 from rdflib import Namespace
 import tasty.constants as tc
@@ -38,14 +39,13 @@ EX = Namespace('example.com#')
 hg = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
 bg = tg.get_versioned_graph(tc.BRICK, tc.V1_1)
 
-# Wrapper classes around entity types
+# Specify the schema version (tc.V9_9_10, etc.) to use
 hp = HaystackPointDefs(tc.V3_9_10)
 bp = BrickPointDefs(tc.V1_1)
 he = HaystackEquipDefs(tc.V3_9_10)
 be = BrickEquipmentDefs(tc.V1_1)
 
 # Bind all of the first class types as attributes
-# to the classes
 hp.bind()
 bp.bind()
 he.bind()
