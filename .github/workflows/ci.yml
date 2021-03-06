@@ -24,12 +24,12 @@ jobs:
     - name: Install poetry
       uses: abatilo/actions-poetry@v2.0.0
 
-    - name: Print CWD
-      run: |
-        poetry run python -c "import os; print(os.getcwd())"
-        ls
-
-    - name: Run tests with poetry and pytest
+    - name: Install Poetry and Generate Shapes
       run: |
         poetry install
+        poetry run python tasty/generate_shapes.py v1
+        poetry run python tasty/generate_shapes.py v2
+
+    - name: Run tests
+      run: |
         poetry run pytest
