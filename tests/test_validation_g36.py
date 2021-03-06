@@ -5,7 +5,6 @@ from rdflib import Namespace, SH
 from pyshacl import validate
 
 import tasty.graphs
-from tasty.generated import core_shapes
 from tasty import constants as tc
 from tasty import graphs as tg
 from tests.conftest import get_single_node_validation_query, assert_remove_markers, write_csv, \
@@ -176,7 +175,7 @@ class TestG36VavCoolingOnly:
         write_csv(results_query, output_file)
 
 
-class TestGeneratedShapes:
+class TestGeneratedShapesV1:
     @pytest.mark.parametrize('shape_name, target_node', [
         [tc.PH_SHAPES['DamperPositionCommandShape'], SAMPLE['VAV-01-DamperPositionCommand']],
         [tc.PH_SHAPES['DischargeAirFlowSensorShape'], SAMPLE['VAV-01-DischargeAirFlowSensor']],
@@ -188,13 +187,13 @@ class TestGeneratedShapes:
         [tc.PH_SHAPES['ZoneAirCO2SensorShape'], SAMPLE['VAV-01-ZoneAirCO2Sensor']],
         [tc.PH_SHAPES['ZoneAirCO2SetpointShape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint']],
     ])
-    def test_is_valid(self, get_g36_data, get_g36_shapes, shape_name, target_node):
+    def test_is_valid(self, get_g36_data, get_core_shapes_v1, shape_name, target_node):
         # Set version for constants
         tc.set_default_versions(haystack_version=tc.V3_9_9)
 
         # -- Setup
         data_graph = get_g36_data
-        shapes_graph = core_shapes
+        shapes_graph = get_core_shapes_v1
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
 
         # -- Setup
@@ -221,13 +220,13 @@ class TestGeneratedShapes:
         [tc.PH_SHAPES['ZoneAirCO2SensorShape'], SAMPLE['VAV-01-ZoneAirCO2Sensor'], ['co2']],
         [tc.PH_SHAPES['ZoneAirCO2SetpointShape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint'], ['co2', 'sp']],
     ])
-    def test_is_invalid(self, get_g36_data, get_g36_shapes, shape_name, target_node, remove_markers):
+    def test_is_invalid(self, get_g36_data, get_core_shapes_v1, shape_name, target_node, remove_markers):
         # Set version for constants
         tc.set_default_versions(haystack_version=tc.V3_9_9)
 
         # -- Setup
         data_graph = get_g36_data
-        shapes_graph = core_shapes
+        shapes_graph = get_core_shapes_v1
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
@@ -236,10 +235,9 @@ class TestGeneratedShapes:
         # -- Setup
         shapes_graph.add((shape_name, SH.targetNode, target_node))
         for marker in remove_markers:
-            ns = tg.get_namespaces_given_term(ont_graph, marker)
-            if tasty.graphs.has_one_namespace(ns, marker):
-                ns = ns[0]
-                data_graph.remove((target_node, tc.PH_DEFAULT.hasTag, ns[marker]))
+            ns = tg.get_namespaced_term(ont_graph, marker)
+            if ns:
+                data_graph.remove((target_node, tc.PH_DEFAULT.hasTag, ns))
 
         result = validate(data_graph, shacl_graph=shapes_graph, ont_graph=ont_graph)
         conforms, results_graph, results = result
@@ -278,10 +276,10 @@ class TestGeneratedShapesV2:
         [tc.PH_SHAPES['zone-air-co2-sensor-shape'], SAMPLE['VAV-01-ZoneAirCO2Sensor']],
         [tc.PH_SHAPES['zone-air-co2-sp-shape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint']],
     ])
-    def test_is_valid(self, get_g36_data2, get_core_shapes2, shape_name, target_node):
+    def test_is_valid(self, get_g36_data_v2, get_core_shapes_v2, shape_name, target_node):
         # -- Setup
-        data_graph = get_g36_data2
-        shapes_graph = get_core_shapes2
+        data_graph = get_g36_data_v2
+        shapes_graph = get_core_shapes_v2
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
 
         # -- Setup
@@ -311,13 +309,13 @@ class TestGeneratedShapesV2:
         [tc.PH_SHAPES['zone-air-co2-sensor-shape'], SAMPLE['VAV-01-ZoneAirCO2Sensor'], ['co2']],
         [tc.PH_SHAPES['zone-air-co2-sp-shape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint'], ['co2']],
     ])
-    def test_is_invalid(self, get_g36_data2, get_core_shapes2, shape_name, target_node, remove_markers):
+    def test_is_invalid(self, get_g36_data_v2, get_core_shapes_v2, shape_name, target_node, remove_markers):
         # Set version for constants
         tc.set_default_versions(haystack_version=tc.V3_9_10)
 
         # -- Setup
-        data_graph = get_g36_data2
-        shapes_graph = get_core_shapes2
+        data_graph = get_g36_data_v2
+        shapes_graph = get_core_shapes_v2
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
 
@@ -354,10 +352,10 @@ class TestGeneratedCoolingOnlyVAV_Shape_001:
     @pytest.mark.parametrize('shape_name, target_node', [
         [tc.PH_SHAPES['CoolingOnlyVAV-Shape-001'], SAMPLE['VAV-01']]
     ])
-    def test_is_valid(self, get_g36_data2, get_core_shapes2, shape_name, target_node):
+    def test_is_valid(self, get_g36_data_v2, get_core_shapes_v2, shape_name, target_node):
         # -- Setup
-        data_graph = get_g36_data2
-        shapes_graph = get_core_shapes2
+        data_graph = get_g36_data_v2
+        shapes_graph = get_core_shapes_v2
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
@@ -389,14 +387,15 @@ class TestGeneratedCoolingOnlyVAV_Shape_001:
             ['zone'], SH.Warning
         ]
     ])
-    def test_is_invalid(self, get_g36_data2, get_core_shapes2, shape_name, target_node, remove_from_node, remove_markers,
+    def test_is_invalid(self, get_g36_data_v2, get_core_shapes_v2, shape_name, target_node, remove_from_node,
+                        remove_markers,
                         severity):
         # Set version for constants
         tc.set_default_versions(haystack_version=tc.V3_9_10)
 
         # -- Setup
-        data_graph = get_g36_data2
-        shapes_graph = get_core_shapes2
+        data_graph = get_g36_data_v2
+        shapes_graph = get_core_shapes_v2
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):

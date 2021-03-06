@@ -168,7 +168,7 @@ def get_g36_data():
 
 
 @pytest.fixture
-def get_g36_data2():
+def get_g36_data_v2():
     g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
     f = os.path.join(os.path.dirname(__file__), 'files/data/g36_data_3_9_10.ttl')
     g.parse(f, format='turtle')
@@ -184,7 +184,15 @@ def get_g36_shapes():
 
 
 @pytest.fixture
-def get_core_shapes2():
+def get_core_shapes_v1():
+    g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
+    f = os.path.join(generated_dir, 'core_v1.ttl')
+    g.parse(f, format='turtle')
+    return g
+
+
+@pytest.fixture
+def get_core_shapes_v2():
     g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
     f = os.path.join(generated_dir, 'core_v2.ttl')
     g.parse(f, format='turtle')

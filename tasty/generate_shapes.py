@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 from typing import List
 
@@ -182,17 +183,26 @@ def safe_add(g: Graph, nodeshape_triple: tuple):
         g.add(nodeshape_triple)
 
 
+assert len(sys.argv) == 2, "Specify v1 or v2"
+assert sys.argv[1] in ['v1', 'v2'], "Specify v1 or v2"
+
 # Load in the template files
 data = load_sources()
 
 # get a blank versioned graph
-g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
-
-# load in the ontology
-ontology = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
+version = sys.argv[1]
+if version == 'v1':
+    tc.set_default_versions(haystack_version=tc.V3_9_9)
+    g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_9)
+    # load in the ontology
+    ontology = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
+else:
+    g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
+    # load in the ontology
+    ontology = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
 
 # Pull out the v2 info
-v2 = data['core_v2.json']
+v2 = data[f"core_{version}.json"]
 ns = Namespace(v2['namespace'])
 g.bind(v2['prefix'], ns)
 
@@ -228,4 +238,4 @@ for shape in v2['shapes']:
         safe_add(g, nodeshape_triple)
         add_predicates(g, ontology, ns_shape, shape['predicates'], 'optional')
 
-write_to_output(g, 'core_v2.ttl')
+write_to_output(g, f"core_{version}.ttl")
