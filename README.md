@@ -7,14 +7,15 @@ Once poetry is installed
 
 - Build the core shapes:
 ```bash
-# build the core shapes (v1 = 3.9.9, v2 = 3.9.10)
+# v1 = 3.9.9, v2 = 3.9.10
 poetry run python tasty/generate_shapes.py v1
 poetry run python tasty/generate_shapes.py v2
 ```
 
-- Create a simple csv file to input your data (optionally merge in existing data)
+- Create a simple csv file to input your data
 ```bash
 poetry run python tasty/generate_input_file.py
+# optionally merge in existing data
 poetry run python tasty/generate_input_file.py path/to/haystack-data.rdf
 ```
 
