@@ -21,7 +21,7 @@
     {
       "name": "occupancy-sensor-shape",
       "type": ["point"],
-      "tags": ["occupied", "sensor", "point"]
+      "tags": ["occupied", "sensor"]
     },
     {
       "name": "window-override-cmd-shape",
