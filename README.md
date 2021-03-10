@@ -19,12 +19,15 @@ poetry run python tasty/generate_input_file.py
 # optionally merge in existing data
 poetry run python tasty/generate_input_file.py path/to/haystack-data.rdf
 ```
+![image](https://user-images.githubusercontent.com/28991233/110189915-dee26700-7dee-11eb-8e56-2a7c2c38b508.png)
 
 - For each entity, mark an `X` in the cell according to the shape you want the entity to validate against. Save the file.
 - Validate the file
 ```bash
 poetry run python tasty/validate.py path/to/haystack-data.rdf
 ```
+![image](https://user-images.githubusercontent.com/28991233/110189981-1ea94e80-7def-11eb-890c-629b913e79bb.png)
+
 
 ## Python
 There are also some simple classes that can take advantage of the types built-in to Brick / Haystack.
