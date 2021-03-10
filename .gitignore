@@ -13,6 +13,7 @@ dist
 output
 debug.py
 core*.ttl
+input-file.csv
 
 # Jupyter
 .ipynb_checkpoints
