@@ -46,6 +46,11 @@
       "tags": ["zone", "air", "co2", "sp"]
     },
     {
+      "name": "hot-water-valve-cmd-shape",
+      "type": ["point"],
+      "tags": ["hot", "water", "valve", "cmd"]
+    },
+    {
       "name": "CoolingOnlyVAV-Shape-001",
       "predicates": {
         "requires": [
@@ -55,6 +60,37 @@
             "type": ["discharge-air-flow-sensor"],
             "shapes": [
               "damper-cmd-shape",
+              "zone-air-temp-sensor-shape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "zone-air-temp-override-cmd-shape",
+              "occupancy-sensor-shape",
+              "window-override-cmd-shape",
+              "zone-air-temp-override-sp-shape",
+              "zone-air-co2-sensor-shape",
+              "zone-air-co2-sp-shape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "HotWaterReheatVAV-Shape-001",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "type": ["discharge-air-flow-sensor", "discharge-air-temp-sensor"],
+            "shapes": [
+              "damper-cmd-shape",
+              "hot-water-valve-cmd-shape",
               "zone-air-temp-sensor-shape"
             ]
           }
