@@ -103,31 +103,33 @@
     },
     {
       "name": "G36-VavTerminalUnitCoolingOnlyShape",
-      "requires": [
-        {
-          "path": "equipRef",
-          "path-type": "inverse",
-          "shapes": [
-            "DamperPositionCommandShape",
-            "DischargeAirFlowSensorShape",
-            "ZoneAirTemperatureSensorShape"
-          ]
-        }
-      ],
-      "optional": [
-        {
-          "path": "equipRef",
-          "path-type": "inverse",
-          "shapes": [
-            "ZoneAirTemperatureOverrideCommandShape",
-            "OccupancySensorShape",
-            "WindowOverrideCommandShape",
-            "ZoneAirTemperatureOverrideSetpointShape",
-            "ZoneAirCO2SensorShape",
-            "ZoneAirCO2SetpointShape"
-          ]
-        }
-      ]
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DamperPositionCommandShape",
+              "DischargeAirFlowSensorShape",
+              "ZoneAirTemperatureSensorShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ZoneAirTemperatureOverrideCommandShape",
+              "OccupancySensorShape",
+              "WindowOverrideCommandShape",
+              "ZoneAirTemperatureOverrideSetpointShape",
+              "ZoneAirCO2SensorShape",
+              "ZoneAirCO2SetpointShape"
+            ]
+          }
+        ]
+      }
     }
   ]
 }
