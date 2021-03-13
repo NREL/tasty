@@ -4,7 +4,8 @@
   "shapes": [
     {
       "name": "OccupancyModeStandbyShape",
-      "tags": ["occ", "mode", "sp", "point"],
+      "tags": ["occ", "sp", "point"],
+      "tags-custom": ["mode"],
       "vals": {
         "enum": "Occupied,Unoccupied,Standby"
       }
