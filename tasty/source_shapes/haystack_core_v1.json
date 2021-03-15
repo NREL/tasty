@@ -1,6 +1,6 @@
 {
-  "prefix": "phShapes",
-  "namespace": "https://project-haystack.org/datashapes/core#",
+  "prefix": "phShapes1",
+  "namespace": "https://project-haystack.org/datashapes/core/v1#",
   "shapes": [
     {
       "name": "DamperPositionCommandShape",
