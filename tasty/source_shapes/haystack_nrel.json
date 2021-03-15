@@ -98,22 +98,26 @@
     {
       "name": "MinimumHeatingDischargeAirFlowSetpointShape",
       "types": ["discharge-air-flow-sp"],
-      "tags": ["min", "heating"]
+      "tags": ["heating"],
+      "tags-custom": ["min"]
     },
     {
       "name": "MinimumCoolingDischargeAirFlowSetpointShape",
       "types": ["discharge-air-flow-sp"],
-      "tags": ["min", "cooling"]
+      "tags": ["cooling"],
+      "tags-custom": ["min"]
     },
     {
       "name": "MaximumHeatingDischargeAirFlowSetpointShape",
       "types": ["discharge-air-flow-sp"],
-      "tags": ["max", "heating"]
+      "tags": ["heating"],
+      "tags-custom": ["max"]
     },
     {
       "name": "MaximumCoolingDischargeAirFlowSetpointShape",
       "types": ["discharge-air-flow-sp"],
-      "tags": ["max", "cooling"]
+      "tags": ["cooling"],
+      "tags-custom": ["max"]
     },
     {
       "name": "OccupancyModeStandbyShape",
