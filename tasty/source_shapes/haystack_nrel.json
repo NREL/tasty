@@ -3,6 +3,119 @@
   "namespace": "https://project-haystack.org/datashapes/nrel#",
   "shapes": [
     {
+      "name": "ZoneRelativeHumidityShape",
+      "types": ["air-humidity-sensor"],
+      "tags": ["zone"]
+    },
+    {
+      "name": "BinaryOccupancySensorShape",
+      "types": ["point"],
+      "tags": ["occupied", "sensor"],
+      "tags-custom": ["occupancyindicator"]
+    },
+    {
+      "name": "OccupancyOverrideCommandShape",
+      "types": ["point"],
+      "tags": ["occupied", "cmd"]
+    },
+    {
+      "name": "ZoneTemperatureCoolingEffectiveSetpointShape",
+      "types": ["air-temp-sp"],
+      "tags": ["zone", "cooling", "effective"]
+    },
+    {
+      "name": "ZoneTemperatureHeatingEffectiveSetpointShape",
+      "types": ["air-temp-sp"],
+      "tags": ["zone", "heating", "effective"]
+    },
+    {
+      "name": "ZoneTemperatureCoolingOccupiedSetpointShape",
+      "types": ["air-temp-sp"],
+      "tags": ["zone", "cooling", "occ"]
+    },
+    {
+      "name": "ZoneTemperatureHeatingOccupiedSetpointShape",
+      "types": ["air-temp-sp"],
+      "tags": ["zone", "heating", "occ"]
+    },
+    {
+      "name": "ZoneTemperatureCoolingUnoccupiedSetpointShape",
+      "types": ["air-temp-sp"],
+      "tags": ["zone", "cooling", "unocc"]
+    },
+    {
+      "name": "ZoneTemperatureHeatingUnoccupiedSetpointShape",
+      "types": ["air-temp-sp"],
+      "tags": ["zone", "heating", "unocc"]
+    },
+    {
+      "name": "ZoneTemperatureCoolingStandbySetpointShape",
+      "types": ["air-temp-sp"],
+      "tags": ["zone", "cooling", "standby"]
+    },
+    {
+      "name": "ZoneTemperatureHeatingStandbySetpointShape",
+      "types": ["air-temp-sp"],
+      "tags": ["zone", "heating", "standby"]
+    },
+    {
+      "name": "ZoneEquipmentOperatingStateShape",
+      "types": ["point"],
+      "tags": ["sp"],
+      "tags-custom": ["operating", "mode"]
+    },
+    {
+      "name": "ZoneEquipmentOperatingStateShape",
+      "types": ["point"],
+      "tags": ["sp"],
+      "tags-custom": ["operating", "mode"]
+    },
+    {
+      "name": "DischargeAirTemperatureShape",
+      "types": ["discharge-air-temp-sensor"],
+      "tags": ["leaving"]
+    },
+    {
+      "name": "DischargeAirDamperCommandShape",
+      "types": ["point"],
+      "tags": ["discharge", "air", "damper", "cmd"]
+    },
+    {
+      "name": "DischargeAirDamperFeedbackShape",
+      "types": ["air-sensor"],
+      "tags": ["discharge", "damper"]
+    },
+    {
+      "name": "DischargeAirFlowShape",
+      "types": ["discharge-air-flow-sensor"],
+      "tags": ["leaving"]
+    },
+    {
+      "name": "DischargeAirFlowSetpointShape",
+      "types": ["discharge-air-flow-sp"],
+      "tags": ["effective"]
+    },
+    {
+      "name": "MinimumHeatingDischargeAirFlowSetpointShape",
+      "types": ["discharge-air-flow-sp"],
+      "tags": ["min", "heating"]
+    },
+    {
+      "name": "MinimumCoolingDischargeAirFlowSetpointShape",
+      "types": ["discharge-air-flow-sp"],
+      "tags": ["min", "cooling"]
+    },
+    {
+      "name": "MaximumHeatingDischargeAirFlowSetpointShape",
+      "types": ["discharge-air-flow-sp"],
+      "tags": ["max", "heating"]
+    },
+    {
+      "name": "MaximumCoolingDischargeAirFlowSetpointShape",
+      "types": ["discharge-air-flow-sp"],
+      "tags": ["max", "cooling"]
+    },
+    {
       "name": "OccupancyModeStandbyShape",
       "tags": ["occ", "sp", "point"],
       "tags-custom": ["mode"],
