@@ -12,7 +12,7 @@ dist
 # Tasty
 output
 debug.py
-core*.ttl
+haystack_*.ttl
 input-file.csv
 
 # Jupyter

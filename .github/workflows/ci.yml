@@ -27,8 +27,7 @@ jobs:
     - name: Install Poetry and Generate Shapes
       run: |
         poetry install
-        poetry run python tasty/generate_shapes.py v1
-        poetry run python tasty/generate_shapes.py v2
+        poetry run tasty generate-shapes
 
     - name: Run tests
       run: |

@@ -8,27 +8,27 @@ import tasty.graphs
 from tasty import constants as tc
 from tasty import graphs as tg
 from tests.conftest import get_single_node_validation_query, assert_remove_markers, write_csv, \
-    get_parent_node_validation_query, get_severity_query
+    get_parent_node_validation_query, get_severity_query, get_source_shape_query, run_another
 
 SAMPLE = Namespace('urn:sample/')
 
 
-class TestIndividualShapes:
+class TestHandcraftedIndividualShapes:
     @pytest.mark.parametrize('shape_name, target_node', [
-        [tc.PH_SHAPES['DamperPositionCommandShape'], SAMPLE['VAV-01-DamperPositionCommand']],
-        [tc.PH_SHAPES['DischargeAirFlowSensorShape'], SAMPLE['VAV-01-DischargeAirFlowSensor']],
-        [tc.PH_SHAPES['ZoneAirTemperatureSensorShape'], SAMPLE['VAV-01-ZoneAirTemperatureSensor']],
-        [tc.PH_SHAPES['ZoneAirTemperatureOverrideCommandShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand']],
-        [tc.PH_SHAPES['OccupancySensorShape'], SAMPLE['VAV-01-OccupancySensor']],
-        [tc.PH_SHAPES['WindowOverrideCommandShape'], SAMPLE['VAV-01-WindowOverrideCommand']],
-        [tc.PH_SHAPES['ZoneAirTemperatureOverrideSetpointShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideSetpoint']],
-        [tc.PH_SHAPES['ZoneAirCO2SensorShape'], SAMPLE['VAV-01-ZoneAirCO2Sensor']],
-        [tc.PH_SHAPES['ZoneAirCO2SetpointShape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint']],
+        [tc.PH_SHAPES_V1['DamperPositionCommandShape'], SAMPLE['VAV-01-DamperPositionCommand']],
+        [tc.PH_SHAPES_V1['DischargeAirFlowSensorShape'], SAMPLE['VAV-01-DischargeAirFlowSensor']],
+        [tc.PH_SHAPES_V1['ZoneAirTemperatureSensorShape'], SAMPLE['VAV-01-ZoneAirTemperatureSensor']],
+        [tc.PH_SHAPES_V1['ZoneAirTemperatureOverrideCommandShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand']],
+        [tc.PH_SHAPES_V1['OccupancySensorShape'], SAMPLE['VAV-01-OccupancySensor']],
+        [tc.PH_SHAPES_V1['WindowOverrideCommandShape'], SAMPLE['VAV-01-WindowOverrideCommand']],
+        [tc.PH_SHAPES_V1['ZoneAirTemperatureOverrideSetpointShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideSetpoint']],
+        [tc.PH_SHAPES_V1['ZoneAirCO2SensorShape'], SAMPLE['VAV-01-ZoneAirCO2Sensor']],
+        [tc.PH_SHAPES_V1['ZoneAirCO2SetpointShape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint']],
     ])
-    def test_is_valid(self, get_g36_data, get_g36_shapes, shape_name, target_node):
+    def test_is_valid(self, get_haystack_g36_data, get_haystack_g36_shapes, shape_name, target_node):
         # -- Setup
-        data_graph = get_g36_data
-        shapes_graph = get_g36_shapes
+        data_graph = get_haystack_g36_data
+        shapes_graph = get_haystack_g36_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
 
         # -- Setup
@@ -41,25 +41,25 @@ class TestIndividualShapes:
         assert conforms
 
     @pytest.mark.parametrize('shape_name, target_node, remove_markers', [
-        [tc.PH_SHAPES['DamperPositionCommandShape'], SAMPLE['VAV-01-DamperPositionCommand'], ['damper']],
-        [tc.PH_SHAPES['DischargeAirFlowSensorShape'], SAMPLE['VAV-01-DischargeAirFlowSensor'], ['discharge']],
-        [tc.PH_SHAPES['ZoneAirTemperatureSensorShape'], SAMPLE['VAV-01-ZoneAirTemperatureSensor'], ['zone']],
-        [tc.PH_SHAPES['ZoneAirTemperatureOverrideCommandShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand'],
+        [tc.PH_SHAPES_V1['DamperPositionCommandShape'], SAMPLE['VAV-01-DamperPositionCommand'], ['damper']],
+        [tc.PH_SHAPES_V1['DischargeAirFlowSensorShape'], SAMPLE['VAV-01-DischargeAirFlowSensor'], ['discharge']],
+        [tc.PH_SHAPES_V1['ZoneAirTemperatureSensorShape'], SAMPLE['VAV-01-ZoneAirTemperatureSensor'], ['zone']],
+        [tc.PH_SHAPES_V1['ZoneAirTemperatureOverrideCommandShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand'],
          ['zone']],
-        [tc.PH_SHAPES['OccupancySensorShape'], SAMPLE['VAV-01-OccupancySensor'], ['occupied']],
-        [tc.PH_SHAPES['WindowOverrideCommandShape'], SAMPLE['VAV-01-WindowOverrideCommand'], ['cmd']],
-        [tc.PH_SHAPES['ZoneAirTemperatureOverrideSetpointShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideSetpoint'],
+        [tc.PH_SHAPES_V1['OccupancySensorShape'], SAMPLE['VAV-01-OccupancySensor'], ['occupied']],
+        [tc.PH_SHAPES_V1['WindowOverrideCommandShape'], SAMPLE['VAV-01-WindowOverrideCommand'], ['cmd']],
+        [tc.PH_SHAPES_V1['ZoneAirTemperatureOverrideSetpointShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideSetpoint'],
          ['temp']],
-        [tc.PH_SHAPES['ZoneAirCO2SensorShape'], SAMPLE['VAV-01-ZoneAirCO2Sensor'], ['co2']],
-        [tc.PH_SHAPES['ZoneAirCO2SetpointShape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint'], ['co2', 'sp']],
+        [tc.PH_SHAPES_V1['ZoneAirCO2SensorShape'], SAMPLE['VAV-01-ZoneAirCO2Sensor'], ['co2']],
+        [tc.PH_SHAPES_V1['ZoneAirCO2SetpointShape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint'], ['co2', 'sp']],
     ])
-    def test_is_invalid(self, get_g36_data, get_g36_shapes, shape_name, target_node, remove_markers):
+    def test_is_invalid(self, get_haystack_g36_data, get_haystack_g36_shapes, shape_name, target_node, remove_markers):
         # Set version for constants
         tc.set_default_versions(haystack_version=tc.V3_9_9)
 
         # -- Setup
-        data_graph = get_g36_data
-        shapes_graph = get_g36_shapes
+        data_graph = get_haystack_g36_data
+        shapes_graph = get_haystack_g36_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
@@ -93,14 +93,14 @@ class TestIndividualShapes:
         write_csv(results_query, output_file)
 
 
-class TestG36VavCoolingOnly:
+class TestHandcraftedG36VavCoolingOnly:
     @pytest.mark.parametrize('shape_name, target_node', [
-        [tc.PH_SHAPES['G36-VavTerminalUnitCoolingOnlyShape'], SAMPLE['VAV-01']]
+        [tc.PH_SHAPES_V1['G36-VavTerminalUnitCoolingOnlyShape'], SAMPLE['VAV-01']]
     ])
-    def test_is_valid(self, get_g36_data, get_g36_shapes, shape_name, target_node):
+    def test_is_valid(self, get_haystack_g36_data, get_haystack_g36_shapes, shape_name, target_node):
         # -- Setup
-        data_graph = get_g36_data
-        shapes_graph = get_g36_shapes
+        data_graph = get_haystack_g36_data
+        shapes_graph = get_haystack_g36_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
@@ -122,24 +122,25 @@ class TestG36VavCoolingOnly:
 
     @pytest.mark.parametrize('shape_name, target_node, remove_from_node, remove_markers, severity', [
         [
-            tc.PH_SHAPES['G36-VavTerminalUnitCoolingOnlyShape'], SAMPLE['VAV-01'],
+            tc.PH_SHAPES_V1['G36-VavTerminalUnitCoolingOnlyShape'], SAMPLE['VAV-01'],
             SAMPLE['VAV-01-DamperPositionCommand'],
             ['damper'], SH.Violation
         ],
         [
-            tc.PH_SHAPES['G36-VavTerminalUnitCoolingOnlyShape'], SAMPLE['VAV-01'],
+            tc.PH_SHAPES_V1['G36-VavTerminalUnitCoolingOnlyShape'], SAMPLE['VAV-01'],
             SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand'],
             ['zone'], SH.Warning
         ]
     ])
-    def test_is_invalid(self, get_g36_data, get_g36_shapes, shape_name, target_node, remove_from_node, remove_markers,
+    def test_is_invalid(self, get_haystack_g36_data, get_haystack_g36_shapes, shape_name, target_node, remove_from_node,
+                        remove_markers,
                         severity):
         # Set version for constants
         tc.set_default_versions(haystack_version=tc.V3_9_9)
 
         # -- Setup
-        data_graph = get_g36_data
-        shapes_graph = get_g36_shapes
+        data_graph = get_haystack_g36_data
+        shapes_graph = get_haystack_g36_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
@@ -175,25 +176,25 @@ class TestG36VavCoolingOnly:
         write_csv(results_query, output_file)
 
 
-class TestGeneratedShapesV1:
+class TestGeneratedSinglePointShapesV1:
     @pytest.mark.parametrize('shape_name, target_node', [
-        [tc.PH_SHAPES['DamperPositionCommandShape'], SAMPLE['VAV-01-DamperPositionCommand']],
-        [tc.PH_SHAPES['DischargeAirFlowSensorShape'], SAMPLE['VAV-01-DischargeAirFlowSensor']],
-        [tc.PH_SHAPES['ZoneAirTemperatureSensorShape'], SAMPLE['VAV-01-ZoneAirTemperatureSensor']],
-        [tc.PH_SHAPES['ZoneAirTemperatureOverrideCommandShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand']],
-        [tc.PH_SHAPES['OccupancySensorShape'], SAMPLE['VAV-01-OccupancySensor']],
-        [tc.PH_SHAPES['WindowOverrideCommandShape'], SAMPLE['VAV-01-WindowOverrideCommand']],
-        [tc.PH_SHAPES['ZoneAirTemperatureOverrideSetpointShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideSetpoint']],
-        [tc.PH_SHAPES['ZoneAirCO2SensorShape'], SAMPLE['VAV-01-ZoneAirCO2Sensor']],
-        [tc.PH_SHAPES['ZoneAirCO2SetpointShape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint']],
+        [tc.PH_SHAPES_V1['DamperPositionCommandShape'], SAMPLE['VAV-01-DamperPositionCommand']],
+        [tc.PH_SHAPES_V1['DischargeAirFlowSensorShape'], SAMPLE['VAV-01-DischargeAirFlowSensor']],
+        [tc.PH_SHAPES_V1['ZoneAirTemperatureSensorShape'], SAMPLE['VAV-01-ZoneAirTemperatureSensor']],
+        [tc.PH_SHAPES_V1['ZoneAirTemperatureOverrideCommandShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand']],
+        [tc.PH_SHAPES_V1['OccupancySensorShape'], SAMPLE['VAV-01-OccupancySensor']],
+        [tc.PH_SHAPES_V1['WindowOverrideCommandShape'], SAMPLE['VAV-01-WindowOverrideCommand']],
+        [tc.PH_SHAPES_V1['ZoneAirTemperatureOverrideSetpointShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideSetpoint']],
+        [tc.PH_SHAPES_V1['ZoneAirCO2SensorShape'], SAMPLE['VAV-01-ZoneAirCO2Sensor']],
+        [tc.PH_SHAPES_V1['ZoneAirCO2SetpointShape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint']],
     ])
-    def test_is_valid(self, get_g36_data, get_core_shapes_v1, shape_name, target_node):
+    def test_is_valid(self, get_haystack_g36_data, get_haystack_core_generated_shapes_v1, shape_name, target_node):
         # Set version for constants
         tc.set_default_versions(haystack_version=tc.V3_9_9)
 
         # -- Setup
-        data_graph = get_g36_data
-        shapes_graph = get_core_shapes_v1
+        data_graph = get_haystack_g36_data
+        shapes_graph = get_haystack_core_generated_shapes_v1
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
 
         # -- Setup
@@ -208,25 +209,26 @@ class TestGeneratedShapesV1:
         assert conforms
 
     @pytest.mark.parametrize('shape_name, target_node, remove_markers', [
-        [tc.PH_SHAPES['DamperPositionCommandShape'], SAMPLE['VAV-01-DamperPositionCommand'], ['damper']],
-        [tc.PH_SHAPES['DischargeAirFlowSensorShape'], SAMPLE['VAV-01-DischargeAirFlowSensor'], ['discharge']],
-        [tc.PH_SHAPES['ZoneAirTemperatureSensorShape'], SAMPLE['VAV-01-ZoneAirTemperatureSensor'], ['zone']],
-        [tc.PH_SHAPES['ZoneAirTemperatureOverrideCommandShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand'],
+        [tc.PH_SHAPES_V1['DamperPositionCommandShape'], SAMPLE['VAV-01-DamperPositionCommand'], ['damper']],
+        [tc.PH_SHAPES_V1['DischargeAirFlowSensorShape'], SAMPLE['VAV-01-DischargeAirFlowSensor'], ['discharge']],
+        [tc.PH_SHAPES_V1['ZoneAirTemperatureSensorShape'], SAMPLE['VAV-01-ZoneAirTemperatureSensor'], ['zone']],
+        [tc.PH_SHAPES_V1['ZoneAirTemperatureOverrideCommandShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand'],
          ['zone']],
-        [tc.PH_SHAPES['OccupancySensorShape'], SAMPLE['VAV-01-OccupancySensor'], ['occupied']],
-        [tc.PH_SHAPES['WindowOverrideCommandShape'], SAMPLE['VAV-01-WindowOverrideCommand'], ['cmd']],
-        [tc.PH_SHAPES['ZoneAirTemperatureOverrideSetpointShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideSetpoint'],
+        [tc.PH_SHAPES_V1['OccupancySensorShape'], SAMPLE['VAV-01-OccupancySensor'], ['occupied']],
+        [tc.PH_SHAPES_V1['WindowOverrideCommandShape'], SAMPLE['VAV-01-WindowOverrideCommand'], ['cmd']],
+        [tc.PH_SHAPES_V1['ZoneAirTemperatureOverrideSetpointShape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideSetpoint'],
          ['temp']],
-        [tc.PH_SHAPES['ZoneAirCO2SensorShape'], SAMPLE['VAV-01-ZoneAirCO2Sensor'], ['co2']],
-        [tc.PH_SHAPES['ZoneAirCO2SetpointShape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint'], ['co2', 'sp']],
+        [tc.PH_SHAPES_V1['ZoneAirCO2SensorShape'], SAMPLE['VAV-01-ZoneAirCO2Sensor'], ['co2']],
+        [tc.PH_SHAPES_V1['ZoneAirCO2SetpointShape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint'], ['co2', 'sp']],
     ])
-    def test_is_invalid(self, get_g36_data, get_core_shapes_v1, shape_name, target_node, remove_markers):
+    def test_is_invalid(self, get_haystack_g36_data, get_haystack_core_generated_shapes_v1, shape_name, target_node,
+                        remove_markers):
         # Set version for constants
         tc.set_default_versions(haystack_version=tc.V3_9_9)
 
         # -- Setup
-        data_graph = get_g36_data
-        shapes_graph = get_core_shapes_v1
+        data_graph = get_haystack_g36_data
+        shapes_graph = get_haystack_core_generated_shapes_v1
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
@@ -261,25 +263,25 @@ class TestGeneratedShapesV1:
         write_csv(results_query, output_file)
 
 
-class TestGeneratedShapesV2:
+class TestGeneratedSinglePointShapesV2:
     @pytest.mark.parametrize('shape_name, target_node', [
-        [tc.PH_SHAPES['damper-cmd-shape'], SAMPLE['VAV-01-DamperPositionCommand']],
+        [tc.PH_SHAPES_V2['damper-cmd-shape'], SAMPLE['VAV-01-DamperPositionCommand']],
 
         # This isn't necessary since it is now not a shape but a strict type
-        # [tc.PH_SHAPES['DischargeAirFlowSensorShape'], SAMPLE['VAV-01-DischargeAirFlowSensor']]
+        # [tc.PH_SHAPES_V2['DischargeAirFlowSensorShape'], SAMPLE['VAV-01-DischargeAirFlowSensor']]
 
-        [tc.PH_SHAPES['zone-air-temp-sensor-shape'], SAMPLE['VAV-01-ZoneAirTemperatureSensor']],
-        [tc.PH_SHAPES['zone-air-temp-override-cmd-shape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand']],
-        [tc.PH_SHAPES['occupancy-sensor-shape'], SAMPLE['VAV-01-OccupancySensor']],
-        [tc.PH_SHAPES['window-override-cmd-shape'], SAMPLE['VAV-01-WindowOverrideCommand']],
-        [tc.PH_SHAPES['zone-air-temp-override-sp-shape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideSetpoint']],
-        [tc.PH_SHAPES['zone-air-co2-sensor-shape'], SAMPLE['VAV-01-ZoneAirCO2Sensor']],
-        [tc.PH_SHAPES['zone-air-co2-sp-shape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint']],
+        [tc.PH_SHAPES_V2['zone-air-temp-sensor-shape'], SAMPLE['VAV-01-ZoneAirTemperatureSensor']],
+        [tc.PH_SHAPES_V2['zone-air-temp-override-cmd-shape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand']],
+        [tc.PH_SHAPES_V2['occupancy-sensor-shape'], SAMPLE['VAV-01-OccupancySensor']],
+        [tc.PH_SHAPES_V2['window-override-cmd-shape'], SAMPLE['VAV-01-WindowOverrideCommand']],
+        [tc.PH_SHAPES_V2['zone-air-temp-override-sp-shape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideSetpoint']],
+        [tc.PH_SHAPES_V2['zone-air-co2-sensor-shape'], SAMPLE['VAV-01-ZoneAirCO2Sensor']],
+        [tc.PH_SHAPES_V2['zone-air-co2-sp-shape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint']],
     ])
-    def test_is_valid(self, get_g36_data_v2, get_core_shapes_v2, shape_name, target_node):
+    def test_is_valid(self, get_haystack_g36_data_v2, get_haystack_core_generated_shapes_v2, shape_name, target_node):
         # -- Setup
-        data_graph = get_g36_data_v2
-        shapes_graph = get_core_shapes_v2
+        data_graph = get_haystack_g36_data_v2
+        shapes_graph = get_haystack_core_generated_shapes_v2
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
 
         # -- Setup
@@ -294,28 +296,28 @@ class TestGeneratedShapesV2:
         assert conforms
 
     @pytest.mark.parametrize('shape_name, target_node, remove_markers', [
-        [tc.PH_SHAPES['damper-cmd-shape'], SAMPLE['VAV-01-DamperPositionCommand'], ['damper']],
+        [tc.PH_SHAPES_V2['damper-cmd-shape'], SAMPLE['VAV-01-DamperPositionCommand'], ['damper']],
 
         # This isn't necessary since it is now not a shape but a strict type
-        # [tc.PH_SHAPES['DischargeAirFlowSensorShape'], SAMPLE['VAV-01-DischargeAirFlowSensor']]
+        # [tc.PH_SHAPES_V2['DischargeAirFlowSensorShape'], SAMPLE['VAV-01-DischargeAirFlowSensor']]
 
-        [tc.PH_SHAPES['zone-air-temp-sensor-shape'], SAMPLE['VAV-01-ZoneAirTemperatureSensor'], ['zone']],
-        [tc.PH_SHAPES['zone-air-temp-override-cmd-shape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand'],
+        [tc.PH_SHAPES_V2['zone-air-temp-sensor-shape'], SAMPLE['VAV-01-ZoneAirTemperatureSensor'], ['zone']],
+        [tc.PH_SHAPES_V2['zone-air-temp-override-cmd-shape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand'],
          ['zone']],
-        [tc.PH_SHAPES['occupancy-sensor-shape'], SAMPLE['VAV-01-OccupancySensor'], ['occupied']],
-        [tc.PH_SHAPES['window-override-cmd-shape'], SAMPLE['VAV-01-WindowOverrideCommand'], ['cmd']],
-        [tc.PH_SHAPES['zone-air-temp-override-sp-shape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideSetpoint'],
+        [tc.PH_SHAPES_V2['occupancy-sensor-shape'], SAMPLE['VAV-01-OccupancySensor'], ['occupied']],
+        [tc.PH_SHAPES_V2['window-override-cmd-shape'], SAMPLE['VAV-01-WindowOverrideCommand'], ['cmd']],
+        [tc.PH_SHAPES_V2['zone-air-temp-override-sp-shape'], SAMPLE['VAV-01-ZoneAirTemperatureOverrideSetpoint'],
          ['zone']],
-        [tc.PH_SHAPES['zone-air-co2-sensor-shape'], SAMPLE['VAV-01-ZoneAirCO2Sensor'], ['co2']],
-        [tc.PH_SHAPES['zone-air-co2-sp-shape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint'], ['co2']],
+        [tc.PH_SHAPES_V2['zone-air-co2-sensor-shape'], SAMPLE['VAV-01-ZoneAirCO2Sensor'], ['co2']],
+        [tc.PH_SHAPES_V2['zone-air-co2-sp-shape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint'], ['co2']],
     ])
-    def test_is_invalid(self, get_g36_data_v2, get_core_shapes_v2, shape_name, target_node, remove_markers):
+    def test_is_invalid(self, get_haystack_g36_data_v2, get_haystack_core_generated_shapes_v2, shape_name, target_node, remove_markers):
         # Set version for constants
         tc.set_default_versions(haystack_version=tc.V3_9_10)
 
         # -- Setup
-        data_graph = get_g36_data_v2
-        shapes_graph = get_core_shapes_v2
+        data_graph = get_haystack_g36_data_v2
+        shapes_graph = get_haystack_core_generated_shapes_v2
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
 
@@ -348,14 +350,25 @@ class TestGeneratedShapesV2:
         write_csv(results_query, output_file)
 
 
-class TestGeneratedCoolingOnlyVAV_Shape_001:
+class TestGeneratedEquipmentPointShapesV2:
     @pytest.mark.parametrize('shape_name, target_node', [
-        [tc.PH_SHAPES['CoolingOnlyVAV-Shape-001'], SAMPLE['VAV-01']]
+        # VAV-01 should be valid against the base and cooling only
+        [tc.PH_SHAPES_V2['G36-Base-VAV-Shape'], SAMPLE['VAV-01']],
+        [tc.PH_SHAPES_V2['G36-CoolingOnly-VAV-Shape'], SAMPLE['VAV-01']],
+
+        # VAV-02 should be valid against the base and hot water reheat
+        [tc.PH_SHAPES_V2['G36-Base-VAV-Shape'], SAMPLE['VAV-02']],
+        [tc.PH_SHAPES_V2['G36-HotWaterReheat-VAV-Shape'], SAMPLE['VAV-02']],
+
+        # VAV-03 should be valid against the base, hw reheat, and hw reheat w/fdbk
+        [tc.PH_SHAPES_V2['G36-Base-VAV-Shape'], SAMPLE['VAV-03']],
+        [tc.PH_SHAPES_V2['G36-HotWaterReheat-VAV-Shape'], SAMPLE['VAV-03']],
+        [tc.PH_SHAPES_V2['HotWaterReheatFdbk-VAV-Shape'], SAMPLE['VAV-03']],
     ])
-    def test_is_valid(self, get_g36_data_v2, get_core_shapes_v2, shape_name, target_node):
+    def test_is_valid(self, get_haystack_g36_data_v2, get_haystack_core_generated_shapes_v2, shape_name, target_node):
         # -- Setup
-        data_graph = get_g36_data_v2
-        shapes_graph = get_core_shapes_v2
+        data_graph = get_haystack_g36_data_v2
+        shapes_graph = get_haystack_core_generated_shapes_v2
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
@@ -367,35 +380,47 @@ class TestGeneratedCoolingOnlyVAV_Shape_001:
         result = validate(data_graph, shacl_graph=shapes_graph, ont_graph=ont_graph)
         conforms, results_graph, results = result
 
+        str_name = str(shape_name)
+        str_name = str_name.split('#')[1]
+        target_name = str(target_node)
+        target_name = target_name.split(str(SAMPLE))[1]
+
         # -- Serialize results
-        f = 'TestGeneratedCoolingOnlyVAV_Shape_001_' + '_valid.ttl'
+        f = f"Mixin_{str_name}_{target_name}" + '_valid.ttl'
         output_file = os.path.join(validate_dir, f)
         results_graph.serialize(output_file, format='turtle')
 
         # -- Assert conforms
         assert conforms
 
-    @pytest.mark.parametrize('shape_name, target_node, remove_from_node, remove_markers, severity', [
+    @pytest.mark.parametrize('shape_name, target_node, remove_from_node, remove_markers, num_runs', [
         [
-            tc.PH_SHAPES['CoolingOnlyVAV-Shape-001'], SAMPLE['VAV-01'],
-            SAMPLE['VAV-01-DamperPositionCommand'],
-            ['damper'], SH.Violation
+            tc.PH_SHAPES_V2['G36-CoolingOnly-VAV-Shape'], SAMPLE['VAV-01'],
+            SAMPLE['VAV-01-DamperPositionCommand'], ['damper'], 2
         ],
         [
-            tc.PH_SHAPES['CoolingOnlyVAV-Shape-001'], SAMPLE['VAV-01'],
-            SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand'],
-            ['zone'], SH.Warning
+            tc.PH_SHAPES_V2['G36-CoolingOnly-VAV-Shape'], SAMPLE['VAV-01'],
+            SAMPLE['VAV-01-ZoneAirTemperatureOverrideCommand'], ['zone'], 2
+        ],
+        [
+            tc.PH_SHAPES_V2['G36-CoolingOnly-VAV-Shape'], SAMPLE['VAV-02'],
+            SAMPLE['VAV-02-ZoneAirTemperatureOverrideCommand'], ['zone'], 2
+        ],
+        # Removes a tag on a point required by G36-Base-VAV-Shape (2 hops)
+        [
+            tc.PH_SHAPES_V2['HotWaterReheatFdbk-VAV-Shape'], SAMPLE['VAV-03'],
+            SAMPLE['VAV-03-ZoneAirTemperatureOverrideCommand'], ['zone'], 3
         ]
     ])
-    def test_is_invalid(self, get_g36_data_v2, get_core_shapes_v2, shape_name, target_node, remove_from_node,
-                        remove_markers,
-                        severity):
+    def test_is_invalid(self, get_haystack_g36_data_v2, get_haystack_core_generated_shapes_v2, shape_name, target_node,
+                        remove_from_node,
+                        remove_markers, num_runs):
         # Set version for constants
         tc.set_default_versions(haystack_version=tc.V3_9_10)
 
         # -- Setup
-        data_graph = get_g36_data_v2
-        shapes_graph = get_core_shapes_v2
+        data_graph = get_haystack_g36_data_v2
+        shapes_graph = get_haystack_core_generated_shapes_v2
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
@@ -413,19 +438,29 @@ class TestGeneratedCoolingOnlyVAV_Shape_001:
         conforms, results_graph, results = result
 
         # -- Serialize results
-        f = 'TestGeneratedCoolingOnlyVAV_Shape_001_' + '_'.join(remove_markers) + '_remove.ttl'
+        f = 'TestMixins_' + '_'.join(remove_markers) + '_remove.ttl'
         output_file = os.path.join(validate_dir, f)
         results_graph.serialize(output_file, format='turtle')
 
         # -- Assert does not conform
         assert not conforms
 
-        results_query = results_graph.query(get_parent_node_validation_query())
+        # Grab easy to read info
+        str_name = str(shape_name)
+        str_name = str_name.split('#')[1]
+        target_name = str(target_node)
+        target_name = target_name.split(str(SAMPLE))[1]
 
-        violation_level = results_graph.query(get_severity_query())
+        # Here we iterate through to add target nodes
+        # based on
+        for run in range(num_runs - 1):
+            print(f"Iteration {run} on {str_name}")
+            conforms, results_graph, results = run_another(results_graph, shapes_graph, data_graph, ont_graph)
 
-        assert len(list(violation_level)) == 1
-        assert (target_node, severity) in violation_level
+        # -- Serialize results
+        f = f"Mixin_{str_name}_{target_name}" + '_'.join(remove_markers) + '_remove.ttl'
+        output_file = os.path.join(validate_dir, f)
+        results_graph.serialize(output_file, format='turtle')
 
-        # Write output to CSV for human readability
-        write_csv(results_query, output_file)
+        # -- Assert does not conform
+        assert not conforms

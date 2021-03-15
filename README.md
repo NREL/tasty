@@ -3,31 +3,51 @@
 Tasty was created to simplify the generation and validation of metadata related to buildings.
 
 # Getting started
-Once poetry is installed
-
-- Build the core shapes:
+Clone the repo and install via poetry:
 ```bash
-# v1 = 3.9.9, v2 = 3.9.10
-poetry run python tasty/generate_shapes.py v1
-poetry run python tasty/generate_shapes.py v2
+# Clone repo
+git clone https://github.com/nrel/tasty.git
+
+# install the package
+cd tasty
+poetry install
+
+# Test that it works, you should see a message describing its usage
+poetry run tasty
+```
+## Generate shapes
+- The core shape templates (`tasty/source_shapes/*`) are used to generate the SHACL shape files. Run the following to regenerate the SHACL shape files locally.
+```bash
+poetry run tasty generate-shapes
+```
+- You should now be able to run the tests, make sure they are all passing: `poetry run pytest`
+
+## Generate input file to use for validation
+You can use tasty to help you validate instance data against specific shapes. To do this, you must first generate an input file. Each row in an input file corresponds to an entity in your instance data. An input file will contain the following column headers:
+- `entity-id`: A namespaced id for entities in a data file you would like to validate.
+- `entity-name`: Optionally a description for the entity, helpful for reading.
+
+Additional column headers will exist for each of the shapes you want to use to validate your data. The easiest way to generate an input file is to also merge in data from an existing RDF graph (`-dg` option). Try this with one of the test files (an `input-file.csv` will appear in your root directory):
+```bash
+poetry run tasty generate-input -dg tests/files/data/haystack_g36_data_3_9_10.ttl
+```
+- Add the `-c` flag to only add composite shapes to your input file. Composite meaning shapes having other shape, i.e. a shape for a specific vav box configuration, etc.
+
+## Validate instance data
+Using the generated `input-file.csv`, mark an `X` in the cells according to the shape you want the entity to validate against. Using the example generated from above, the following should be true:
+
+| Entity | phShapes2:G36-Base-VAV-Shape | phShapes2:G36-CoolingOnly-VAV-Shape | phShapes2:G36-HotWaterReheat-VAV-Shape | phShapes2:HotWaterReheatFdbk-VAV-Shape |
+| --- | --- | --- | --- | --- |
+| VAV-01 | Valid | Valid | Invalid | Invalid | Invalid |
+| VAV-02 | Valid | Valid | Valid | Valid | Invalid |
+| VAV-03 | Valid | Valid | Valid | Valid | Valid |
+
+Save the file. Each entity can now be validated against the indicated shape. To validate the file, simply run:
+```bash
+poetry run tasty validate -dg tests/files/data/haystack_g36_data_3_9_10.ttl
 ```
 
-- Create a simple csv file to input your data
-```bash
-poetry run python tasty/generate_input_file.py
-
-# optionally merge in existing data
-poetry run python tasty/generate_input_file.py path/to/haystack-data.rdf
-```
-![image](https://user-images.githubusercontent.com/28991233/110189915-dee26700-7dee-11eb-8e56-2a7c2c38b508.png)
-
-- For each entity, mark an `X` in the cell according to the shape you want the entity to validate against. Save the file.
-- Validate the file
-```bash
-poetry run python tasty/validate.py path/to/haystack-data.rdf
-```
-![image](https://user-images.githubusercontent.com/28991233/110189981-1ea94e80-7def-11eb-890c-629b913e79bb.png)
-
+Outputs will be printed to the terminal, but you can also find a validation report as a ttl file in your root. Should look something like `results-haystack_g36_data_3_9_10.ttl`.
 
 ## Python
 There are also some simple classes that can take advantage of the types built-in to Brick / Haystack.
