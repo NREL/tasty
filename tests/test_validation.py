@@ -15,10 +15,10 @@ EXAMPLE = Namespace('https://project-haystack.org/datashapes#')
 
 class TestOccupancyModeBinary:
 
-    def test_is_valid(self, get_occupancy_mode_data, get_occupancy_mode_shapes):
+    def test_is_valid(self, get_haystack_occupancy_mode_data, get_haystack_occupancy_mode_shapes):
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
+        data_graph = get_haystack_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
 
         # -- Setup - we target AHU-01-Point-02
@@ -35,13 +35,13 @@ class TestOccupancyModeBinary:
         ['sp'],
         ['occupied', 'sp']
     ])
-    def test_is_invalid(self, get_occupancy_mode_data, get_occupancy_mode_shapes, remove_markers):
+    def test_is_invalid(self, get_haystack_occupancy_mode_data, get_haystack_occupancy_mode_shapes, remove_markers):
         # Set version for constants
         tc.set_default_versions(haystack_version=tc.V3_9_9)
 
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
+        data_graph = get_haystack_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
@@ -76,10 +76,10 @@ class TestOccupancyModeBinary:
 
 class TestOccupancyModeStandby:
 
-    def test_is_valid(self, get_occupancy_mode_data, get_occupancy_mode_shapes):
+    def test_is_valid(self, get_haystack_occupancy_mode_data, get_haystack_occupancy_mode_shapes):
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
+        data_graph = get_haystack_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
 
         # -- Setup - we target AHU-01-Point-01
@@ -95,13 +95,13 @@ class TestOccupancyModeStandby:
         ['occ'],
         ['occ', 'sp']
     ])
-    def test_is_invalid(self, get_occupancy_mode_data, get_occupancy_mode_shapes, remove_markers):
+    def test_is_invalid(self, get_haystack_occupancy_mode_data, get_haystack_occupancy_mode_shapes, remove_markers):
         # Set version for constants
         tc.set_default_versions(haystack_version=tc.V3_9_9)
 
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
+        data_graph = get_haystack_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
@@ -135,10 +135,10 @@ class TestOccupancyModeStandby:
 
 
 class TestAhuOccupancyShape:
-    def test_is_valid(self, get_occupancy_mode_data, get_occupancy_mode_shapes):
+    def test_is_valid(self, get_haystack_occupancy_mode_data, get_haystack_occupancy_mode_shapes):
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
+        data_graph = get_haystack_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
@@ -154,10 +154,10 @@ class TestAhuOccupancyShape:
         assert conforms
 
     # Remove 'point' tag from AHU-01-Point-01
-    def test_invalid_child_point_shape(self, get_occupancy_mode_data, get_occupancy_mode_shapes):
+    def test_invalid_child_point_shape(self, get_haystack_occupancy_mode_data, get_haystack_occupancy_mode_shapes):
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
+        data_graph = get_haystack_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
@@ -190,10 +190,10 @@ class TestAhuOccupancyShape:
 
     # Remove 'point' tag from AHU-01-Point-01
     # Remove 'sp' tag from AHU-01-Point-02
-    def test_multiple_invalid_child_point_shapes(self, get_occupancy_mode_data, get_occupancy_mode_shapes):
+    def test_multiple_invalid_child_point_shapes(self, get_haystack_occupancy_mode_data, get_haystack_occupancy_mode_shapes):
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
+        data_graph = get_haystack_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
@@ -234,10 +234,10 @@ class TestAhuOccupancyShape:
         write_csv(results_query, output_file)
 
     # Add point (AHU-01-Point-03) conforming to the OccupancyModeBinary shape
-    def test_multiple_valid_child_point_shapes(self, get_occupancy_mode_data, get_occupancy_mode_shapes):
+    def test_multiple_valid_child_point_shapes(self, get_haystack_occupancy_mode_data, get_haystack_occupancy_mode_shapes):
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
+        data_graph = get_haystack_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
@@ -274,10 +274,10 @@ class TestAhuOccupancyShape:
         write_csv(results_query, output_file)
 
     # Add point (AHU-01-Point-03) conforming to the OccupancyModeBinary shape
-    def test_disjoint_shapes_requirement(self, get_occupancy_mode_data, get_occupancy_mode_shapes):
+    def test_disjoint_shapes_requirement(self, get_haystack_occupancy_mode_data, get_haystack_occupancy_mode_shapes):
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
+        data_graph = get_haystack_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
