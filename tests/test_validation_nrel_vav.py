@@ -4,7 +4,6 @@ import pytest
 from rdflib import Namespace, SH
 from pyshacl import validate
 
-import tasty.graphs
 from tasty import constants as tc
 from tasty import graphs as tg
 from tests.conftest import get_single_node_validation_query, assert_remove_markers, write_csv, \
