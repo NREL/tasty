@@ -3,11 +3,13 @@ import uuid
 import csv
 
 import pytest
+from rdflib import SH
+from pyshacl import validate
 
 import tasty.templates as tt
 import tasty.graphs as tg
 import tasty.constants as tc
-from tasty.generated import generated_dir
+from tasty.generated_shapes import generated_dir
 
 
 def populate_point_group_template_from_file(file_path):
@@ -144,57 +146,85 @@ def point_group_template_bad_template_type():
 
 
 @pytest.fixture
-def get_occupancy_mode_data():
+def get_haystack_occupancy_mode_data():
+    """
+    A very simple example of an AHU with two occupancy point types.
+    :return:
+    """
     g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_9)
-    f = os.path.join(os.path.dirname(__file__), 'files/data/occupancy_mode_data.ttl')
+    f = os.path.join(os.path.dirname(__file__), 'files/data/haystack_occupancy_mode_data.ttl')
     g.parse(f, format='turtle')
     return g
 
 
 @pytest.fixture
-def get_occupancy_mode_shapes():
+def get_haystack_occupancy_mode_shapes():
+    """
+    these shapes were generated_shapes by hand. They are based on NREL's occupancy
+    mode binary and occupancy mode status points, and are used as a guide
+    for ensuring that generated_shapes shapes match our original expectations.
+    removing them in the future might make sense, but they are a litmus test.
+    :return:
+    """
     g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_9)
-    f = os.path.join(os.path.dirname(__file__), 'files/shapes/occupancy_mode_shapes.ttl')
+    f = os.path.join(os.path.dirname(__file__), 'files/shapes/haystack_occupancy_mode_shapes.ttl')
     g.parse(f, format='turtle')
     return g
 
 
 @pytest.fixture
-def get_g36_data():
+def get_haystack_g36_data():
     g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_9)
-    f = os.path.join(os.path.dirname(__file__), 'files/data/g36_data.ttl')
+    f = os.path.join(os.path.dirname(__file__), 'files/data/haystack_g36_data.ttl')
     g.parse(f, format='turtle')
     return g
 
 
 @pytest.fixture
-def get_g36_data_v2():
+def get_haystack_g36_data_v2():
     g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
-    f = os.path.join(os.path.dirname(__file__), 'files/data/g36_data_3_9_10.ttl')
+    f = os.path.join(os.path.dirname(__file__), 'files/data/haystack_g36_data_3_9_10.ttl')
     g.parse(f, format='turtle')
     return g
 
 
 @pytest.fixture
-def get_g36_shapes():
+def get_haystack_g36_shapes():
+    """
+    these shapes were generated_shapes by hand and are used as a guide
+    for ensuring that generated_shapes shapes match our original expectations.
+    removing them in the future might make sense, but they are a litmus test.
+    :return:
+    """
     g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_9)
-    f = os.path.join(os.path.dirname(__file__), 'files/shapes/g36_shapes.ttl')
+    f = os.path.join(os.path.dirname(__file__), 'files/shapes/haystack_g36_shapes.ttl')
     g.parse(f, format='turtle')
     return g
 
 
 @pytest.fixture
-def get_core_shapes_v1():
-    g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
-    f = os.path.join(generated_dir, 'core_v1.ttl')
+def get_haystack_core_generated_shapes_v1():
+    """
+    This version uses the haystack 3.9.9 implementation, i.e. before the exploded
+    point types. Also it does not use any of the mixin type functionality, it simply
+    implements the cooling only vav box.
+    :return:
+    """
+    g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_9)
+    f = os.path.join(generated_dir, 'haystack_core_v1.ttl')
     g.parse(f, format='turtle')
     return g
 
 
 @pytest.fixture
-def get_core_shapes_v2():
+def get_haystack_core_generated_shapes_v2():
+    """
+    This version uses the haystack 3.9.10 implementation, i.e. with exploded point
+    types.
+    :return:
+    """
     g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
-    f = os.path.join(generated_dir, 'core_v2.ttl')
+    f = os.path.join(generated_dir, 'haystack_core_v2.ttl')
     g.parse(f, format='turtle')
     return g
 
@@ -259,6 +289,17 @@ def get_severity_query():
     return q
 
 
+def get_source_shape_query():
+    q = ''' SELECT ?focus ?rm WHERE {
+        ?vr a sh:ValidationReport .
+        ?vr sh:result ?r .
+        ?r sh:focusNode ?focus .
+        ?r sh:resultMessage ?rm .
+        }
+    '''
+    return q
+
+
 def assert_remove_markers(remove_markers, results_query, point, ont_graph=tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)):
     print(f"Remove: {remove_markers}")
     namespaced_terms = []
@@ -283,3 +324,23 @@ def write_csv(results_query, output_file):
         writer = csv.writer(f)
         for row in results_query:
             writer.writerow(row)
+
+
+def run_another(results_graph, shapes_graph, data_graph, ont_graph):
+    # This adds a new triple to the shapes graph of the form:
+    #  (mixin-shape, sh:targetNode, node)
+    # This is relevant where we have mixins, since when a validation rule
+    # configured as (new-shape, sh:node, mixin-shape) is triggered,
+    # it doesn't produce much helpful output.
+    # It crudely relies on a resultMessage like:
+    #    sh:resultMessage "Value does not conform to Shape phShapes:G36-Base-VAV-Shape"
+    shapes_and_focus_nodes = results_graph.query(get_source_shape_query())
+    for source_shape_failure in shapes_and_focus_nodes:
+        fn, rm = source_shape_failure
+        rm = str(rm)
+        source_shape = rm.split(":")[1]
+        shapes_graph.add((tc.PH_SHAPES_DEFAULT[source_shape], SH.targetNode, fn))
+
+    result = validate(data_graph, shacl_graph=shapes_graph, ont_graph=ont_graph)
+    return result
+    # conforms, results_graph, results = result
