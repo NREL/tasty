@@ -50,7 +50,7 @@ def main():
 
     # Generate shapes command
     parser_generate_shapes = subparsers.add_parser('generate-shapes',
-                                                   description='Command for generating SHACL shape files')
+                                                   description='Command for generating SHACL shape files. Attempt to generate a shapes file for each file in tasty/source_shapes. The resulting shape files are placed in tasty/generated_shapes.')
 
     parser_generate_shapes.set_defaults(func=generate_shapes)
 

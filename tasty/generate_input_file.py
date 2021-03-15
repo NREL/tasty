@@ -29,8 +29,11 @@ def generate_input_file(shapes_file, data_file, output_file, composite=True):
         }
         """
         query_response = g.query(q)
-    else:
-        print(f"Unable to find data file: {data_file}")
+    elif data_file is None:
+        print(f"No input data file provided. Proceeding fine.")
+        valid_file = False
+    elif not os.path.isfile(data_file):
+        print(f"Unable to find data file: {data_file}. Proceeding fine.")
         valid_file = False
 
     if not output_file:
