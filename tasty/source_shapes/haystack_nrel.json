@@ -133,13 +133,18 @@
     },
     {
       "name": "AhuOccupancyShape",
-      "requires": [
-        {
-          "path": "equipRef",
-          "path-type": "inverse",
-          "shapes": ["OccupancyModeStandbyShape", "OccupancyModeBinaryShape"]
-        }
-      ]
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "OccupancyModeStandbyShape",
+              "OccupancyModeBinaryShape"
+            ]
+          }
+        ]
+      }
     },
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
