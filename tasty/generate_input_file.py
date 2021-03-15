@@ -1,5 +1,4 @@
 import os
-import sys
 
 from rdflib import Graph
 from rdflib.util import guess_format
@@ -12,23 +11,26 @@ def generate_input_file(shapes_file, data_file, output_file, composite=True):
         data = json.loads(f.read())
 
     headers = ['entity-id', 'entity-name']
+    prefix = data['prefix']
     for shape in data['shapes']:
         if composite:
             if 'shape-mixins' in shape or 'predicates' in shape:
-                headers.append(shape['name'])
+                headers.append(prefix + ':' + shape['name'])
         else:
-            headers.append(shape['name'])
+            headers.append(prefix + ':' + shape['name'])
 
     valid_file = True
     if data_file is not None and os.path.isfile(data_file):
         g = Graph()
-        g.parse(sys.argv[1], format=guess_format(sys.argv[1]))
-        q = """SELECT ?n ?label WHERE {
-            ?n rdfs:label ?label
+        g.parse(data_file, format=guess_format(data_file))
+        q = """SELECT ?s ?label WHERE {
+            ?s a ?o .
+            OPTIONAL { ?s rdfs:label ?label }
         }
         """
         query_response = g.query(q)
     else:
+        print(f"Unable to find data file: {data_file}")
         valid_file = False
 
     if not output_file:

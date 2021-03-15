@@ -24,7 +24,7 @@ def load_sources():
 
 
 def write_to_output(g, name):
-    output = os.path.join(os.path.dirname(__file__), 'generated')
+    output = os.path.join(os.path.dirname(__file__), 'generated_shapes')
     if not os.path.isdir(output):
         os.mkdir(output)
     g.serialize(destination=os.path.join(output, name), format='turtle')
@@ -109,7 +109,7 @@ def add_shapes_and_types(g: Graph, ontology: Graph, namespaced_shape: URIRef, na
     if each_path.get('shapes') is not None:
         for each_shape in each_path['shapes']:
             prop_bn = add_qvs_property(g, each_path, namespaced_shape, namespaced_path)
-            g.add((prop_bn, SH.qualifiedValueShape, tc.PH_SHAPES[each_shape]))
+            g.add((prop_bn, SH.qualifiedValueShape, tc.PH_SHAPES_DEFAULT[each_shape]))
             if optional:
                 # For optionals, we set the severity to warning
                 g.add((prop_bn, SH.severity, SH.Warning))
@@ -218,17 +218,19 @@ def set_version_and_load(file_path):
     ontology = None
     bn = os.path.basename(file_path)
     no_ext = os.path.splitext(bn)[0]
-    if 'haystack' in no_ext.lower():
-        if no_ext.endswith('v1'):
-            version = tc.V3_9_9
-        else:
-            version = tc.V3_9_10
-        tc.set_default_versions(haystack_version=version)
-        g = tg.get_versioned_graph(tc.HAYSTACK, version)
-        ontology = tg.load_ontology(tc.HAYSTACK, version)
-    elif 'brick' in no_ext:
+    if 'brick' in no_ext.lower():
         g = tg.get_versioned_graph(tc.BRICK, tc.V1_1)
         ontology = tg.load_ontology(tc.HAYSTACK, tc.V1_1)
+    else:
+        if no_ext.endswith('v1'):
+            version = tc.V3_9_9
+            ph_shapes_version = '1'
+        else:
+            version = tc.V3_9_10
+            ph_shapes_version = '2'
+        tc.set_default_versions(haystack_version=version, ph_shapes_version=ph_shapes_version)
+        g = tg.get_versioned_graph(tc.HAYSTACK, version)
+        ontology = tg.load_ontology(tc.HAYSTACK, version)
     return g, ontology
 
 
@@ -279,28 +281,3 @@ def generate_shapes_given_source_template(shape_template: dict, g: Graph, ontolo
                 have_mixins.pop(i)
 
     write_to_output(g, f"{file_name}.ttl")
-
-
-#
-# assert len(sys.argv) == 2, "Specify v1, v2, or mixins"
-# assert sys.argv[1] in ['v1', 'v2', 'mixins'], "Specify v1, v2, or mixins"
-
-# # Load in the template files
-# data = load_sources()
-#
-# # get a blank versioned graph
-# version = sys.argv[1]
-# if version == 'v1':
-#     tc.set_default_versions(haystack_version=tc.V3_9_9)
-#     g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_9)
-#     # load in the ontology
-#     ontology = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
-#
-# # for either v2 or mixins, we use the newest Haystack 3.9.10
-# else:
-#     g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
-#     # load in the ontology
-#     ontology = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
-
-# Pull out the shape_templates info
-# shape_templates = data[f"core_{version}.json"]
