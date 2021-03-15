@@ -228,6 +228,24 @@ def get_haystack_core_generated_shapes_v2():
     g.parse(f, format='turtle')
     return g
 
+@pytest.fixture
+def get_haystack_nrel_generated_shapes():
+    """
+    This version uses the haystack 3.9.10 implementation, i.e. with exploded point
+    types.
+    :return:
+    """
+    g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
+    f = os.path.join(generated_dir, 'haystack_nrel.ttl')
+    g.parse(f, format='turtle')
+    return g
+
+@pytest.fixture
+def get_haystack_nrel_data():
+    n = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_9)
+    f = os.path.join(os.path.dirname(__file__), 'files/data/haystack_nrel_vav_cooling_only_data.ttl')
+    n.parse(f, format='turtle')
+    return n
 
 def get_single_node_validation_query():
     # -- This query returns us three values that looks like:
