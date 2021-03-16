@@ -15,11 +15,6 @@ repos:
       - id: requirements-txt-fixer
       - id: mixed-line-ending
         args: ['--fix=auto']
-  - repo: https://github.com/psf/black
-    rev: 19.10b0 # Replace by any tag/version: https://github.com/psf/black/tags
-    hooks:
-      - id: black
-        language_version: python3 # Should be a command that runs python3.6+
   - repo: https://github.com/pre-commit/mirrors-autopep8
     rev: v1.4.4
     hooks:
