@@ -1,0 +1,121 @@
+{
+  "prefix": "phShapes",
+  "namespace": "https://project-haystack.org/datashapes/core#",
+  "shapes": [
+    {
+      "name": "damper-cmd-shape",
+      "types": ["point"],
+      "tags": ["damper", "cmd"]
+    },
+    {
+      "name": "zone-air-temp-sensor-shape",
+      "types": ["air-temp-sensor"],
+      "tags": ["zone"]
+    },
+    {
+      "name": "zone-air-temp-override-cmd-shape",
+      "types": ["point"],
+      "tags": ["zone", "air", "temp", "cmd"],
+      "tags-custom": ["override"]
+    },
+    {
+      "name": "occupancy-sensor-shape",
+      "types": ["point"],
+      "tags": ["occupied", "sensor"]
+    },
+    {
+      "name": "window-override-cmd-shape",
+      "types": ["point"],
+      "tags": ["cmd"],
+      "tags-custom": ["window", "override"]
+    },
+    {
+      "name": "zone-air-temp-override-sp-shape",
+      "types": ["air-temp-sp"],
+      "tags": ["zone"],
+      "tags-custom": ["override"]
+    },
+    {
+      "name": "zone-air-co2-sensor-shape",
+      "types": ["point"],
+      "tags": ["zone", "air", "co2", "sensor"]
+    },
+    {
+      "name": "zone-air-co2-sp-shape",
+      "types": ["point"],
+      "tags": ["zone", "air", "co2", "sp"]
+    },
+    {
+      "name": "hot-water-valve-cmd-shape",
+      "types": ["point"],
+      "tags": ["hot", "water", "valve", "cmd"]
+    },
+    {
+      "name": "hot-water-valve-sensor-shape",
+      "types": ["point"],
+      "tags": ["hot", "water", "valve", "sensor"]
+    },
+    {
+      "name": "G36-Base-VAV-Shape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "types": ["discharge-air-flow-sensor"],
+            "shapes": [
+              "damper-cmd-shape",
+              "zone-air-temp-sensor-shape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "zone-air-temp-override-cmd-shape",
+              "occupancy-sensor-shape",
+              "window-override-cmd-shape",
+              "zone-air-temp-override-sp-shape",
+              "zone-air-co2-sensor-shape",
+              "zone-air-co2-sp-shape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "G36-HotWaterReheat-VAV-Shape",
+      "shape-mixins": ["G36-Base-VAV-Shape"],
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "types": ["discharge-air-temp-sensor"],
+            "shapes": ["hot-water-valve-cmd-shape"]
+          }
+        ]
+      }
+    },
+    {
+      "name": "G36-CoolingOnly-VAV-Shape",
+      "shape-mixins": ["G36-Base-VAV-Shape"]
+    },
+    {
+      "name": "HotWaterReheatFdbk-VAV-Shape",
+      "shape-mixins": ["G36-HotWaterReheat-VAV-Shape"],
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": ["hot-water-valve-sensor-shape"]
+          }
+        ]
+      }
+
+    }
+  ]
+}

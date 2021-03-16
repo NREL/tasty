@@ -1,7 +1,7 @@
 import os
 
 import pytest
-from rdflib import Namespace, Literal
+from rdflib import Namespace, Literal, RDF, SH
 from pyshacl import validate
 
 from tasty import constants as tc
@@ -10,19 +10,19 @@ from tests.conftest import get_single_node_validation_query, assert_remove_marke
     get_parent_node_validation_query, get_min_count_validation_query
 
 SAMPLE = Namespace('urn:sample/')
-EXAMPLE = Namespace('https://project-haystack.org/datashapes#')
+EXAMPLE = Namespace('urn:example-shapes#')
 
 
 class TestOccupancyModeBinary:
 
-    def test_is_valid(self, get_occupancy_mode_data, get_occupancy_mode_shapes):
+    def test_is_valid(self, get_haystack_nrel_occupancy_mode_data, get_haystack_occupancy_mode_shapes):
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
-        ont_graph = tg.load_ontology('Haystack', '3.9.9')
+        data_graph = get_haystack_nrel_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
+        ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
 
         # -- Setup - we target AHU-01-Point-02
-        shapes_graph.add((EXAMPLE.OccupancyModeBinary, tc.SH.targetNode, SAMPLE['AHU-01-Point-02']))
+        shapes_graph.add((EXAMPLE.OccupancyModeBinary, SH.targetNode, SAMPLE['AHU-01-Point-02']))
 
         result = validate(data_graph, shacl_graph=shapes_graph, ont_graph=ont_graph)
         conforms = result[0]
@@ -35,18 +35,21 @@ class TestOccupancyModeBinary:
         ['sp'],
         ['occupied', 'sp']
     ])
-    def test_is_invalid(self, get_occupancy_mode_data, get_occupancy_mode_shapes, remove_markers):
+    def test_is_invalid(self, get_haystack_nrel_occupancy_mode_data, get_haystack_occupancy_mode_shapes, remove_markers):
+        # Set version for constants
+        tc.set_default_versions(haystack_version=tc.V3_9_9)
+
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
-        ont_graph = tg.load_ontology('Haystack', '3.9.9')
+        data_graph = get_haystack_nrel_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
+        ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
             os.mkdir(validate_dir)
 
         # -- Setup - we target AHU-01-Point-02
         point = SAMPLE['AHU-01-Point-02']
-        shapes_graph.add((EXAMPLE.OccupancyModeBinary, tc.SH.targetNode, point))
+        shapes_graph.add((EXAMPLE.OccupancyModeBinary, SH.targetNode, point))
 
         # -- Remove markers and run validation
         for marker in remove_markers:
@@ -73,14 +76,14 @@ class TestOccupancyModeBinary:
 
 class TestOccupancyModeStandby:
 
-    def test_is_valid(self, get_occupancy_mode_data, get_occupancy_mode_shapes):
+    def test_is_valid(self, get_haystack_nrel_occupancy_mode_data, get_haystack_occupancy_mode_shapes):
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
-        ont_graph = tg.load_ontology('Haystack', '3.9.9')
+        data_graph = get_haystack_nrel_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
+        ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
 
         # -- Setup - we target AHU-01-Point-01
-        shapes_graph.add((EXAMPLE.OccupancyModeStandby, tc.SH.targetNode, SAMPLE['AHU-01-Point-01']))
+        shapes_graph.add((EXAMPLE.OccupancyModeStandby, SH.targetNode, SAMPLE['AHU-01-Point-01']))
 
         result = validate(data_graph, shacl_graph=shapes_graph, ont_graph=ont_graph)
         conforms = result[0]
@@ -92,18 +95,21 @@ class TestOccupancyModeStandby:
         ['occ'],
         ['occ', 'sp']
     ])
-    def test_is_invalid(self, get_occupancy_mode_data, get_occupancy_mode_shapes, remove_markers):
+    def test_is_invalid(self, get_haystack_nrel_occupancy_mode_data, get_haystack_occupancy_mode_shapes, remove_markers):
+        # Set version for constants
+        tc.set_default_versions(haystack_version=tc.V3_9_9)
+
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
-        ont_graph = tg.load_ontology('Haystack', '3.9.9')
+        data_graph = get_haystack_nrel_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
+        ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
             os.mkdir(validate_dir)
 
         # -- Setup - we target AHU-01-Point-01
         point = SAMPLE['AHU-01-Point-01']
-        shapes_graph.add((EXAMPLE.OccupancyModeStandby, tc.SH.targetNode, point))
+        shapes_graph.add((EXAMPLE.OccupancyModeStandby, SH.targetNode, point))
 
         # -- Remove markers and run validation
         for marker in remove_markers:
@@ -129,17 +135,17 @@ class TestOccupancyModeStandby:
 
 
 class TestAhuOccupancyShape:
-    def test_is_valid(self, get_occupancy_mode_data, get_occupancy_mode_shapes):
+    def test_is_valid(self, get_haystack_nrel_occupancy_mode_data, get_haystack_occupancy_mode_shapes):
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
-        ont_graph = tg.load_ontology('Haystack', '3.9.9')
+        data_graph = get_haystack_nrel_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
+        ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
             os.mkdir(validate_dir)
 
         # -- Setup - we target AHU-01
-        shapes_graph.add((EXAMPLE.AhuOccupancyShape, tc.SH.targetNode, SAMPLE['AHU-01']))
+        shapes_graph.add((EXAMPLE.AhuOccupancyShape, SH.targetNode, SAMPLE['AHU-01']))
 
         result = validate(data_graph, shacl_graph=shapes_graph, ont_graph=ont_graph)
         conforms = result[0]
@@ -148,18 +154,18 @@ class TestAhuOccupancyShape:
         assert conforms
 
     # Remove 'point' tag from AHU-01-Point-01
-    def test_invalid_child_point_shape(self, get_occupancy_mode_data, get_occupancy_mode_shapes):
+    def test_invalid_child_point_shape(self, get_haystack_nrel_occupancy_mode_data, get_haystack_occupancy_mode_shapes):
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
-        ont_graph = tg.load_ontology('Haystack', '3.9.9')
+        data_graph = get_haystack_nrel_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
+        ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
             os.mkdir(validate_dir)
 
         # -- Setup - we target AHU-01
         equip = SAMPLE['AHU-01']
-        shapes_graph.add((EXAMPLE.AhuOccupancyShape, tc.SH.targetNode, equip))
+        shapes_graph.add((EXAMPLE.AhuOccupancyShape, SH.targetNode, equip))
 
         # -- Setup - we remove a tag from
         point = SAMPLE['AHU-01-Point-01']
@@ -177,25 +183,25 @@ class TestAhuOccupancyShape:
         results_query = results_graph.query(get_parent_node_validation_query())
 
         assert len(list(results_query)) == 1
-        assert (equip, tc.PHIOT_3_9_9['equipRef'], tc.SH.QualifiedMinCountConstraintComponent, EXAMPLE.OccupancyModeStandby) in results_query
+        assert (equip, tc.PHIOT_3_9_9['equipRef'], SH.QualifiedMinCountConstraintComponent, EXAMPLE.OccupancyModeStandby) in results_query
 
         # Write output to CSV for human readability
         write_csv(results_query, output_file)
 
     # Remove 'point' tag from AHU-01-Point-01
     # Remove 'sp' tag from AHU-01-Point-02
-    def test_multiple_invalid_child_point_shapes(self, get_occupancy_mode_data, get_occupancy_mode_shapes):
+    def test_multiple_invalid_child_point_shapes(self, get_haystack_nrel_occupancy_mode_data, get_haystack_occupancy_mode_shapes):
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
-        ont_graph = tg.load_ontology('Haystack', '3.9.9')
+        data_graph = get_haystack_nrel_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
+        ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
             os.mkdir(validate_dir)
 
         # -- Setup - we target AHU-01
         equip = SAMPLE['AHU-01']
-        shapes_graph.add((EXAMPLE.AhuOccupancyShape, tc.SH.targetNode, equip))
+        shapes_graph.add((EXAMPLE.AhuOccupancyShape, SH.targetNode, equip))
 
         # -- Setup - we remove a tag
         # Triggers: OccupancyModeStandby
@@ -221,25 +227,25 @@ class TestAhuOccupancyShape:
 
         # -- Assert constraints fail as expected
         assert len(list(results_query)) == 2
-        assert (equip, tc.PHIOT_3_9_9['equipRef'], tc.SH.QualifiedMinCountConstraintComponent, EXAMPLE.OccupancyModeStandby) in results_query
-        assert (equip, tc.PHIOT_3_9_9['equipRef'], tc.SH.QualifiedMinCountConstraintComponent, EXAMPLE.OccupancyModeBinary) in results_query
+        assert (equip, tc.PHIOT_3_9_9['equipRef'], SH.QualifiedMinCountConstraintComponent, EXAMPLE.OccupancyModeStandby) in results_query
+        assert (equip, tc.PHIOT_3_9_9['equipRef'], SH.QualifiedMinCountConstraintComponent, EXAMPLE.OccupancyModeBinary) in results_query
 
         # Write output to CSV for human readability
         write_csv(results_query, output_file)
 
     # Add point (AHU-01-Point-03) conforming to the OccupancyModeBinary shape
-    def test_multiple_valid_child_point_shapes(self, get_occupancy_mode_data, get_occupancy_mode_shapes):
+    def test_multiple_valid_child_point_shapes(self, get_haystack_nrel_occupancy_mode_data, get_haystack_occupancy_mode_shapes):
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
-        ont_graph = tg.load_ontology('Haystack', '3.9.9')
+        data_graph = get_haystack_nrel_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
+        ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
             os.mkdir(validate_dir)
 
         # -- Setup - we target AHU-01
         equip = SAMPLE['AHU-01']
-        shapes_graph.add((EXAMPLE.AhuOccupancyShape, tc.SH.targetNode, equip))
+        shapes_graph.add((EXAMPLE.AhuOccupancyShape, SH.targetNode, equip))
 
         # -- Setup - create new point conforming to OccupancyModeBinary
         point = SAMPLE['AHU-01-Point-03']
@@ -262,28 +268,28 @@ class TestAhuOccupancyShape:
 
         # -- Assert constraints fail as expected
         assert len(list(results_query)) == 1
-        assert (equip, tc.PHIOT_3_9_9['equipRef'], tc.SH.QualifiedMaxCountConstraintComponent, EXAMPLE.OccupancyModeBinary) in results_query
+        assert (equip, tc.PHIOT_3_9_9['equipRef'], SH.QualifiedMaxCountConstraintComponent, EXAMPLE.OccupancyModeBinary) in results_query
 
         # Write output to CSV for human readability
         write_csv(results_query, output_file)
 
     # Add point (AHU-01-Point-03) conforming to the OccupancyModeBinary shape
-    def test_disjoint_shapes_requirement(self, get_occupancy_mode_data, get_occupancy_mode_shapes):
+    def test_disjoint_shapes_requirement(self, get_haystack_nrel_occupancy_mode_data, get_haystack_occupancy_mode_shapes):
         # -- Setup
-        data_graph = get_occupancy_mode_data
-        shapes_graph = get_occupancy_mode_shapes
-        ont_graph = tg.load_ontology('Haystack', '3.9.9')
+        data_graph = get_haystack_nrel_occupancy_mode_data
+        shapes_graph = get_haystack_occupancy_mode_shapes
+        ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
             os.mkdir(validate_dir)
 
         # -- Setup - we target AHU-01
         equip = SAMPLE['AHU-01']
-        shapes_graph.add((EXAMPLE.AhuOccupancyShape, tc.SH.targetNode, equip))
+        shapes_graph.add((EXAMPLE.AhuOccupancyShape, SH.targetNode, equip))
 
         # -- Setup - remove the AHU-01-Point-02
         point = SAMPLE['AHU-01-Point-02']
-        data_graph.remove((point, tc.RDF.type, tc.PHIOT_3_9_9.point))
+        data_graph.remove((point, RDF.type, tc.PHIOT_3_9_9.point))
         data_graph.remove((point, tc.PH_3_9_9.hasTag, tc.PHIOT_3_9_9.point))
         data_graph.remove((point, tc.PH_3_9_9.hasTag, tc.PHIOT_3_9_9.occupied))
         data_graph.remove((point, tc.PH_3_9_9.hasTag, tc.PHIOT_3_9_9.sp))
@@ -314,9 +320,9 @@ class TestAhuOccupancyShape:
 
         # -- Assert constraints fail as expected
         assert len(list(results_query_shapes)) == 2
-        assert (equip, tc.PHIOT_3_9_9['equipRef'], tc.SH.QualifiedMinCountConstraintComponent, EXAMPLE.OccupancyModeBinary) in results_query_shapes
-        assert (equip, tc.PHIOT_3_9_9['equipRef'], tc.SH.QualifiedMinCountConstraintComponent, EXAMPLE.OccupancyModeStandby) in results_query_shapes
+        assert (equip, tc.PHIOT_3_9_9['equipRef'], SH.QualifiedMinCountConstraintComponent, EXAMPLE.OccupancyModeBinary) in results_query_shapes
+        assert (equip, tc.PHIOT_3_9_9['equipRef'], SH.QualifiedMinCountConstraintComponent, EXAMPLE.OccupancyModeStandby) in results_query_shapes
 
         # -- Assert constraints fail as expected
         assert len(list(results_query_count)) == 1
-        assert (equip, tc.PHIOT_3_9_9['equipRef'], tc.SH.MinCountConstraintComponent, Literal("Less than 2 values on sample:AHU-01->[ sh:inversePath phIoT:equipRef ]")) in results_query_count
+        assert (equip, tc.PHIOT_3_9_9['equipRef'], SH.MinCountConstraintComponent, Literal("Less than 2 values on sample:AHU-01->[ sh:inversePath phIoT:equipRef ]")) in results_query_count

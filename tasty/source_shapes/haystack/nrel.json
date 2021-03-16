@@ -4,7 +4,8 @@
   "shapes": [
     {
       "name": "OccupancyModeStandbyShape",
-      "tags": ["occ", "mode", "sp", "point"],
+      "tags": ["occ", "sp", "point"],
+      "tags-custom": ["mode"],
       "vals": {
         "enum": "Occupied,Unoccupied,Standby"
       }
@@ -15,13 +16,18 @@
     },
     {
       "name": "AhuOccupancyShape",
-      "requires": [
-        {
-          "path": "equipRef",
-          "path-type": "inverse",
-          "shapes": ["OccupancyModeStandbyShape", "OccupancyModeBinaryShape"]
-        }
-      ]
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "OccupancyModeStandbyShape",
+              "OccupancyModeBinaryShape"
+            ]
+          }
+        ]
+      }
     }
   ]
 }

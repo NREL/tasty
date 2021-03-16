@@ -12,6 +12,9 @@ dist
 # Tasty
 output
 debug.py
+haystack_*.ttl
+input-file.csv
+!tests/files/*/haystack_*.ttl
 
 # Jupyter
 .ipynb_checkpoints
