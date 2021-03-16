@@ -203,20 +203,6 @@ def get_haystack_g36_shapes():
 
 
 @pytest.fixture
-def get_haystack_core_generated_shapes_v1():
-    """
-    This version uses the haystack 3.9.9 implementation, i.e. before the exploded
-    point types. Also it does not use any of the mixin type functionality, it simply
-    implements the cooling only vav box.
-    :return:
-    """
-    g = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_9)
-    f = os.path.join(generated_dir, 'haystack_core_v1.ttl')
-    g.parse(f, format='turtle')
-    return g
-
-
-@pytest.fixture
 def get_haystack_core_generated_shapes_v2():
     """
     This version uses the haystack 3.9.10 implementation, i.e. with exploded point
