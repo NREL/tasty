@@ -1,6 +1,7 @@
 {
   "prefix": "nrel",
   "namespace": "https://project-haystack.org/datashapes/nrel#",
+  "requires": ["haystack_core"],
   "shapes": [
     {
       "name": "OccupancyModeStandbyShape",
