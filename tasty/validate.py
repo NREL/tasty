@@ -58,12 +58,17 @@ def validate_from_csv(data_file, input_file):
                     print(f"Targeting entity {entity_id} with shape {shape_name}")
                     shapes_graph.add((ns[shape_name], SH.targetNode, rdflib.term.URIRef(entity_id)))
 
-    shapes_graph.serialize('shapes.ttl', format='turtle')
+    shapes_graph_output_file = 'shapes.ttl'
+    shapes_graph.serialize(shapes_graph_output_file, format='turtle')
     ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
 
     conforms, results_graph, results = validate(data_graph, shacl_graph=shapes_graph, ont_graph=ont_graph)
+    output_file_name = f"results-{os.path.splitext(os.path.basename(data_file))[0]}.ttl"
 
-    results_graph.serialize(f"results-{os.path.splitext(os.path.basename(data_file))[0]}.ttl", format='turtle')
-
+    results_graph.serialize(output_file_name, format='turtle')
     if not conforms:
         print_outputs(results_graph)
+
+    print(f"Validation report saved at: {output_file_name}")
+    print(f"Copy of shapes graph saved at: {shapes_graph_output_file}")
+    print("-" * 100)

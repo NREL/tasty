@@ -40,8 +40,7 @@ PHSCIENCE_3_9_10 = Namespace("https://project-haystack.org/def/phScience/3.9.10#
 PHIOT_3_9_10 = Namespace("https://project-haystack.org/def/phIoT/3.9.10#")
 
 # Haystack Datashapes
-PH_SHAPES_V1 = Namespace("https://project-haystack.org/datashapes/core/v1#")
-PH_SHAPES_V2 = Namespace("https://project-haystack.org/datashapes/core/v2#")
+PH_SHAPES_CORE = Namespace("https://project-haystack.org/datashapes/core#")
 PH_CUSTOM = Namespace("https://project-haystack.org/def/custom#")
 
 PH_DEFAULT = None
@@ -51,7 +50,6 @@ PHIOT_DEFAULT = None
 BRICK_DEFAULT = None
 TAG_DEFAULT = None
 BSH_DEFAULT = None
-PH_SHAPES_DEFAULT = None
 
 SUPPORTED_SCHEMAS = {
     BRICK: [V1_1],
@@ -62,22 +60,19 @@ SCHEMAS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'schemas'
 
 
 namespace_map = {
-    'phShapes1': PH_SHAPES_V1,
-    'phShapes2': PH_SHAPES_V2,
+    'phShapes': PH_SHAPES_CORE,
 }
 
 
-def set_default_versions(haystack_version=V3_9_10, brick_version=V1_1, ph_shapes_version='2'):
-    global PH_DEFAULT, PHICT_DEFAULT, PHSCIENCE_DEFAULT, PHIOT_DEFAULT, BRICK_DEFAULT, TAG_DEFAULT, BSH_DEFAULT, PH_SHAPES_DEFAULT
+def set_default_versions(haystack_version=V3_9_10, brick_version=V1_1):
+    global PH_DEFAULT, PHICT_DEFAULT, PHSCIENCE_DEFAULT, PHIOT_DEFAULT, BRICK_DEFAULT, TAG_DEFAULT, BSH_DEFAULT
     assert haystack_version in SUPPORTED_SCHEMAS[HAYSTACK], f"{haystack_version} must be one of {SUPPORTED_SCHEMAS[HAYSTACK]}"
     assert brick_version in SUPPORTED_SCHEMAS[BRICK], f"{brick_version} must be one of {SUPPORTED_SCHEMAS[BRICK]}"
-    assert ph_shapes_version in ['1', '2']
 
     PH_DEFAULT = Namespace(f"https://project-haystack.org/def/ph/{haystack_version}#")
     PHICT_DEFAULT = Namespace(f"https://project-haystack.org/def/phIct/{haystack_version}#")
     PHSCIENCE_DEFAULT = Namespace(f"https://project-haystack.org/def/phScience/{haystack_version}#")
     PHIOT_DEFAULT = Namespace(f"https://project-haystack.org/def/phIoT/{haystack_version}#")
-    PH_SHAPES_DEFAULT = Namespace(f"https://project-haystack.org/datashapes/core/v{ph_shapes_version}#")
 
     if brick_version == V1_1:
         BRICK_DEFAULT = BRICK_1_1

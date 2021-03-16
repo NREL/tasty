@@ -9,8 +9,8 @@ import tasty.constants as tc
 
 
 # Functions
-def load_sources():
-    root = os.path.join(os.path.dirname(__file__), 'source_shapes')
+def load_sources(schema):
+    root = os.path.join(os.path.dirname(__file__), 'source_shapes', schema)
     files = [os.path.join(root, f) for f in
              os.listdir(root) if f.endswith('.json')]
 
@@ -109,7 +109,7 @@ def add_shapes_and_types(g: Graph, ontology: Graph, namespaced_shape: URIRef, na
     if each_path.get('shapes') is not None:
         for each_shape in each_path['shapes']:
             prop_bn = add_qvs_property(g, each_path, namespaced_shape, namespaced_path)
-            g.add((prop_bn, SH.qualifiedValueShape, tc.PH_SHAPES_DEFAULT[each_shape]))
+            g.add((prop_bn, SH.qualifiedValueShape, tc.PH_SHAPES_CORE[each_shape]))
             if optional:
                 # For optionals, we set the severity to warning
                 g.add((prop_bn, SH.severity, SH.Warning))
@@ -214,8 +214,6 @@ def add_things(g, ns_shape, shape, ontology):
 
 
 def set_version_and_load(file_path):
-    g = None
-    ontology = None
     bn = os.path.basename(file_path)
     no_ext = os.path.splitext(bn)[0]
     if 'brick' in no_ext.lower():
@@ -224,11 +222,9 @@ def set_version_and_load(file_path):
     else:
         if no_ext.endswith('v1'):
             version = tc.V3_9_9
-            ph_shapes_version = '1'
         else:
             version = tc.V3_9_10
-            ph_shapes_version = '2'
-        tc.set_default_versions(haystack_version=version, ph_shapes_version=ph_shapes_version)
+        tc.set_default_versions(haystack_version=version)
         g = tg.get_versioned_graph(tc.HAYSTACK, version)
         ontology = tg.load_ontology(tc.HAYSTACK, version)
     return g, ontology
@@ -279,5 +275,4 @@ def generate_shapes_given_source_template(shape_template: dict, g: Graph, ontolo
                 add_things(g, ns_shape, shape, ontology)
                 add_mixins(g, ns_shape, shape, ns)
                 have_mixins.pop(i)
-
-    write_to_output(g, f"{file_name}.ttl")
+    return g

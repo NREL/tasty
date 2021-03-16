@@ -6,18 +6,20 @@ from rdflib.util import guess_format
 import json
 
 
-def generate_input_file(shapes_file, data_file, output_file, composite=True):
-    with open(shapes_file, 'r') as f:
-        data = json.loads(f.read())
-
+def generate_input_file(shape_files, data_file, output_file, composite=True):
     headers = ['entity-id', 'entity-name']
-    prefix = data['prefix']
-    for shape in data['shapes']:
-        if composite:
-            if 'shape-mixins' in shape or 'predicates' in shape:
+
+    for shape_file in shape_files:
+        with open(shape_file, 'r') as f:
+            data = json.loads(f.read())
+
+        prefix = data['prefix']
+        for shape in data['shapes']:
+            if composite:
+                if 'shape-mixins' in shape or 'predicates' in shape:
+                    headers.append(prefix + ':' + shape['name'])
+            else:
                 headers.append(prefix + ':' + shape['name'])
-        else:
-            headers.append(prefix + ':' + shape['name'])
 
     valid_file = True
     if data_file is not None and os.path.isfile(data_file):

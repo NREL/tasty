@@ -2,7 +2,8 @@ import argparse
 import os
 import sys
 
-from tasty.generate_shapes import load_sources, set_version_and_load, generate_shapes_given_source_template
+from tasty.generate_shapes import load_sources, set_version_and_load, generate_shapes_given_source_template, \
+    write_to_output
 from tasty.generate_input_file import generate_input_file
 from tasty.validate import validate_from_csv
 
@@ -13,36 +14,52 @@ tasty_root = os.path.join(current_dir, '..')
 
 
 def generate_shapes(args):
-    data = load_sources()
-    for file_path, shape_template in data.items():
-        name = os.path.splitext(os.path.basename(file_path))[0]
-        print("#" * 20)
-        print(f"Shapes from file: {name}")
-        g, ontology = set_version_and_load(file_path)
-        generate_shapes_given_source_template(shape_template, g, ontology, name)
+    data = load_sources(args.schema)
+    if len(data) == 0:
+        print(f"No source shapes found for {args.schema}")
+    else:
+        for file_path, shape_template in data.items():
+            name = os.path.splitext(os.path.basename(file_path))[0]
+            print("#" * 20)
+            print(f"Shapes from file: {name}")
+            g, ontology = set_version_and_load(file_path)
+            output_graph = generate_shapes_given_source_template(shape_template, g, ontology, name)
+            write_to_output(output_graph, f"{args.schema}_{name}.ttl")
 
 
 def generate_input(args):
-    potential_shapes = [x for x in os.listdir(source_shapes_dir) if x.endswith('.json')]
-    shape_to_load = False
-    for potential in potential_shapes:
-        if args.schema.lower() in potential and args.version.lower() in potential:
-            shape_to_load = os.path.join(source_shapes_dir, potential)
-            break
-    if shape_to_load:
-        print(f"Generating input from {os.path.splitext(potential)[0]}")
-        generate_input_file(shape_to_load, args.data_graph, args.output, args.composite_only)
+    """
+    Generate a CSV input file with shape names as headers.
+    Doesn't use the generated shapes files, instead uses the:
+        - source_shapes/*.json
+    :param args:
+    :return:
+    """
+    load_dir = os.path.join(source_shapes_dir, args.schema)
+    potential_shapes = [os.path.join(load_dir, x) for x in os.listdir(load_dir) if x.endswith('.json')]
+    input_files = None
+    if args.library == 'all':
+        input_files = [os.path.basename(shape) for shape in potential_shapes]
+        generate_input_file(potential_shapes, args.data_graph, args.output, args.composite_only)
     else:
-        print(f"No shapes file found to load")
-        sys.exit(1)
+        for potential in potential_shapes:
+            if args.library.lower() == os.path.splitext(os.path.basename(potential))[0]:
+                input_files = [potential]
+                break
+        if input_files:
+            generate_input_file(input_files, args.data_graph, args.output, args.composite_only)
+        else:
+            print(f"No shapes file found to load")
+            sys.exit(1)
+    print(f"Generated input from {[os.path.basename(f) for f in input_files]}")
 
 
 def validate(args):
-    print(args)
     validate_from_csv(args.data_graph, args.input_file)
 
 
 def main():
+    """Main launch point for the CLI. Mainly points to other functions."""
     # Construct Parsers
     parser = argparse.ArgumentParser(
         description='Tool for generating SHACL files and validating RDF data against SHACL shapes')
@@ -51,6 +68,16 @@ def main():
     # Generate shapes command
     parser_generate_shapes = subparsers.add_parser('generate-shapes',
                                                    description='Command for generating SHACL shape files. Attempt to generate a shapes file for each file in tasty/source_shapes. The resulting shape files are placed in tasty/generated_shapes.')
+
+    parser_generate_shapes.add_argument(
+        '-s',
+        '--schema',
+        type=str,
+        choices=['haystack', 'brick'],
+        help='Schema that shapes are defined in',
+        default='haystack',
+        nargs='?'
+    )
 
     parser_generate_shapes.set_defaults(func=generate_shapes)
 
@@ -67,12 +94,12 @@ def main():
         nargs='?'
     )
     parser_generate_input.add_argument(
-        '-v',
-        '--version',
+        '-l',
+        '--library',
         type=str,
-        default='v2',
-        choices=['v1', 'v2', 'nrel'],
-        help='Version of the implementation to use',
+        default='core',
+        choices=['core', 'nrel', 'all'],
+        help='Name of the library to use for populating shape headers.',
         nargs='?'
     )
     parser_generate_input.add_argument(
