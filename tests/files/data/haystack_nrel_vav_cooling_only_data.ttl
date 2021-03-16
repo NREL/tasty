@@ -1,0 +1,51 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.10#> .
+@prefix ph: <https://project-haystack.org/def/ph/3.9.10#> .
+@prefix phScience: <https://project-haystack.org/def/phScience/3.9.10#> .
+@prefix phCustom: <https://project-haystack.org/def/custom#> .
+@prefix sample: <urn:sample/> .
+
+################################
+### NREL Cooling Only VAV ###
+################################
+sample:NREL-VAV-01 a phIoT:coolingOnly-vav ;
+    ph:hasTag phIoT:vav,
+        phIoT:coolingOnly,
+        phIoT:equip .
+
+### NREL VAV-SD-Cooling-Only points ###
+sample:NREL-VAV-01-ZoneAirTemperatureSensor a phIoT:air-temp-sensor ;
+    ph:hasTag phIoT:zone,
+        phScience:air,
+        phScience:temp,
+        phIoT:sensor,
+        phIoT:point ;
+    phIoT:equipRef sample:VAV-01 .
+
+sample:NREL-VAV-01-ZoneRelativeHumiditySensor a phIoT:air-humidity-sensor ;
+    ph:hasTag phIoT:zone,
+        phScience:air,
+        phScience:humidity,
+        phIoT:sensor,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-ZoneAirCO2Sensor a phIoT:point ;
+    ph:hasTag phIoT:zone,
+        phScience:air,
+        phScience:co2,
+        phIoT:sensor,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+
+sample:NREL-VAV-01-ZoneAirCO2Setpoint a phIoT:point ;
+    ph:hasTag phIoT:zone,
+        phScience:air,
+        phScience:co2,
+        phIoT:sp,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
