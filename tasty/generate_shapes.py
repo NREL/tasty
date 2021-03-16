@@ -230,7 +230,7 @@ def set_version_and_load(file_path):
     return g, ontology
 
 
-def generate_shapes_given_source_template(shape_template: dict, g: Graph, ontology: Graph, file_name: str):
+def generate_shapes_given_source_template(shape_template: dict, g: Graph, ontology: Graph):
     ns = Namespace(shape_template['namespace'])
     g.bind(shape_template['prefix'], ns)
 

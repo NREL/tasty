@@ -23,7 +23,7 @@ def generate_shapes(args):
             print("#" * 20)
             print(f"Shapes from file: {name}")
             g, ontology = set_version_and_load(file_path)
-            output_graph = generate_shapes_given_source_template(shape_template, g, ontology, name)
+            output_graph = generate_shapes_given_source_template(shape_template, g, ontology)
             write_to_output(output_graph, f"{args.schema}_{name}.ttl")
 
 
