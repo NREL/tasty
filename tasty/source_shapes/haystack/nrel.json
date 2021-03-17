@@ -122,10 +122,7 @@
     {
       "name": "OccupancyModeStandbyShape",
       "tags": ["occ", "sp", "point"],
-      "tags-custom": ["mode"],
-      "vals": {
-        "enum": "Occupied,Unoccupied,Standby"
-      }
+      "tags-custom": ["mode"]
     },
     {
       "name": "OccupancyModeBinaryShape",
@@ -148,16 +145,14 @@
     },
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
+      "types": ["coolingOnly-vav"],
       "predicates": {
         "requires": [
           {
             "path": "equipRef",
             "path-type": "inverse",
-            "types": ["coolingOnly-vav"],
             "shapes": [
-              "zone-air-temp-sensor-shape",
               "ZoneRelativeHumidityShape",
-              "zone-air-co2-sensor-shape",
               "BinaryOccupancySensorShape",
               "OccupancyOverrideCommandShape",
               "ZoneTemperatureCoolingEffectiveSetpointShape",
@@ -165,10 +160,9 @@
               "ZoneTemperatureCoolingOccupiedSetpointShape",
               "ZoneTemperatureHeatingOccupiedSetpointShape",
               "ZoneTemperatureCoolingUnoccupiedSetpointShape",
-              "ZoneTemperatureHeatingUoccupiedSetpointShape",
+              "ZoneTemperatureHeatingUnoccupiedSetpointShape",
               "ZoneTemperatureCoolingStandbySetpointShape",
               "ZoneTemperatureHeatingStandbySetpointShape",
-              "zone-air-co2-sp-shape",
               "ZoneEquipmentOperatingStateShape",
               "OccupancyModeBinaryShape",
               "OccupancyModeStandbyShape",
@@ -178,7 +172,7 @@
               "DischargeAirFlowShape",
               "DischargeAirFlowSetpointShape",
               "MinimumHeatingDischargeAirFlowSetpointShape",
-              "MinimumHCoolingDischargeAirFlowSetpointShape",
+              "MinimumCoolingDischargeAirFlowSetpointShape",
               "MaximumHeatingDischargeAirFlowSetpointShape",
               "MaximumCoolingDischargeAirFlowSetpointShape"
             ]
