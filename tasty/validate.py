@@ -8,7 +8,7 @@ import pandas as pd
 
 import tasty.constants as tc
 import tasty.graphs as tg
-from tasty.generated_shapes import load_all_shapes_and_merge
+from tasty.shapes_loader import ShapesLoader
 
 tasty_dir = os.path.dirname(__file__)
 
@@ -61,7 +61,8 @@ def validate_from_csv(data_graph: str, input_file: str) -> None:
     :param input_file: path to the input csv file
     :return:
     """
-    shapes_graph = load_all_shapes_and_merge()
+    sl = ShapesLoader(tc.HAYSTACK)
+    shapes_graph = sl.load_all_and_merge()
     data_graph = Graph().parse(data_graph, format=guess_format(data_graph))
     data = pd.read_csv(input_file, index_col='entity-id', true_values='X').fillna(value=False)
     for entity_id, vals in data.iterrows():
