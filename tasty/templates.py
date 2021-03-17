@@ -601,6 +601,8 @@ def get_namespaced_terms(ontology: Graph, terms: [str, dict]) -> Set:
             ns = tg.get_namespaces_given_term(ontology, candidate)
             if tg.has_one_namespace(ns, candidate):
                 valid_namespaced_terms.add((ns[0], candidate))
+            else:
+                return False
     elif isinstance(terms, dict):
         for candidate, meta in terms.items():
             candidate_ns = tg.get_namespaces_given_term(ontology, candidate)
@@ -612,6 +614,8 @@ def get_namespaced_terms(ontology: Graph, terms: [str, dict]) -> Set:
                     if tg.has_one_namespace(meta_ns, meta['_kind']):
                         meta_copy['_kind'] = (meta_ns[0], meta['_kind'])
                         valid_namespaced_terms.add((candidate_ns[0], candidate, frozendict(meta_copy)))
+                    else:
+                        return False
                 elif isinstance(meta, (int, float, bool, str)):
                     valid_namespaced_terms.add((candidate_ns[0], candidate, frozendict({'val': meta})))
 
