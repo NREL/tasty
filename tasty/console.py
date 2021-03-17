@@ -2,8 +2,7 @@ import argparse
 import os
 import sys
 
-from tasty.generate_shapes import load_sources, set_version_and_load, generate_shapes_given_source_template, \
-    write_shapes_graph_to_generated_shapes_dir
+from tasty.generate_shapes import ShapesGenerator
 from tasty.generate_input_file import generate_input_file
 from tasty.validate import validate_from_csv
 
@@ -21,17 +20,17 @@ def generate_shapes(args):
     :param args:
     :return:
     """
-    data = load_sources(args.schema)
-    if len(data) == 0:
+    sg = ShapesGenerator(args.schema, args.version)
+    if len(sg.source_shapes_by_file) == 0:
         print(f"No source shapes found for {args.schema}")
     else:
-        for file_path, shape_template in data.items():
+        for file_path, shape_template in sg.source_shapes_by_file.items():
             name = os.path.splitext(os.path.basename(file_path))[0]
             print("#" * 20)
             print(f"Shapes from file: {name}")
-            g, ontology = set_version_and_load(file_path)
-            output_graph = generate_shapes_given_source_template(shape_template, g, ontology)
-            write_shapes_graph_to_generated_shapes_dir(output_graph, f"{args.schema}_{name}.ttl")
+            sg.main(shape_template)
+            sg.write_shapes_graph_to_generated_shapes_dir(f"{args.schema}_{name}.ttl")
+            sg.reset_shapes_graph()
 
 
 def generate_input(args):
@@ -86,9 +85,18 @@ def main():
         '-s',
         '--schema',
         type=str,
-        choices=['haystack', 'brick'],
+        choices=['Haystack', 'Brick'],
         help='Schema that shapes are defined in',
-        default='haystack',
+        default='Haystack',
+        nargs='?'
+    )
+    parser_generate_shapes.add_argument(
+        '-v',
+        '--version',
+        type=str,
+        choices=['3.9.10', '3.9.9', '1.1'],
+        help='Version of schema to use',
+        default='3.9.10',
         nargs='?'
     )
 
@@ -101,9 +109,9 @@ def main():
         '-s',
         '--schema',
         type=str,
-        choices=['haystack', 'brick'],
+        choices=['Haystack', 'Brick'],
         help='Schema that shapes are defined in',
-        default='haystack',
+        default='Haystack',
         nargs='?'
     )
     parser_generate_input.add_argument(

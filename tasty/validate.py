@@ -80,7 +80,7 @@ def validate_from_csv(data_graph: str, input_file: str) -> None:
     ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
 
     conforms, results_graph, results = validate(data_graph, shacl_graph=shapes_graph, ont_graph=ont_graph)
-    output_file_name = f"results-{os.path.splitext(os.path.basename(data_graph))[0]}.ttl"
+    output_file_name = f"results.ttl"
 
     results_graph.serialize(output_file_name, format='turtle')
     if not conforms:

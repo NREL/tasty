@@ -4,7 +4,6 @@ from typing import List, Union
 from rdflib import Graph, Namespace, OWL, RDF, RDFS, SKOS, SH, URIRef
 
 import tasty.constants as tc
-from tasty import exceptions as te
 
 
 def get_versioned_graph(schema: str, version: str) -> Graph:
@@ -32,9 +31,9 @@ def load_ontology(schema: str, version: str) -> Graph:
     """
     g = get_versioned_graph(schema, version)
     schema_path = os.path.join(tc.SCHEMAS_DIR, schema.lower())
-    if schema == 'Haystack':
+    if schema == tc.HAYSTACK:
         schema_path = os.path.join(schema_path, f"defs_{version.replace('.', '_')}.ttl")
-    elif schema == 'Brick':
+    elif schema == tc.BRICK:
         schema_path = os.path.join(schema_path, f"Brick_{version.replace('.', '_')}.ttl")
     with open(schema_path, 'r') as f:
         data = f.read()
@@ -128,11 +127,9 @@ def has_one_namespace(ns, candidate):
     if len(ns) == 1:
         return True
     elif len(ns) == 0:
-        raise te.TermNotFoundError(
-            f"Candidate '{candidate}' not found in any namespaces in the provided ontology")
+        return False
     else:
-        raise te.MultipleTermsFoundError(
-            f"Candidate '{candidate}' found in multiple namespaces: {[x[0] for x in ns]}")
+        return False
 
 
 def get_namespaced_term(ontology: Graph, term: str) -> Union[URIRef, bool]:
