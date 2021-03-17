@@ -2,7 +2,7 @@ import argparse
 import os
 import sys
 
-from tasty.generate_shapes import ShapesGenerator
+from tasty.shapes_generator import ShapesGenerator
 from tasty.generate_input_file import generate_input_file
 from tasty.validate import validate_from_csv
 
