@@ -1,7 +1,7 @@
 import os
 
-from typing import List
-from rdflib import Graph, Namespace, OWL, RDF, RDFS, SKOS, SH
+from typing import List, Union
+from rdflib import Graph, Namespace, OWL, RDF, RDFS, SKOS, SH, URIRef
 
 import tasty.constants as tc
 from tasty import exceptions as te
@@ -135,7 +135,13 @@ def has_one_namespace(ns, candidate):
             f"Candidate '{candidate}' found in multiple namespaces: {[x[0] for x in ns]}")
 
 
-def get_namespaced_term(ontology: Graph, term: str) -> Namespace:
+def get_namespaced_term(ontology: Graph, term: str) -> Union[URIRef, bool]:
+    """
+    Return a fully namespaced term if it exists exclusively in the ontology, else return False
+    :param ontology:
+    :param term:
+    :return:
+    """
     potential_namespaces = get_namespaces_given_term(ontology, term)
     if has_one_namespace(potential_namespaces, term):
         ns = potential_namespaces[0]

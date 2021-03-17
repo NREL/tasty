@@ -6,30 +6,30 @@
 @prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.9#> .
 @prefix ph: <https://project-haystack.org/def/ph/3.9.9#> .
 @prefix phScience: <https://project-haystack.org/def/phScience/3.9.9#> .
-@prefix phShapes1: <https://project-haystack.org/datashapes/core/v1#> .
+@prefix ex: <urn:example-shapes#> .
 
-phShapes1:G36-VavTerminalUnitCoolingOnlyShape a sh:NodeShape ;
+ex:G36-VavTerminalUnitCoolingOnlyShape a sh:NodeShape ;
     sh:property [
         sh:path [ sh:inversePath phIoT:equipRef ] ;
         sh:minCount 3 ;
     ] ;
     sh:property [
         sh:path [ sh:inversePath phIoT:equipRef ] ;
-        sh:qualifiedValueShape phShapes1:DamperPositionCommandShape ;
+        sh:qualifiedValueShape ex:DamperPositionCommandShape ;
         sh:qualifiedMinCount 1 ;
         sh:qualifiedMaxCount 1 ;
         sh:qualifiedValueShapesDisjoint true ;
     ] ;
     sh:property [
         sh:path [ sh:inversePath phIoT:equipRef ] ;
-        sh:qualifiedValueShape phShapes1:DischargeAirFlowSensorShape ;
+        sh:qualifiedValueShape ex:DischargeAirFlowSensorShape ;
         sh:qualifiedMinCount 1 ;
         sh:qualifiedMaxCount 1 ;
         sh:qualifiedValueShapesDisjoint true ;
     ] ;
     sh:property [
         sh:path [ sh:inversePath phIoT:equipRef ] ;
-        sh:qualifiedValueShape phShapes1:ZoneAirTemperatureSensorShape ;
+        sh:qualifiedValueShape ex:ZoneAirTemperatureSensorShape ;
         sh:qualifiedMinCount 1 ;
         sh:qualifiedMaxCount 1 ;
         sh:qualifiedValueShapesDisjoint true ;
@@ -37,7 +37,7 @@ phShapes1:G36-VavTerminalUnitCoolingOnlyShape a sh:NodeShape ;
     # WARNINGS
     sh:property [
         sh:path [ sh:inversePath phIoT:equipRef ] ;
-        sh:qualifiedValueShape phShapes1:ZoneAirTemperatureOverrideCommandShape ;
+        sh:qualifiedValueShape ex:ZoneAirTemperatureOverrideCommandShape ;
         sh:qualifiedMinCount 1 ;
         sh:qualifiedMaxCount 1 ;
         sh:qualifiedValueShapesDisjoint true ;
@@ -45,7 +45,7 @@ phShapes1:G36-VavTerminalUnitCoolingOnlyShape a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path [ sh:inversePath phIoT:equipRef ] ;
-        sh:qualifiedValueShape phShapes1:OccupancySensorShape ;
+        sh:qualifiedValueShape ex:OccupancySensorShape ;
         sh:qualifiedMinCount 1 ;
         sh:qualifiedMaxCount 1 ;
         sh:qualifiedValueShapesDisjoint true ;
@@ -53,7 +53,7 @@ phShapes1:G36-VavTerminalUnitCoolingOnlyShape a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path [ sh:inversePath phIoT:equipRef ] ;
-        sh:qualifiedValueShape phShapes1:WindowOverrideCommandShape ;
+        sh:qualifiedValueShape ex:WindowOverrideCommandShape ;
         sh:qualifiedMinCount 1 ;
         sh:qualifiedMaxCount 1 ;
         sh:qualifiedValueShapesDisjoint true ;
@@ -61,7 +61,7 @@ phShapes1:G36-VavTerminalUnitCoolingOnlyShape a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path [ sh:inversePath phIoT:equipRef ] ;
-        sh:qualifiedValueShape phShapes1:ZoneAirTemperatureOverrideSetpointShape ;
+        sh:qualifiedValueShape ex:ZoneAirTemperatureOverrideSetpointShape ;
         sh:qualifiedMinCount 1 ;
         sh:qualifiedMaxCount 1 ;
         sh:qualifiedValueShapesDisjoint true ;
@@ -69,7 +69,7 @@ phShapes1:G36-VavTerminalUnitCoolingOnlyShape a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path [ sh:inversePath phIoT:equipRef ] ;
-        sh:qualifiedValueShape phShapes1:ZoneAirCO2SensorShape ;
+        sh:qualifiedValueShape ex:ZoneAirCO2SensorShape ;
         sh:qualifiedMinCount 1 ;
         sh:qualifiedMaxCount 1 ;
         sh:qualifiedValueShapesDisjoint true ;
@@ -77,7 +77,7 @@ phShapes1:G36-VavTerminalUnitCoolingOnlyShape a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path [ sh:inversePath phIoT:equipRef ] ;
-        sh:qualifiedValueShape phShapes1:ZoneAirCO2SetpointShape ;
+        sh:qualifiedValueShape ex:ZoneAirCO2SetpointShape ;
         sh:qualifiedMinCount 1 ;
         sh:qualifiedMaxCount 1 ;
         sh:qualifiedValueShapesDisjoint true ;
@@ -87,7 +87,7 @@ phShapes1:G36-VavTerminalUnitCoolingOnlyShape a sh:NodeShape ;
 
 
 # Table 4.1; VAV box damper position; AO; modulating actuator
-phShapes1:DamperPositionCommandShape a sh:NodeShape ;
+ex:DamperPositionCommandShape a sh:NodeShape ;
     sh:property [
             sh:path ph:hasTag ;
             sh:qualifiedValueShape [
@@ -111,7 +111,7 @@ phShapes1:DamperPositionCommandShape a sh:NodeShape ;
         ] ;
 .
 
-phShapes1:DischargeAirFlowSensorShape a sh:NodeShape ;
+ex:DischargeAirFlowSensorShape a sh:NodeShape ;
     sh:property [
             sh:path ph:hasTag ;
             sh:qualifiedValueShape [
@@ -149,7 +149,7 @@ phShapes1:DischargeAirFlowSensorShape a sh:NodeShape ;
         ] ;
 .
 
-phShapes1:ZoneAirTemperatureSensorShape a sh:NodeShape ;
+ex:ZoneAirTemperatureSensorShape a sh:NodeShape ;
     sh:property [
             sh:path ph:hasTag ;
             sh:qualifiedValueShape [
@@ -187,7 +187,7 @@ phShapes1:ZoneAirTemperatureSensorShape a sh:NodeShape ;
         ] ;
 .
 
-phShapes1:ZoneAirTemperatureOverrideCommandShape a sh:NodeShape ;
+ex:ZoneAirTemperatureOverrideCommandShape a sh:NodeShape ;
     sh:property [
             sh:path ph:hasTag ;
             sh:qualifiedValueShape [
@@ -233,7 +233,7 @@ phShapes1:ZoneAirTemperatureOverrideCommandShape a sh:NodeShape ;
         ] ;
 .
 
-phShapes1:OccupancySensorShape a sh:NodeShape ;
+ex:OccupancySensorShape a sh:NodeShape ;
     sh:property [
             sh:path ph:hasTag ;
             sh:qualifiedValueShape [
@@ -257,7 +257,7 @@ phShapes1:OccupancySensorShape a sh:NodeShape ;
         ] ;
 .
 
-phShapes1:WindowOverrideCommandShape a sh:NodeShape ;
+ex:WindowOverrideCommandShape a sh:NodeShape ;
     sh:property [
             sh:path ph:hasTag ;
             sh:qualifiedValueShape [
@@ -290,7 +290,7 @@ phShapes1:WindowOverrideCommandShape a sh:NodeShape ;
         ] ;
 .
 
-phShapes1:ZoneAirTemperatureOverrideSetpointShape a sh:NodeShape ;
+ex:ZoneAirTemperatureOverrideSetpointShape a sh:NodeShape ;
     sh:property [
             sh:path ph:hasTag ;
             sh:qualifiedValueShape [
@@ -336,7 +336,7 @@ phShapes1:ZoneAirTemperatureOverrideSetpointShape a sh:NodeShape ;
         ] ;
 .
 
-phShapes1:ZoneAirCO2SensorShape a sh:NodeShape ;
+ex:ZoneAirCO2SensorShape a sh:NodeShape ;
     sh:property [
             sh:path ph:hasTag ;
             sh:qualifiedValueShape [
@@ -374,7 +374,7 @@ phShapes1:ZoneAirCO2SensorShape a sh:NodeShape ;
         ] ;
 .
 
-phShapes1:ZoneAirCO2SetpointShape a sh:NodeShape ;
+ex:ZoneAirCO2SetpointShape a sh:NodeShape ;
     sh:property [
             sh:path ph:hasTag ;
             sh:qualifiedValueShape [

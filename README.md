@@ -36,7 +36,7 @@ poetry run tasty generate-input -dg tests/files/data/haystack_g36_data_3_9_10.tt
 ## Validate instance data
 Using the generated `input-file.csv`, mark an `X` in the cells according to the shape you want the entity to validate against. Using the example generated from above, the following should be true:
 
-| Entity | phShapes2:G36-Base-VAV-Shape | phShapes2:G36-CoolingOnly-VAV-Shape | phShapes2:G36-HotWaterReheat-VAV-Shape | phShapes2:HotWaterReheatFdbk-VAV-Shape |
+| Entity | phShapes:G36-Base-VAV-Shape | phShapes:G36-CoolingOnly-VAV-Shape | phShapes:G36-HotWaterReheat-VAV-Shape | phShapes:HotWaterReheatFdbk-VAV-Shape |
 | --- | --- | --- | --- | --- |
 | VAV-01 | Valid | Valid | Invalid | Invalid | Invalid |
 | VAV-02 | Valid | Valid | Valid | Valid | Invalid |
