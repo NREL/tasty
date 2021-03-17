@@ -42,7 +42,7 @@ class ShapesGenerator:
         self.load_all_source_shapes_by_schema()
 
     def load_all_source_shapes_by_schema(self):
-        source_shapes_schema_dir = os.path.join(self.source_shapes_dir, self.schema)
+        source_shapes_schema_dir = os.path.join(self.source_shapes_dir, self.schema.lower())
         files = [os.path.join(source_shapes_schema_dir, f) for f in
                  os.listdir(source_shapes_schema_dir) if f.endswith('.json')]
 
