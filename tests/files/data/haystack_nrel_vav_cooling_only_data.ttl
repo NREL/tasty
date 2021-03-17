@@ -33,6 +33,188 @@ sample:NREL-VAV-01-ZoneRelativeHumiditySensor a phIoT:air-humidity-sensor ;
         phIoT:point ;
     phIoT:equipRef sample:NREL-VAV-01 .
 
+sample:NREL-VAV-01-BinaryOccupancySensor a phIoT:point ;
+    ph:hasTag phIoT:occupied,
+        phIoT:sensor,
+        phCustom:occupancyindicator,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-OccupancyOverrideCommand a phIoT:point ;
+    ph:hasTag phIoT:occupied,
+        phIoT:cmd,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-ZoneTemperatureCoolingEffectiveSetpoint a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:zone,
+        phIoT:cooling,
+        phIoT:effective,
+        phScience:air,
+        phScience:temp,
+        phIoT:sp,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-ZoneTemperatureHeatingEffectiveSetpoint a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:zone,
+        phIoT:heating,
+        phIoT:effective,
+        phScience:air,
+        phScience:temp,
+        phIoT:sp,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-ZoneTemperatureCoolingOccupiedSetpoint a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:zone,
+        phIoT:cooling,
+        phIoT:occ,
+        phScience:air,
+        phScience:temp,
+        phIoT:sp,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-ZoneTemperatureHeatingOccupiedSetpoint a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:zone,
+        phIoT:heating,
+        phIoT:occ,
+        phScience:air,
+        phScience:temp,
+        phIoT:sp,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-ZoneTemperatureCoolingUnoccupiedSetpoint a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:zone,
+        phIoT:cooling,
+        phIoT:unocc,
+        phScience:air,
+        phScience:temp,
+        phIoT:sp,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-ZoneTemperatureHeatingUnoccupiedSetpoint a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:zone,
+        phIoT:heating,
+        phIoT:unocc,
+        phScience:air,
+        phScience:temp,
+        phIoT:sp,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-ZoneTemperatureCoolingStandbySetpoint a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:zone,
+        phIoT:cooling,
+        phIoT:standby,
+        phScience:air,
+        phScience:temp,
+        phIoT:sp,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-ZoneTemperatureHeatingStandbySetpoint a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:zone,
+        phIoT:heating,
+        phIoT:standby,
+        phScience:air,
+        phScience:temp,
+        phIoT:sp,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-ZoneEquipmentOperatingState a phIoT:point ;
+    ph:hasTag phIoT:zone,
+        phIoT:heating,
+        phIoT:standby;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-DischargeAirTemperature a phIoT:discharge-air-temp-sensor ;
+    ph:hasTag phIoT:discharge,
+        phScience:air,
+        phScience:temp,
+        phIoT:sensor,
+        phIoT:leaving,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-DischargeAirDamperCommand a phIoT:point ;
+    ph:hasTag phIoT:discharge,
+        phScience:air,
+        phIoT:damper,
+        phIoT:cmd,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-DischargeAirDamperFeedback a phIoT:air-sensor ;
+    ph:hasTag phIoT:sensor,
+        phScience:air,
+        phIoT:discharge,
+        phIoT:damper,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-DischargeAirFlow a phIoT:discharge-air-flow-sensor ;
+    ph:hasTag phIoT:discharge,
+        phScience:air,
+        phScience:flow,
+        phIoT:sensor,
+        phIoT:leaving,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-DischargeAirFlowSetpoint a phIoT:discharge-air-flow-sp ;
+    ph:hasTag phIoT:discharge,
+        phScience:air,
+        phScience:flow,
+        phIoT:sp,
+        phIoT:effective,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-MinimumHeatingDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+    ph:hasTag phIoT:discharge,
+        phScience:air,
+        phScience:flow,
+        phIoT:sp,
+        phIoT:heating,
+        phCustom:min,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-MinimumCooolingDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+    ph:hasTag phIoT:discharge,
+        phScience:air,
+        phScience:flow,
+        phIoT:sp,
+        phIoT:cooling,
+        phCustom:min,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-MaximumHeatingDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+    ph:hasTag phIoT:discharge,
+        phScience:air,
+        phScience:flow,
+        phIoT:sp,
+        phIoT:heating,
+        phCustom:max,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-MaximumCooolingDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+    ph:hasTag phIoT:discharge,
+        phScience:air,
+        phScience:flow,
+        phIoT:sp,
+        phIoT:cooling,
+        phCustom:max,
+        phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
 sample:NREL-VAV-01-ZoneAirCO2Sensor a phIoT:point ;
     ph:hasTag phIoT:zone,
         phScience:air,
@@ -40,7 +222,6 @@ sample:NREL-VAV-01-ZoneAirCO2Sensor a phIoT:point ;
         phIoT:sensor,
         phIoT:point ;
     phIoT:equipRef sample:NREL-VAV-01 .
-
 
 sample:NREL-VAV-01-ZoneAirCO2Setpoint a phIoT:point ;
     ph:hasTag phIoT:zone,
