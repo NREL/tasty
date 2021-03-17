@@ -42,6 +42,17 @@ class ShapesGenerator:
         self.load_all_source_shapes_by_schema()
 
     def load_all_source_shapes_by_schema(self):
+        """
+        Called in initialization. Based on <schema> provided, looks in the source_shapes/<schema> dir
+        for all JSON files with that schema name.
+        - Loads into self.source_shapes_by_file
+        - creates self.shape_lookup:
+            sg.shapes_lookup.get('damper-cmd-shape')
+            # {'namespace': 'https://project-haystack.org/datashapes/core#', 'prefix': 'phShapes'}
+            sg.shapes_lookup.get('foo')
+            # NoneType
+        :return:
+        """
         source_shapes_schema_dir = os.path.join(self.source_shapes_dir, self.schema.lower())
         files = [os.path.join(source_shapes_schema_dir, f) for f in
                  os.listdir(source_shapes_schema_dir) if f.endswith('.json')]
