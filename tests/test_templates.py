@@ -147,17 +147,16 @@ class TestGetNamespacedTerms(TestCase):
         assert tags_list[0][0] == tc.BRICK_1_1
         assert tags_list[0][1] == entity_type
 
-    def test_errors_when_term_not_found(self):
+    def test_false_when_term_not_found(self):
         # -- Setup
         ont = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
         entity_type = 'this-sensor'
 
         # -- Act
-        with self.assertRaises(te.TermNotFoundError) as context:
-            tt.get_namespaced_terms(ont, entity_type)
+        found = tt.get_namespaced_terms(ont, entity_type)
 
         # -- Assert
-        assert str(context.exception) == "Candidate 'this' not found in any namespaces in the provided ontology"
+        assert not found
 
     def test_errors_when_term_found_in_multiple_namespaces(self):
         # -- Setup
@@ -165,14 +164,10 @@ class TestGetNamespacedTerms(TestCase):
         entity_type = 'Discharge-Temperature'
 
         # -- Act
-        with self.assertRaises(te.MultipleTermsFoundError) as context:
-            tt.get_namespaced_terms(ont, entity_type)
-        ex = "Candidate 'Temperature' found in multiple namespaces: [rdflib.term.URIRef(" \
-             "'https://brickschema.org/schema/1.1/Brick#'), rdflib.term.URIRef(" \
-             "'https://brickschema.org/schema/1.1/BrickTag#')]"
+        found = tt.get_namespaced_terms(ont, entity_type)
 
         # -- Assert
-        assert str(context.exception) == ex
+        assert not found
 
 
 class TestHGetEntityClasses:
