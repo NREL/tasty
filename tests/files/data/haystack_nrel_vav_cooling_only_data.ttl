@@ -134,6 +134,7 @@ sample:NREL-VAV-01-OccupancyModeStandby a phIoT:point ;
         phIoT:occ,
         phCustom:mode,
         phIoT:sp ;
+    ph:enum "Occupied,Unoccupied,Standby" ;
     phIoT:equipRef sample:NREL-VAV-01 .
 
 sample:NREL-VAV-01-DischargeAirTemperature a phIoT:discharge-air-temp-sensor ;

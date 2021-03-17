@@ -122,7 +122,10 @@
     {
       "name": "OccupancyModeStandbyShape",
       "tags": ["occ", "sp", "point"],
-      "tags-custom": ["mode"]
+      "tags-custom": ["mode"],
+      "vals": {
+        "enum": "Occupied,Unoccupied,Standby"
+      }
     },
     {
       "name": "OccupancyModeBinaryShape",
