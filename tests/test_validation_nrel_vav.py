@@ -7,7 +7,7 @@ from pyshacl import validate
 from tasty import constants as tc
 from tasty import graphs as tg
 from tests.conftest import get_single_node_validation_query, assert_remove_markers, write_csv, \
-    get_parent_node_validation_query, get_severity_query, get_source_shape_query, run_another
+    get_parent_node_validation_query, get_severity_query, run_another, get_validate_dir
 
 SAMPLE = Namespace('urn:sample/')
 
