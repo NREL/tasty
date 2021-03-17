@@ -1,6 +1,6 @@
 import os
 import json
-from typing import List
+from typing import List, Dict
 
 from rdflib import BNode, Namespace, Literal, Graph, URIRef, SH, RDF
 
@@ -9,7 +9,15 @@ import tasty.constants as tc
 
 
 # Functions
-def load_sources(schema):
+def load_sources(schema: str) -> Dict:
+    """
+    Load all JSON source shapes for a given schema. Return a dictionary that looks like:
+    {
+        'path-to-file': { data-loaded-from-file }
+    }
+    :param schema:
+    :return:
+    """
     root = os.path.join(os.path.dirname(__file__), 'source_shapes', schema)
     files = [os.path.join(root, f) for f in
              os.listdir(root) if f.endswith('.json')]
@@ -23,11 +31,17 @@ def load_sources(schema):
     return data
 
 
-def write_to_output(g, name):
+def write_shapes_graph_to_generated_shapes_dir(g: Graph, file_name: str):
+    """
+    Serialize the provided shapes graph to the tasty/generated_shapes/ directory.
+    :param g: shapes graph to write
+    :param file_name: name of the output file to write
+    :return:
+    """
     output = os.path.join(os.path.dirname(__file__), 'generated_shapes')
     if not os.path.isdir(output):
         os.mkdir(output)
-    g.serialize(destination=os.path.join(output, name), format='turtle')
+    g.serialize(destination=os.path.join(output, file_name), format='turtle')
     return True
 
 
@@ -75,7 +89,16 @@ def add_all_tags(g: Graph, ontology: Graph, shape_map: List, namespaced_shape: U
     return count_tags
 
 
-def add_all_types(g: Graph, ontology: Graph, shape_map: List, namespaced_shape: URIRef) -> int:
+def add_all_types(g: Graph, ontology: Graph, shape_map: Dict, namespaced_shape: URIRef) -> int:
+    """
+    Loop through the 'types' in the shape_map and add a SHACL
+    The types are not expected to be namespaced, but should exist in the ontology.
+    :param g:
+    :param ontology:
+    :param shape_map:
+    :param namespaced_shape:
+    :return:
+    """
     assert shape_map.get("types") is not None, f"There must be a 'type' key in {shape_map}"
 
     count_types = 0

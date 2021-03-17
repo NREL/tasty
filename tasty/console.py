@@ -3,7 +3,7 @@ import os
 import sys
 
 from tasty.generate_shapes import load_sources, set_version_and_load, generate_shapes_given_source_template, \
-    write_to_output
+    write_shapes_graph_to_generated_shapes_dir
 from tasty.generate_input_file import generate_input_file
 from tasty.validate import validate_from_csv
 
@@ -14,6 +14,13 @@ tasty_root = os.path.join(current_dir, '..')
 
 
 def generate_shapes(args):
+    """
+    Generate a SHACL shapes file for each JSON source file. This is done on a
+    schema basis, i.e. all haystack or brick source shapes are sourced from
+    tasty/source_shapes/<schema-name>/*.json
+    :param args:
+    :return:
+    """
     data = load_sources(args.schema)
     if len(data) == 0:
         print(f"No source shapes found for {args.schema}")
@@ -24,13 +31,13 @@ def generate_shapes(args):
             print(f"Shapes from file: {name}")
             g, ontology = set_version_and_load(file_path)
             output_graph = generate_shapes_given_source_template(shape_template, g, ontology)
-            write_to_output(output_graph, f"{args.schema}_{name}.ttl")
+            write_shapes_graph_to_generated_shapes_dir(output_graph, f"{args.schema}_{name}.ttl")
 
 
 def generate_input(args):
     """
     Generate a CSV input file with shape names as headers.
-    Doesn't use the generated shapes files, instead uses the:
+    Doesn't use the ttl shacl files, instead uses the:
         - source_shapes/*.json
     :param args:
     :return:
@@ -55,6 +62,12 @@ def generate_input(args):
 
 
 def validate(args):
+    """
+    Validate an input data graph using the marked up csv file. The csv file should have X's
+    in entity rows to indicate it should be validated against a specific shape of interest.
+    :param args:
+    :return:
+    """
     validate_from_csv(args.data_graph, args.input_file)
 
 
