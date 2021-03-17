@@ -1,12 +1,16 @@
 import os
 import json
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 from rdflib import BNode, Namespace, Literal, Graph, URIRef, SH, RDF
 
 import tasty.graphs as tg
 import tasty.constants as tc
 
+
+# TODO:
+# we should probably refactor this as a class since we are just passing
+# data around between functions
 
 # Functions
 def load_sources(schema: str) -> Dict:
@@ -91,7 +95,7 @@ def add_all_tags(g: Graph, ontology: Graph, shape_map: List, namespaced_shape: U
 
 def add_all_types(g: Graph, ontology: Graph, shape_map: Dict, namespaced_shape: URIRef) -> int:
     """
-    Loop through the 'types' in the shape_map and add a SHACL
+    Loop through the 'types' in the shape_map and add a sh:class constraint for each.
     The types are not expected to be namespaced, but should exist in the ontology.
     :param g:
     :param ontology:
@@ -112,6 +116,16 @@ def add_all_types(g: Graph, ontology: Graph, shape_map: Dict, namespaced_shape: 
 
 
 def add_predicates(g: Graph, ontology: Graph, namespaced_shape: URIRef, predicates: dict, importance: str):
+    """
+    Loop through required and optional predicates key from the source shape and transform to SHACL.
+    for each path, add in the required shapes and types.
+    :param g:
+    :param ontology:
+    :param namespaced_shape:
+    :param predicates:
+    :param importance:
+    :return:
+    """
     if importance == 'requires' and predicates.get('requires') is not None:
         for each_path in predicates['requires']:
             path = each_path.get('path')
@@ -129,9 +143,20 @@ def add_predicates(g: Graph, ontology: Graph, namespaced_shape: URIRef, predicat
 
 def add_shapes_and_types(g: Graph, ontology: Graph, namespaced_shape: URIRef, namespaced_path: URIRef, each_path: dict,
                          optional=False):
+    """
+    For a given path provided, transform all of the 'shapes' and 'types' from the source shape definition into SHACL.
+    Handles optional by setting the sh:severity to sh:Warning
+    :param g:
+    :param ontology:
+    :param namespaced_shape:
+    :param namespaced_path:
+    :param each_path:
+    :param optional:
+    :return:
+    """
     if each_path.get('shapes') is not None:
         for each_shape in each_path['shapes']:
-            prop_bn = add_qvs_property(g, each_path, namespaced_shape, namespaced_path)
+            prop_bn = stub_new_qualified_value_property(g, each_path, namespaced_shape, namespaced_path)
             g.add((prop_bn, SH.qualifiedValueShape, tc.PH_SHAPES_CORE[each_shape]))
             if optional:
                 # For optionals, we set the severity to warning
@@ -139,7 +164,7 @@ def add_shapes_and_types(g: Graph, ontology: Graph, namespaced_shape: URIRef, na
 
     if each_path.get("types") is not None:
         for each_type in each_path["types"]:
-            prop_bn = add_qvs_property(g, each_path, namespaced_shape, namespaced_path)
+            prop_bn = stub_new_qualified_value_property(g, each_path, namespaced_shape, namespaced_path)
             namespaced_type = tg.get_namespaced_term(ontology, each_type)
             nodeshape_bn = BNode()
             g.add((prop_bn, SH.qualifiedValueShape, nodeshape_bn))
@@ -150,7 +175,15 @@ def add_shapes_and_types(g: Graph, ontology: Graph, namespaced_shape: URIRef, na
                 g.add((prop_bn, SH.severity, SH.Warning))
 
 
-def add_mixins(g: Graph, namespaced_shape: URIRef, shape: dict, ns: Namespace):
+def add_all_mixins(g: Graph, namespaced_shape: URIRef, shape: dict, ns: Namespace):
+    """
+    Add all mixins to the provided namespaced_shape.
+    :param g:
+    :param namespaced_shape:
+    :param shape:
+    :param ns: namespace to use for the mixin
+    :return:
+    """
     if shape.get('shape-mixins') is not None:
         for each_mixin in shape['shape-mixins']:
             ns_mixin = ns[each_mixin]
@@ -160,7 +193,27 @@ def add_mixins(g: Graph, namespaced_shape: URIRef, shape: dict, ns: Namespace):
                 g.add((namespaced_shape, SH.node, ns_mixin))
 
 
-def add_qvs_property(g: Graph, each_path: dict, parent_namespaced_shape: URIRef, namespaced_path: URIRef) -> BNode:
+def stub_new_qualified_value_property(g: Graph, each_path: dict, parent_namespaced_shape: URIRef,
+                                      namespaced_path: URIRef) -> BNode:
+    """
+    Create a new property as a BNode, where the property specifies qualified constraints.
+
+    Output looks like:
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShapesDisjoint true ] ;
+
+    The sh:qualifiedValueShape added elsewhere.
+    Assumes we want:
+        - exactly 1 of the shapes
+        - distinctness (i.e. disjoint)
+    :param g:
+    :param each_path:
+    :param parent_namespaced_shape:
+    :param namespaced_path:
+    :return:
+    """
     property_bn = BNode()
     g.add((parent_namespaced_shape, SH.property, property_bn))
     add_sh_path(g, property_bn, each_path, namespaced_path)
@@ -195,11 +248,14 @@ def add_min_count_for_required_nodes(g: Graph, each_path: dict, namespaced_shape
 
 def add_sh_path(g: Graph, property_bn: BNode, each_path: dict, namespaced_path):
     """
-    Add a path constraint, either inverse or direct
+    Add a path constraint, either inverse or direct. Looks like:
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ] (inverse)
+        [ sh:path phIoT:equipRef ] (direct)
+        where the outer is the property_bn
     :param g:
-    :param property_bn:
+    :param property_bn: blank node of the current property
     :param each_path:
-    :param namespaced_path:
+    :param namespaced_path: the predicate to be traversed, i.e. ph:hasTag, phIoT:equipRef
     :return:
     """
     # Here we translate the path into a BNode if necessary (i.e. for inverse pathing)
@@ -211,7 +267,19 @@ def add_sh_path(g: Graph, property_bn: BNode, each_path: dict, namespaced_path):
         g.add((property_bn, SH.path, namespaced_path))
 
 
-def add_things(g, ns_shape, shape, ontology):
+def add_tags_types_and_predicates(g: Graph, ns_shape: URIRef, shape: dict, ontology: Graph):
+    """
+    Take the provided source shape dict object and transform to a SHACL shape:
+    - tag requirements will be added as property shape requirements to the shape itself with a ph:hasTag traversal
+    - type requirements will be added as sh:class constrants to the shape itself
+    - predicates will be added as property shape requirements to the shape itself with a traversal defined by
+        the 'path' and 'path-type' keys.
+    :param g:
+    :param ns_shape:
+    :param shape:
+    :param ontology:
+    :return:
+    """
     # add tag requirements to shacl shape
     if shape.get('tags') is not None:
         add_all_tags(g, ontology, shape, ns_shape)
@@ -236,10 +304,18 @@ def add_things(g, ns_shape, shape, ontology):
         add_predicates(g, ontology, ns_shape, shape['predicates'], 'optional')
 
 
-def set_version_and_load(file_path):
+def set_version_and_load(file_path) -> Tuple[Graph, Graph]:
+    """
+    Given a file path to a source_shape JSON file, set defaults for the namespaces.
+    Return a graph with default namespaces loaded in and graph with the correct versioned
+    ontology loaded.
+    see tc.set_default_versions()
+    :param file_path:
+    :return:
+    """
     bn = os.path.basename(file_path)
     no_ext = os.path.splitext(bn)[0]
-    if 'brick' in no_ext.lower():
+    if 'brick' in file_path:
         g = tg.get_versioned_graph(tc.BRICK, tc.V1_1)
         ontology = tg.load_ontology(tc.HAYSTACK, tc.V1_1)
     else:
@@ -253,22 +329,29 @@ def set_version_and_load(file_path):
     return g, ontology
 
 
-def generate_shapes_given_source_template(shape_template: dict, g: Graph, ontology: Graph):
-    ns = Namespace(shape_template['namespace'])
-    g.bind(shape_template['prefix'], ns)
+def generate_shapes_given_source_template(source_shape_full: dict, g: Graph, ontology: Graph):
+    """
+    Given a full source shape as a dict, generate SHACL shapes for all items under 'shapes' list.
+    :param source_shape_full:
+    :param g:
+    :param ontology:
+    :return:
+    """
+    ns = Namespace(source_shape_full['namespace'])
+    g.bind(source_shape_full['prefix'], ns)
 
     # we separate out mixins to process later
     have_mixins = []
 
     # now iterate through and build shapes
-    for shape in shape_template['shapes']:
+    for shape in source_shape_full['shapes']:
         ns_shape = ns[shape['name']]
         if shape.get("shape-mixins"):
             have_mixins.append(shape)
             continue
         nodeshape_triple = (ns_shape, RDF.type, SH.NodeShape)
         g.add(nodeshape_triple)
-        add_things(g, ns_shape, shape, ontology)
+        add_tags_types_and_predicates(g, ns_shape, shape, ontology)
         print(f"Processed shape: {ns_shape}")
 
     # now we process things with mixins.
@@ -295,7 +378,7 @@ def generate_shapes_given_source_template(shape_template: dict, g: Graph, ontolo
                 # if we get to this point, all mixins required for this
                 # particular shape are already in the graph and we can begin
                 # processing this shape
-                add_things(g, ns_shape, shape, ontology)
-                add_mixins(g, ns_shape, shape, ns)
+                add_tags_types_and_predicates(g, ns_shape, shape, ontology)
+                add_all_mixins(g, ns_shape, shape, ns)
                 have_mixins.pop(i)
     return g
