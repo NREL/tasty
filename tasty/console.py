@@ -29,7 +29,7 @@ def generate_shapes(args):
             print("#" * 20)
             print(f"Shapes from file: {name}")
             sg.main(shape_template)
-            sg.write_shapes_graph_to_generated_shapes_dir(f"{args.schema}_{name}.ttl")
+            sg.write_shapes_graph_to_generated_shapes_dir(f"{args.schema.lower()}_{name}.ttl")
             sg.reset_shapes_graph()
 
 
