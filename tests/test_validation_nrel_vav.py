@@ -14,7 +14,7 @@ SAMPLE = Namespace('urn:sample/')
 
 class TestNRELVavCoolingOnly:
     @pytest.mark.parametrize('shape_name, target_node', [
-        [tc.PH_SHAPES_V1['NREL-VAV-SD-Cooling-Only-Shape'], SAMPLE['NREL-VAV-01']]
+        [tc.PH_SHAPES_CORE['NREL-VAV-SD-Cooling-Only-Shape'], SAMPLE['NREL-VAV-01']]
     ])
     def test_is_valid(self, get_haystack_nrel_data, get_haystack_nrel_generated_shapes, shape_name, target_node):
         # -- Setup
