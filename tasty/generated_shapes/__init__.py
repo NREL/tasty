@@ -7,6 +7,10 @@ generated_dir = os.path.dirname(__file__)
 
 
 def load_all_shapes_and_merge():
+    """
+    Load all ttl files in this directory into a single graph and return
+    :return:
+    """
     g = Graph()
     files = [os.path.join(generated_dir, f) for f in os.listdir(generated_dir) if f.endswith('.ttl')]
     for file in files:
