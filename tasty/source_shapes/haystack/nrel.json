@@ -11,7 +11,7 @@
       "name": "BinaryOccupancySensorShape",
       "types": ["point"],
       "tags": ["occupied", "sensor"],
-      "tags-custom": ["occupancyindicator"]
+      "tags-custom": ["occupancyIndicator"]
     },
     {
       "name": "OccupancyOverrideCommandShape",
