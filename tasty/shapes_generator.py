@@ -1,12 +1,16 @@
 import os
 import json
 from typing import Dict
+import logging
+from copy import deepcopy
 
 from rdflib import BNode, Namespace, Literal, Graph, URIRef, SH, RDF
 
 import tasty.graphs as tg
 import tasty.constants as tc
 import tasty.exceptions as te
+
+logging.basicConfig(level=logging.INFO)
 
 
 class ShapesGenerator:
@@ -16,8 +20,9 @@ class ShapesGenerator:
         self.generated_shapes_dir = os.path.join(self.root_dir, 'generated_shapes')
         self.schema_source_shapes_dir: str = None
         self.source_shapes_by_file: dict = {}
-        self.shapes_lookup: dict = {}
         self.current_shape_ns: Namespace = None
+        self.shapes_lookup: dict = {}
+        self.prefix_namespace_pairs = []
 
         # create dirs if not exist
         if not os.path.isdir(self.generated_shapes_dir):
@@ -64,6 +69,7 @@ class ShapesGenerator:
         for file, file_data in self.source_shapes_by_file.items():
             ns = file_data['namespace']
             prefix = file_data['prefix']
+            self.prefix_namespace_pairs.append((prefix, ns))
             for shape in file_data['shapes']:
                 if shape['name'] not in self.shapes_lookup:
                     self.shapes_lookup[shape['name']] = {
@@ -71,7 +77,7 @@ class ShapesGenerator:
                         'prefix': prefix
                     }
                 else:
-                    print(f"WARNING: {shape['name']} exists in multiple namespaces")
+                    logging.warning(f"{shape['name']} exists in multiple namespaces")
 
     def reset_shapes_graph(self):
         self.shapes_graph: Graph = tg.get_versioned_graph(self.schema, self.version)
@@ -153,11 +159,26 @@ class ShapesGenerator:
             if required:
                 self.add_min_count_for_required_nodes(each_path, namespaced_shape, namespaced_path)
 
-    def add_shapes_and_types(self, namespaced_shape: URIRef, namespaced_path: URIRef, each_path: dict, required=True):
+    def get_namespaced_shape(self, shape_name):
+        shape_info = self.shapes_lookup.get(shape_name)
+        if shape_info:
+            ns = Namespace(shape_info['namespace'])
+            if ns != self.current_shape_ns:
+                logging.warning(
+                    f"shape: {shape_name} declared in {ns}, while the current module namespace is {self.current_shape_ns}. Ensure shapes graphs are merged when performing validation")
+            if (shape_info['prefix'], ns) not in list(self.shapes_graph.namespaces()):
+                self.shapes_graph.bind(shape_info['prefix'], ns)
+            return ns[shape_name]
+        else:
+            raise te.TastyError(
+                f"Shape: {shape_name} not found. Make sure it is defined in one of: {self.source_shapes_by_file.keys()}")
+
+    def add_shapes_and_types(self, parent_namespaced_shape: URIRef, namespaced_path_from_parent_to_children: URIRef,
+                             each_path: dict, required=True):
         """
         For a given path provided, transform all of the 'shapes' and 'types' from the source shape definition into SHACL.
         Handles optional by setting the sh:severity to sh:Warning
-        :param namespaced_shape:
+        :param parent_namespaced_shape:
         :param namespaced_path: example: URIRef('https://project-haystack.org/def/phIoT/3.9.10#equipRef')
         :param each_path:
         :param required:
@@ -165,18 +186,18 @@ class ShapesGenerator:
         """
         if each_path.get('shapes') is not None:
             for each_shape in each_path['shapes']:
-                prop_bn = self.stub_new_qualified_value_property(each_path, namespaced_shape, namespaced_path)
-                shape_info = self.shapes_lookup.get(each_shape)
-                if shape_info:
-                    ns = Namespace(shape_info['namespace'])
-                    self.shapes_graph.add((prop_bn, SH.qualifiedValueShape, ns[each_shape]))
-                    if not required:
-                        # For optionals, we set the severity to warning
-                        self.shapes_graph.add((prop_bn, SH.severity, SH.Warning))
+                prop_bn = self.stub_new_qualified_value_property(each_path, parent_namespaced_shape,
+                                                                 namespaced_path_from_parent_to_children)
+                ns_shape = self.get_namespaced_shape(each_shape)
+                self.shapes_graph.add((prop_bn, SH.qualifiedValueShape, ns_shape))
+                if not required:
+                    # For optionals, we set the severity to warning
+                    self.shapes_graph.add((prop_bn, SH.severity, SH.Warning))
 
         if each_path.get("types") is not None:
             for each_type in each_path["types"]:
-                prop_bn = self.stub_new_qualified_value_property(each_path, namespaced_shape, namespaced_path)
+                prop_bn = self.stub_new_qualified_value_property(each_path, parent_namespaced_shape,
+                                                                 namespaced_path_from_parent_to_children)
                 namespaced_type = tg.get_namespaced_term(self.ontology, each_type)
                 nodeshape_bn = BNode()
                 self.shapes_graph.add((prop_bn, SH.qualifiedValueShape, nodeshape_bn))
@@ -196,9 +217,9 @@ class ShapesGenerator:
         """
         if shape.get('shape-mixins') is not None:
             for each_mixin in shape['shape-mixins']:
-                ns_mixin = self.current_shape_ns[each_mixin]
+                ns_mixin = self.get_namespaced_shape(each_mixin)
                 if ns_mixin not in self.shapes_graph.subjects():
-                    print(f"Mixin {ns_mixin} not in graph")
+                    logging.info(f"Mixin {ns_mixin} not in graph")
                 else:
                     self.shapes_graph.add((namespaced_shape, SH.node, ns_mixin))
 
@@ -313,6 +334,9 @@ class ShapesGenerator:
 
         # now iterate through and build shapes
         for shape in source_shape_full['shapes']:
+
+            # here we are processing top level shapes, which should
+            # be declared in the current namespace, so this is correct
             ns_shape = self.current_shape_ns[shape['name']]
             if shape.get("shape-mixins"):
                 have_mixins.append(shape)
@@ -320,24 +344,29 @@ class ShapesGenerator:
             nodeshape_triple = (ns_shape, RDF.type, SH.NodeShape)
             self.shapes_graph.add(nodeshape_triple)
             self.add_tags_types_and_predicates(ns_shape, shape)
-            print(f"Processed shape: {ns_shape}")
+            logging.info(f"Processed shape: {ns_shape}")
 
         # now we process things with mixins.
         # we assume mixins might contain other mixins,
         # which is why we have the double loops
+        original_length = len(have_mixins)
+        running_length = 0
         while len(have_mixins) > 0:
 
             # loop in reverse so that when we pop it dont blow up
             for i in range(len(have_mixins) - 1, -1, -1):
                 shape = have_mixins[i]
+
+                # here we are processing top level shapes, which should
+                # be declared in the current namespace, so this is correct
                 ns_shape = self.current_shape_ns[shape['name']]
-                print(f"Processing mixin: {ns_shape}")
+                logging.info(f"Processing mixin: {ns_shape}")
                 mixins = shape.get("shape-mixins")
                 skip = False
                 for mixin in mixins:
-                    ns_mixin = self.current_shape_ns[mixin]
+                    ns_mixin = self.get_namespaced_shape(mixin)
                     if ns_mixin not in self.shapes_graph.subjects():
-                        print(f"{ns_mixin} required for {ns_shape}, but not yet in graph.")
+                        logging.info(f"{ns_mixin} required for {ns_shape}, but not yet in graph.")
                         skip = True
                         continue
                 if not skip:
@@ -349,4 +378,25 @@ class ShapesGenerator:
                     self.add_tags_types_and_predicates(ns_shape, shape)
                     self.add_all_mixins(ns_shape, shape)
                     have_mixins.pop(i)
+            running_length += 1
+            if running_length > original_length:
+                te.TastyError(f"Could not resolve the following mixins: {have_mixins} after {running_length} attempts")
+                logging.error()
+                break
         return self.shapes_graph
+
+    def main_generate_all_and_merge(self):
+        shapes_graph_all = tg.get_versioned_graph(self.schema, self.version)
+        for file_path, shape_template in self.source_shapes_by_file.items():
+            name = os.path.splitext(os.path.basename(file_path))[0]
+            logging.info("#" * 20)
+            logging.info(f"Shapes from file: {name}")
+            self.main(shape_template)
+            self.write_shapes_graph_to_generated_shapes_dir(f"{self.schema.lower()}_{name}.ttl")
+            shapes_graph_all += deepcopy(self.shapes_graph)
+            self.reset_shapes_graph()
+        for each in self.prefix_namespace_pairs:
+            shapes_graph_all.bind(each[0], each[1])
+        shapes_graph_all.bind('phCustom', tc.PH_CUSTOM)
+        all_output = os.path.join(self.generated_shapes_dir, f"{self.schema.lower()}_all.ttl")
+        shapes_graph_all.serialize(all_output, format='turtle')
