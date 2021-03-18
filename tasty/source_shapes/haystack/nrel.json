@@ -254,9 +254,19 @@
         "VAVZoneThermalComfortSensorsShape",
         "VAVZoneThermalComfortSetpointsShape",
         "VAVModeControlShape",
-        "DischargeAirTemperatureShape",
         "VAVAirFlowControlShape"
-      ]
+      ],
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DischargeAirTemperatureShape"
+            ]
+          }
+        ]
+      }
     }
   ]
 }
