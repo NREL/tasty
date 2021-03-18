@@ -156,31 +156,39 @@
             "path-type": "inverse",
             "shapes": [
               "ZoneRelativeHumidityShape",
-              "BinaryOccupancySensorShape",
-              "OccupancyOverrideCommandShape",
               "ZoneTemperatureCoolingEffectiveSetpointShape",
               "ZoneTemperatureHeatingEffectiveSetpointShape",
               "ZoneTemperatureCoolingOccupiedSetpointShape",
               "ZoneTemperatureHeatingOccupiedSetpointShape",
               "ZoneTemperatureCoolingUnoccupiedSetpointShape",
               "ZoneTemperatureHeatingUnoccupiedSetpointShape",
-              "ZoneTemperatureCoolingStandbySetpointShape",
-              "ZoneTemperatureHeatingStandbySetpointShape",
-              "ZoneEquipmentOperatingStateShape",
-              "OccupancyModeBinaryShape",
-              "OccupancyModeStandbyShape",
               "DischargeAirTemperatureShape",
               "DischargeAirDamperCommandShape",
               "DischargeAirDamperFeedbackShape",
               "DischargeAirFlowShape",
-              "DischargeAirFlowSetpointShape",
-              "MinimumHeatingDischargeAirFlowSetpointShape",
-              "MinimumCoolingDischargeAirFlowSetpointShape",
-              "MaximumHeatingDischargeAirFlowSetpointShape",
-              "MaximumCoolingDischargeAirFlowSetpointShape",
-              "zone-air-temp-sensor-shape",
-              "zone-air-co2-sensor-shape",
-              "zone-air-co2-sp-shape"
+              "zone-air-temp-sensor-shape"
+            ],
+            "optional": [
+              {
+                "path": "equipRef",
+                "path-type": "inverse",
+                "shapes": [
+                  "zone-air-co2-sensor-shape",
+                  "BinaryOccupancySensorShape",
+                  "OccupancyOverrideCommandShape",
+                  "ZoneTemperatureCoolingStandbySetpointShape",
+                  "ZoneTemperatureHeatingStandbySetpointShape",
+                  "zone-air-co2-sp-shape",
+                  "ZoneEquipmentOperatingStateShape",
+                  "OccupancyModeBinaryShape",
+                  "OccupancyModeStandbyShape",
+                  "DischargeAirFlowSetpointShape",
+                  "MinimumHeatingDischargeAirFlowSetpointShape",
+                  "MinimumCoolingDischargeAirFlowSetpointShape",
+                  "MaximumHeatingDischargeAirFlowSetpointShape",
+                  "MaximumCoolingDischargeAirFlowSetpointShape"
+                ]
+              }
             ]
           }
         ]
