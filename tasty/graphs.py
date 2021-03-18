@@ -117,7 +117,7 @@ def get_namespaces_given_term(ontology: Graph, term: str) -> List[Namespace]:
     return matched_namespaces
 
 
-def has_one_namespace(ns, candidate):
+def has_one_namespace(ns):
     """
     Run after tg.get_namespaces_given_term to validate only a single ns was found
     :param ns: [List[Namespace]]
@@ -140,7 +140,7 @@ def get_namespaced_term(ontology: Graph, term: str) -> Union[URIRef, bool]:
     :return:
     """
     potential_namespaces = get_namespaces_given_term(ontology, term)
-    if has_one_namespace(potential_namespaces, term):
+    if has_one_namespace(potential_namespaces):
         ns = potential_namespaces[0]
         return ns[term]
     return False
