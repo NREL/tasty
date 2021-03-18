@@ -599,19 +599,19 @@ def get_namespaced_terms(ontology: Graph, terms: [str, dict]) -> Set:
         candidate_terms = set(terms.split("-"))
         for candidate in candidate_terms:
             ns = tg.get_namespaces_given_term(ontology, candidate)
-            if tg.has_one_namespace(ns, candidate):
+            if tg.has_one_namespace(ns):
                 valid_namespaced_terms.add((ns[0], candidate))
             else:
                 return False
     elif isinstance(terms, dict):
         for candidate, meta in terms.items():
             candidate_ns = tg.get_namespaces_given_term(ontology, candidate)
-            if tg.has_one_namespace(candidate_ns, candidate):
+            if tg.has_one_namespace(candidate_ns):
                 # Create a deepcopy so as to not impact original template
                 meta_copy = deepcopy(meta)
                 if isinstance(meta, dict) and '_kind' in meta.keys():
                     meta_ns = tg.get_namespaces_given_term(ontology, meta_copy['_kind'])
-                    if tg.has_one_namespace(meta_ns, meta['_kind']):
+                    if tg.has_one_namespace(meta_ns):
                         meta_copy['_kind'] = (meta_ns[0], meta['_kind'])
                         valid_namespaced_terms.add((candidate_ns[0], candidate, frozendict(meta_copy)))
                     else:
