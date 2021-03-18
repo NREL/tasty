@@ -177,7 +177,10 @@
               "MinimumHeatingDischargeAirFlowSetpointShape",
               "MinimumCoolingDischargeAirFlowSetpointShape",
               "MaximumHeatingDischargeAirFlowSetpointShape",
-              "MaximumCoolingDischargeAirFlowSetpointShape"
+              "MaximumCoolingDischargeAirFlowSetpointShape",
+              "zone-air-temp-sensor-shape",
+              "zone-air-co2-sensor-shape",
+              "zone-air-co2-sp-shape"
             ]
           }
         ]
