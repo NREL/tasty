@@ -4,7 +4,6 @@ import pytest
 from rdflib import Namespace, SH
 from pyshacl import validate
 
-import tasty.graphs
 from tasty import constants as tc
 from tasty import graphs as tg
 from tests.conftest import get_single_node_validation_query, assert_remove_markers, write_csv, \
@@ -17,11 +16,11 @@ class TestNRELVavCoolingOnly:
     @pytest.mark.parametrize('shape_name, target_node', [
         [tc.PH_SHAPES_NREL['NREL-VAV-SD-Cooling-Only-Shape'], SAMPLE['NREL-VAV-01']]
     ])
-    def test_is_valid(self, get_haystack_nrel_data, get_haystack_nrel_generated_shapes, shape_name, target_node):
+    def test_is_valid(self, get_haystack_nrel_data, get_haystack_all_generated_shapes, shape_name, target_node):
         # -- Setup
         data_graph = get_haystack_nrel_data
-        shapes_graph = get_haystack_nrel_generated_shapes
-        ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_9)
+        shapes_graph = get_haystack_all_generated_shapes
+        ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
         if not os.path.isdir(validate_dir):
             os.mkdir(validate_dir)
@@ -38,6 +37,9 @@ class TestNRELVavCoolingOnly:
         results_graph.serialize(output_file, format='turtle')
 
         # -- Assert conforms
+        if not conforms:
+            # serialize shapes graph for debugging
+            shapes_graph.serialize('TestNRELVavCoolingOnly-test_is_valid.ttl', format='turtle')
         assert conforms
 
     @pytest.mark.parametrize('shape_name, target_node, remove_from_node, remove_markers, num_runs', [
@@ -46,7 +48,7 @@ class TestNRELVavCoolingOnly:
             SAMPLE['NREL-VAV-01-ZoneRelativeHumiditySensor'], ['zone'], 2
         ],
     ])
-    def test_is_invalid(self, get_haystack_nrel_data, get_haystack_nrel_generated_shapes, shape_name, target_node,
+    def test_is_invalid(self, get_haystack_nrel_data, get_haystack_all_generated_shapes, shape_name, target_node,
                         remove_from_node,
                         remove_markers, num_runs):
         # Set version for constants
@@ -54,7 +56,7 @@ class TestNRELVavCoolingOnly:
 
         # -- Setup
         data_graph = get_haystack_nrel_data
-        shapes_graph = get_haystack_nrel_generated_shapes
+        shapes_graph = get_haystack_all_generated_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
         validate_dir = get_validate_dir()
 
@@ -62,7 +64,7 @@ class TestNRELVavCoolingOnly:
         shapes_graph.add((shape_name, SH.targetNode, target_node))
         for marker in remove_markers:
             ns = tg.get_namespaces_given_term(ont_graph, marker)
-            if tasty.graphs.has_one_namespace(ns, marker):
+            if tg.has_one_namespace(ns):
                 ns = ns[0]
                 data_graph.remove((remove_from_node, tc.PH_DEFAULT.hasTag, ns[marker]))
 
@@ -74,6 +76,9 @@ class TestNRELVavCoolingOnly:
         output_file = os.path.join(validate_dir, f)
         results_graph.serialize(output_file, format='turtle')
 
+        if conforms:
+            # serialize shapes graph for debugging
+            shapes_graph.serialize('TestNRELVavCoolingOnly-test_is_invalid.ttl', format='turtle')
         # -- Assert does not conform
         assert not conforms
 

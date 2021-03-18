@@ -4,7 +4,6 @@ import pytest
 from rdflib import Namespace, SH
 from pyshacl import validate
 
-import tasty.graphs
 from tasty import constants as tc
 from tasty import graphs as tg
 from tests.conftest import get_single_node_validation_query, assert_remove_markers, write_csv, \
@@ -68,7 +67,7 @@ class TestHandcraftedIndividualShapes:
         shapes_graph.add((shape_name, SH.targetNode, target_node))
         for marker in remove_markers:
             ns = tg.get_namespaces_given_term(ont_graph, marker)
-            if tasty.graphs.has_one_namespace(ns, marker):
+            if tg.has_one_namespace(ns):
                 ns = ns[0]
                 data_graph.remove((target_node, tc.PH_DEFAULT.hasTag, ns[marker]))
 
@@ -145,7 +144,7 @@ class TestHandcraftedG36VavCoolingOnly:
         shapes_graph.add((shape_name, SH.targetNode, target_node))
         for marker in remove_markers:
             ns = tg.get_namespaces_given_term(ont_graph, marker)
-            if tasty.graphs.has_one_namespace(ns, marker):
+            if tg.has_one_namespace(ns):
                 ns = ns[0]
                 data_graph.remove((remove_from_node, tc.PH_DEFAULT.hasTag, ns[marker]))
 
@@ -186,10 +185,10 @@ class TestHaystackCoreGeneratedSinglePointShapes:
         [tc.PH_SHAPES_CORE['zone-air-co2-sensor-shape'], SAMPLE['VAV-01-ZoneAirCO2Sensor']],
         [tc.PH_SHAPES_CORE['zone-air-co2-sp-shape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint']],
     ])
-    def test_is_valid(self, get_haystack_g36_data_3_9_10, get_haystack_core_generated_shapes, shape_name, target_node):
+    def test_is_valid(self, get_haystack_g36_data_3_9_10, get_haystack_all_generated_shapes, shape_name, target_node):
         # -- Setup
         data_graph = get_haystack_g36_data_3_9_10
-        shapes_graph = get_haystack_core_generated_shapes
+        shapes_graph = get_haystack_all_generated_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
 
         # -- Setup
@@ -219,13 +218,13 @@ class TestHaystackCoreGeneratedSinglePointShapes:
         [tc.PH_SHAPES_CORE['zone-air-co2-sensor-shape'], SAMPLE['VAV-01-ZoneAirCO2Sensor'], ['co2']],
         [tc.PH_SHAPES_CORE['zone-air-co2-sp-shape'], SAMPLE['VAV-01-ZoneAirCO2Setpoint'], ['co2']],
     ])
-    def test_is_invalid(self, get_haystack_g36_data_3_9_10, get_haystack_core_generated_shapes, shape_name, target_node, remove_markers):
+    def test_is_invalid(self, get_haystack_g36_data_3_9_10, get_haystack_all_generated_shapes, shape_name, target_node, remove_markers):
         # Set version for constants
         tc.set_default_versions(haystack_version=tc.V3_9_10)
 
         # -- Setup
         data_graph = get_haystack_g36_data_3_9_10
-        shapes_graph = get_haystack_core_generated_shapes
+        shapes_graph = get_haystack_all_generated_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
         validate_dir = get_validate_dir()
 
@@ -273,10 +272,10 @@ class TestHaystackCoreGeneratedEquipmentPointShapes:
         [tc.PH_SHAPES_CORE['G36-HotWaterReheat-VAV-Shape'], SAMPLE['VAV-03']],
         [tc.PH_SHAPES_CORE['HotWaterReheatFdbk-VAV-Shape'], SAMPLE['VAV-03']],
     ])
-    def test_is_valid(self, get_haystack_g36_data_3_9_10, get_haystack_core_generated_shapes, shape_name, target_node):
+    def test_is_valid(self, get_haystack_g36_data_3_9_10, get_haystack_all_generated_shapes, shape_name, target_node):
         # -- Setup
         data_graph = get_haystack_g36_data_3_9_10
-        shapes_graph = get_haystack_core_generated_shapes
+        shapes_graph = get_haystack_all_generated_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
         validate_dir = get_validate_dir()
 
@@ -318,7 +317,7 @@ class TestHaystackCoreGeneratedEquipmentPointShapes:
             SAMPLE['VAV-03-ZoneAirTemperatureOverrideCommand'], ['zone'], 3
         ]
     ])
-    def test_is_invalid(self, get_haystack_g36_data_3_9_10, get_haystack_core_generated_shapes, shape_name, target_node,
+    def test_is_invalid(self, get_haystack_g36_data_3_9_10, get_haystack_all_generated_shapes, shape_name, target_node,
                         remove_from_node,
                         remove_markers, num_runs):
         # Set version for constants
@@ -326,7 +325,7 @@ class TestHaystackCoreGeneratedEquipmentPointShapes:
 
         # -- Setup
         data_graph = get_haystack_g36_data_3_9_10
-        shapes_graph = get_haystack_core_generated_shapes
+        shapes_graph = get_haystack_all_generated_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
         validate_dir = get_validate_dir()
 
@@ -334,7 +333,7 @@ class TestHaystackCoreGeneratedEquipmentPointShapes:
         shapes_graph.add((shape_name, SH.targetNode, target_node))
         for marker in remove_markers:
             ns = tg.get_namespaces_given_term(ont_graph, marker)
-            if tasty.graphs.has_one_namespace(ns, marker):
+            if tg.has_one_namespace(ns):
                 ns = ns[0]
                 data_graph.remove((remove_from_node, tc.PH_DEFAULT.hasTag, ns[marker]))
 
