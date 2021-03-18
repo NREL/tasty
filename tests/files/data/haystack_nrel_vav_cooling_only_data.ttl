@@ -27,7 +27,7 @@ sample:NREL-VAV-01-ZoneRelativeHumiditySensor a phIoT:air-humidity-sensor ;
 sample:NREL-VAV-01-BinaryOccupancySensor a phIoT:point ;
     ph:hasTag phIoT:occupied,
         phIoT:sensor,
-        phCustom:occupancyindicator,
+        phCustom:occupancyIndicator,
         phIoT:point ;
     phIoT:equipRef sample:NREL-VAV-01 .
 
