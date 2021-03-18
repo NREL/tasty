@@ -209,7 +209,7 @@ sample:NREL-VAV-01-MaximumHeatingDischargeAirFlowSetpointShape a phIoT:discharge
         phCustom:max,
         phIoT:point ;
     phIoT:equipRef sample:NREL-VAV-01 .
-#
+
 sample:NREL-VAV-01-MaximumCooolingDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
     ph:hasTag phIoT:discharge,
         phScience:air,
@@ -218,4 +218,23 @@ sample:NREL-VAV-01-MaximumCooolingDischargeAirFlowSetpointShape a phIoT:discharg
         phIoT:cooling,
         phCustom:max,
         phIoT:point ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+# Shapes from core.json
+sample:NREL-VAV-01-zone-air-temp-sensor a phIoT:air-temp-sensor ;
+    ph:hasTag phIoT:zone ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-zone-air-co2-sensor a phIoT:point ;
+    ph:hasTag phIoT:zone,
+        phScience:air,
+        phScience:co2,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-zone-air-co2-sp a phIoT:point ;
+    ph:hasTag phIoT:zone,
+        phScience:air,
+        phScience:co2,
+        phIoT:sp ;
     phIoT:equipRef sample:NREL-VAV-01 .
