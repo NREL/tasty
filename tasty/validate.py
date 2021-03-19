@@ -62,7 +62,7 @@ def validate_from_csv(data_graph: str, input_file: str) -> None:
     :return:
     """
     sl = ShapesLoader(tc.HAYSTACK)
-    shapes_graph = sl.load_all_and_merge()
+    shapes_graph = sl.load_all_shapes()
     data_graph = Graph().parse(data_graph, format=guess_format(data_graph))
     data = pd.read_csv(input_file, index_col='entity-id', true_values='X').fillna(value=False)
     for entity_id, vals in data.iterrows():

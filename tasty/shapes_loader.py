@@ -1,4 +1,5 @@
 import os
+import logging
 
 from rdflib import Graph
 from rdflib.util import guess_format
@@ -19,15 +20,14 @@ class ShapesLoader:
         self.generated_shapes_dir = os.path.join(self.root_dir, 'generated_shapes')
         if schema:
             assert self.schema in tc.SUPPORTED_SCHEMAS.keys(), f"schema must be one of: {tc.SUPPORTED_SCHEMAS.keys()}"
-            self.shacl_schema_files = [os.path.join(self.generated_shapes_dir, f) for f in
-                                       os.listdir(self.generated_shapes_dir) if f.startswith(self.schema.lower())]
+            to_find = f"{self.schema.lower()}_all.ttl"
+            assert to_find in os.listdir(
+                self.generated_shapes_dir), f"{to_find} not in {self.generated_shapes_dir}. Make sure to run 'poetry run tasty generate-shapes'"
+            self.shacl_schema_all_file = os.path.join(self.generated_shapes_dir, to_find)
         else:
-            self.shacl_schema_files = [os.path.join(self.generated_shapes_dir, f) for f in
-                                       os.listdir(self.generated_shapes_dir)]
+            logging.warning("Only able to load single schema shapes at this time.")
 
-    def load_all_and_merge(self) -> Graph:
+    def load_all_shapes(self) -> Graph:
         all_shapes = Graph()
-        for shape_file in self.shacl_schema_files:
-            all_shapes.parse(shape_file, format=guess_format(shape_file))
-        all_shapes.serialize('all_shapes.ttl', format='turtle')
+        all_shapes.parse(self.shacl_schema_all_file, format=guess_format(self.shacl_schema_all_file))
         return all_shapes
