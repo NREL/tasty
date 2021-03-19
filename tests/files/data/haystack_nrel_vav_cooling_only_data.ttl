@@ -238,3 +238,16 @@ sample:NREL-VAV-01-zone-air-co2-sp a phIoT:point ;
         phScience:co2,
         phIoT:sp ;
     phIoT:equipRef sample:NREL-VAV-01 .
+
+# add in heating and cooling requests
+sample:NREL-VAV-01-CoolingRequests a phIoT:point ;
+    ph:hasTag phIoT:cooling,
+        phCustom:request,
+        phIoT:cmd ;
+    phIoT:equipRef sample:NREL-VAV-01 .
+
+sample:NREL-VAV-01-HeatingRequests a phIoT:point ;
+    ph:hasTag phIoT:heating,
+        phCustom:request,
+        phIoT:cmd ;
+    phIoT:equipRef sample:NREL-VAV-01 .
