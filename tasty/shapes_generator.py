@@ -115,6 +115,8 @@ class ShapesGenerator:
             if tag_ns:
                 count_tags += 1
                 add_tag_as_bnode(tag_ns)
+            else:
+                raise te.TastyError(f"tag '{tag}' not part of the ontology. If it is custom, add it to the 'tags-custom' key.")
 
         if shape_map.get('tags-custom') is not None:
             self.shapes_graph.bind('phCustom', tc.PH_CUSTOM)
