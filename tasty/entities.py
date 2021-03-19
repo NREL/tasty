@@ -50,8 +50,8 @@ class ShapesWrapper:
         for file, file_data in self.sg.source_shapes_by_file.items():
             for shape in file_data['shapes']:
                 keys = set(shape.keys())
-                dont_want = set(['predicates', 'shape-mixins'])
-                want = set(['name', 'types'])
+                dont_want = {'predicates', 'shape-mixins'}
+                want = {'name', 'types'}
                 if keys.intersection(dont_want):
                     continue
                 if want <= keys and len(shape.get('types')) == 1:
