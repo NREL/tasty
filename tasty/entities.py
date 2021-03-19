@@ -26,7 +26,7 @@ class SimpleShape:
         self.docs_query = f'''SELECT ?docs {{ {URIRef(self.type).n3()} rdfs:comment ?docs . }}'''
         self.docs: str = ''
 
-    def cast_to_entity(self) -> 'EntityType':
+    def cast_to_entity(self, id=None) -> 'EntityType':
         ont = tg.load_ontology(self.schema, self.version)
         docs = ont.query(self.docs_query)
         if docs:
@@ -37,6 +37,8 @@ class SimpleShape:
             et.add_tags(self.tags, ont)
         if self.tags_custom:
             et.add_tags(self.tags_custom, ont)
+        if id:
+            et.set_id(id)
         return et
 
 
