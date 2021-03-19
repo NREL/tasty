@@ -20,6 +20,8 @@ poetry run tasty
 ```bash
 poetry run tasty generate-shapes
 ```
+
+### Run tests
 - You should now be able to run the tests, make sure they are all passing: `poetry run pytest`
 
 ## Generate input file to use for validation
@@ -88,16 +90,9 @@ chw_flow_sensor.bind_to_graph(hg)
 ```
 
 # Usage and Examples
-- TODO
+Jupyter Lab is currently a dev dependency. If you have gone through the poetry setup, run:
+- `poetry run jupyter lab`
+- Open up the [Cooling Only Example](./examples/NREL%20VAV%20Cooling%20Only.ipynb)
 
 # Setup
-This repository is setup to work with pyenv and poetry:
-- [pyenv](https://github.com/pyenv/pyenv#installation) for managing python versions
-- [poetry](https://python-poetry.org/docs/#installation) for managing environment
-- [pre-commit](https://pre-commit.com/#install) for managing code styling
-
-## Using Poetry
-See [here](https://gist.github.com/corymosiman12/26fb682df2d36b5c9155f344eccbe404) for poetry setup info
-
-# Tests
-- `poetry run pytest`
+Recommended setup documented [here](https://gist.github.com/corymosiman12/26fb682df2d36b5c9155f344eccbe404)
