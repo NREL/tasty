@@ -65,12 +65,6 @@
       "tags-custom": ["operating", "mode"]
     },
     {
-      "name": "ZoneEquipmentOperatingStateShape",
-      "types": ["point"],
-      "tags": ["sp"],
-      "tags-custom": ["operating", "mode"]
-    },
-    {
       "name": "DischargeAirTemperatureShape",
       "types": ["discharge-air-temp-sensor"],
       "tags": ["leaving"]
