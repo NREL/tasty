@@ -24,13 +24,7 @@ def generate_shapes(args):
     if len(sg.source_shapes_by_file) == 0:
         print(f"No source shapes found for {args.schema}")
     else:
-        for file_path, shape_template in sg.source_shapes_by_file.items():
-            name = os.path.splitext(os.path.basename(file_path))[0]
-            print("#" * 20)
-            print(f"Shapes from file: {name}")
-            sg.main(shape_template)
-            sg.write_shapes_graph_to_generated_shapes_dir(f"{args.schema.lower()}_{name}.ttl")
-            sg.reset_shapes_graph()
+        sg.main_generate_all_and_merge()
 
 
 def generate_input(args):

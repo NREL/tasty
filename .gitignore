@@ -21,3 +21,6 @@ input-file.csv
 
 # temporary ignores
 tests/files/test.hayson.json
+
+# don't ignore test instance data
+!tests/files/data/*

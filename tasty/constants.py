@@ -41,7 +41,10 @@ PHIOT_3_9_10 = Namespace("https://project-haystack.org/def/phIoT/3.9.10#")
 
 # Haystack Datashapes
 PH_SHAPES_CORE = Namespace("https://project-haystack.org/datashapes/core#")
+PH_SHAPES_NREL = Namespace("https://project-haystack.org/datashapes/nrel#")
 PH_CUSTOM = Namespace("https://project-haystack.org/def/custom#")
+
+BRICK_CUSTOM = Namespace("https://brickschema.org/custom#")
 
 PH_DEFAULT = None
 PHICT_DEFAULT = None

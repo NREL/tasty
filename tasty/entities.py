@@ -1,11 +1,69 @@
 from copy import deepcopy
 from uuid import uuid4, UUID
-from typing import List, Union
+from typing import List, Union, Set
+import logging
 
 from rdflib import Namespace, RDF, Graph, URIRef, Literal
 
 import tasty.graphs as tg
 import tasty.constants as tc
+from tasty.shapes_generator import ShapesGenerator
+
+
+class RefType:
+    def __init__(self, type_uri: URIRef, type_docs: Literal):
+        self._type_uri = type_uri
+        self._type_docs = type_docs
+
+
+class SimpleShape:
+    def __init__(self, data, schema, version):
+        self.type = data.get('type')
+        self.schema = schema
+        self.version = version
+        self.tags = data.get('tags')
+        self.tags_custom = data.get('tags-custom')
+        self.docs_query = f'''SELECT ?docs {{ {URIRef(self.type).n3()} rdfs:comment ?docs . }}'''
+        self.docs: str = ''
+
+    def cast_to_entity(self, id=None) -> 'EntityType':
+        ont = tg.load_ontology(self.schema, self.version)
+        docs = ont.query(self.docs_query)
+        if docs:
+            docs = list(docs)
+            self.docs = docs[0][0]
+        et = EntityType(self.type, self.docs, self.schema, self.version)
+        if self.tags:
+            et.add_tags(self.tags, ont)
+        if self.tags_custom:
+            et.add_tags(self.tags_custom, ont)
+        if id:
+            et.set_id(id)
+        return et
+
+
+class ShapesWrapper:
+    def __init__(self, schema, version):
+        self.sg = ShapesGenerator(schema, version)
+
+    def bind(self):
+        for file, file_data in self.sg.source_shapes_by_file.items():
+            for shape in file_data['shapes']:
+                keys = set(shape.keys())
+                dont_want = {'predicates', 'shape-mixins'}
+                want = {'name', 'types'}
+                if keys.intersection(dont_want):
+                    continue
+                if want <= keys and len(shape.get('types')) == 1:
+                    data = {
+                        'type': tg.get_namespaced_term(self.sg.ontology, shape['types'][0])
+                    }
+                    if shape.get('tags'):
+                        data['tags'] = shape.get('tags')
+                    if shape.get('tags-custom'):
+                        data['tags-custom'] = shape.get('tags-custom')
+
+                    self.__setattr__(shape['name'].replace('-', '_'), SimpleShape(data, self.sg.schema, self.sg.version))
 
 
 class EntityType:
@@ -15,13 +73,23 @@ class EntityType:
     i.e. a point, ahu, etc.
     """
 
-    def __init__(self, type_uri: URIRef, type_docs: Literal, namespace: Namespace = None):
+    def __init__(self, type_uri: URIRef, type_docs: Literal, schema, version, namespace: Namespace = None):
         self._type_uri = type_uri
         self._type_docs = type_docs
         self._namespace = namespace
         self._id: UUID = None
         self.node: URIRef = None
         self.graph: Graph = None
+        self.schema = schema
+        self.version = version
+        self.tags: Set = set()
+        self.tags_custom: Set = set()
+        self.relationships: Set = set()
+
+        if schema == tc.HAYSTACK:
+            self._custom_namespace = tc.PH_CUSTOM
+        elif schema == tc.BRICK:
+            self._custom_namespace = tc.BRICK_CUSTOM
 
     def __str__(self):
         return str(self._type_uri)
@@ -36,13 +104,17 @@ class EntityType:
         """Return a deep copy of the current self"""
         return deepcopy(self)
 
-    def gen_uuid(self) -> UUID:
+    def set_id(self, new_id=None) -> UUID:
         """
-        Generate a random uuid for this instance
+        Set the id or generate a
         :return: the uuid
         """
-        if self._id is None:
+        if new_id is None and self._id is None:
             self._id = uuid4()
+        elif new_id and self._id is None:
+            self._id = new_id
+        else:
+            print(f"id already set, can't override.")
         return self._id
 
     def set_namespace(self, ns: Union[str, Namespace]) -> bool:
@@ -76,6 +148,46 @@ class EntityType:
         self.graph.add((self.node, RDF.type, self._type_uri))
         return True
 
+    def add_tags(self, tags: List[str], ontology: Graph):
+        assert isinstance(tags, list)
+        for t in tags:
+            ns_term = tg.get_namespaced_term(ontology, t)
+            if ns_term:
+                self.tags.add(ns_term)
+            else:
+                logging.warning(f"{t} not found. adding under custom namespace as: {self._custom_namespace[t]}")
+                self.tags_custom.add(self._custom_namespace[t])
+
+    def add_relationship(self, predicate: RefType, obj: 'EntityType'):
+        if obj.graph and self.graph:
+            assert obj.graph is self.graph, f"Objects cannot be bound to a different graph, cannot add"
+            obj.set_node_name()
+            self.set_node_name()
+        elif obj.graph:
+            self.bind_to_graph(obj.graph)
+            print(f"Bound {self.node} to graph")
+        elif self.graph:
+            obj.bind_to_graph(self.graph)
+            print(f"Bound {obj.node} to graph")
+        else:
+            print("Atleast one of the nodes must be bound to a graph")
+            return False
+        self.relationships.add((predicate, obj))
+
+    def sync(self):
+        self.set_node_name()
+        if not self.graph:
+            return False
+        # Make sure all the objects have node names set
+        for pred, obj in self.relationships:
+            self.graph.add((self.node, pred._type_uri, obj.node))
+            obj.sync()
+        if self.schema == tc.HAYSTACK:
+            for tag in self.tags:
+                self.graph.add((self.node, tc.PH_DEFAULT.hasTag, tag))
+            for tag in self.tags_custom:
+                self.graph.add((self.node, tc.PH_DEFAULT.hasTag, tag))
+
 
 class EntityDefs:
     """
@@ -88,6 +200,7 @@ class EntityDefs:
         :param schema: see load_ontology for supported values
         :param version: see load_ontology for supported values
         """
+        self.schema = schema
         self.version = version
         self.ontology = tg.load_ontology(schema, version)
         self.namespaces = list(self.ontology.namespaces())
@@ -104,7 +217,7 @@ class EntityDefs:
         self.result = self.ontology.query(self.query)
         for node in self.result:
             name = node[0].split('#')[1]
-            self.__setattr__(name.replace('-', '_'), EntityType(node[0], node[1]))
+            self.__setattr__(name.replace('-', '_'), EntityType(node[0], node[1], self.schema, self.version))
 
     def find(self, to_find: Union[str, list], case_sensitive=False) -> List:
         """
@@ -155,6 +268,32 @@ class HaystackEquipDefs(EntityDefs):
             ?n rdfs:subClassOf* phIoT:equip .
             ?n rdfs:comment ?doc .
         }'''
+
+
+class HaystackRefDefs(EntityDefs):
+    """
+    A class with attributes corresponding to Haystack object properties
+    Attributes are only added upon calling the 'bind' method.
+    """
+
+    def __init__(self, version):
+        super().__init__(tc.HAYSTACK, version)
+        self.query = '''SELECT ?r ?doc WHERE {
+            ?r a owl:ObjectProperty .
+            ?n rdfs:comment ?doc .
+        }'''
+
+    def bind(self) -> None:
+        """
+        Create an attribute for each first class type. The value of each
+        attribute is an EntityType.
+        :return:
+        """
+        assert self.query is not None, 'A query string must be defined'
+        self.result = self.ontology.query(self.query)
+        for node in self.result:
+            name = node[0].split('#')[1]
+            self.__setattr__(name.replace('-', '_'), RefType(node[0], node[1]))
 
 
 class BrickPointDefs(EntityDefs):
