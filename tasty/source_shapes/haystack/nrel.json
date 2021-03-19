@@ -120,6 +120,18 @@
       "tags-custom": ["max"]
     },
     {
+      "name": "CoolingRequestsShape",
+      "types": ["point"],
+      "tags": ["cooling", "cmd"],
+      "tags-custom": ["request"]
+    },
+    {
+      "name": "HeatingRequestsShape",
+      "types": ["point"],
+      "tags": ["heating", "cmd"],
+      "tags-custom": ["request"]
+    },
+    {
       "name": "OccupancyModeStandbyShape",
       "types": ["point"],
       "tags": ["occ", "sp"],
@@ -160,13 +172,17 @@
               "ZoneRelativeHumidityShape"
             ]
           }
-        ],
+        ]
+      }
+    },
+    {
+      "name": "ZoneOccupancySensorsShape",
+      "predicates": {
         "optional": [
           {
             "path": "equipRef",
             "path-type": "inverse",
             "shapes": [
-              "zone-air-co2-sensor-shape",
               "BinaryOccupancySensorShape",
               "OccupancyOverrideCommandShape"
             ]
@@ -175,7 +191,22 @@
       }
     },
     {
-      "name": "ZoneThermalComfortSetpointsShape",
+      "name": "ZoneDemandControlledVentilationShape",
+      "predicates": {
+        "required": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "zone-air-co2-sensor-shape",
+              "zone-air-co2-sp-shape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ZoneCoolingSetpointsShape",
       "predicates": {
         "requires": [
           {
@@ -183,10 +214,32 @@
             "path-type": "inverse",
             "shapes": [
               "ZoneTemperatureCoolingEffectiveSetpointShape",
-              "ZoneTemperatureHeatingEffectiveSetpointShape",
               "ZoneTemperatureCoolingOccupiedSetpointShape",
+              "ZoneTemperatureCoolingUnoccupiedSetpointShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ZoneTemperatureCoolingStandbySetpointShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ZoneHeatingSetpointsShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ZoneTemperatureHeatingEffectiveSetpointShape",
               "ZoneTemperatureHeatingOccupiedSetpointShape",
-              "ZoneTemperatureCoolingUnoccupiedSetpointShape",
               "ZoneTemperatureHeatingUnoccupiedSetpointShape"
             ]
           }
@@ -196,16 +249,14 @@
             "path": "equipRef",
             "path-type": "inverse",
             "shapes": [
-              "ZoneTemperatureCoolingStandbySetpointShape",
-              "ZoneTemperatureHeatingStandbySetpointShape",
-              "zone-air-co2-sp-shape"
+              "ZoneTemperatureHeatingStandbySetpointShape"
             ]
           }
         ]
       }
     },
     {
-      "name": "ModeControlShape",
+      "name": "ZoneModeControlShape",
       "predicates": {
         "optional": [
           {
@@ -221,7 +272,23 @@
       }
     },
     {
-      "name": "AirFlowControlShape",
+      "name": "AirTemperatureControlShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DischargeAirTemperatureShape",
+              "CoolingRequestsShape",
+              "HeatingRequestsShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "VAVAirFlowControlShape",
       "predicates": {
         "requires": [
           {
@@ -254,21 +321,14 @@
       "types": ["coolingOnly-vav"],
       "shape-mixins": [
         "ZoneThermalComfortSensorsShape",
-        "ZoneThermalComfortSetpointsShape",
-        "ModeControlShape",
-        "AirFlowControlShape"
-      ],
-      "predicates": {
-        "requires": [
-          {
-            "path": "equipRef",
-            "path-type": "inverse",
-            "shapes": [
-              "DischargeAirTemperatureShape"
-            ]
-          }
-        ]
-      }
+        "ZoneOccupancySensorsShape",
+        "ZoneDemandControlledVentilationShape",
+        "ZoneCoolingSetpointsShape",
+        "ZoneHeatingSetpointsShape",
+        "ZoneModeControlShape",
+        "AirTemperatureControlShape",
+        "VAVAirFlowControlShape"
+      ]
     }
   ]
 }
