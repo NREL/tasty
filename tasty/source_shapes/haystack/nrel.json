@@ -149,7 +149,7 @@
       }
     },
     {
-      "name": "VAVZoneThermalComfortSensorsShape",
+      "name": "ZoneThermalComfortSensorsShape",
       "predicates": {
         "requires": [
           {
@@ -175,7 +175,7 @@
       }
     },
     {
-      "name": "VAVZoneThermalComfortSetpointsShape",
+      "name": "ZoneThermalComfortSetpointsShape",
       "predicates": {
         "requires": [
           {
@@ -205,7 +205,7 @@
       }
     },
     {
-      "name": "VAVModeControlShape",
+      "name": "ModeControlShape",
       "predicates": {
         "optional": [
           {
@@ -221,7 +221,7 @@
       }
     },
     {
-      "name": "VAVAirFlowControlShape",
+      "name": "AirFlowControlShape",
       "predicates": {
         "requires": [
           {
@@ -253,10 +253,10 @@
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
       "types": ["coolingOnly-vav"],
       "shape-mixins": [
-        "VAVZoneThermalComfortSensorsShape",
-        "VAVZoneThermalComfortSetpointsShape",
-        "VAVModeControlShape",
-        "VAVAirFlowControlShape"
+        "ZoneThermalComfortSensorsShape",
+        "ZoneThermalComfortSetpointsShape",
+        "ModeControlShape",
+        "AirFlowControlShape"
       ],
       "predicates": {
         "requires": [
