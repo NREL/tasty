@@ -121,7 +121,8 @@
     },
     {
       "name": "OccupancyModeStandbyShape",
-      "tags": ["occ", "sp", "point"],
+      "types": ["point"],
+      "tags": ["occ", "sp"],
       "tags-custom": ["mode"],
       "vals": {
         "enum": "Occupied,Unoccupied,Standby"
@@ -129,7 +130,8 @@
     },
     {
       "name": "OccupancyModeBinaryShape",
-      "tags": ["occupied", "sp", "point"]
+      "types": ["point"],
+      "tags": ["occupied", "sp"]
     },
     {
       "name": "AhuOccupancyShape",
