@@ -76,17 +76,17 @@ class TestNRELVavCoolingOnly:
         output_file = os.path.join(validate_dir, f)
         results_graph.serialize(output_file, format='turtle')
 
-        if conforms:
-            # serialize shapes graph for debugging
-            shapes_graph.serialize('TestNRELVavCoolingOnly-test_is_invalid.ttl', format='turtle')
-        # -- Assert does not conform
-        assert not conforms
-
         # Grab easy to read info
         str_name = str(shape_name)
         str_name = str_name.split('#')[1]
         target_name = str(target_node)
         target_name = target_name.split(str(SAMPLE))[1]
+
+        # serialize shapes graph for debugging
+        f = f"{str_name}_{target_name}" + '_'.join(remove_markers) + '_remove-shapes-graph.ttl'
+        shapes_graph.serialize(f, format='turtle')
+        # -- Assert does not conform
+        assert not conforms
 
         # Here we iterate through to add target nodes
         # based on
@@ -95,7 +95,7 @@ class TestNRELVavCoolingOnly:
             conforms, results_graph, results = run_another(results_graph, shapes_graph, data_graph, ont_graph)
 
         # -- Serialize results
-        f = f"NREL_{str_name}_{target_name}" + '_'.join(remove_markers) + '_remove.ttl'
+        f = f"{str_name}_{target_name}" + '_'.join(remove_markers) + '_remove-results-graph.ttl'
         output_file = os.path.join(validate_dir, f)
         results_graph.serialize(output_file, format='turtle')
 
