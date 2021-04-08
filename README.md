@@ -35,6 +35,11 @@ poetry run tasty generate-input -dg tests/files/data/haystack_g36_data_3_9_10.tt
 ```
 - Add the `-c` flag to only add composite shapes to your input file. Composite meaning shapes having other shape, i.e. a shape for a specific vav box configuration, etc.
 
+### OAP Inputs
+We scrape the BuildingsIOT API for all of their points and functions and then use these to create a source shapes file (`oap.json`). Run the following scripts in order:
+- `poetry run python tasty/utils/scrape_oap.py`
+- `poetry run python tasty/utils/generate_oap.py` -> outputs `oap.json`
+
 ## Validate instance data
 Using the generated `input-file.csv`, mark an `X` in the cells according to the shape you want the entity to validate against. Using the example generated from above, the following should be true:
 

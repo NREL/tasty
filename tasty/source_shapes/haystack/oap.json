@@ -1,0 +1,5946 @@
+{
+  "prefix": "oap",
+  "namespace": "https://oap.buildingsiot.com#",
+  "shapes": [
+    {
+      "name": "ASNLNDCALL",
+      "description": "Assigned Landing Calls",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cmd"
+      ],
+      "tags-custom": [
+        "landing",
+        "call"
+      ]
+    },
+    {
+      "name": "CARDIRCMD",
+      "description": "Car Assigned Direction",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "direction",
+        "cmd"
+      ],
+      "tags-custom": [
+        "car"
+      ]
+    },
+    {
+      "name": "CARDIR",
+      "description": "Car Moving Direction",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "direction",
+        "sensor"
+      ],
+      "tags-custom": [
+        "car"
+      ]
+    },
+    {
+      "name": "CARDRST",
+      "description": "Car Door Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor",
+        "state"
+      ],
+      "tags-custom": [
+        "car",
+        "door"
+      ]
+    },
+    {
+      "name": "CARDRVST",
+      "description": "Car Drive Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor",
+        "state",
+        "drive"
+      ],
+      "tags-custom": [
+        "car"
+      ]
+    },
+    {
+      "name": "CARLD",
+      "description": "Car Load",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "load",
+        "sensor"
+      ],
+      "tags-custom": [
+        "car"
+      ]
+    },
+    {
+      "name": "CARMD",
+      "description": "Car Mode",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sp"
+      ],
+      "tags-custom": [
+        "car",
+        "mode"
+      ]
+    },
+    {
+      "name": "CARNXTPOS",
+      "description": "Next Stopping Floor",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "car",
+        "position",
+        "next"
+      ]
+    },
+    {
+      "name": "CARPOS",
+      "description": "Car Position",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "car",
+        "position"
+      ]
+    },
+    {
+      "name": "ELVOOS",
+      "description": "Elevator Out of Service",
+      "types": [
+        "elevator",
+        "point"
+      ],
+      "tags": [
+        "sensor",
+        "state"
+      ]
+    },
+    {
+      "name": "ESCOOS",
+      "description": "Escalator Out of Service",
+      "types": [
+        "escalator",
+        "point"
+      ],
+      "tags": [
+        "sensor",
+        "state"
+      ]
+    },
+    {
+      "name": "MKCARCALL",
+      "description": "Making Car Calls",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cmd"
+      ],
+      "tags-custom": [
+        "car",
+        "call"
+      ]
+    },
+    {
+      "name": "LNDCALL",
+      "description": "Landing Calls",
+      "types": [
+        "point"
+      ],
+      "tags-custom": [
+        "group",
+        "landing",
+        "call"
+      ]
+    },
+    {
+      "name": "LNDDRST",
+      "description": "Landing Door Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor",
+        "state"
+      ],
+      "tags-custom": [
+        "landing",
+        "door"
+      ]
+    },
+    {
+      "name": "OPDIR",
+      "description": "Operation Direction",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "direction",
+        "sensor"
+      ]
+    },
+    {
+      "name": "PASALM",
+      "description": "Passenger Alarm",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "alarm"
+      ]
+    },
+    {
+      "name": "REGCARCALL",
+      "description": "Registered Car Calls",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sp"
+      ],
+      "tags-custom": [
+        "car",
+        "call"
+      ]
+    },
+    {
+      "name": "ENLDSH",
+      "description": "Enable Loadshedding",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "enable",
+        "cmd"
+      ],
+      "tags-custom": [
+        "loadshed"
+      ]
+    },
+    {
+      "name": "WTRTEMP",
+      "description": "Water Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "temp",
+        "water",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ACSLVL",
+      "description": "Acoustic Level",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "acoustic"
+      ]
+    },
+    {
+      "name": "DIMCMD",
+      "description": "Dimming Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "load",
+        "cmd"
+      ]
+    },
+    {
+      "name": "EPRTBAND",
+      "description": "Ethernet Port Bandwidth",
+      "types": [
+        "point"
+      ],
+      "tags-custom": [
+        "bandwidth"
+      ]
+    },
+    {
+      "name": "EPRTERR",
+      "description": "Ethernet Port Error Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ]
+    },
+    {
+      "name": "EPRTST",
+      "description": "Ethernet Port Connection Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ]
+    },
+    {
+      "name": "NGVOL",
+      "description": "Total Natural Gas Volume",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "naturalGas",
+        "sensor",
+        "total"
+      ],
+      "tags-custom": [
+        "volume"
+      ]
+    },
+    {
+      "name": "NGFLOW",
+      "description": "Natural Gas Flow Rate",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "naturalGas",
+        "sensor",
+        "flow"
+      ]
+    },
+    {
+      "name": "OARH",
+      "description": "Outside Air Relative Humidity",
+      "types": [
+        "outside-air-humidity-sensor"
+      ]
+    },
+    {
+      "name": "OATEMP",
+      "description": "Outside Air Temperature",
+      "types": [
+        "outside-air-temp-sensor"
+      ]
+    },
+    {
+      "name": "OCCSNS",
+      "description": "Occupancy Sensor",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "occupied",
+        "sensor"
+      ]
+    },
+    {
+      "name": "POECURR",
+      "description": "Power-Over-Ethernet Current",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "current",
+        "sensor",
+        "dc"
+      ],
+      "tags-custom": [
+        "poe"
+      ]
+    },
+    {
+      "name": "POEPWR",
+      "description": "Power-Over-Ethernet Power",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "power",
+        "sensor",
+        "dc"
+      ],
+      "tags-custom": [
+        "poe"
+      ]
+    },
+    {
+      "name": "PRKSPACT",
+      "description": "Parking Space Active",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor",
+        "active"
+      ]
+    },
+    {
+      "name": "PRKSPST",
+      "description": "Parking Space Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "occ",
+        "sensor"
+      ]
+    },
+    {
+      "name": "RES",
+      "description": "Resolution",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "resolution"
+      ]
+    },
+    {
+      "name": "RMRH",
+      "description": "Room Relative Humidity",
+      "types": [
+        "room",
+        "air-humidity-sensor"
+      ]
+    },
+    {
+      "name": "RMTEMP",
+      "description": "Room Temperature",
+      "types": [
+        "room",
+        "air-temp-sensor"
+      ]
+    },
+    {
+      "name": "SSCMD",
+      "description": "Run Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "cmd"
+      ]
+    },
+    {
+      "name": "SSST",
+      "description": "Run Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "sensor",
+        "state"
+      ]
+    },
+    {
+      "name": "CMST",
+      "description": "Communication Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor",
+        "state"
+      ],
+      "tags-custom": [
+        "comm"
+      ]
+    },
+    {
+      "name": "DVST",
+      "description": "Device Status",
+      "types": [
+        "device",
+        "point"
+      ],
+      "tags": [
+        "sensor",
+        "state"
+      ]
+    },
+    {
+      "name": "SDLD",
+      "description": "Storage Drive Usage",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "load",
+        "sensor"
+      ],
+      "tags-custom": [
+        "storageDrive"
+      ]
+    },
+    {
+      "name": "CPULD",
+      "description": "CPU Usage",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "load",
+        "sensor"
+      ],
+      "tags-custom": [
+        "cpu"
+      ]
+    },
+    {
+      "name": "PMLD",
+      "description": "Physical Memory Usage",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "load",
+        "sensor"
+      ],
+      "tags-custom": [
+        "physicalMemory"
+      ]
+    },
+    {
+      "name": "TLPM",
+      "description": "Total Physical Memory Capacity",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "total",
+        "sp"
+      ],
+      "tags-custom": [
+        "physicalMemory"
+      ]
+    },
+    {
+      "name": "HPLD",
+      "description": "Heap Memory Usage",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "load",
+        "sensor"
+      ],
+      "tags-custom": [
+        "heap"
+      ]
+    },
+    {
+      "name": "TLSD",
+      "description": "Total Storage Drive Capacity",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "total",
+        "sp"
+      ],
+      "tags-custom": [
+        "storageDrive"
+      ]
+    },
+    {
+      "name": "BATST",
+      "description": "Battery Status",
+      "types": [
+        "point",
+        "battery"
+      ],
+      "tags": [
+        "sensor",
+        "state"
+      ]
+    },
+    {
+      "name": "ACI",
+      "description": "AC Current",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "magnitude",
+        "elec",
+        "sensor",
+        "current"
+      ]
+    },
+    {
+      "name": "ACIA",
+      "description": "AC Current Phase A",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "magnitude",
+        "elec",
+        "sensor",
+        "current"
+      ],
+      "tags-custom": [
+        "phase"
+      ]
+    },
+    {
+      "name": "ACIAVG",
+      "description": "Average AC Current",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "avg",
+        "elec",
+        "sensor",
+        "current"
+      ]
+    },
+    {
+      "name": "ACIB",
+      "description": "AC Current Phase B",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "magnitude",
+        "elec",
+        "sensor",
+        "current"
+      ],
+      "tags-custom": [
+        "phase"
+      ]
+    },
+    {
+      "name": "ACIC",
+      "description": "AC Current Phase C",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "magnitude",
+        "elec",
+        "sensor",
+        "current"
+      ],
+      "tags-custom": [
+        "phase"
+      ]
+    },
+    {
+      "name": "ACITTL",
+      "description": "Total AC Current",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "elec",
+        "total",
+        "sensor",
+        "current"
+      ]
+    },
+    {
+      "name": "ACFREQ",
+      "description": "AC Frequency",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "freq",
+        "sensor",
+        "elec"
+      ]
+    },
+    {
+      "name": "ACPF",
+      "description": "Power Factor",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "elec",
+        "sensor",
+        "pf"
+      ]
+    },
+    {
+      "name": "ACPFA",
+      "description": "Power Factor Phase A",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "elec",
+        "sensor",
+        "pf"
+      ],
+      "tags-custom": [
+        "phase"
+      ]
+    },
+    {
+      "name": "ACPFB",
+      "description": "Power Factor Phase B",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "elec",
+        "sensor",
+        "pf"
+      ],
+      "tags-custom": [
+        "phase"
+      ]
+    },
+    {
+      "name": "ACPFC",
+      "description": "Power Factor Phase C",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "elec",
+        "sensor",
+        "pf"
+      ],
+      "tags-custom": [
+        "phase"
+      ]
+    },
+    {
+      "name": "ACPFAVG",
+      "description": "Average Power Factor",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "avg",
+        "elec",
+        "sensor",
+        "pf"
+      ]
+    },
+    {
+      "name": "ACV",
+      "description": "AC Voltage",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "volt",
+        "magnitude",
+        "elec",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ACVA",
+      "description": "AC Voltage Phase A",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "volt",
+        "magnitude",
+        "elec",
+        "sensor"
+      ],
+      "tags-custom": [
+        "phase"
+      ]
+    },
+    {
+      "name": "ACVAVG",
+      "description": "Average AC Voltage",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "volt",
+        "avg",
+        "elec",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ACVB",
+      "description": "AC Voltage Phase B",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "volt",
+        "magnitude",
+        "elec",
+        "sensor"
+      ],
+      "tags-custom": [
+        "phase"
+      ]
+    },
+    {
+      "name": "ACVC",
+      "description": "AC Voltage Phase C",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "volt",
+        "magnitude",
+        "elec",
+        "sensor"
+      ],
+      "tags-custom": [
+        "phase"
+      ]
+    },
+    {
+      "name": "APPENE",
+      "description": "Apparent Energy",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "apparent",
+        "elec",
+        "total",
+        "energy",
+        "sensor"
+      ]
+    },
+    {
+      "name": "APPPWR",
+      "description": "Apparent Power",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "apparent",
+        "power",
+        "elec",
+        "total",
+        "sensor"
+      ]
+    },
+    {
+      "name": "DCV",
+      "description": "DC Voltage",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "volt",
+        "magnitude",
+        "elec",
+        "sensor",
+        "dc"
+      ]
+    },
+    {
+      "name": "ENERGYNET",
+      "description": "Net Active Energy",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "elec",
+        "total",
+        "energy",
+        "active",
+        "net",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ENERGYIMP",
+      "description": "Imported Active Energy",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "elec",
+        "total",
+        "import",
+        "energy",
+        "active",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ENERGYEXP",
+      "description": "Exported Active Energy",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "export",
+        "elec",
+        "total",
+        "energy",
+        "active",
+        "sensor"
+      ]
+    },
+    {
+      "name": "PWRDMD",
+      "description": "Power Demand",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "total",
+        "sensor",
+        "elec"
+      ],
+      "tags-custom": [
+        "demand"
+      ]
+    },
+    {
+      "name": "REACENE",
+      "description": "Total Reactive Energy",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "reactive",
+        "elec",
+        "total",
+        "energy",
+        "sensor"
+      ]
+    },
+    {
+      "name": "REACPWR",
+      "description": "Reactive Power",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "reactive",
+        "power",
+        "elec",
+        "total",
+        "sensor"
+      ]
+    },
+    {
+      "name": "RLPWR",
+      "description": "Real Power",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "power",
+        "elec",
+        "total",
+        "active",
+        "sensor"
+      ]
+    },
+    {
+      "name": "RLPWRA",
+      "description": "Real Power Phase A",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "power",
+        "elec",
+        "active",
+        "sensor"
+      ],
+      "tags-custom": [
+        "phase"
+      ]
+    },
+    {
+      "name": "RLPWRB",
+      "description": "Real Power Phase B",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "power",
+        "elec",
+        "active",
+        "sensor"
+      ],
+      "tags-custom": [
+        "phase"
+      ]
+    },
+    {
+      "name": "RLPWRC",
+      "description": "Real Power Phase C",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "ac",
+        "power",
+        "elec",
+        "active",
+        "sensor"
+      ],
+      "tags-custom": [
+        "phase"
+      ]
+    },
+    {
+      "name": "ZCO",
+      "description": "Zone CO",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "co",
+        "zone"
+      ]
+    },
+    {
+      "name": "ZTVOC",
+      "description": "Zone TVOC",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "tvoc",
+        "zone"
+      ]
+    },
+    {
+      "name": "ZPM10",
+      "description": "Zone PM 10",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "pm10",
+        "zone"
+      ]
+    },
+    {
+      "name": "ZPM25",
+      "description": "Zone PM 2.5",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "pm25",
+        "zone"
+      ]
+    },
+    {
+      "name": "ZPM01",
+      "description": "Zone PM 0.1",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "zone"
+      ],
+      "tags-custom": [
+        "pm01"
+      ]
+    },
+    {
+      "name": "ZHCHO",
+      "description": "Zone HCHO",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "zone"
+      ],
+      "tags-custom": [
+        "hcho"
+      ]
+    },
+    {
+      "name": "ZNO2",
+      "description": "Zone NO2",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "zone"
+      ],
+      "tags-custom": [
+        "no2"
+      ]
+    },
+    {
+      "name": "ZO3",
+      "description": "Zone O3",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "zone"
+      ],
+      "tags-custom": [
+        "o3"
+      ]
+    },
+    {
+      "name": "ZNH3",
+      "description": "Zone NH3",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "zone"
+      ],
+      "tags-custom": [
+        "nh3"
+      ]
+    },
+    {
+      "name": "ZPCNT",
+      "description": "Zone People Count",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "zone",
+        "sensor",
+        "occupancy"
+      ]
+    },
+    {
+      "name": "LNIPCNT",
+      "description": "Line In People Count",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "entering",
+        "sensor",
+        "occupancy"
+      ],
+      "tags-custom": [
+        "line"
+      ]
+    },
+    {
+      "name": "LNOPCNT",
+      "description": "Line Out People Count",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "leaving",
+        "sensor",
+        "occupancy"
+      ],
+      "tags-custom": [
+        "line"
+      ]
+    },
+    {
+      "name": "BLDSPR",
+      "description": "Bldg Static Pressure",
+      "types": [
+        "return-air-pressure-sensor"
+      ]
+    },
+    {
+      "name": "BLDSPRSP",
+      "description": "Bldg Static Pressure Setpoint",
+      "types": [
+        "return-air-pressure-sp"
+      ]
+    },
+    {
+      "name": "BYPDCMD",
+      "description": "Bypass Damper Command",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "cmd",
+        "bypass"
+      ]
+    },
+    {
+      "name": "EFFCDAFLWSP",
+      "description": "Effective Cold Deck Air Flow Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "effective",
+        "coldDeck"
+      ]
+    },
+    {
+      "name": "CDDATSP",
+      "description": "Cold Deck Discharge Air Temperature Setpoint",
+      "types": [
+        "discharge-air-temp-sp"
+      ],
+      "tags": [
+        "effective",
+        "coldDeck"
+      ]
+    },
+    {
+      "name": "CDDCMD",
+      "description": "Cold Deck Damper Command",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "coldDeck",
+        "damper",
+        "cmd"
+      ]
+    },
+    {
+      "name": "CHWBYPVCMD",
+      "description": "Chilled Water Bypass Valve Command",
+      "types": [
+        "chilled-water-point"
+      ],
+      "tags": [
+        "valve",
+        "cmd",
+        "bypass"
+      ]
+    },
+    {
+      "name": "CHWISOVCMD",
+      "description": "Chilled Water Isolation Valve Command",
+      "types": [
+        "chilled-water-point"
+      ],
+      "tags": [
+        "isolation",
+        "valve",
+        "cmd"
+      ]
+    },
+    {
+      "name": "CHWVCMD",
+      "description": "Chilled Water Valve Command",
+      "types": [
+        "chilled-water-point"
+      ],
+      "tags": [
+        "cool",
+        "valve",
+        "cmd"
+      ]
+    },
+    {
+      "name": "CHWVFBK",
+      "description": "Chilled Water Valve Position Feedback",
+      "types": [
+        "chilled-water-sensor"
+      ],
+      "tags": [
+        "cool",
+        "valve"
+      ]
+    },
+    {
+      "name": "CLCMD",
+      "description": "Cooling Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cool",
+        "cmd"
+      ]
+    },
+    {
+      "name": "CLSTG1CMD",
+      "description": "Cooling Stage 1 Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cool",
+        "cmd"
+      ],
+      "tags-custom": [
+        "stage"
+      ]
+    },
+    {
+      "name": "CLSTG2CMD",
+      "description": "Cooling Stage 2 Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cool",
+        "cmd"
+      ],
+      "tags-custom": [
+        "stage"
+      ]
+    },
+    {
+      "name": "CLSTG3CMD",
+      "description": "Cooling Stage 3 Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cool",
+        "cmd"
+      ],
+      "tags-custom": [
+        "stage"
+      ]
+    },
+    {
+      "name": "CLSTG4CMD",
+      "description": "Cooling Stage 4 Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cool",
+        "cmd"
+      ],
+      "tags-custom": [
+        "stage"
+      ]
+    },
+    {
+      "name": "CLDEM",
+      "description": "Cooling Demand",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cooling",
+        "load",
+        "sensor"
+      ]
+    },
+    {
+      "name": "CLREQ",
+      "description": "Cooling Requests",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cooling",
+        "sp"
+      ],
+      "tags-custom": [
+        "request"
+      ]
+    },
+    {
+      "name": "CTBYPVCMD",
+      "description": "Cooling Tower Bypass Valve Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cmd",
+        "valve",
+        "bypass",
+        "water",
+        "condenser"
+      ]
+    },
+    {
+      "name": "CTFCMD",
+      "description": "Cooling Tower Fan Command",
+      "types": [
+        "coolingTower",
+        "point"
+      ],
+      "tags": [
+        "run",
+        "fan",
+        "cmd"
+      ]
+    },
+    {
+      "name": "CTFSPCMD",
+      "description": "Cooling Tower Fan Speed Command",
+      "types": [
+        "coolingTower",
+        "vfd",
+        "point"
+      ],
+      "tags": [
+        "speed",
+        "fan",
+        "cmd"
+      ]
+    },
+    {
+      "name": "CWISOVCMD",
+      "description": "Condenser Water Isolation Valve Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cmd",
+        "valve",
+        "isolation",
+        "water",
+        "condenser"
+      ]
+    },
+    {
+      "name": "CWVCMD",
+      "description": "Condenser Water Valve Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "water",
+        "valve",
+        "condenser",
+        "cmd"
+      ]
+    },
+    {
+      "name": "DADCMD",
+      "description": "Discharge Air Damper Command",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "cmd",
+        "discharge"
+      ]
+    },
+    {
+      "name": "DADCMDOP",
+      "description": "Discharge Air Damper Command Open",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "cmd",
+        "discharge"
+      ],
+      "tags-custom": [
+        "open"
+      ]
+    },
+    {
+      "name": "DADCMDCL",
+      "description": "Discharge Air Damper Command Closed",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "cmd",
+        "discharge"
+      ],
+      "tags-custom": [
+        "open"
+      ]
+    },
+    {
+      "name": "DADFBK",
+      "description": "Discharge Air Damper Feedback",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "damper",
+        "discharge"
+      ]
+    },
+    {
+      "name": "ADFBK",
+      "description": "Air Damper Feedback",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "damper"
+      ]
+    },
+    {
+      "name": "DADCTSPRSP",
+      "description": "Discharge Air Duct Static Pressure Setpoint",
+      "types": [
+        "discharge-air-pressure-sp"
+      ],
+      "tags": [
+        "effective"
+      ]
+    },
+    {
+      "name": "DADCTSPR",
+      "description": "Discharge Air Duct Static Pressure",
+      "types": [
+        "discharge-air-pressure-sensor"
+      ]
+    },
+    {
+      "name": "DPRCMDOP",
+      "description": "Damper Command Open",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "cmd"
+      ],
+      "tags-custom": [
+        "open"
+      ]
+    },
+    {
+      "name": "DPRCMDCL",
+      "description": "Damper Command Closed",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "cmd"
+      ],
+      "tags-custom": [
+        "closed"
+      ]
+    },
+    {
+      "name": "DPRREQ",
+      "description": "Damper Requests",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "damper",
+        "sp"
+      ],
+      "tags-custom": [
+        "request"
+      ]
+    },
+    {
+      "name": "EFFDAFLWSP",
+      "description": "Effective Discharge Air Flow Setpoint",
+      "types": [
+        "discharge-air-flow-sp"
+      ],
+      "tags": [
+        "effective"
+      ]
+    },
+    {
+      "name": "EFFIAFLWSP",
+      "description": "Effective Inlet Air Flow Setpoint",
+      "types": [
+        "inlet-air-flow-sp"
+      ],
+      "tags": [
+        "effective"
+      ]
+    },
+    {
+      "name": "DAFLWSP",
+      "description": "Discharge Air Flow Setpoint",
+      "types": [
+        "discharge-air-flow-sp"
+      ]
+    },
+    {
+      "name": "DATSP",
+      "description": "Discharge Air Temperature Setpoint",
+      "types": [
+        "discharge-air-temp-sp"
+      ],
+      "tags": [
+        "effective"
+      ]
+    },
+    {
+      "name": "DATCLSP",
+      "description": "Discharge Air Temperature Cooling Setpoint",
+      "types": [
+        "discharge-air-temp-sp"
+      ],
+      "tags": [
+        "effective",
+        "cooling"
+      ]
+    },
+    {
+      "name": "DATHTSP",
+      "description": "Discharge Air Temperature Heating Setpoint",
+      "types": [
+        "discharge-air-temp-sp"
+      ],
+      "tags": [
+        "effective",
+        "heating"
+      ]
+    },
+    {
+      "name": "DARHSP",
+      "description": "Discharge Air Humidity Setpoint",
+      "types": [
+        "discharge-air-humidity-sp"
+      ]
+    },
+    {
+      "name": "DFCMD",
+      "description": "Discharge Fan Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "fan",
+        "cmd",
+        "discharge"
+      ]
+    },
+    {
+      "name": "DFSPCMD",
+      "description": "Discharge Fan Speed Command",
+      "types": [
+        "vfd",
+        "point"
+      ],
+      "tags": [
+        "speed",
+        "fan",
+        "cmd",
+        "discharge"
+      ]
+    },
+    {
+      "name": "EADCMD",
+      "description": "Exhaust Air Damper Command",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "exhaust",
+        "cmd"
+      ]
+    },
+    {
+      "name": "EAFLWSP",
+      "description": "Exhaust Air Flow Setpoint",
+      "types": [
+        "exhaust-air-flow-sp"
+      ]
+    },
+    {
+      "name": "ECCMD",
+      "description": "Economizer Output Command",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "economizing",
+        "cmd",
+        "outside"
+      ]
+    },
+    {
+      "name": "ECENCMD",
+      "description": "Economizer Enable Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "enable",
+        "economizing",
+        "cmd"
+      ]
+    },
+    {
+      "name": "ECOALCKTSP",
+      "description": "Economizer Outdoor Air Lockout Temperature Setpoint",
+      "types": [
+        "outside-air-temp-sp"
+      ],
+      "tags": [
+        "damper",
+        "economizing",
+        "enable"
+      ]
+    },
+    {
+      "name": "EFCMD",
+      "description": "Exhaust Fan Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "fan",
+        "cmd",
+        "exhaust"
+      ]
+    },
+    {
+      "name": "EFSPCMD",
+      "description": "Exhaust Fan Speed Command",
+      "types": [
+        "vfd",
+        "point"
+      ],
+      "tags": [
+        "speed",
+        "exhaust",
+        "cmd",
+        "fan"
+      ]
+    },
+    {
+      "name": "EHTOCMD",
+      "description": "Electric Heating Output Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "elec",
+        "heat",
+        "cmd"
+      ]
+    },
+    {
+      "name": "FLTDPR",
+      "description": "Filter Differential Pressure",
+      "types": [
+        "air-pressure-sensor"
+      ],
+      "tags-custom": [
+        "filter"
+      ]
+    },
+    {
+      "name": "EFFHDAFLWSP",
+      "description": "Effective Hot Deck Air Flow Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "effective",
+        "hotDeck"
+      ]
+    },
+    {
+      "name": "HDDATSP",
+      "description": "Hot Deck Discharge Air Temperature Setpoint",
+      "types": [
+        "discharge-air-temp-sp"
+      ],
+      "tags": [
+        "effective",
+        "hotDeck"
+      ]
+    },
+    {
+      "name": "HDDCMD",
+      "description": "Hot Deck Damper Command",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "cmd",
+        "hotDeck"
+      ]
+    },
+    {
+      "name": "HTCMD",
+      "description": "Heating Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "cmd"
+      ]
+    },
+    {
+      "name": "HTDEM",
+      "description": "Heating Demand",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "load",
+        "sensor",
+        "heating"
+      ]
+    },
+    {
+      "name": "HTREQ",
+      "description": "Heating Requests",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heating",
+        "sp"
+      ],
+      "tags-custom": [
+        "request"
+      ]
+    },
+    {
+      "name": "HTGCLGV",
+      "description": "Htg Clg Valve",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "valve",
+        "cmd"
+      ],
+      "tags-custom": [
+        "heatCool"
+      ]
+    },
+    {
+      "name": "HTGRHVCMD",
+      "description": "Hot Gas Reheat Valve Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "valve",
+        "cmd"
+      ],
+      "tags-custom": [
+        "hotGas"
+      ]
+    },
+    {
+      "name": "HTGRHSP",
+      "description": "Hot Gas Reheat Setpoint",
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "reheat"
+      ],
+      "tags-custom": [
+        "hotGas"
+      ]
+    },
+    {
+      "name": "HTGRHDBSP",
+      "description": "Hot Gas Reheat Deadband Setpoint",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "reheat",
+        "sp"
+      ],
+      "tags-custom": [
+        "hotGas",
+        "deadband"
+      ]
+    },
+    {
+      "name": "HTSTG1CMD",
+      "description": "Heating Stage 1 Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "cmd"
+      ],
+      "tags-custom": [
+        "stage"
+      ]
+    },
+    {
+      "name": "HTSTG2CMD",
+      "description": "Heating Stage 2 Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "cmd"
+      ],
+      "tags-custom": [
+        "stage"
+      ]
+    },
+    {
+      "name": "HTSTG3CMD",
+      "description": "Heating Stage 3 Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "cmd"
+      ],
+      "tags-custom": [
+        "stage"
+      ]
+    },
+    {
+      "name": "HTSTG4CMD",
+      "description": "Heating Stage 4 Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "cmd"
+      ],
+      "tags-custom": [
+        "stage"
+      ]
+    },
+    {
+      "name": "HWBYPVCMD",
+      "description": "Hot Water Bypass Valve Command",
+      "types": [
+        "hot-water-point"
+      ],
+      "tags": [
+        "valve",
+        "cmd",
+        "bypass"
+      ]
+    },
+    {
+      "name": "HWVCMD",
+      "description": "Hot Water Valve Command",
+      "types": [
+        "hot-water-point"
+      ],
+      "tags": [
+        "heat",
+        "valve",
+        "cmd"
+      ]
+    },
+    {
+      "name": "IADCMD",
+      "description": "Inlet Air Damper Command",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "inlet",
+        "cmd"
+      ]
+    },
+    {
+      "name": "IADCMDOP",
+      "description": "Inlet Air Damper Command Open",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "inlet",
+        "cmd"
+      ],
+      "tags-custom": [
+        "open"
+      ]
+    },
+    {
+      "name": "IADCMDCL",
+      "description": "Inlet Air Damper Command Close",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "inlet",
+        "cmd"
+      ],
+      "tags-custom": [
+        "closed"
+      ]
+    },
+    {
+      "name": "IADFBK",
+      "description": "Inlet Air Damper Feedback",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "damper",
+        "inlet"
+      ]
+    },
+    {
+      "name": "HWVFBK",
+      "description": "Hot Water Valve Position Feedback",
+      "types": [
+        "hot-water-sensor"
+      ],
+      "tags": [
+        "heat",
+        "valve"
+      ]
+    },
+    {
+      "name": "ISOVCMD",
+      "description": "Isolation Valve Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "isolation",
+        "valve",
+        "cmd"
+      ]
+    },
+    {
+      "name": "MATSP",
+      "description": "Mixed Air Temperature Setpoint",
+      "types": [
+        "mixed-air-temp-sp"
+      ]
+    },
+    {
+      "name": "OACLLCKTSP",
+      "description": "Cooling Lockout Temperature Setpoint",
+      "types": [
+        "outside-air-temp-sp"
+      ],
+      "tags": [
+        "enable",
+        "cooling"
+      ]
+    },
+    {
+      "name": "OADCMD",
+      "description": "Outside Air Damper Command",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "cmd",
+        "outside"
+      ]
+    },
+    {
+      "name": "OAFLWMNSP",
+      "description": "Outside Air Minimum Flow Setpoint",
+      "types": [
+        "outside-air-flow-sp"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "OAFLWSP",
+      "description": "Outside Air Flow Setpoint",
+      "types": [
+        "outside-air-flow-sp"
+      ]
+    },
+    {
+      "name": "OAHTLCKTSP",
+      "description": "Heating Lockout Temperature Setpoint",
+      "types": [
+        "outside-air-temp-sp"
+      ],
+      "tags": [
+        "enable",
+        "heating"
+      ]
+    },
+    {
+      "name": "OALCKTSP",
+      "description": "Outside Air Lockout Temperature Setpoint",
+      "types": [
+        "outside-air-temp-sp"
+      ],
+      "tags": [
+        "enable"
+      ]
+    },
+    {
+      "name": "OCCCDAFLWMNSP",
+      "description": "Occupied Cold Deck Air Flow Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "coldDeck",
+        "occ"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "OCCCDAFLWMXSP",
+      "description": "Occupied Cold Deck Air Flow Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "coldDeck",
+        "occ"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "OCCDAFLWMNSP",
+      "description": "Occupied Air Flow Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "occ"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "OCCDAFLWMXSP",
+      "description": "Occupied Air Flow Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "occ"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "OCCDAFLWCLMNSP",
+      "description": "Occupied Cooling Air Flow Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "cooling",
+        "occ"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "OCCDAFLWCLMXSP",
+      "description": "Occupied Cooling Air Flow Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "cooling",
+        "occ"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "OCCDAFLWHTMNSP",
+      "description": "Occupied Discharge Air Flow Heating Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "heating",
+        "occ"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "OCCDAFLWHTMXSP",
+      "description": "Occupied Discharge Air Flow Heating Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "heating",
+        "occ"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "OCCHDAFLWMNSP",
+      "description": "Occupied Hot Deck Air Flow Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "occ",
+        "hotDeck"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "OCCHDAFLWMXSP",
+      "description": "Occupied Hot Deck Air Flow Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "occ",
+        "hotDeck"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "OCCZTCLSP",
+      "description": "Occupied Zone Temperature Cooling Setpoint",
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "cooling",
+        "occ",
+        "zone"
+      ]
+    },
+    {
+      "name": "OCCZTHTSP",
+      "description": "Occupied Zone Temperature Heating Setpoint",
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "heating",
+        "occ",
+        "zone"
+      ]
+    },
+    {
+      "name": "OFCMD",
+      "description": "Outside Air Fan Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "outside",
+        "fan",
+        "cmd"
+      ]
+    },
+    {
+      "name": "RADCMD",
+      "description": "Return Air Damper Command",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "cmd",
+        "return"
+      ]
+    },
+    {
+      "name": "RADVCMD",
+      "description": "Radiator Valve Command",
+      "types": [
+        "hot-water-point"
+      ],
+      "tags": [
+        "heat",
+        "valve",
+        "cmd",
+        "perimeterHeat"
+      ]
+    },
+    {
+      "name": "RAFLWSP",
+      "description": "Return Air Flow Setpoint",
+      "types": [
+        "return-air-flow-sp"
+      ]
+    },
+    {
+      "name": "RATSP",
+      "description": "Return Air Temperature Setpoint",
+      "types": [
+        "return-air-temp-sp"
+      ]
+    },
+    {
+      "name": "RARHSP",
+      "description": "Return Air Humidity Setpoint",
+      "types": [
+        "return-air-humidity-sp"
+      ]
+    },
+    {
+      "name": "RACO2SP",
+      "description": "Return Air CO2 Setpoint",
+      "types": [
+        "air-sp"
+      ],
+      "tags": [
+        "co2",
+        "return"
+      ]
+    },
+    {
+      "name": "REFCMD",
+      "description": "Refrig Exhaust Fan",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "fan",
+        "cmd",
+        "run",
+        "refrig",
+        "exhaust"
+      ]
+    },
+    {
+      "name": "REVVCMD",
+      "description": "Reversing Valve Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "valve",
+        "cmd"
+      ],
+      "tags-custom": [
+        "reversing"
+      ]
+    },
+    {
+      "name": "RFCMD",
+      "description": "Return Fan Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "fan",
+        "cmd",
+        "return"
+      ]
+    },
+    {
+      "name": "RFSPCMD",
+      "description": "Return Fan Speed Command",
+      "types": [
+        "vfd",
+        "point"
+      ],
+      "tags": [
+        "speed",
+        "fan",
+        "cmd",
+        "return"
+      ]
+    },
+    {
+      "name": "RFDCMD",
+      "description": "Relief Damper Command",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "damper",
+        "cmd"
+      ],
+      "tags-custom": [
+        "relief"
+      ]
+    },
+    {
+      "name": "RHV",
+      "description": "Reheat Valve Position",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "reheat",
+        "sensor",
+        "valve"
+      ]
+    },
+    {
+      "name": "RHVCMD",
+      "description": "Reheat Valve Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "reheat",
+        "cmd",
+        "valve"
+      ]
+    },
+    {
+      "name": "SATSP",
+      "description": "Supply Air Temperature Setpoint",
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "effective"
+      ],
+      "tags-custom": [
+        "supply"
+      ]
+    },
+    {
+      "name": "SBCDAFLWMNSP",
+      "description": "Standby Cold Deck Air Flow Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "coldDeck",
+        "standby"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "SBCDAFLWMXSP",
+      "description": "Standby Cold Deck Air Flow Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "coldDeck",
+        "standby"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "SBDAFLWMNSP",
+      "description": "Standby Air Flow Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "standby"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "SBDAFLWMXSP",
+      "description": "Standby Air Flow Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "standby"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "SBDAFLWCLMNSP",
+      "description": "Standby Cooling Air Flow Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "standby",
+        "cooling"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "SBDAFLWCLMXSP",
+      "description": "Standby Cooling Air Flow Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "standby",
+        "cooling"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "SBDAFLWHTMNSP",
+      "description": "Standby Discharge Air Flow Heating Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "standby",
+        "heating"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "SBDAFLWHTMXSP",
+      "description": "Standby Discharge Air Flow Heating Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "standby",
+        "heating"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "SBHDAFLWMNSP",
+      "description": "Standby Hot Deck Air Flow Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "standby",
+        "hotDeck"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "SBHDAFLWMXSP",
+      "description": "Standby Hot Deck Air Flow Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "standby",
+        "hotDeck"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "SBZTCLSP",
+      "description": "Standby Zone Temperature Cooling Setpoint",
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "standby",
+        "cooling",
+        "zone"
+      ]
+    },
+    {
+      "name": "SBZTHTSP",
+      "description": "Standby Zone Temperature Heating Setpoint",
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "standby",
+        "heating",
+        "zone"
+      ]
+    },
+    {
+      "name": "UOCCDAFLWMNSP",
+      "description": "Unoccupied Cold Deck Air Flow Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "coldDeck",
+        "unocc"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "UOCCDAFLWMXSP",
+      "description": "Unoccupied Cold Deck Air Flow Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "coldDeck",
+        "unocc"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "UOCDAFLWCLMNSP",
+      "description": "Unoccupied Cooling Air Flow Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "cooling",
+        "unocc"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "UOCDAFLWCLMXSP",
+      "description": "Unoccupied Cooling Air Flow Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "cooling",
+        "unocc"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "UOCDAFLWHTMNSP",
+      "description": "Unoccupied Discharge Air Flow Heating Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "unocc",
+        "heating"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "UOCDAFLWHTMXSP",
+      "description": "Unoccupied Discharge Air Flow Heating Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "unocc",
+        "heating"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "UOCDAFLWMNSP",
+      "description": "Unoccupied Air Flow Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "unocc"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "UOCDAFLWMXSP",
+      "description": "Unoccupied Air Flow Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "unocc"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "UOCHDAFLWMNSP",
+      "description": "Unoccupied Hot Deck Air Flow Min Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "unocc",
+        "hotDeck"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "UOCHDAFLWMXSP",
+      "description": "Unoccupied Hot Deck Air Flow Max Setpoint",
+      "types": [
+        "air-flow-sp"
+      ],
+      "tags": [
+        "unocc",
+        "hotDeck"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "UOCZTCLSP",
+      "description": "Unoccupied Zone Temperature Cooling Setpoint",
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "cooling",
+        "unocc",
+        "zone"
+      ]
+    },
+    {
+      "name": "UOCZTHTSP",
+      "description": "Unoccupied Zone Temperature Heating Setpoint",
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "unocc",
+        "heating",
+        "zone"
+      ]
+    },
+    {
+      "name": "VCMDOP",
+      "description": "Valve Command Open",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "valve",
+        "cmd"
+      ],
+      "tags-custom": [
+        "open"
+      ]
+    },
+    {
+      "name": "VCMDCL",
+      "description": "Valve Command Closed",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "valve",
+        "cmd"
+      ],
+      "tags-custom": [
+        "open"
+      ]
+    },
+    {
+      "name": "ZCO2SP",
+      "description": "Zone CO2 Setpoint",
+      "types": [
+        "air-sp"
+      ],
+      "tags": [
+        "co2",
+        "zone"
+      ]
+    },
+    {
+      "name": "ZRHSP",
+      "description": "Zone Humidity Setpoint",
+      "types": [
+        "air-humidity-sp"
+      ],
+      "tags": [
+        "zone"
+      ]
+    },
+    {
+      "name": "ZSPR",
+      "description": "Zone Static Pressure",
+      "types": [
+        "air-pressure-sensor"
+      ],
+      "tags": [
+        "zone"
+      ]
+    },
+    {
+      "name": "ZSPRSP",
+      "description": "Zone Pressure Setpoint",
+      "types": [
+        "air-pressure-sp"
+      ],
+      "tags": [
+        "zone"
+      ]
+    },
+    {
+      "name": "ZTADJSP",
+      "description": "Zone Temperature Adjust Setpoint",
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "zone"
+      ],
+      "tags-custom": [
+        "adjust"
+      ]
+    },
+    {
+      "name": "EFFZTDB",
+      "description": "Effective Zone Temperature Deadband",
+      "types": [
+        "air-point"
+      ],
+      "tags": [
+        "effective",
+        "temp",
+        "zone"
+      ],
+      "tags-custom": [
+        "deadband"
+      ]
+    },
+    {
+      "name": "EFFZTSP",
+      "description": "Effective Zone Temperature Setpoint",
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "effective",
+        "zone"
+      ]
+    },
+    {
+      "name": "EFFZTCLSP",
+      "description": "Effective Zone Temperature Cooling Setpoint",
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "effective",
+        "cooling",
+        "zone"
+      ]
+    },
+    {
+      "name": "EFFZTHTSP",
+      "description": "Effective Zone Temperature Heating Setpoint",
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "effective",
+        "heating",
+        "zone"
+      ]
+    },
+    {
+      "name": "ZTSP",
+      "description": "Zone Temperature Setpoint",
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "zone"
+      ]
+    },
+    {
+      "name": "OCCZCLDB",
+      "description": "Occupied Zone Cooling Deadband",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cooling",
+        "sp",
+        "zone",
+        "occ"
+      ],
+      "tags-custom": [
+        "deadband"
+      ]
+    },
+    {
+      "name": "OCCZHTDB",
+      "description": "Occupied Zone Heating Deadband",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heating",
+        "occ",
+        "sp",
+        "zone"
+      ],
+      "tags-custom": [
+        "deadband"
+      ]
+    },
+    {
+      "name": "FANST",
+      "description": "Fan Status (Base Definition)",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "fan",
+        "sensor"
+      ]
+    },
+    {
+      "name": "FLTST",
+      "description": "Filter Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "filter"
+      ]
+    },
+    {
+      "name": "CDAFLW",
+      "description": "Cold Deck Air Flow",
+      "types": [
+        "air-flow-sensor"
+      ],
+      "tags": [
+        "coldDeck"
+      ]
+    },
+    {
+      "name": "CDDAT",
+      "description": "Cold Deck Discharge Air Temperature",
+      "types": [
+        "discharge-air-temp-sensor"
+      ],
+      "tags": [
+        "coldDeck"
+      ]
+    },
+    {
+      "name": "CCDAT",
+      "description": "Cooling Coil Discharge Air Temperature",
+      "types": [
+        "discharge-air-temp-sensor",
+        "coolingCoil"
+      ]
+    },
+    {
+      "name": "HCDAT",
+      "description": "Heating Coil Discharge Air Temperature",
+      "types": [
+        "discharge-air-temp-sensor",
+        "heatingCoil"
+      ]
+    },
+    {
+      "name": "HDAFLW",
+      "description": "Hot Deck Air Flow",
+      "types": [
+        "air-flow-sensor"
+      ],
+      "tags": [
+        "hotDeck"
+      ]
+    },
+    {
+      "name": "HDDAT",
+      "description": "Hot Deck Discharge Air Temperature",
+      "types": [
+        "discharge-air-temp-sensor"
+      ],
+      "tags": [
+        "hotDeck"
+      ]
+    },
+    {
+      "name": "DACO2",
+      "description": "Discharge Air CO2",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "co2",
+        "discharge"
+      ]
+    },
+    {
+      "name": "DAFLW",
+      "description": "Discharge Air Flow",
+      "types": [
+        "discharge-air-flow-sensor"
+      ]
+    },
+    {
+      "name": "DARH",
+      "description": "Discharge Air Rel Humidity",
+      "types": [
+        "discharge-air-humidity-sensor"
+      ]
+    },
+    {
+      "name": "DAT",
+      "description": "Discharge Air Temperature",
+      "types": [
+        "discharge-air-temp-sensor"
+      ]
+    },
+    {
+      "name": "DFI",
+      "description": "Discharge Fan Current",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "fan",
+        "discharge",
+        "sensor",
+        "current"
+      ]
+    },
+    {
+      "name": "DFMDSP",
+      "description": "Discharge Fan Mode Status (i.e. auto/cycling, smart, on continuous, etc)",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "fan",
+        "sp",
+        "discharge"
+      ],
+      "tags-custom": [
+        "mode"
+      ]
+    },
+    {
+      "name": "DFP",
+      "description": "Discharge Fan Power",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "power",
+        "fan",
+        "discharge",
+        "sensor"
+      ]
+    },
+    {
+      "name": "DFST",
+      "description": "Discharge Fan Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "fan",
+        "discharge",
+        "sensor"
+      ]
+    },
+    {
+      "name": "EAFLW",
+      "description": "Exhaust Air Flow",
+      "types": [
+        "exhaust-air-flow-sensor"
+      ]
+    },
+    {
+      "name": "EARH",
+      "description": "Exhaust Air Relative Humidity",
+      "types": [
+        "exhaust-air-humidity-sensor"
+      ]
+    },
+    {
+      "name": "EAT",
+      "description": "Exhaust Air Temperature",
+      "types": [
+        "exhaust-air-temp-sensor"
+      ]
+    },
+    {
+      "name": "EFST",
+      "description": "Exhaust Fan Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "fan",
+        "sensor",
+        "exhaust"
+      ]
+    },
+    {
+      "name": "HVACMDSP",
+      "description": "HVAC Mode Status (i.e. heating, cooling, fan etc)",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sp"
+      ],
+      "tags-custom": [
+        "hvacMode"
+      ]
+    },
+    {
+      "name": "MACO2",
+      "description": "Mixed Air CO2",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "co2",
+        "mixed"
+      ]
+    },
+    {
+      "name": "MAFLTST",
+      "description": "Mixed Air Filter Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "mixed",
+        "sensor"
+      ],
+      "tags-custom": [
+        "filter"
+      ]
+    },
+    {
+      "name": "MAFLW",
+      "description": "Mixed Air Flow",
+      "types": [
+        "mixed-air-flow-sensor"
+      ]
+    },
+    {
+      "name": "MARH",
+      "description": "Mixed Air Rel Humidity",
+      "types": [
+        "mixed-air-humidity-sensor"
+      ]
+    },
+    {
+      "name": "MAT",
+      "description": "Mixed Air Temperature",
+      "types": [
+        "mixed-air-temp-sensor"
+      ]
+    },
+    {
+      "name": "OAFLTST",
+      "description": "Outdoor Air Filter Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "sensor"
+      ],
+      "tags-custom": [
+        "filter"
+      ]
+    },
+    {
+      "name": "OAFLW",
+      "description": "Outside Air Flow",
+      "types": [
+        "outside-air-flow-sensor"
+      ]
+    },
+    {
+      "name": "RACO2",
+      "description": "Return Air CO2",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "co2",
+        "return"
+      ]
+    },
+    {
+      "name": "RADWP",
+      "description": "Return Air Dew Point",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "return",
+        "dewPoint"
+      ]
+    },
+    {
+      "name": "RAENTH",
+      "description": "Return Air Enthalpy",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "return"
+      ],
+      "tags-custom": [
+        "enthalpy"
+      ]
+    },
+    {
+      "name": "RAFLW",
+      "description": "Return Air Flow",
+      "types": [
+        "return-air-flow-sensor"
+      ]
+    },
+    {
+      "name": "RARH",
+      "description": "Return Air Rel Humidity",
+      "types": [
+        "return-air-humidity-sensor"
+      ]
+    },
+    {
+      "name": "RAT",
+      "description": "Return Air Temperature",
+      "types": [
+        "return-air-temp-sensor"
+      ]
+    },
+    {
+      "name": "RFST",
+      "description": "Return Fan Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "fan",
+        "return",
+        "sensor"
+      ]
+    },
+    {
+      "name": "SAT",
+      "description": "Supply Air Temperature",
+      "types": [
+        "discharge-air-temp-sensor"
+      ]
+    },
+    {
+      "name": "ZCO2",
+      "description": "Zone CO2",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "co2",
+        "zone"
+      ]
+    },
+    {
+      "name": "ZRH",
+      "description": "Zone Rel Humidity",
+      "types": [
+        "air-humidity-sensor"
+      ],
+      "tags": [
+        "zone"
+      ]
+    },
+    {
+      "name": "ZT",
+      "description": "Zone Temperature",
+      "types": [
+        "air-temp-sensor"
+      ],
+      "tags": [
+        "zone"
+      ]
+    },
+    {
+      "name": "HRWCMD",
+      "description": "Heat Recovery Wheel Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "heatWheel",
+        "cmd"
+      ],
+      "tags-custom": [
+        "heatRecovery"
+      ]
+    },
+    {
+      "name": "HRWST",
+      "description": "Heat Recovery Wheel Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "heatWheel",
+        "sensor"
+      ],
+      "tags-custom": [
+        "heatRecovery"
+      ]
+    },
+    {
+      "name": "HRWSPCMD",
+      "description": "Heat Recovery Wheel Speed Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "speed",
+        "heatWheel",
+        "cmd"
+      ],
+      "tags-custom": [
+        "heatRecovery"
+      ]
+    },
+    {
+      "name": "HRBYPDCMD",
+      "description": "Heat Recovery Bypass Damper Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "damper",
+        "cmd",
+        "bypass"
+      ],
+      "tags-custom": [
+        "heatRecovery"
+      ]
+    },
+    {
+      "name": "HRDAT",
+      "description": "Heat Recovery Discharge Air Temperature",
+      "types": [
+        "discharge-air-temp-sensor"
+      ],
+      "tags-custom": [
+        "heatRecovery"
+      ]
+    },
+    {
+      "name": "IAFLW",
+      "description": "Inlet Air Flow",
+      "types": [
+        "inlet-air-flow-sensor"
+      ]
+    },
+    {
+      "name": "CN",
+      "description": "Condensate Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "condensate",
+        "sensor"
+      ]
+    },
+    {
+      "name": "CMPFREQ",
+      "description": "Compressor Frequency",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "freq",
+        "sensor"
+      ],
+      "tags-custom": [
+        "compressor"
+      ]
+    },
+    {
+      "name": "CMPST",
+      "description": "Compressor Status (on or off)",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "compressor"
+      ]
+    },
+    {
+      "name": "CMPRFLT",
+      "description": "Compressor Discharge Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "refrig",
+        "temp",
+        "leaving",
+        "sensor"
+      ],
+      "tags-custom": [
+        "compressor"
+      ]
+    },
+    {
+      "name": "CMPRFET",
+      "description": "Compressor Suction Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "entering",
+        "temp",
+        "sensor",
+        "refrig"
+      ],
+      "tags-custom": [
+        "compressor"
+      ]
+    },
+    {
+      "name": "CNDFFREQ",
+      "description": "Condenser Fan Frequency",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "freq",
+        "fan",
+        "condenser",
+        "sensor"
+      ]
+    },
+    {
+      "name": "CNDRFPR",
+      "description": "Condenser Refrigerant Pressure",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "refrig",
+        "condenser",
+        "sensor",
+        "pressure"
+      ]
+    },
+    {
+      "name": "CNDRFLT",
+      "description": "Condenser Refrigerant Leaving Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "refrig",
+        "leaving",
+        "condenser",
+        "sensor"
+      ],
+      "tags-custom": [
+        "temperature"
+      ]
+    },
+    {
+      "name": "SBCRFET",
+      "description": "Subcooler Refrigerant Entering Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "refrig",
+        "sensor",
+        "entering"
+      ],
+      "tags-custom": [
+        "subcooler",
+        "temperature"
+      ]
+    },
+    {
+      "name": "SBCRFLT",
+      "description": "Subcooler Refrigerant Leaving Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "refrig",
+        "leaving",
+        "sensor"
+      ],
+      "tags-custom": [
+        "subcooler",
+        "temperature"
+      ]
+    },
+    {
+      "name": "EVPRFPR",
+      "description": "Evaporator Refrigerant Pressure",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "refrig",
+        "evaporator",
+        "sensor",
+        "pressure"
+      ]
+    },
+    {
+      "name": "EVPRFET",
+      "description": "Evaporator Refrigerant Entering Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "entering",
+        "evaporator",
+        "sensor",
+        "refrig"
+      ],
+      "tags-custom": [
+        "temperature"
+      ]
+    },
+    {
+      "name": "EVPRFLT",
+      "description": "Evaporator Refrigerant Leaving Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "refrig",
+        "evaporator",
+        "leaving",
+        "sensor"
+      ],
+      "tags-custom": [
+        "temperature"
+      ]
+    },
+    {
+      "name": "ERRST",
+      "description": "Error Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "alarm"
+      ]
+    },
+    {
+      "name": "ENCMD",
+      "description": "Enable Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "enable",
+        "cmd"
+      ]
+    },
+    {
+      "name": "EVABSFLW",
+      "description": "Energy Valve Absolute Flow in gpm",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "water",
+        "sensor",
+        "flow"
+      ]
+    },
+    {
+      "name": "EVABSFLWSP",
+      "description": "Energy Valve Absolute Flow Setpoint in gpm",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "effective",
+        "flow",
+        "sp",
+        "water"
+      ]
+    },
+    {
+      "name": "EVABSPWR",
+      "description": "Energy Valve Power in kBTU/h",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "power",
+        "sensor"
+      ]
+    },
+    {
+      "name": "EVCNTMDCMD",
+      "description": "Energy Valve Control Mode",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sp"
+      ],
+      "tags-custom": [
+        "mode",
+        "config"
+      ]
+    },
+    {
+      "name": "EVDT",
+      "description": "Energy Valve Delta Temperature in \u00b0F",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "temp",
+        "delta",
+        "sensor"
+      ]
+    },
+    {
+      "name": "EVDTFLWSP",
+      "description": "Energy Valve Setpoint Flow DeltaT in gpm",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "water",
+        "sp",
+        "flow"
+      ],
+      "tags-custom": [
+        "maxVal",
+        "dtManager"
+      ]
+    },
+    {
+      "name": "EVDTLIMCMD",
+      "description": "Energy Valve DeltaT Limitation",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sp"
+      ],
+      "tags-custom": [
+        "dtManager",
+        "config",
+        "mode"
+      ]
+    },
+    {
+      "name": "EVDTMGRST",
+      "description": "Energy Valve DeltaT Limitation Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "dtManager",
+        "config"
+      ]
+    },
+    {
+      "name": "EVDTSP",
+      "description": "Energy Valve Setpoint Delta Temperature in Fahrenheit",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "temp",
+        "water",
+        "delta",
+        "sp"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "EVERRST",
+      "description": "Energy Valve Error State",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "error"
+      ]
+    },
+    {
+      "name": "EVEWT",
+      "description": "Energy Valve Entering Water Temperature 1 (remote) in \u00b0F",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "temp",
+        "water",
+        "sensor"
+      ],
+      "tags-custom": [
+        "number"
+      ]
+    },
+    {
+      "name": "EVFLWMXSP",
+      "description": "Energy Valve Maximum Flowlimit in gpm",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "water",
+        "sp",
+        "flow"
+      ],
+      "tags-custom": [
+        "max"
+      ]
+    },
+    {
+      "name": "EVGLYCON",
+      "description": "Energy Valve Media Glycol Concentration",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "glycol",
+        "conc"
+      ]
+    },
+    {
+      "name": "EVLWT",
+      "description": "Energy Valve Leaving Water Temperature (embedded) in \u00b0F",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "temp",
+        "water",
+        "sensor"
+      ],
+      "tags-custom": [
+        "number"
+      ]
+    },
+    {
+      "name": "EVOVCMD",
+      "description": "Energy Valve Override Control",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sp"
+      ],
+      "tags-custom": [
+        "override"
+      ]
+    },
+    {
+      "name": "EVRELFLW",
+      "description": "Energy Valve Relative Flow in %",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "water",
+        "sensor",
+        "flow"
+      ],
+      "tags-custom": [
+        "relative"
+      ]
+    },
+    {
+      "name": "EVRELPOS",
+      "description": "Energy Valve Relative Position in %",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "valve",
+        "cmd"
+      ],
+      "tags-custom": [
+        "position"
+      ]
+    },
+    {
+      "name": "EVRELSP",
+      "description": "Energy Valve Setpoint Relative in %",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "valve",
+        "sp"
+      ]
+    },
+    {
+      "name": "IAT",
+      "description": "Inlet Air Temperature",
+      "types": [
+        "air-temp-sensor"
+      ],
+      "tags": [
+        "entering"
+      ]
+    },
+    {
+      "name": "OCCCMD",
+      "description": "Occupancy Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "occupied",
+        "cmd"
+      ]
+    },
+    {
+      "name": "OCCEFFSP",
+      "description": "Occupancy Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "effective",
+        "occupied",
+        "sp"
+      ]
+    },
+    {
+      "name": "OCCSCHSP",
+      "description": "Occupancy Schedule",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "occupied",
+        "sp"
+      ],
+      "tags-custom": [
+        "schedulePoint"
+      ]
+    },
+    {
+      "name": "VAVMDSP",
+      "description": "VAV Mode Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sp"
+      ],
+      "tags-custom": [
+        "vavMode"
+      ]
+    },
+    {
+      "name": "RWFLW",
+      "description": "Return Water Flow",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "flow",
+        "leaving",
+        "sensor",
+        "water"
+      ]
+    },
+    {
+      "name": "VFB",
+      "description": "6-way Valve Feedback",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "valve",
+        "sensor"
+      ],
+      "tags-custom": [
+        "sixWay"
+      ]
+    },
+    {
+      "name": "WDWSW",
+      "description": "Window Switch",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "window"
+      ]
+    },
+    {
+      "name": "ZDWP",
+      "description": "Zone Dew Point",
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "zone",
+        "dewPoint"
+      ]
+    },
+    {
+      "name": "ZOVCMD",
+      "description": "Zone Override",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "occupied",
+        "cmd",
+        "zone"
+      ],
+      "tags-custom": [
+        "override"
+      ]
+    },
+    {
+      "name": "TSTATLCK",
+      "description": "Thermostat Lockout",
+      "types": [
+        "thermostat",
+        "point"
+      ],
+      "tags": [
+        "cmd"
+      ],
+      "tags-custom": [
+        "disable"
+      ]
+    },
+    {
+      "name": "TSTATMDLCK",
+      "description": "Thermostat Mode Lockout",
+      "types": [
+        "thermostat",
+        "point"
+      ],
+      "tags": [
+        "cmd"
+      ],
+      "tags-custom": [
+        "disable",
+        "hvacMode"
+      ]
+    },
+    {
+      "name": "TSTATFLCK",
+      "description": "Thermostat Fan Lockout",
+      "types": [
+        "thermostat",
+        "point"
+      ],
+      "tags": [
+        "fan",
+        "cmd"
+      ],
+      "tags-custom": [
+        "disable"
+      ]
+    },
+    {
+      "name": "TSTATTLCK",
+      "description": "Thermostat Temperature Lockout",
+      "types": [
+        "thermostat",
+        "point"
+      ],
+      "tags": [
+        "temp",
+        "cmd"
+      ],
+      "tags-custom": [
+        "disable"
+      ]
+    },
+    {
+      "name": "WVOL",
+      "description": "Water Volume",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "water",
+        "sensor"
+      ],
+      "tags-custom": [
+        "volume"
+      ]
+    },
+    {
+      "name": "BYPCHWFL",
+      "description": "Bypass Chilled Water Flow",
+      "types": [
+        "bypass-chilled-water-flow-sensor"
+      ]
+    },
+    {
+      "name": "CHWDPR",
+      "description": "Chilled Water Differential Pressure",
+      "types": [
+        "chilled-water-pressure-sensor"
+      ],
+      "tags": [
+        "delta"
+      ]
+    },
+    {
+      "name": "LCHWFLOWSP",
+      "description": "Leaving Chilled Water Flow Setpoint",
+      "types": [
+        "leaving-chilled-water-flow-sp"
+      ]
+    },
+    {
+      "name": "CHWDPRSP",
+      "description": "Chilled Water Differential Pressure Setpoint",
+      "types": [
+        "chilled-water-pressure-sp"
+      ],
+      "tags": [
+        "delta"
+      ]
+    },
+    {
+      "name": "CWDPR",
+      "description": "Condenser Water Differential Pressure",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "delta",
+        "pressure",
+        "water",
+        "condenser",
+        "sensor"
+      ]
+    },
+    {
+      "name": "CWDPRSP",
+      "description": "Condenser Water Differential Pressure Setpoint",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "delta",
+        "sp",
+        "pressure",
+        "water",
+        "condenser"
+      ]
+    },
+    {
+      "name": "ECHWFL",
+      "description": "Entering Chilled Water Flow",
+      "types": [
+        "entering-chilled-water-flow-sensor"
+      ]
+    },
+    {
+      "name": "EHWFL",
+      "description": "Entering Hot Water Flow",
+      "types": [
+        "entering-hot-water-flow-sensor"
+      ]
+    },
+    {
+      "name": "HWDPR",
+      "description": "Hot Water Differential Pressure",
+      "types": [
+        "hot-water-pressure-sensor"
+      ],
+      "tags": [
+        "delta"
+      ]
+    },
+    {
+      "name": "HWDPRSP",
+      "description": "Hot Water Differential Pressure Setpoint",
+      "types": [
+        "hot-water-pressure-sp"
+      ],
+      "tags": [
+        "delta"
+      ]
+    },
+    {
+      "name": "LCHWFL",
+      "description": "Leaving Chilled Water Flow",
+      "types": [
+        "leaving-chilled-water-flow-sensor"
+      ]
+    },
+    {
+      "name": "LCHWTSP",
+      "description": "Leaving Chilled Water Temperature Setpoint",
+      "types": [
+        "leaving-chilled-water-temp-sp"
+      ]
+    },
+    {
+      "name": "LCWFL",
+      "description": "Leaving Condenser Water Flow",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "flow",
+        "leaving",
+        "water",
+        "condenser",
+        "sensor"
+      ]
+    },
+    {
+      "name": "LCWTSP",
+      "description": "Leaving Condenser Water Temperature Setpoint",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "temp",
+        "leaving",
+        "sp",
+        "water",
+        "condenser"
+      ]
+    },
+    {
+      "name": "LHWFL",
+      "description": "Leaving Hot Water Flow",
+      "types": [
+        "leaving-hot-water-flow-sensor"
+      ]
+    },
+    {
+      "name": "LHWTSP",
+      "description": "Leaving Hot Water Temperature Setpoint",
+      "types": [
+        "leaving-hot-water-temp-sp"
+      ]
+    },
+    {
+      "name": "LWISOVCMD",
+      "description": "Leaving Water Isolation Valve Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cmd",
+        "leaving",
+        "valve",
+        "isolation",
+        "water"
+      ]
+    },
+    {
+      "name": "LWISOVST",
+      "description": "Leaving Water Isolation Valve Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "leaving",
+        "valve",
+        "isolation",
+        "water",
+        "sensor"
+      ]
+    },
+    {
+      "name": "PMPFLOW",
+      "description": "Pump Flow",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "water",
+        "sensor",
+        "flow"
+      ]
+    },
+    {
+      "name": "PRLHWTSP",
+      "description": "Primary Leaving Hot Water Temperature Setpoint",
+      "types": [
+        "leaving-hot-water-temp-sp"
+      ],
+      "tags-custom": [
+        "primaryLoop"
+      ]
+    },
+    {
+      "name": "PRLCWT",
+      "description": "Primary Loop Leaving Condenser Water Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "temp",
+        "leaving",
+        "water",
+        "condenser",
+        "sensor"
+      ],
+      "tags-custom": [
+        "primaryLoop"
+      ]
+    },
+    {
+      "name": "PRLCWTSP",
+      "description": "Primary Loop Leaving Condenser Water Temperature Setpoint",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "temp",
+        "leaving",
+        "sp",
+        "water",
+        "condenser"
+      ],
+      "tags-custom": [
+        "primaryLoop"
+      ]
+    },
+    {
+      "name": "PRECWT",
+      "description": "Primary Loop Entering Condenser Water Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "entering",
+        "temp",
+        "water",
+        "condenser",
+        "sensor"
+      ],
+      "tags-custom": [
+        "primaryLoop"
+      ]
+    },
+    {
+      "name": "SCLCWT",
+      "description": "Secondary Loop Leaving Condenser Water Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "temp",
+        "leaving",
+        "water",
+        "condenser",
+        "sensor"
+      ],
+      "tags-custom": [
+        "secondaryLoop"
+      ]
+    },
+    {
+      "name": "SCLCWTSP",
+      "description": "Secondary Loop Leaving Condenser Water Temperature Setpoint",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "temp",
+        "leaving",
+        "sp",
+        "water",
+        "condenser"
+      ],
+      "tags-custom": [
+        "secondaryLoop"
+      ]
+    },
+    {
+      "name": "SCECWT",
+      "description": "Secondary Loop Entering Condenser Water Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "entering",
+        "temp",
+        "water",
+        "condenser",
+        "sensor"
+      ],
+      "tags-custom": [
+        "secondaryLoop"
+      ]
+    },
+    {
+      "name": "SCCWHXBYPVCMD",
+      "description": "Secondary Loop Condenser Water Heat Exchanger Bypass Valve Command",
+      "types": [
+        "heatExchanger",
+        "point"
+      ],
+      "tags": [
+        "cmd",
+        "valve",
+        "bypass",
+        "water",
+        "condenser"
+      ],
+      "tags-custom": [
+        "secondaryLoop"
+      ]
+    },
+    {
+      "name": "SCHWFL",
+      "description": "Secondary Chilled Water Flow",
+      "types": [
+        "chilled-water-flow-sensor"
+      ],
+      "tags-custom": [
+        "secondaryLoop"
+      ]
+    },
+    {
+      "name": "SCLHWTSP",
+      "description": "Secondary Leaving Hot Water Temperature Setpoint",
+      "types": [
+        "leaving-hot-water-temp-sp"
+      ],
+      "tags-custom": [
+        "secondaryLoop"
+      ]
+    },
+    {
+      "name": "WFLWST",
+      "description": "Water Flow Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "state",
+        "flow",
+        "sensor",
+        "water"
+      ]
+    },
+    {
+      "name": "ECHWT",
+      "description": "Entering Chilled Water Temperature",
+      "types": [
+        "entering-chilled-water-temp-sensor"
+      ]
+    },
+    {
+      "name": "ECWT",
+      "description": "Entering Condenser Water Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "entering",
+        "temp",
+        "water",
+        "condenser",
+        "sensor"
+      ]
+    },
+    {
+      "name": "EHWT",
+      "description": "Entering Hot Water Temperature",
+      "types": [
+        "entering-hot-water-temp-sensor"
+      ]
+    },
+    {
+      "name": "LCHWT",
+      "description": "Leaving Chilled Water Temperature",
+      "types": [
+        "leaving-chilled-water-temp-sensor"
+      ]
+    },
+    {
+      "name": "LCWT",
+      "description": "Leaving Condenser Water Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "temp",
+        "leaving",
+        "water",
+        "condenser",
+        "sensor"
+      ]
+    },
+    {
+      "name": "LHWT",
+      "description": "Leaving Hot Water Temperature",
+      "types": [
+        "leaving-hot-water-temp-sensor"
+      ]
+    },
+    {
+      "name": "PRLHWT",
+      "description": "Primary Leaving Hot Water Temperature",
+      "types": [
+        "leaving-hot-water-temp-sensor"
+      ],
+      "tags-custom": [
+        "primaryLoop"
+      ]
+    },
+    {
+      "name": "PREHWT",
+      "description": "Primary Entering Hot Water Temperature",
+      "types": [
+        "entering-hot-water-temp-sensor"
+      ],
+      "tags-custom": [
+        "primaryLoop"
+      ]
+    },
+    {
+      "name": "PSSCMD",
+      "description": "Pump Run Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "cmd",
+        "pump"
+      ]
+    },
+    {
+      "name": "PSSST",
+      "description": "Pump Run Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "pump",
+        "sensor",
+        "state"
+      ]
+    },
+    {
+      "name": "SCLHWT",
+      "description": "Secondary Leaving Hot Water Temperature",
+      "types": [
+        "leaving-hot-water-temp-sensor"
+      ],
+      "tags-custom": [
+        "secondaryLoop"
+      ]
+    },
+    {
+      "name": "SCEHWT",
+      "description": "Secondary Entering Hot Water Temperature",
+      "types": [
+        "entering-hot-water-temp-sensor"
+      ],
+      "tags-custom": [
+        "secondaryLoop"
+      ]
+    },
+    {
+      "name": "VFDSPCMD",
+      "description": "VFD Output Speed",
+      "types": [
+        "vfd",
+        "point"
+      ],
+      "tags": [
+        "speed",
+        "cmd"
+      ]
+    },
+    {
+      "name": "VFDSPREF",
+      "description": "VFD Speed Reference",
+      "types": [
+        "vfd",
+        "point"
+      ],
+      "tags": [
+        "speed",
+        "sensor"
+      ]
+    },
+    {
+      "name": "VFDSSCMD",
+      "description": "VFD Start/Stop Command",
+      "types": [
+        "vfd",
+        "point"
+      ],
+      "tags": [
+        "run",
+        "cmd"
+      ]
+    },
+    {
+      "name": "VFDFREQ",
+      "description": "VFD Frequency Feedback",
+      "types": [
+        "vfd",
+        "point"
+      ],
+      "tags": [
+        "freq",
+        "sensor"
+      ]
+    },
+    {
+      "name": "DLTLVLSP",
+      "description": "Daylighting Light Level Setpoint",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "light",
+        "sp",
+        "level"
+      ],
+      "tags-custom": [
+        "daylighting"
+      ]
+    },
+    {
+      "name": "EFLTLVLSP",
+      "description": "Light Level Setpoint",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "effective",
+        "light",
+        "sp",
+        "level"
+      ]
+    },
+    {
+      "name": "ENDLC",
+      "description": "Enable Daylighting Control",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "enable",
+        "cmd"
+      ],
+      "tags-custom": [
+        "daylighting"
+      ]
+    },
+    {
+      "name": "LDSHLTLVLSP",
+      "description": "Loadshedding Light Level Setpoint",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "light",
+        "sp",
+        "level"
+      ],
+      "tags-custom": [
+        "loadshed"
+      ]
+    },
+    {
+      "name": "LTCIRCMD",
+      "description": "Lighting Circuit Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cmd",
+        "lighting"
+      ],
+      "tags-custom": [
+        "circuit"
+      ]
+    },
+    {
+      "name": "LTCLRT",
+      "description": "Light Color Temperature",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "light",
+        "sp"
+      ],
+      "tags-custom": [
+        "colorTemperature"
+      ]
+    },
+    {
+      "name": "LTCMD",
+      "description": "Light Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "light",
+        "cmd"
+      ]
+    },
+    {
+      "name": "LTLVL",
+      "description": "Light Level Sensor",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "light",
+        "sensor",
+        "level"
+      ]
+    },
+    {
+      "name": "LTLVLCMD",
+      "description": "Light Level Command",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "light",
+        "cmd",
+        "level"
+      ]
+    },
+    {
+      "name": "LTOCMODE",
+      "description": "Lighting Occupancy Control Mode",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "occupied",
+        "sp",
+        "lighting"
+      ],
+      "tags-custom": [
+        "mode"
+      ]
+    },
+    {
+      "name": "LTPC",
+      "description": "Light Photocell",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "light",
+        "sensor",
+        "illuminance"
+      ]
+    },
+    {
+      "name": "LTSC",
+      "description": "Lighting Scene",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "effective",
+        "light",
+        "sp"
+      ],
+      "tags-custom": [
+        "scene"
+      ]
+    },
+    {
+      "name": "LTST",
+      "description": "Light Status",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "run",
+        "light",
+        "sensor"
+      ]
+    },
+    {
+      "name": "OCLTLVLSP",
+      "description": "Occupied Light Level Setpoint",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "level",
+        "light",
+        "sp",
+        "occ"
+      ]
+    },
+    {
+      "name": "OLTPC",
+      "description": "Outdoor Light Photocell",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "light",
+        "sensor",
+        "illuminance"
+      ]
+    },
+    {
+      "name": "UOCLTLVLSP",
+      "description": "Unoccupied Light Level Setpoint",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "unocc",
+        "sp",
+        "light",
+        "level"
+      ]
+    },
+    {
+      "name": "SHPOS",
+      "description": "Shade Position",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "shades",
+        "position"
+      ]
+    },
+    {
+      "name": "SHSC",
+      "description": "Shade Scene or Preset",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sp"
+      ],
+      "tags-custom": [
+        "shades",
+        "scene"
+      ]
+    },
+    {
+      "name": "SHDIR",
+      "description": "Shade Direction",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "direction",
+        "sensor"
+      ],
+      "tags-custom": [
+        "shades"
+      ]
+    },
+    {
+      "name": "OCC",
+      "description": "OCC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "OCCEFFSP",
+              "OCCCMD",
+              "OCCSCHSP",
+              "OCCSNS"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "SS",
+      "description": "SS",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "SSCMD",
+              "SSST"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "PSS",
+      "description": "PSS",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "PSSCMD",
+              "PSSST"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "VSC",
+      "description": "VSC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "VFDSPCMD",
+              "VFDSPREF",
+              "VFDSSCMD"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "LWTC",
+      "description": "LWTC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "EHWT",
+              "EHWFL",
+              "LHWT",
+              "LHWTSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "CWHXTC",
+      "description": "CWHXTC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "PRLCWT",
+              "PRLCWTSP",
+              "PRECWT",
+              "SCLCWT",
+              "SCLCWTSP",
+              "SCECWT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "LWISOVC",
+      "description": "LWISOVC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "LWISOVCMD",
+              "LWISOVST"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "AQM",
+      "description": "AQM",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ZCO2",
+              "ZCO",
+              "ZTVOC",
+              "ZPM10",
+              "ZPM25",
+              "ZPM01",
+              "ZHCHO",
+              "ZNO2",
+              "ZO3",
+              "ZNH3"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "AFC",
+      "description": "AFC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "OCCDAFLWMNSP",
+              "OCCDAFLWMXSP",
+              "SBDAFLWMNSP",
+              "SBDAFLWMXSP",
+              "UOCDAFLWMNSP",
+              "UOCDAFLWMXSP",
+              "DAFLW",
+              "EFFDAFLWSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "CAFC",
+      "description": "CAFC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "UOCDAFLWMNSP",
+              "UOCDAFLWCLMNSP",
+              "UOCDAFLWCLMXSP",
+              "SBDAFLWMNSP",
+              "SBDAFLWCLMNSP",
+              "SBDAFLWCLMXSP",
+              "OCCDAFLWCLMNSP",
+              "OCCDAFLWCLMXSP",
+              "DAFLW",
+              "DAFLWSP",
+              "EFFDAFLWSP",
+              "CLREQ"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "CHBZC",
+      "description": "CHBZC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ZT",
+              "CLCMD",
+              "HTCMD",
+              "CHWVCMD",
+              "HWVCMD"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "CHWDC",
+      "description": "CHWDC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CHWVCMD",
+              "DAT",
+              "DATSP",
+              "DATCLSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "CHWZC",
+      "description": "CHWZC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CHWVCMD",
+              "ZT",
+              "ZTSP",
+              "DAT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "CNM",
+      "description": "CNM",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CN"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "CSP",
+      "description": "CSP",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CLDEM",
+              "OCCZTCLSP",
+              "UOCZTCLSP",
+              "SBZTCLSP",
+              "ZT",
+              "EFFZTSP",
+              "ZTSP",
+              "ZTADJSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "CWLC",
+      "description": "CWLC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CWVCMD",
+              "LCWT",
+              "LCWTSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "DD",
+      "description": "DD",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CDDCMD",
+              "HDDCMD",
+              "DAT",
+              "CDDAT",
+              "HDDAT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "DFSS",
+      "description": "DFSS",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DFCMD",
+              "DFST",
+              "DFP",
+              "DFI"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "DFVDC",
+      "description": "DFVSC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DFSPCMD",
+              "DFCMD",
+              "DFST"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "DSP",
+      "description": "DSP",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CLDEM",
+              "HTDEM",
+              "OCCZTCLSP",
+              "OCCZTHTSP",
+              "SBZTCLSP",
+              "SBZTHTSP",
+              "UOCZTCLSP",
+              "UOCZTHTSP",
+              "ZT",
+              "EFFZTDB",
+              "EFFZTSP",
+              "EFFZTCLSP",
+              "EFFZTHTSP",
+              "ZTSP",
+              "ZTADJSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "DTC",
+      "description": "DTC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DAT",
+              "DATSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "DHC",
+      "description": "DHC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DARH",
+              "DARHSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "DTM",
+      "description": "DTM",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DAT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "DXZC",
+      "description": "DXZC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ZT",
+              "CLCMD",
+              "CLSTG1CMD",
+              "CLSTG2CMD",
+              "CLSTG3CMD",
+              "CLSTG4CMD",
+              "DAT",
+              "RAT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "DXDC",
+      "description": "DXDC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CLCMD",
+              "CLSTG1CMD",
+              "CLSTG2CMD",
+              "CLSTG3CMD",
+              "CLSTG4CMD",
+              "DAT",
+              "CCDAT",
+              "DATSP",
+              "DATCLSP",
+              "RAT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "EAFC",
+      "description": "EAFC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "EADCMD",
+              "EAFLW",
+              "EAFLWSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ECON",
+      "description": "ECON",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ECOALCKTSP",
+              "RAT",
+              "MAT",
+              "DAT",
+              "DATSP",
+              "MATSP",
+              "OADCMD",
+              "RADCMD"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ED",
+      "description": "ED",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "EAFLW",
+              "EAFLWSP",
+              "EADCMD"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "EFSS",
+      "description": "EFSS",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "EFCMD",
+              "EFST"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "EFVSC",
+      "description": "EFVSC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "EFSPCMD",
+              "EFCMD",
+              "EFST"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "HAFC",
+      "description": "HAFC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "UOCDAFLWMNSP",
+              "UOCDAFLWHTMNSP",
+              "UOCDAFLWHTMXSP",
+              "SBDAFLWMNSP",
+              "SBDAFLWHTMNSP",
+              "SBDAFLWHTMXSP",
+              "OCCDAFLWHTMNSP",
+              "OCCDAFLWHTMXSP",
+              "DAFLW",
+              "DAFLWSP",
+              "EFFDAFLWSP",
+              "HTREQ"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "HPZC",
+      "description": "HPZC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CLCMD",
+              "HTCMD",
+              "REVVCMD",
+              "DAT",
+              "RAT",
+              "HVACMDSP",
+              "CMPST"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "HSP",
+      "description": "HSP",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "HTDEM",
+              "OCCZTHTSP",
+              "SBZTHTSP",
+              "UOCZTHTSP",
+              "ZT",
+              "EFFZTSP",
+              "ZTSP",
+              "ZTADJSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "HTEZC",
+      "description": "HTEZC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ZT",
+              "HTCMD",
+              "HTSTG1CMD",
+              "HTSTG2CMD",
+              "HTSTG3CMD",
+              "HTSTG4CMD"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "HTGZC",
+      "description": "HTGZC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ZT",
+              "HTCMD"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "HWZC",
+      "description": "HWZC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "HWVCMD",
+              "ZT",
+              "ZTSP",
+              "HTREQ"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "MOAFC",
+      "description": "MOAFC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "OADCMD",
+              "OAFLW",
+              "OAFLWSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "PDZC",
+      "description": "PDZC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DADCMD",
+              "DADCMDOP",
+              "DADCMDCL",
+              "DADFBK",
+              "ZT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "PHWSC",
+      "description": "PHWSC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "HWVCMD",
+              "SAT",
+              "SATSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "HWDC",
+      "description": "HWDC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "HWVCMD",
+              "HCDAT",
+              "DAT",
+              "DATSP",
+              "DATHTSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "RD",
+      "description": "RD",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "RAFLW",
+              "RAFLWSP",
+              "RADCMD"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "RHC",
+      "description": "RHC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "RARH",
+              "RARHSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "RTC",
+      "description": "RTC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "RAT",
+              "RATSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "RTM",
+      "description": "RTM",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "RAT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "SD",
+      "description": "SD",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DADCMD",
+              "DADCMDOP",
+              "DADCMDCL",
+              "DADFBK",
+              "DAT",
+              "DATSP",
+              "VAVMDSP",
+              "DPRREQ"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "SID",
+      "description": "SID",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "IADCMD",
+              "IADCMDOP",
+              "IADCMDCL",
+              "IADFBK",
+              "DAT",
+              "DATSP",
+              "VAVMDSP",
+              "DPRREQ"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "WCR",
+      "description": "WCR",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CWVCMD",
+              "ECWT",
+              "LCWT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ZCO2C",
+      "description": "ZCO2C",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ZCO2",
+              "ZCO2SP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ZRHC",
+      "description": "ZRHC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ZRH",
+              "ZRHSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ZSPC",
+      "description": "ZSPC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ZSPR",
+              "ZSPRSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "DSPC",
+      "description": "DSPC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DADCTSPR",
+              "DADCTSPRSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "BSPC",
+      "description": "BSPC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "BLDSPR",
+              "BLDSPRSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "HRWC",
+      "description": "HRWC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "HRWCMD",
+              "HRWST",
+              "HRWSPCMD",
+              "HRBYPDCMD",
+              "HRDAT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "HGRC",
+      "description": "HGRC",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "HTGRHVCMD",
+              "HTGRHSP"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "VRFOUREF",
+      "description": "VRFOUREF",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CMPFREQ",
+              "CNDRFPR",
+              "EVPRFPR",
+              "CMPRFET",
+              "CMPRFLT",
+              "CNDRFLT",
+              "SBCRFET",
+              "SBCRFLT"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "VRFOUAIR",
+      "description": "VRFOUAIR",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CNDFFREQ"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "VRFOUWTR",
+      "description": "VRFOUWTR",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ECWT",
+              "LCWT"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
