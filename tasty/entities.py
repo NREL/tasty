@@ -18,11 +18,39 @@ class RefType:
 
 class SimpleShape:
     def __init__(self, data, schema, version):
+        self.name = data.get('name')
         self.type = data.get('type')
         self.schema = schema
         self.version = version
         self.tags = data.get('tags')
         self.tags_custom = data.get('tags-custom')
+        self.docs_query = f'''SELECT ?docs {{ {URIRef(self.type).n3()} rdfs:comment ?docs . }}'''
+        self.docs: str = ''
+
+    def cast_to_entity(self, id=None) -> 'EntityType':
+        ont = tg.load_ontology(self.schema, self.version)
+        docs = ont.query(self.docs_query)
+        if docs:
+            docs = list(docs)
+            self.docs = docs[0][0]
+        et = EntityType(self.type, self.docs, self.schema, self.version)
+        if self.tags:
+            et.add_tags(self.tags, ont)
+        if self.tags_custom:
+            et.add_tags(self.tags_custom, ont)
+        if id:
+            et.set_id(id)
+        return et
+
+
+class CompositeShape:
+    def __init__(self, data, schema, version):
+        self.name = data.get('name')
+        self.type = data.get('type')
+        self.schema = schema
+        self.version = version
+        self.shapes = data.get('shapes')
+        self.simple_shapes = data.get('simple_shapes')
         self.docs_query = f'''SELECT ?docs {{ {URIRef(self.type).n3()} rdfs:comment ?docs . }}'''
         self.docs: str = ''
 
@@ -50,12 +78,13 @@ class ShapesWrapper:
         for file, file_data in self.sg.source_shapes_by_file.items():
             for shape in file_data['shapes']:
                 keys = set(shape.keys())
-                dont_want = {'predicates', 'shape-mixins'}
-                want = {'name', 'types'}
-                if keys.intersection(dont_want):
+                composite_shapes = {'predicates', 'shape-mixins'}
+                simple_shapes = {'name', 'types'}
+                if keys.intersection(composite_shapes):
                     continue
-                if want <= keys and len(shape.get('types')) == 1:
+                if simple_shapes <= keys and len(shape.get('types')) == 1:
                     data = {
+                        'name': shape['name'],
                         'type': tg.get_namespaced_term(self.sg.ontology, shape['types'][0])
                     }
                     if shape.get('tags'):
@@ -63,7 +92,69 @@ class ShapesWrapper:
                     if shape.get('tags-custom'):
                         data['tags-custom'] = shape.get('tags-custom')
 
-                    self.__setattr__(shape['name'].replace('-', '_'), SimpleShape(data, self.sg.schema, self.sg.version))
+                    self.__setattr__(shape['name'].replace('-', '_'),
+                                     SimpleShape(data, self.sg.schema, self.sg.version))
+
+    def bind_composite(self):
+        for file, file_data in self.sg.source_shapes_by_file.items():
+            for shape in file_data['shapes']:
+                keys = set(shape.keys())
+                composite_shapes = {'predicates', 'shape-mixins'}
+                if keys.intersection(composite_shapes):
+                    data = {
+                        'name': shape['name']
+                    }
+                    if len(shape.keys()) <= 2 and 'shape-mixins' in shape.keys():
+                        # print("Composite shape with just mixin", shape['name'], shape['shape-mixins'])
+                        data['shapes'] = shape['shape-mixins']
+                        data['simple_shapes'] = []
+                        for ss in data['shapes']:
+                            simple_shape = self.__getattribute__(ss.replace('-', '_'))
+                            data['simple_shapes'].append(simple_shape)
+
+                    elif len(shape.keys()) <= 3 and 'types' in shape.keys():
+                        # print("Composite shape with just mixin", shape['name'], shape['shape-mixins'])
+                        data['shapes'] = shape['shape-mixins']
+                        data['simple_shapes'] = []
+                        for ss in data['shapes']:
+                            simple_shape = self.__getattribute__(ss.replace('-', '_'))
+                            data['simple_shapes'].append(simple_shape)
+
+                    else:
+                        if len(shape['predicates'].keys()) == 2:
+                            print("Complex shape Both", shape['name'], shape['predicates']['requires'][0]['shapes'])
+                            data['shapes'] = shape['predicates']['requires'][0]['shapes']
+                            data['type'] = tg.get_namespaced_term(self.sg.ontology, shape['predicates']['requires'][0]['types'][0])
+                            print(data['type'])
+                            data['simple_shapes'] = []
+                            for ss in data['shapes']:
+                                simple_shape = self.__getattribute__(ss.replace('-', '_'))
+                                data['simple_shapes'].append(simple_shape)
+
+                        elif 'requires' in shape['predicates'].keys():
+                            # print("Complex shape Only Requires", shape['name'],
+                            #       shape['predicates']['requires'][0]['shapes'])
+                            shapes = shape['predicates']['requires'][0]['shapes']
+                            data['shapes'] = shapes
+                            data['simple_shapes'] = []
+                            for ss in data['shapes']:
+                                simple_shape = self.__getattribute__(ss.replace('-', '_'))
+                                data['simple_shapes'].append(simple_shape)
+
+                        else:
+                            # print("Complex shape Only Optional", shape['name'],
+                            #       shape['predicates']['optional'][0]['shapes'])
+                            data['shapes'] = shape['predicates']['optional'][0]['shapes']
+                            data['simple_shapes'] = []
+                            for ss in data['shapes']:
+                                try:
+                                    simple_shape = self.__getattribute__(ss.replace('-', '_'))
+                                except BaseException:
+                                    continue
+                                data['simple_shapes'].append(simple_shape)
+
+                    self.__setattr__(shape['name'].replace('-', '_'),
+                                     CompositeShape(data, self.sg.schema, self.sg.version))
 
 
 class EntityType:
