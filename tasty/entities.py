@@ -42,6 +42,12 @@ class SimpleShape:
             et.set_id(id)
         return et
 
+    def apply(self, equip_id, namespace, parent, equip_ref):
+        entity = self.cast_to_entity(f"{equip_id}-{self.name}")
+        entity.set_namespace(namespace)
+        entity.add_relationship(equip_ref, parent)
+        entity.sync()
+
 
 class CompositeShape:
     def __init__(self, data, schema, version):
@@ -66,6 +72,18 @@ class CompositeShape:
         if id:
             et.set_id(id)
         return et
+
+    def apply_shape_mixins(self, equip_id, namespace, ref, entity, optional_points=False):
+        if self.shape_mixins:
+            for composite_shape in self.shape_mixins:
+                if composite_shape.required_shapes:
+                    for point in composite_shape.required_shapes:
+                        point.apply(equip_id, namespace, entity, ref)
+                if optional_points and composite_shape.optional_shapes:
+                    for point in composite_shape.optional_shapes:
+                        point.apply(equip_id, namespace, entity, ref)
+        else:
+            print('No mixins found for this composite shape')
 
 
 class ShapesWrapper:
