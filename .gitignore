@@ -6,8 +6,16 @@ __pycache__
 .tox
 .python-version
 
-# Poetry things
+# Environments (https://github.com/github/gitignore/blob/master/Python.gitignore)
+.env
 .venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Poetry things
 dist
 
 # Tasty
