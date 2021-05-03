@@ -216,6 +216,16 @@
       }
     },
     {
+      "name": "NREL-Natural-Gas-Meter-Shape",
+      "types": ["naturalGas-meter"],
+      "shape-mixins": [
+        "NaturalGasMeterFlowRateShape",
+        "NaturalGasMeterVolumeShape",
+        "NaturalGasMeterEnergyRateShape",
+        "NaturalGasMeterEnergyShape"
+      ]
+    },
+    {
       "name": "AhuOccupancyShape",
       "predicates": {
         "requires": [
