@@ -18,6 +18,7 @@ class RefType:
 
 class SimpleShape:
     def __init__(self, data, schema, version):
+        self.name = data.get('name')
         self.type = data.get('type')
         self.schema = schema
         self.version = version
@@ -41,6 +42,49 @@ class SimpleShape:
             et.set_id(id)
         return et
 
+    def apply(self, equip_id, namespace, parent, equip_ref):
+        entity = self.cast_to_entity(f"{equip_id}-{self.name}")
+        entity.set_namespace(namespace)
+        entity.add_relationship(equip_ref, parent)
+        entity.sync()
+
+
+class CompositeShape:
+    def __init__(self, data, schema, version):
+        self.name = data.get('name')
+        self.type = data.get('type')
+        self.schema = schema
+        self.version = version
+        self.shapes = data.get('shapes')
+        self.shape_mixins = data.get('shape-mixins')
+        self.required_shapes = data.get('requires')
+        self.optional_shapes = data.get('optional')
+        self.docs_query = f'''SELECT ?docs {{ {URIRef(self.type).n3()} rdfs:comment ?docs . }}'''
+        self.docs: str = ''
+
+    def cast_to_entity(self, id=None) -> 'EntityType':
+        ont = tg.load_ontology(self.schema, self.version)
+        docs = ont.query(self.docs_query)
+        if docs:
+            docs = list(docs)
+            self.docs = docs[0][0]
+        et = EntityType(self.type, self.docs, self.schema, self.version)
+        if id:
+            et.set_id(id)
+        return et
+
+    def apply_shape_mixins(self, equip_id, namespace, ref, entity, optional_points=False):
+        if self.shape_mixins:
+            for composite_shape in self.shape_mixins:
+                if composite_shape.required_shapes:
+                    for point in composite_shape.required_shapes:
+                        point.apply(equip_id, namespace, entity, ref)
+                if optional_points and composite_shape.optional_shapes:
+                    for point in composite_shape.optional_shapes:
+                        point.apply(equip_id, namespace, entity, ref)
+        else:
+            print('No mixins found for this composite shape')
+
 
 class ShapesWrapper:
     def __init__(self, schema, version):
@@ -50,12 +94,13 @@ class ShapesWrapper:
         for file, file_data in self.sg.source_shapes_by_file.items():
             for shape in file_data['shapes']:
                 keys = set(shape.keys())
-                dont_want = {'predicates', 'shape-mixins'}
-                want = {'name', 'types'}
-                if keys.intersection(dont_want):
+                composite_shapes = {'predicates', 'shape-mixins'}
+                simple_shapes = {'name', 'types'}
+                if keys.intersection(composite_shapes):
                     continue
-                if want <= keys and len(shape.get('types')) == 1:
+                if simple_shapes <= keys and len(shape.get('types')) == 1:
                     data = {
+                        'name': shape['name'],
                         'type': tg.get_namespaced_term(self.sg.ontology, shape['types'][0])
                     }
                     if shape.get('tags'):
@@ -63,7 +108,50 @@ class ShapesWrapper:
                     if shape.get('tags-custom'):
                         data['tags-custom'] = shape.get('tags-custom')
 
-                    self.__setattr__(shape['name'].replace('-', '_'), SimpleShape(data, self.sg.schema, self.sg.version))
+                    self.__setattr__(shape['name'].replace('-', '_'),
+                                     SimpleShape(data, self.sg.schema, self.sg.version))
+
+    def bind_composite(self):
+        for file, file_data in self.sg.source_shapes_by_file.items():
+            for shape in file_data['shapes']:
+                keys = set(shape.keys())
+                composite_shapes = {'predicates', 'shape-mixins'}
+                if keys.intersection(composite_shapes):
+                    data = self.evaluate_shape(shape)
+                    self.__setattr__(data['name'].replace('-', '_'),
+                                     CompositeShape(data, self.sg.schema, self.sg.version))
+
+    def evaluate_shape(self, shape):
+        data = {'name': shape['name']}
+        if 'shape-mixins' in shape.keys() and 'predicates' not in shape.keys():
+            # Composite shape with only mixins
+            try:
+                data['type'] = tg.get_namespaced_term(self.sg.ontology, shape['types'][0])
+            except BaseException:
+                # TODO: add functionality to infer type from mixins
+                data['type'] = tg.get_namespaced_term(self.sg.ontology, 'point')
+            data['shape-mixins'] = self.add_shapes(shape['shape-mixins'])
+        else:
+            # Composite shape with Required and Optional
+            for category in shape['predicates'].keys():
+                data['shapes'] = shape['predicates'][category][0]['shapes']
+                try:
+                    data['type'] = tg.get_namespaced_term(self.sg.ontology,
+                                                          shape['predicates'][category][0]['types'][0])
+                except BaseException:
+                    data['type'] = tg.get_namespaced_term(self.sg.ontology, 'point')
+                data[category] = self.add_shapes(data['shapes'])
+        return data
+
+    def add_shapes(self, shapes):
+        shape_list = []
+        for shape in shapes:
+            try:
+                s = self.__getattribute__(shape.replace('-', '_'))
+                shape_list.append(s)
+            except BaseException:
+                continue
+        return shape_list
 
 
 class EntityType:

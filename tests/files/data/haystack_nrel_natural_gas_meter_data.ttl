@@ -1,0 +1,31 @@
+@prefix ph: <https://project-haystack.org/def/ph/3.9.10#> .
+@prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.10#> .
+@prefix phScience: <https://project-haystack.org/def/phScience/3.9.10#> .
+@prefix sample: <urn:sample/> .
+
+sample:NREL-GAS-MTR-01-NaturalGasEnergyRateShape a phIoT:thermal-meter ;
+    ph:hasTag phIoT:sensor,
+        phScience:gas,
+        phScience:power ;
+    phIoT:equipRef sample:NREL-GAS-MTR-01 .
+
+sample:NREL-GAS-MTR-01-NaturalGasEnergyShape a phIoT:thermal-meter ;
+    ph:hasTag phIoT:sensor,
+        phScience:energy,
+        phScience:gas ;
+    phIoT:equipRef sample:NREL-GAS-MTR-01 .
+
+sample:NREL-GAS-MTR-01-NaturalGasFlowRateShape a phIoT:flow-meter ;
+    ph:hasTag phIoT:sensor,
+        phScience:flow,
+        phScience:gas ;
+    phIoT:equipRef sample:NREL-GAS-MTR-01 .
+
+sample:NREL-GAS-MTR-01-NaturalGasVolumeShape a phIoT:flow-meter ;
+    ph:hasTag phIoT:sensor,
+        phScience:gas,
+        phScience:volume ;
+    phIoT:equipRef sample:NREL-GAS-MTR-01 .
+
+sample:NREL-GAS-MTR-01 a phIoT:flow-meter,
+        phIoT:thermal-meter .
