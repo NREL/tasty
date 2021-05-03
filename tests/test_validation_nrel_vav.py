@@ -8,12 +8,17 @@ from tasty import constants as tc
 from tasty import graphs as tg
 from tests.conftest import run_another, get_validate_dir
 
-SAMPLE = Namespace('urn:sample/')
+
+NAMESPACE = Namespace('urn:sample/')
+SHAPE = 'NREL-VAV-SD-Cooling-Only-Shape'
+SAMPLE = 'NREL-VAV-01'
+TTL_FILE_PREFIX = 'TestNRELVavCoolingOnly'
 
 
 class TestNRELVavCoolingOnly:
+
     @pytest.mark.parametrize('shape_name, target_node', [
-        [tc.PH_SHAPES_NREL['NREL-VAV-SD-Cooling-Only-Shape'], SAMPLE['NREL-VAV-01']]
+        [tc.PH_SHAPES_NREL[SHAPE], NAMESPACE[SAMPLE]]
     ])
     def test_is_valid(self, get_haystack_nrel_data, get_haystack_all_generated_shapes, shape_name, target_node):
         # -- Setup
@@ -31,20 +36,20 @@ class TestNRELVavCoolingOnly:
         conforms, results_graph, results = result
 
         # -- Serialize results
-        f = 'TestNRELVavCoolingOnly' + '_valid.ttl'
+        f = TTL_FILE_PREFIX + '_valid.ttl'
         output_file = os.path.join(validate_dir, f)
         results_graph.serialize(output_file, format='turtle')
 
         # -- Assert conforms
         if not conforms:
             # serialize shapes graph for debugging
-            shapes_graph.serialize('TestNRELVavCoolingOnly-test_is_valid.ttl', format='turtle')
+            shapes_graph.serialize(TTL_FILE_PREFIX + '-test_is_valid.ttl', format='turtle')
         assert conforms
 
     @pytest.mark.parametrize('shape_name, target_node, remove_from_node, remove_markers, num_runs', [
         [
-            tc.PH_SHAPES_NREL['NREL-VAV-SD-Cooling-Only-Shape'], SAMPLE['NREL-VAV-01'],
-            SAMPLE['NREL-VAV-01-ZoneRelativeHumiditySensor'], ['zone'], 2
+            tc.PH_SHAPES_NREL[SHAPE], NAMESPACE[SAMPLE],
+            NAMESPACE['NREL-VAV-01-ZoneRelativeHumiditySensor'], ['zone'], 2
         ],
     ])
     def test_is_invalid(self, get_haystack_nrel_data, get_haystack_all_generated_shapes, shape_name, target_node,
@@ -79,11 +84,11 @@ class TestNRELVavCoolingOnly:
         str_name = str(shape_name)
         str_name = str_name.split('#')[1]
         target_name = str(target_node)
-        target_name = target_name.split(str(SAMPLE))[1]
+        target_name = target_name.split(str(NAMESPACE))[1]
 
         # serialize shapes graph for debugging
         f = f"{str_name}_{target_name}" + '_'.join(remove_markers) + '_remove-shapes-graph.ttl'
-        shapes_graph.serialize(f, format='turtle')
+        shapes_graph.serialize(os.path.join(validate_dir, f), format='turtle')
         # -- Assert does not conform
         assert not conforms
 
