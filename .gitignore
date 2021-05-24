@@ -4,9 +4,18 @@ __pycache__
 *.pyc
 *.egg-info/
 .tox
+.python-version
+
+# Environments (https://github.com/github/gitignore/blob/master/Python.gitignore)
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
 # Poetry things
-.venv
 dist
 
 # Tasty
