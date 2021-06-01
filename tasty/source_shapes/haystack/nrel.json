@@ -3,6 +3,26 @@
   "namespace": "https://project-haystack.org/datashapes/nrel#",
   "shapes": [
     {
+      "name": "NaturalGasFlowRateShape",
+      "types": ["flow-meter"],
+      "tags": ["gas", "flow", "sensor"]
+    },
+    {
+      "name": "NaturalGasVolumeShape",
+      "types": ["flow-meter"],
+      "tags": ["gas", "volume", "sensor"]
+    },
+    {
+      "name": "NaturalGasEnergyRateShape",
+      "types": ["thermal-meter"],
+      "tags": ["gas", "power", "sensor"]
+    },
+    {
+      "name": "NaturalGasEnergyShape",
+      "types": ["thermal-meter"],
+      "tags": ["gas", "energy", "sensor"]
+    },
+    {
       "name": "ZoneRelativeHumidityShape",
       "types": ["air-humidity-sensor"],
       "tags": ["zone"]
@@ -138,6 +158,72 @@
       "name": "OccupancyModeBinaryShape",
       "types": ["point"],
       "tags": ["occupied", "sp"]
+    },
+    {
+      "name": "NaturalGasMeterFlowRateShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "NaturalGasFlowRateShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "NaturalGasMeterVolumeShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "NaturalGasVolumeShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "NaturalGasMeterEnergyRateShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "NaturalGasEnergyRateShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "NaturalGasMeterEnergyShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "NaturalGasEnergyShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "NREL-Natural-Gas-Meter-Shape",
+      "types": ["naturalGas-meter"],
+      "shape-mixins": [
+        "NaturalGasMeterFlowRateShape",
+        "NaturalGasMeterVolumeShape",
+        "NaturalGasMeterEnergyRateShape",
+        "NaturalGasMeterEnergyShape"
+      ]
     },
     {
       "name": "AhuOccupancyShape",

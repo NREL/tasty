@@ -10,19 +10,19 @@ from tests.conftest import run_another, get_validate_dir
 
 
 NAMESPACE = Namespace('urn:sample/')
-SHAPE = 'NREL-VAV-SD-Cooling-Only-Shape'
-SAMPLE = 'NREL-VAV-01'
-TTL_FILE_PREFIX = 'TestNRELVavCoolingOnly'
+SHAPE = 'NREL-Natural-Gas-Meter-Shape'
+SAMPLE = 'NREL-GAS-MTR-01'
+TTL_FILE_PREFIX = 'TestNRELNaturalGasMeter'
 
 
-class TestNRELVavCoolingOnly:
+class TestNRELNaturalGasMeter:
 
     @pytest.mark.parametrize('shape_name, target_node', [
         [tc.PH_SHAPES_NREL[SHAPE], NAMESPACE[SAMPLE]]
     ])
-    def test_is_valid(self, get_haystack_nrel_data, get_haystack_all_generated_shapes, shape_name, target_node):
+    def test_is_valid(self, get_haystack_nrel_natural_gas_meter_data, get_haystack_all_generated_shapes, shape_name, target_node):
         # -- Setup
-        data_graph = get_haystack_nrel_data
+        data_graph = get_haystack_nrel_natural_gas_meter_data
         shapes_graph = get_haystack_all_generated_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
         validate_dir = os.path.join(os.path.dirname(__file__), 'output/validate')
@@ -49,17 +49,17 @@ class TestNRELVavCoolingOnly:
     @pytest.mark.parametrize('shape_name, target_node, remove_from_node, remove_markers, num_runs', [
         [
             tc.PH_SHAPES_NREL[SHAPE], NAMESPACE[SAMPLE],
-            NAMESPACE['NREL-VAV-01-ZoneRelativeHumiditySensor'], ['zone'], 2
+            NAMESPACE['NREL-GAS-MTR-01-NaturalGasFlowRateShape'], ["gas", "flow", "sensor"], 2
         ],
     ])
-    def test_is_invalid(self, get_haystack_nrel_data, get_haystack_all_generated_shapes, shape_name, target_node,
+    def test_is_invalid(self, get_haystack_nrel_natural_gas_meter_data, get_haystack_all_generated_shapes, shape_name, target_node,
                         remove_from_node,
                         remove_markers, num_runs):
         # Set version for constants
         tc.set_default_versions(haystack_version=tc.V3_9_10)
 
         # -- Setup
-        data_graph = get_haystack_nrel_data
+        data_graph = get_haystack_nrel_natural_gas_meter_data
         shapes_graph = get_haystack_all_generated_shapes
         ont_graph = tg.load_ontology(tc.HAYSTACK, tc.V3_9_10)
         validate_dir = get_validate_dir()
