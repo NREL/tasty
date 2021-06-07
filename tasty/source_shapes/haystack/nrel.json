@@ -217,7 +217,7 @@
     },
     {
       "name": "NREL-Natural-Gas-Meter-Shape",
-      "types": ["naturalGas-meter"],
+      "types": ["meter"],
       "shape-mixins": [
         "NaturalGasMeterFlowRateShape",
         "NaturalGasMeterVolumeShape",
