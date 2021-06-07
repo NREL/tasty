@@ -2,7 +2,8 @@ import os
 
 from typing import List, Union
 from rdflib import Graph, Namespace, OWL, RDF, RDFS, SKOS, SH, URIRef
-
+import json
+import uuid
 import tasty.constants as tc
 
 
@@ -144,3 +145,81 @@ def get_namespaced_term(ontology: Graph, term: str) -> Union[URIRef, bool]:
         ns = potential_namespaces[0]
         return ns[term]
     return False
+
+
+def print_as_hayson(graph: Graph):
+    """
+    Return the Hayson encoding of an rdf graph
+    :param graph: [rdflib.Graph]
+    :return:
+    """
+    hayson = {
+
+        "meta": {"ver": "3.0"},
+        "cols": [],
+        "rows": []
+    }
+    json_ld = graph.serialize(format='json-ld').decode('utf-8')
+    data = json.loads(json_ld)
+    for row in data:
+        hayThing = {"id": str(uuid.uuid4())}
+        for key, value in row.items():
+            if key == "@id":
+                dis = value
+                hayThing.update({"dis": dis})
+            elif key == "@type":
+                tags = value[0].split('#')[1]
+                multitag = tags.split("-")
+                for tag in multitag:
+                    hayThing.update({tag: "m"})
+            elif key.split("#")[1] == "hasTag":
+                for tag1 in value:
+                    for k, v in tag1.items():
+                        if k == "@id":
+                            t = v.split("#")[1]
+                            hayThing.update({t: ":m"})
+            elif key.split("#")[1] == "equipRef":
+                for ref in value:
+                    for k, v in ref.items():
+                        if k == "@id":
+                            t = v.split("/")[1]
+                            hayThing.update({"equipRef": v})
+            elif key.split("#")[1] == "condenserWaterRef":
+                for ref in value:
+                    for k, v in ref.items():
+                        if k == "@id":
+                            t = v.split("/")[1]
+                            hayThing.update({"condenserWaterRef": v})
+            elif key.split("#")[1] == "hotWaterRef":
+                for ref in value:
+                    for k, v in ref.items():
+                        if k == "@id":
+                            t = v.split("/")[1]
+                            hayThing.update({"hotWaterRef": v})
+            elif key.split("#")[1] == "airRef":
+                for ref in value:
+                    for k, v in ref.items():
+                        if k == "@id":
+                            t = v.split("/")[1]
+                            hayThing.update({"airRef": v})
+
+            hayson["rows"].append(hayThing)
+
+    seen = set()
+    new_l = []
+    cols = set()
+    hay_cols = []
+    for d in hayson["rows"]:
+        t = tuple(d.items())
+        if t not in seen:
+            seen.add(t)
+            new_l.append(d)
+            for tag in t:
+                cols.add(tag[0])
+
+    for tag in cols:
+        hay_cols.append({"name": tag})
+
+    hayson["cols"] = hay_cols
+    hayson["rows"] = new_l
+    return json.dumps(hayson)
