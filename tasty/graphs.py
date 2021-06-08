@@ -1,9 +1,10 @@
-import os
-
-from typing import List, Union
-from rdflib import Graph, Namespace, OWL, RDF, RDFS, SKOS, SH, URIRef
 import json
+import os
+from typing import List, Union
 import uuid
+
+from rdflib import Graph, Namespace, OWL, RDF, RDFS, SKOS, SH, URIRef
+
 import tasty.constants as tc
 
 
