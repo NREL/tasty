@@ -148,79 +148,76 @@ def get_namespaced_term(ontology: Graph, term: str) -> Union[URIRef, bool]:
     return False
 
 
-def print_as_hayson(graph: Graph):
+def graph_to_hayson_string(graph: Graph) -> str:
     """
-    Return the Hayson encoding of an rdf graph
+    Return the Haystack JSON (Hayson) encoding of an RDF graph.
     :param graph: [rdflib.Graph]
-    :return:
+    :return: [str]
     """
-    hayson = {
-
+    hayson_dict = {
         "meta": {"ver": "3.0"},
         "cols": [],
         "rows": []
     }
-    json_ld = graph.serialize(format='json-ld').decode('utf-8')
-    data = json.loads(json_ld)
-    for row in data:
-        hayThing = {"id": str(uuid.uuid4())}
-        for key, value in row.items():
+    json_ld_str = json.loads(graph.serialize(format='json-ld').decode('utf-8'))
+    for row in json_ld_str:
+        json_ld_dict = {"id": str(uuid.uuid4())}
+        for key, val in row.items():
+            uri_fragment_list = key.split("#")
             if key == "@id":
-                dis = value
-                hayThing.update({"dis": dis})
+                dis = val
+                json_ld_dict .update({"dis": dis})
             elif key == "@type":
-                tags = value[0].split('#')[1]
+                tags = val[0].split('#')[1]
                 multitag = tags.split("-")
-                for tag in multitag:
-                    hayThing.update({tag: "m"})
-            elif key.split("#")[1] == "hasTag":
-                for tag1 in value:
+                [json_ld_dict .update({tag: "m"}) for tag in multitag]
+            elif uri_fragment_list[1] == "hasTag":
+                for tag1 in val:
                     for k, v in tag1.items():
                         if k == "@id":
                             t = v.split("#")[1]
-                            hayThing.update({t: ":m"})
-            elif key.split("#")[1] == "equipRef":
-                for ref in value:
+                            json_ld_dict .update({t: ":m"})
+            elif uri_fragment_list[1] == "equipRef":
+                for ref in val:
                     for k, v in ref.items():
                         if k == "@id":
                             t = v.split("/")[1]
-                            hayThing.update({"equipRef": v})
-            elif key.split("#")[1] == "condenserWaterRef":
-                for ref in value:
+                            json_ld_dict .update({"equipRef": v})
+            elif uri_fragment_list[1] == "condenserWaterRef":
+                for ref in val:
                     for k, v in ref.items():
                         if k == "@id":
                             t = v.split("/")[1]
-                            hayThing.update({"condenserWaterRef": v})
-            elif key.split("#")[1] == "hotWaterRef":
-                for ref in value:
+                            json_ld_dict .update({"condenserWaterRef": v})
+            elif uri_fragment_list[1] == "hotWaterRef":
+                for ref in val:
                     for k, v in ref.items():
                         if k == "@id":
                             t = v.split("/")[1]
-                            hayThing.update({"hotWaterRef": v})
-            elif key.split("#")[1] == "airRef":
-                for ref in value:
+                            json_ld_dict .update({"hotWaterRef": v})
+            elif uri_fragment_list[1] == "airRef":
+                for ref in val:
                     for k, v in ref.items():
                         if k == "@id":
                             t = v.split("/")[1]
-                            hayThing.update({"airRef": v})
+                            json_ld_dict .update({"airRef": v})
 
-            hayson["rows"].append(hayThing)
+            hayson_dict["rows"].append(json_ld_dict)
 
     seen = set()
-    new_l = []
+    hayson_rows_list = []
     cols = set()
-    hay_cols = []
-    for d in hayson["rows"]:
+    hayson_cols_list = []
+    for d in hayson_dict["rows"]:
         t = tuple(d.items())
         if t not in seen:
             seen.add(t)
-            new_l.append(d)
+            hayson_rows_list.append(d)
             for tag in t:
                 cols.add(tag[0])
 
-    for tag in cols:
-        hay_cols.append({"name": tag})
+    [hayson_cols_list.append({"name": tag}) for tag in cols]
 
-    hayson["cols"] = hay_cols
-    hayson["rows"] = new_l
-    return json.dumps(hayson)
+    hayson_dict["cols"] = hayson_cols_list
+    hayson_dict["rows"] = hayson_rows_list
+    return json.dumps(hayson_dict)
