@@ -462,7 +462,7 @@
       }
     },
     {
-      "name": "HeatingCoilShape",
+      "name": "HWHeatingCoilShape",
       "predicates": {
         "requires": [
           {
@@ -498,6 +498,21 @@
         "ZoneModeControlShape",
         "AirTemperatureControlShape",
         "VAVAirFlowControlShape"
+      ]
+    },
+    {
+      "name": "NREL-VAV-SD-HW-Reheat-Shape",
+      "types": ["vav"],
+      "shape-mixins": [
+        "ZoneThermalComfortSensorsShape",
+        "ZoneOccupancySensorsShape",
+        "ZoneDemandControlledVentilationShape",
+        "ZoneCoolingSetpointsShape",
+        "ZoneHeatingSetpointsShape",
+        "ZoneModeControlShape",
+        "VAVReheatAirTemperatureControlShape",
+        "VAVAirFlowControlShape",
+        "HWHeatingCoilShape"
       ]
     }
   ]
