@@ -1,20 +1,25 @@
 # tasty
 
-Tasty was created to simplify the generation and validation of metadata related to buildings.
+Tasty was created to simplify the generation and validation of metadata related to buildings and intends to support the following schemas.
+
+- [Brick](https://brickschema.org/)
+- [Project Haystack](https://project-haystack.org/)
+- [ASHRAE Standard 223P](https://www.ashrae.org/about/news/2018/ashrae-s-bacnet-committee-project-haystack-and-brick-schema-collaborating-to-provide-unified-data-semantic-modeling-solution)
 
 # Getting started
-Clone the repo and install via poetry:
-```bash
-# Clone repo
-git clone https://github.com/nrel/tasty.git
 
-# install the package
-cd tasty
-poetry install
+1. Clone or download the repository.
+2. Install [Python](https://www.python.org/downloads/) (>=3.3 recommended)
+3. Install [Poetry](https://python-poetry.org/docs/#installation)
+4. Create a virtual environment within the repository. The following command will create a virtual environment with [venv](https://docs.python.org/3/library/venv.html) (included with Python >=3.3) named `venv_name`.
+   > python3 -m venv venv_name
+5. Install dependencies.
+   > poetry install
+6. Run tasty to confirm that it's working, which should show a message describing its usage.
+   > poetry run tasty
 
-# Test that it works, you should see a message describing its usage
-poetry run tasty
-```
+# Using
+
 ## Generate shapes
 - The core shape templates (`tasty/source_shapes/*`) are used to generate the SHACL shape files. Run the following to regenerate the SHACL shape files locally.
 ```bash
@@ -94,10 +99,10 @@ chw_flow_sensor.set_namespace(EX) # True
 chw_flow_sensor.bind_to_graph(hg)
 ```
 
-# Usage and Examples
+## Examples
 Jupyter Lab is currently a dev dependency. If you have gone through the poetry setup, run:
 - `poetry run jupyter lab`
-- Open up the [Cooling Only Example](./examples/NREL%20VAV%20Cooling%20Only.ipynb)
+- Open the [NREL VAV Cooling Only.ipynb](./examples/NREL%20VAV%20Cooling%20Only.ipynb)
 
-# Setup
+# Developing
 Recommended setup documented [here](https://gist.github.com/corymosiman12/26fb682df2d36b5c9155f344eccbe404)
