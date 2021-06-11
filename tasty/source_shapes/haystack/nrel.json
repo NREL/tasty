@@ -185,6 +185,11 @@
       "tags": ["hot", "water", "heat", "valve", "cmd"]
     },
     {
+      "name": "HeatingWaterValveFeedbackShape",
+      "types": ["point"],
+      "tags": ["hot", "water", "heat", "valve", "sensor"]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
