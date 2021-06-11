@@ -388,6 +388,31 @@
       }
     },
     {
+      "name": "VAVReheatAirTemperatureControlShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DischargeAirTemperatureShape",
+              "DischargeAirTemperatureSetpointShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "InletAirTemperatureShape",
+              "CoolingRequestsShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "name": "VAVAirFlowControlShape",
       "predicates": {
         "requires": [
