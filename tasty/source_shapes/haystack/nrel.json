@@ -462,6 +462,31 @@
       }
     },
     {
+      "name": "HeatingCoilShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "HeatingWaterValveCommandShape",
+              "HeatingWaterValveFeedbackShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "HeatingCoilSupplyWaterTemperatureShape",
+              "HeatingCoilReturnWaterTemperatureShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
       "types": ["coolingOnly-vav"],
       "shape-mixins": [
