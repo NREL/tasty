@@ -175,6 +175,11 @@
       "tags-custom": ["min"]
     },
     {
+      "name": "MaximumDischargeAirFlowSetpointShape",
+      "types": ["discharge-air-flow-sp"],
+      "tags-custom": ["max"]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
