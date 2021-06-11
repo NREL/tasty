@@ -160,6 +160,26 @@
       "tags": ["occupied", "sp"]
     },
     {
+      "name": "InletAirTemperatureShape",
+      "types": ["air-temp-sensor"],
+      "tags": ["entering"]
+    },
+    {
+      "name": "DischargeAirTemperatureSetpointShape",
+      "types": ["discharge-air-temp-sp"],
+      "tags": ["leaving"]
+    },
+    {
+      "name": "MinimumDischargeAirFlowSetpointShape",
+      "types": ["discharge-air-flow-sp"],
+      "tags-custom": ["min"]
+    },
+    {
+      "name": "MaximumDischargeAirFlowSetpointShape",
+      "types": ["discharge-air-flow-sp"],
+      "tags-custom": ["max"]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
