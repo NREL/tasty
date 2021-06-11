@@ -180,6 +180,11 @@
       "tags-custom": ["max"]
     },
     {
+      "name": "HeatingWaterValveCommandShape",
+      "types": ["point"],
+      "tags": ["hot", "water", "heat", "valve", "cmd"]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
