@@ -170,6 +170,11 @@
       "tags": ["leaving"]
     },
     {
+      "name": "MinimumDischargeAirFlowSetpointShape",
+      "types": ["discharge-air-flow-sp"],
+      "tags-custom": ["min"]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
