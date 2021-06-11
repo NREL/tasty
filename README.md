@@ -32,6 +32,18 @@ The core shape templates (`tasty/source_shapes/*`) are used to generate the SHAC
 poetry run tasty generate-shapes
 ```
 
+### OAP Shapes
+Tasty can scrape the [BuildingsIOT Ontology Alignment Project (OAP)](https://oap.buildingsiot.com/) for all of their points and functions and then use these to create a source shapes file with the following commands.
+
+1. Scrape data to `tasty/utils/temp/`.
+   ```bash
+   poetry run python tasty/utils/scrape_oap.py
+   ```
+2. Generate shapes to `tasty/source_shapes/haystack/oap.json`.
+   ```bash
+   poetry run python tasty/utils/generate_oap.py
+   ```
+
 ### Run tests
 You should now be able to run the tests, make sure they are all passing: 
 ```bash
@@ -48,11 +60,6 @@ Additional column headers will exist for each of the shapes you want to use to v
 poetry run tasty generate-input -dg tests/files/data/haystack_g36_data_3_9_10.ttl
 ```
 - Add the `-c` flag to only add composite shapes to your input file. Composite meaning shapes having other shape, i.e. a shape for a specific vav box configuration, etc.
-
-### OAP Inputs
-We scrape the BuildingsIOT API for all of their points and functions and then use these to create a source shapes file (`oap.json`). Run the following scripts in order:
-- `poetry run python tasty/utils/scrape_oap.py`
-- `poetry run python tasty/utils/generate_oap.py` -> outputs `oap.json`
 
 ## Validate instance data
 Using the generated `input-file.csv`, mark an `X` in the cells according to the shape you want the entity to validate against. Using the example generated from above, the following should be true:
