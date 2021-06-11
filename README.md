@@ -27,13 +27,16 @@ Tasty was created to simplify the generation and validation of metadata related 
 # Using
 
 ## Generate shapes
-- The core shape templates (`tasty/source_shapes/*`) are used to generate the SHACL shape files. Run the following to regenerate the SHACL shape files locally.
+The core shape templates (`tasty/source_shapes/*`) are used to generate the SHACL shape files. Run the following to generate the SHACL shape files locally.
 ```bash
 poetry run tasty generate-shapes
 ```
 
 ### Run tests
-- You should now be able to run the tests, make sure they are all passing: `poetry run pytest`
+You should now be able to run the tests, make sure they are all passing: 
+```bash
+poetry run pytest
+```
 
 ## Generate input file to use for validation
 You can use tasty to help you validate instance data against specific shapes. To do this, you must first generate an input file. Each row in an input file corresponds to an entity in your instance data. An input file will contain the following column headers:
