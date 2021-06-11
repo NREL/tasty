@@ -190,6 +190,10 @@
       "tags": ["hot", "water", "heat", "valve", "sensor"]
     },
     {
+      "name": "HeatingCoilSupplyWaterTemperatureShape",
+      "types": ["entering-hot-water-temp-sensor"]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
