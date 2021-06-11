@@ -194,6 +194,10 @@
       "types": ["entering-hot-water-temp-sensor"]
     },
     {
+      "name": "HeatingCoilReturnWaterTemperatureShape",
+      "types": ["leaving-hot-water-temp-sensor"]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
