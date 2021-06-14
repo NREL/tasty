@@ -451,6 +451,19 @@
       ]
     },
     {
+      "name": "AHUOperatingModeShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sp"
+      ],
+      "tags-custom": [
+        "operating",
+        "mode"
+      ]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
