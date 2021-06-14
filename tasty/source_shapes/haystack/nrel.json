@@ -198,6 +198,11 @@
       "types": ["leaving-hot-water-temp-sensor"]
     },
     {
+      "name": "ElectricHeatingBinaryCommandShape",
+      "types": ["point"],
+      "tags": ["elec", "heat", "run", "cmd"]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
