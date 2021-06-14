@@ -880,7 +880,7 @@
             "path-type": "inverse",
             "shapes": [
               "CoolingOATemperatureEnableSetpointShape",
-              "CoolingOAWetBulbEbnableSetpointShape",
+              "CoolingOAWetBulbEnableSetpointShape",
               "EconomizerOATemperatureEnableSetpointShape",
               "EconomizerOAWetBulbEnableSetpointShape",
               "HeatingOATemperatureEnableSetpointShape"
