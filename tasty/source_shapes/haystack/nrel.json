@@ -464,6 +464,16 @@
       ]
     },
     {
+      "name": "CoolingOATemperatureEnableShape",
+      "types": [
+        "outside-air-temp-sp"
+      ],
+      "tags": [
+        "cooling",
+        "enable"
+      ]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
