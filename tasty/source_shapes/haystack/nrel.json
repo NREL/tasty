@@ -523,6 +523,23 @@
         ]
       }
     },
+
+    {
+      "name": "OccupancyModeIndicatorShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "OccupancyModeBinaryShape",
+              "OccupancyModeStandbyShape"
+            ]
+          }
+        ]
+      }
+    },
+
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
       "types": ["coolingOnly-vav"],
