@@ -464,13 +464,27 @@
       ]
     },
     {
-      "name": "CoolingOATemperatureEnableShape",
+      "name": "CoolingOATemperatureEnableSetpointShape",
       "types": [
         "outside-air-temp-sp"
       ],
       "tags": [
         "cooling",
         "enable"
+      ]
+    },
+    {
+      "name": "CoolingOAWetBulbEnableSetpointShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cooling",
+        "outside",
+        "air",
+        "wetBulb",
+        "enable",
+        "sp"
       ]
     },
     {
