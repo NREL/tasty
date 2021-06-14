@@ -488,6 +488,18 @@
       ]
     },
     {
+      "name": "EconomizerOATemperatureEnableSetpointShape",
+      "types": [
+        "outside-air-temp-sp"
+      ],
+      "tags": [
+        "enable"
+      ],
+      "tags-custom": [
+        "econ"
+      ]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
