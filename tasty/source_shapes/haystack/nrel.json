@@ -208,6 +208,11 @@
       "tags": ["elec", "heat", "run", "sensor"]
     },
     {
+      "name": "ElectricHeatingPercentCommandShape",
+      "types": ["point"],
+      "tags": ["elec", "heat", "load", "cmd"]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
