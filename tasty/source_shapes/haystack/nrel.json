@@ -203,6 +203,11 @@
       "tags": ["elec", "heat", "run", "cmd"]
     },
     {
+      "name": "ElectricHeatingBinaryFeedbackShape",
+      "types": ["point"],
+      "tags": ["elec", "heat", "run", "sensor"]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
