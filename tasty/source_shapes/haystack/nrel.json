@@ -862,6 +862,33 @@
         ]
       }
     },
+    {
+      "name": "AHUModeControlShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "AHUOperatingModeShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CoolingOATemperatureEnableSetpointShape",
+              "CoolingOAWetBulbEbnableSetpointShape",
+              "EconomizerOATemperatureEnableSetpointShape",
+              "EconomizerOAWetBulbEnableSetpointShape",
+              "HeatingOATemperatureEnableSetpointShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
