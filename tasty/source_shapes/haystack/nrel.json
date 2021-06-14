@@ -704,6 +704,7 @@
             "path": "equipRef",
             "path-type": "inverse",
             "shapes": [
+              "DischargeAirFlowSetpointShape",
               "MinimumHeatingDischargeAirFlowSetpointShape",
               "MinimumCoolingDischargeAirFlowSetpointShape",
               "MaximumHeatingDischargeAirFlowSetpointShape",
