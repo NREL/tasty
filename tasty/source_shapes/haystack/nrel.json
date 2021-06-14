@@ -507,6 +507,23 @@
       }
     },
     {
+      "name": "ElectricHeatingCoilShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ElectricHeatingBinaryCommandShape",
+              "ElectricHeatingBinaryFeedbackShape",
+              "ElectricHeatingPercentCommandShape",
+              "ElectricHeatingPercentFeedbackShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
       "types": ["coolingOnly-vav"],
       "shape-mixins": [
