@@ -213,6 +213,11 @@
       "tags": ["elec", "heat", "load", "cmd"]
     },
     {
+      "name": "ElectricHeatingPercentFeedbackShape",
+      "types": ["point"],
+      "tags": ["elec", "heat", "load", "sensor"]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
