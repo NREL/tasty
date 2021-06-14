@@ -551,6 +551,21 @@
         "VAVAirFlowControlShape",
         "HWHeatingCoilShape"
       ]
+    },
+    {
+      "name": "NREL-VAV-SD-Elec-Reheat-Shape",
+      "types": ["vav"],
+      "shape-mixins": [
+        "ZoneThermalComfortSensorsShape",
+        "ZoneOccupancySensorsShape",
+        "ZoneDemandControlledVentilationShape",
+        "ZoneCoolingSetpointsShape",
+        "ZoneHeatingSetpointsShape",
+        "ZoneModeControlShape",
+        "VAVReheatAirTemperatureControlShape",
+        "VAVAirFlowControlShape",
+        "ElectricHeatingCoilShape"
+      ]
     }
   ]
 }
