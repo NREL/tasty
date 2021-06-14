@@ -4,198 +4,451 @@
   "shapes": [
     {
       "name": "NaturalGasFlowRateShape",
-      "types": ["flow-meter"],
-      "tags": ["gas", "flow", "sensor"]
+      "types": [
+        "flow-meter"
+      ],
+      "tags": [
+        "gas",
+        "flow",
+        "sensor"
+      ]
     },
     {
       "name": "NaturalGasVolumeShape",
-      "types": ["flow-meter"],
-      "tags": ["gas", "volume", "sensor"]
+      "types": [
+        "flow-meter"
+      ],
+      "tags": [
+        "gas",
+        "volume",
+        "sensor"
+      ]
     },
     {
       "name": "NaturalGasEnergyRateShape",
-      "types": ["thermal-meter"],
-      "tags": ["gas", "power", "sensor"]
+      "types": [
+        "thermal-meter"
+      ],
+      "tags": [
+        "gas",
+        "power",
+        "sensor"
+      ]
     },
     {
       "name": "NaturalGasEnergyShape",
-      "types": ["thermal-meter"],
-      "tags": ["gas", "energy", "sensor"]
+      "types": [
+        "thermal-meter"
+      ],
+      "tags": [
+        "gas",
+        "energy",
+        "sensor"
+      ]
     },
     {
       "name": "ZoneRelativeHumidityShape",
-      "types": ["air-humidity-sensor"],
-      "tags": ["zone"]
+      "types": [
+        "air-humidity-sensor"
+      ],
+      "tags": [
+        "zone"
+      ]
     },
     {
       "name": "BinaryOccupancySensorShape",
-      "types": ["point"],
-      "tags": ["occupied", "sensor"],
-      "tags-custom": ["occupancyIndicator"]
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "occupied",
+        "sensor"
+      ],
+      "tags-custom": [
+        "occupancyIndicator"
+      ]
     },
     {
       "name": "OccupancyOverrideCommandShape",
-      "types": ["point"],
-      "tags": ["occupied", "cmd"]
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "occupied",
+        "cmd"
+      ]
     },
     {
       "name": "ZoneTemperatureCoolingEffectiveSetpointShape",
-      "types": ["air-temp-sp"],
-      "tags": ["zone", "cooling", "effective"]
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "zone",
+        "cooling",
+        "effective"
+      ]
     },
     {
       "name": "ZoneTemperatureHeatingEffectiveSetpointShape",
-      "types": ["air-temp-sp"],
-      "tags": ["zone", "heating", "effective"]
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "zone",
+        "heating",
+        "effective"
+      ]
     },
     {
       "name": "ZoneTemperatureCoolingOccupiedSetpointShape",
-      "types": ["air-temp-sp"],
-      "tags": ["zone", "cooling", "occ"]
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "zone",
+        "cooling",
+        "occ"
+      ]
     },
     {
       "name": "ZoneTemperatureHeatingOccupiedSetpointShape",
-      "types": ["air-temp-sp"],
-      "tags": ["zone", "heating", "occ"]
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "zone",
+        "heating",
+        "occ"
+      ]
     },
     {
       "name": "ZoneTemperatureCoolingUnoccupiedSetpointShape",
-      "types": ["air-temp-sp"],
-      "tags": ["zone", "cooling", "unocc"]
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "zone",
+        "cooling",
+        "unocc"
+      ]
     },
     {
       "name": "ZoneTemperatureHeatingUnoccupiedSetpointShape",
-      "types": ["air-temp-sp"],
-      "tags": ["zone", "heating", "unocc"]
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "zone",
+        "heating",
+        "unocc"
+      ]
     },
     {
       "name": "ZoneTemperatureCoolingStandbySetpointShape",
-      "types": ["air-temp-sp"],
-      "tags": ["zone", "cooling", "standby"]
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "zone",
+        "cooling",
+        "standby"
+      ]
     },
     {
       "name": "ZoneTemperatureHeatingStandbySetpointShape",
-      "types": ["air-temp-sp"],
-      "tags": ["zone", "heating", "standby"]
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "zone",
+        "heating",
+        "standby"
+      ]
     },
     {
       "name": "ZoneEquipmentOperatingStateShape",
-      "types": ["point"],
-      "tags": ["sp"],
-      "tags-custom": ["operating", "mode"]
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sp"
+      ],
+      "tags-custom": [
+        "operating",
+        "mode"
+      ]
     },
     {
       "name": "DischargeAirTemperatureShape",
-      "types": ["discharge-air-temp-sensor"],
-      "tags": ["leaving"]
+      "types": [
+        "discharge-air-temp-sensor"
+      ],
+      "tags": [
+        "leaving"
+      ]
     },
     {
       "name": "DischargeAirDamperCommandShape",
-      "types": ["point"],
-      "tags": ["discharge", "air", "damper", "cmd"]
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "discharge",
+        "air",
+        "damper",
+        "cmd"
+      ]
     },
     {
       "name": "DischargeAirDamperFeedbackShape",
-      "types": ["air-sensor"],
-      "tags": ["discharge", "damper"]
+      "types": [
+        "air-sensor"
+      ],
+      "tags": [
+        "discharge",
+        "damper"
+      ]
     },
     {
       "name": "DischargeAirFlowShape",
-      "types": ["discharge-air-flow-sensor"],
-      "tags": ["leaving"]
+      "types": [
+        "discharge-air-flow-sensor"
+      ],
+      "tags": [
+        "leaving"
+      ]
     },
     {
       "name": "DischargeAirFlowSetpointShape",
-      "types": ["discharge-air-flow-sp"],
-      "tags": ["effective"]
+      "types": [
+        "discharge-air-flow-sp"
+      ],
+      "tags": [
+        "effective"
+      ]
     },
     {
       "name": "MinimumHeatingDischargeAirFlowSetpointShape",
-      "types": ["discharge-air-flow-sp"],
-      "tags": ["heating"],
-      "tags-custom": ["min"]
+      "types": [
+        "discharge-air-flow-sp"
+      ],
+      "tags": [
+        "heating"
+      ],
+      "tags-custom": [
+        "min"
+      ]
     },
     {
       "name": "MinimumCoolingDischargeAirFlowSetpointShape",
-      "types": ["discharge-air-flow-sp"],
-      "tags": ["cooling"],
-      "tags-custom": ["min"]
+      "types": [
+        "discharge-air-flow-sp"
+      ],
+      "tags": [
+        "cooling"
+      ],
+      "tags-custom": [
+        "min"
+      ]
     },
     {
       "name": "MaximumHeatingDischargeAirFlowSetpointShape",
-      "types": ["discharge-air-flow-sp"],
-      "tags": ["heating"],
-      "tags-custom": ["max"]
+      "types": [
+        "discharge-air-flow-sp"
+      ],
+      "tags": [
+        "heating"
+      ],
+      "tags-custom": [
+        "max"
+      ]
     },
     {
       "name": "MaximumCoolingDischargeAirFlowSetpointShape",
-      "types": ["discharge-air-flow-sp"],
-      "tags": ["cooling"],
-      "tags-custom": ["max"]
+      "types": [
+        "discharge-air-flow-sp"
+      ],
+      "tags": [
+        "cooling"
+      ],
+      "tags-custom": [
+        "max"
+      ]
     },
     {
       "name": "CoolingRequestsShape",
-      "types": ["point"],
-      "tags": ["cooling", "cmd"],
-      "tags-custom": ["request"]
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cooling",
+        "cmd"
+      ],
+      "tags-custom": [
+        "request"
+      ]
     },
     {
       "name": "HeatingRequestsShape",
-      "types": ["point"],
-      "tags": ["heating", "cmd"],
-      "tags-custom": ["request"]
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heating",
+        "cmd"
+      ],
+      "tags-custom": [
+        "request"
+      ]
     },
     {
       "name": "OccupancyModeStandbyShape",
-      "types": ["point"],
-      "tags": ["occ", "sp"],
-      "tags-custom": ["mode"],
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "occ",
+        "sp"
+      ],
+      "tags-custom": [
+        "mode"
+      ],
       "vals": {
         "enum": "Occupied,Unoccupied,Standby"
       }
     },
     {
       "name": "OccupancyModeBinaryShape",
-      "types": ["point"],
-      "tags": ["occupied", "sp"]
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "occupied",
+        "sp"
+      ]
     },
     {
       "name": "InletAirTemperatureShape",
-      "types": ["air-temp-sensor"],
-      "tags": ["entering"]
+      "types": [
+        "air-temp-sensor"
+      ],
+      "tags": [
+        "entering"
+      ]
     },
     {
       "name": "DischargeAirTemperatureSetpointShape",
-      "types": ["discharge-air-temp-sp"],
-      "tags": ["leaving"]
+      "types": [
+        "discharge-air-temp-sp"
+      ],
+      "tags": [
+        "leaving"
+      ]
     },
     {
       "name": "MinimumDischargeAirFlowSetpointShape",
-      "types": ["discharge-air-flow-sp"],
-      "tags-custom": ["min"]
+      "types": [
+        "discharge-air-flow-sp"
+      ],
+      "tags-custom": [
+        "min"
+      ]
     },
     {
       "name": "MaximumDischargeAirFlowSetpointShape",
-      "types": ["discharge-air-flow-sp"],
-      "tags-custom": ["max"]
+      "types": [
+        "discharge-air-flow-sp"
+      ],
+      "tags-custom": [
+        "max"
+      ]
     },
     {
       "name": "HeatingWaterValveCommandShape",
-      "types": ["point"],
-      "tags": ["hot", "water", "heat", "valve", "cmd"]
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "hot",
+        "water",
+        "heat",
+        "valve",
+        "cmd"
+      ]
     },
     {
       "name": "HeatingWaterValveFeedbackShape",
-      "types": ["point"],
-      "tags": ["hot", "water", "heat", "valve", "sensor"]
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "hot",
+        "water",
+        "heat",
+        "valve",
+        "sensor"
+      ]
     },
     {
       "name": "HeatingCoilSupplyWaterTemperatureShape",
-      "types": ["entering-hot-water-temp-sensor"]
+      "types": [
+        "entering-hot-water-temp-sensor"
+      ]
     },
     {
       "name": "HeatingCoilReturnWaterTemperatureShape",
-      "types": ["leaving-hot-water-temp-sensor"]
+      "types": [
+        "leaving-hot-water-temp-sensor"
+      ]
+    },
+    {
+      "name": "ElectricHeatingBinaryCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "elec",
+        "heat",
+        "run",
+        "cmd"
+      ]
+    },
+    {
+      "name": "ElectricHeatingBinaryFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "elec",
+        "heat",
+        "run",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ElectricHeatingPercentCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "elec",
+        "heat",
+        "load",
+        "cmd"
+      ]
+    },
+    {
+      "name": "ElectricHeatingPercentFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "elec",
+        "heat",
+        "load",
+        "sensor"
+      ]
     },
     {
       "name": "NaturalGasMeterFlowRateShape",
@@ -255,7 +508,9 @@
     },
     {
       "name": "NREL-Natural-Gas-Meter-Shape",
-      "types": ["meter"],
+      "types": [
+        "meter"
+      ],
       "shape-mixins": [
         "NaturalGasMeterFlowRateShape",
         "NaturalGasMeterVolumeShape",
@@ -460,6 +715,21 @@
       }
     },
     {
+      "name": "VAVAirFlowReheatShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "MinimumDischargeAirFlowSetpointShape",
+              "MaximumDischargeAirFlowSetpointShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "name": "HWHeatingCoilShape",
       "predicates": {
         "requires": [
@@ -485,8 +755,27 @@
       }
     },
     {
+      "name": "ElectricHeatingCoilShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ElectricHeatingBinaryCommandShape",
+              "ElectricHeatingBinaryFeedbackShape",
+              "ElectricHeatingPercentCommandShape",
+              "ElectricHeatingPercentFeedbackShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
-      "types": ["coolingOnly-vav"],
+      "types": [
+        "coolingOnly-vav"
+      ],
       "shape-mixins": [
         "ZoneThermalComfortSensorsShape",
         "ZoneOccupancySensorsShape",
@@ -500,7 +789,9 @@
     },
     {
       "name": "NREL-VAV-SD-HW-Reheat-Shape",
-      "types": ["vav"],
+      "types": [
+        "vav"
+      ],
       "shape-mixins": [
         "ZoneThermalComfortSensorsShape",
         "ZoneOccupancySensorsShape",
@@ -510,7 +801,26 @@
         "ZoneModeControlShape",
         "VAVReheatAirTemperatureControlShape",
         "VAVAirFlowControlShape",
+        "VAVAirFlowReheatShape",
         "HWHeatingCoilShape"
+      ]
+    },
+    {
+      "name": "NREL-VAV-SD-Elec-Reheat-Shape",
+      "types": [
+        "vav"
+      ],
+      "shape-mixins": [
+        "ZoneThermalComfortSensorsShape",
+        "ZoneOccupancySensorsShape",
+        "ZoneDemandControlledVentilationShape",
+        "ZoneCoolingSetpointsShape",
+        "ZoneHeatingSetpointsShape",
+        "ZoneModeControlShape",
+        "VAVReheatAirTemperatureControlShape",
+        "VAVAirFlowControlShape",
+        "ElectricHeatingCoilShape",
+        "VAVAirFlowReheatShape"
       ]
     }
   ]
