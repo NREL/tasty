@@ -516,6 +516,16 @@
       ]
     },
     {
+      "name": "HeatingOATemperatureEnableSetpointShape",
+      "types": [
+        "outside-air-temp-sp"
+      ],
+      "tags": [
+        "heating",
+        "enable"
+      ]
+    },
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
