@@ -450,8 +450,6 @@
             "path-type": "inverse",
             "shapes": [
               "DischargeAirFlowSetpointShape",
-              "MinimumDischargeAirFlowSetpointShape",
-              "MaximumDischargeAirFlowSetpointShape",
               "MinimumHeatingDischargeAirFlowSetpointShape",
               "MinimumCoolingDischargeAirFlowSetpointShape",
               "MaximumHeatingDischargeAirFlowSetpointShape",
