@@ -624,6 +624,12 @@
       ]
     },
     {
+      "name": "SupplyAirHumiditySetpointShape",
+      "types": [
+        "discharge-air-humidity-sp"
+      ]
+    },
+    {
       "name": "NaturalGasMeterVolumeShape",
       "predicates": {
         "requires": [
