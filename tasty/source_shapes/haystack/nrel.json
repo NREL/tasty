@@ -892,6 +892,17 @@
       ]
     },
     {
+      "name": "OutsideAirDamperFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "damper",
+        "sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
