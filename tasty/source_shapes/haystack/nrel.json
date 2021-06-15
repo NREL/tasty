@@ -1395,6 +1395,32 @@
         ]
       }
     },
+    {
+      "name": "OutsideAirSectionShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "OutsideAirDamperCommandShape",
+              "OutsideAirDamperFeedbackShape",
+              "OutsideAirFlowShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "OutsideAirDamperMinimumSetpointShape",
+              "OutsideAirFlowSetpointShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
