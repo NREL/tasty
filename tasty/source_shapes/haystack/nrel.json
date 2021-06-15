@@ -881,6 +881,17 @@
       ]
     },
     {
+      "name": "OutsideAirDamperCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "damper",
+        "cmd"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
