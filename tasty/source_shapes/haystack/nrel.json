@@ -1273,6 +1273,32 @@
         ]
       }
     },
+    {
+      "name": "MixedAirSectionShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "MixedAirTemperatureShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "MixedAirTemperatureSetpointShape",
+              "MixedAirDamperCommandShape",
+              "MixedAirDamperFeedbackShape",
+              "MixedAirFlowShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
