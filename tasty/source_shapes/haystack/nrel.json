@@ -765,6 +765,12 @@
       ]
     },
     {
+      "name": "SupplyAirStaticPressureSetpointShape",
+      "types": [
+        "discharge-air-pressure-sp"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
