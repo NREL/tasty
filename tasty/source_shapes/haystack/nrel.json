@@ -526,20 +526,6 @@
       ]
     },
     {
-      "name": "NaturalGasMeterFlowRateShape",
-      "predicates": {
-        "requires": [
-          {
-            "path": "equipRef",
-            "path-type": "inverse",
-            "shapes": [
-              "NaturalGasFlowRateShape"
-            ]
-          }
-        ]
-      }
-    },
-    {
       "name": "PressureRequestCountShape",
       "types": [
         "point"
@@ -695,20 +681,6 @@
       "types": [
         "discharge-air-flow-sp"
       ]
-    },
-    {
-      "name": "NaturalGasMeterVolumeShape",
-      "predicates": {
-        "requires": [
-          {
-            "path": "equipRef",
-            "path-type": "inverse",
-            "shapes": [
-              "NaturalGasVolumeShape"
-            ]
-          }
-        ]
-      }
     },
     {
       "name": "SupplyFanRunCommandShape",
@@ -927,6 +899,36 @@
       "types": [
         "outside-air-flow-sp"
       ]
+    },
+
+
+    {
+      "name": "NaturalGasMeterFlowRateShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "NaturalGasFlowRateShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "NaturalGasMeterVolumeShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "NaturalGasVolumeShape"
+            ]
+          }
+        ]
+      }
     },
     {
       "name": "NaturalGasMeterEnergyRateShape",
@@ -1380,7 +1382,7 @@
             "path-type": "inverse",
             "shapes": [
               "OutsideAirDryBulbTemperatureShape",
-              "OutsideAirRelativeHumididtyShape"
+              "OutsideAirRelativeHumidityShape"
             ]
           }
         ],
