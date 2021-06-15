@@ -936,6 +936,17 @@
         "sp"
       ]
     },
+    {
+      "name": "ReturnAirDamperCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "damper",
+        "cmd"
+      ]
+    },
 
 
     {
