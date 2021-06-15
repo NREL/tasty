@@ -540,6 +540,19 @@
       }
     },
     {
+      "name": "PressureRequestCountShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "pressure",
+        "sensor"
+      ],
+      "tags-custom": [
+        "request"
+      ]
+    },
+    {
       "name": "NaturalGasMeterVolumeShape",
       "predicates": {
         "requires": [
