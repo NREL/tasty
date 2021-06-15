@@ -782,6 +782,17 @@
       ]
     },
     {
+      "name": "SupplyFanVFDEnergyShape",
+      "types": [
+        "elec-energy"
+      ],
+      "tags": [
+        "discharge",
+        "fan",
+        "sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
