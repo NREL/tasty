@@ -804,6 +804,19 @@
       ]
     },
     {
+      "name": "SupplyFanVFDFrequencyShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "discharge",
+        "fan",
+        "elec",
+        "freq",
+        "sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
