@@ -663,6 +663,17 @@
       ]
     },
     {
+      "name": "SupplyAirDamperCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "discharge",
+        "damper",
+        "cmd"
+      ]
+    },
+    {
       "name": "NaturalGasMeterVolumeShape",
       "predicates": {
         "requires": [
