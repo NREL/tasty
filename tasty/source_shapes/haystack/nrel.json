@@ -592,6 +592,19 @@
       ]
     },
     {
+      "name": "HeatingRequestCountShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heating",
+        "sensor"
+      ],
+      "tags-custom": [
+        "request"
+      ]
+    },
+    {
       "name": "NaturalGasMeterVolumeShape",
       "predicates": {
         "requires": [
