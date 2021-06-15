@@ -566,6 +566,19 @@
       ]
     },
     {
+      "name": "CoolingRequestCountShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cooling",
+        "sensor"
+      ],
+      "tags-custom": [
+        "request"
+      ]
+    },
+    {
       "name": "NaturalGasMeterVolumeShape",
       "predicates": {
         "requires": [
