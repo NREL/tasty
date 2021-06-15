@@ -875,6 +875,12 @@
       ]
     },
     {
+      "name": "OutsideAirRelativeHumidityShape",
+      "types": [
+        "outside-air-humidity-sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
