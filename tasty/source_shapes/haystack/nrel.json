@@ -947,6 +947,17 @@
         "cmd"
       ]
     },
+    {
+      "name": "ReturnAirDamperFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "damper",
+        "sensor"
+      ]
+    },
 
 
     {
