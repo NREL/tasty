@@ -900,6 +900,12 @@
         "outside-air-flow-sp"
       ]
     },
+    {
+      "name": "ReturnAirTemperatureShape",
+      "types": [
+        "return-air-temp-sensor"
+      ]
+    },
 
 
     {
