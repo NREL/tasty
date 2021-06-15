@@ -654,6 +654,15 @@
       ]
     },
     {
+      "name": "SupplyAirTemperatureHeatingSetpointShape",
+      "types": [
+        "discharge-air-temp-sp"
+      ],
+      "tags": [
+        "heating"
+      ]
+    },
+    {
       "name": "NaturalGasMeterVolumeShape",
       "predicates": {
         "requires": [
