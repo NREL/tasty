@@ -840,6 +840,17 @@
       ]
     },
     {
+      "name": "MixedAirDamperFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "mixed",
+        "damper",
+        "sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
