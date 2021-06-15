@@ -723,6 +723,18 @@
       ]
     },
     {
+      "name": "SupplyFanRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "discharge",
+        "fan",
+        "run",
+        "sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
