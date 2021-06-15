@@ -903,6 +903,20 @@
       ]
     },
     {
+      "name": "OutsideAirDamperMinimumSetpointShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "damper",
+        "sp"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
