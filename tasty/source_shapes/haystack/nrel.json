@@ -645,6 +645,15 @@
       ]
     },
     {
+      "name": "SupplyAirTemperatureCoolingSetpointShape",
+      "types": [
+        "discharge-air-temp-sp"
+      ],
+      "tags": [
+        "cooling"
+      ]
+    },
+    {
       "name": "NaturalGasMeterVolumeShape",
       "predicates": {
         "requires": [
