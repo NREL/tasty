@@ -630,6 +630,12 @@
       ]
     },
     {
+      "name": "SupplyAirTemperatureShape",
+      "types": [
+        "discharge-air-temp-sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterVolumeShape",
       "predicates": {
         "requires": [
