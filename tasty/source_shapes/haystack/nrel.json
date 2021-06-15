@@ -759,6 +759,12 @@
       ]
     },
     {
+      "name": "SupplyAirStaticPressureShape",
+      "types": [
+        "discharge-air-pressure-sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
