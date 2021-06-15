@@ -912,6 +912,18 @@
         "return-air-humidity-sensor"
       ]
     },
+    {
+      "name": "ReturnAirCO2Shape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "air",
+        "co2",
+        "sensor"
+      ]
+    },
 
 
     {
