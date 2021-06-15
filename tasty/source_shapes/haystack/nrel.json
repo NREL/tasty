@@ -735,6 +735,18 @@
       ]
     },
     {
+      "name": "SupplyFanVFDSpeedCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "discharge",
+        "fan",
+        "speed",
+        "cmd"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
