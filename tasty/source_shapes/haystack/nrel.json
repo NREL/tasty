@@ -967,6 +967,25 @@
         ]
       }
     },
+    {
+      "name": "AHUResetLogicShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "PressureRequestCountShape",
+              "PressureRequestsIgnoredShape",
+              "CoolingRequestCountShape",
+              "CoolingRequestsIgnoredShape",
+              "HeatingRequestCountShape",
+              "HeatingRequestsIgnoredShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
