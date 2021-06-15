@@ -924,6 +924,18 @@
         "sensor"
       ]
     },
+    {
+      "name": "ReturnAirCO2SetpointShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "air",
+        "co2",
+        "sp"
+      ]
+    },
 
 
     {
