@@ -553,6 +553,19 @@
       ]
     },
     {
+      "name": "PressureRequestsIgnoredShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "pressure",
+        "sp"
+      ],
+      "tags-custom": [
+        "request"
+      ]
+    },
+    {
       "name": "NaturalGasMeterVolumeShape",
       "predicates": {
         "requires": [
