@@ -923,6 +923,12 @@
       ]
     },
     {
+      "name": "OutsideAirFlowSetpointShape",
+      "types": [
+        "outside-air-flow-sp"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
