@@ -711,6 +711,18 @@
       }
     },
     {
+      "name": "SupplyFanRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "discharge",
+        "fan",
+        "run",
+        "cmd"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
