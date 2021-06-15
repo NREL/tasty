@@ -817,6 +817,12 @@
       ]
     },
     {
+      "name": "MixedAirTemperatureShape",
+      "types": [
+        "mixed-air-temp-sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
