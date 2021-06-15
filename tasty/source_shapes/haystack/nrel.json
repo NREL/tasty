@@ -674,6 +674,17 @@
       ]
     },
     {
+      "name": "SupplyAirDamperFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "discharge",
+        "damper",
+        "sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterVolumeShape",
       "predicates": {
         "requires": [
