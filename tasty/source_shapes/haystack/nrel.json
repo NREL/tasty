@@ -906,6 +906,12 @@
         "return-air-temp-sensor"
       ]
     },
+    {
+      "name": "ReturnAirHumidityShape",
+      "types": [
+        "return-air-humidity-sensor"
+      ]
+    },
 
 
     {
