@@ -917,6 +917,12 @@
       ]
     },
     {
+      "name": "OutsideAirFlowShape",
+      "types": [
+        "outside-air-flow-sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
