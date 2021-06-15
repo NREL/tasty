@@ -685,6 +685,12 @@
       ]
     },
     {
+      "name": "SupplyAirFlowShape",
+      "types": [
+        "discharge-air-flow-sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterVolumeShape",
       "predicates": {
         "requires": [
