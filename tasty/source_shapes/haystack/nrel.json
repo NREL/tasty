@@ -605,6 +605,19 @@
       ]
     },
     {
+      "name": "HeatingRequestsIgnoredShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heating",
+        "sp"
+      ],
+      "tags-custom": [
+        "request"
+      ]
+    },
+    {
       "name": "NaturalGasMeterVolumeShape",
       "predicates": {
         "requires": [
