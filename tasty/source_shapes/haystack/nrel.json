@@ -636,6 +636,15 @@
       ]
     },
     {
+      "name": "SupplyAirTemperatureSetpointShape",
+      "types": [
+        "discharge-air-temp-sp"
+      ],
+      "tags": [
+        "effective"
+      ]
+    },
+    {
       "name": "NaturalGasMeterVolumeShape",
       "predicates": {
         "requires": [
