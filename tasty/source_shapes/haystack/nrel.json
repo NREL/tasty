@@ -618,6 +618,12 @@
       ]
     },
     {
+      "name": "SupplyAirHumidityShape",
+      "types": [
+        "discharge-air-humidity-sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterVolumeShape",
       "predicates": {
         "requires": [
