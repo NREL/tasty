@@ -823,6 +823,12 @@
       ]
     },
     {
+      "name": "MixedAirTemperatureSetpointShape",
+      "types": [
+        "mixed-air-temp-sp"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
