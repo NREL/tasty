@@ -958,6 +958,12 @@
         "sensor"
       ]
     },
+    {
+      "name": "ReturnAirFlowShape",
+      "types": [
+        "return-air-flow-sensor"
+      ]
+    },
 
 
     {
