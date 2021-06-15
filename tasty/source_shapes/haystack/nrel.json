@@ -851,6 +851,12 @@
       ]
     },
     {
+      "name": "MixedAirFlowShape",
+      "types": [
+        "mixed-air-flow-sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
