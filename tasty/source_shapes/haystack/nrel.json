@@ -1202,6 +1202,37 @@
         ]
       }
     },
+    {
+      "name": "SupplyFanShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "SupplyFanRunCommandShape",
+              "SupplyFanRunStatusShape",
+              "SupplyFanVFDSpeedCommandShape",
+              "SupplyFanVFDSpeedFeedbackShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "SupplyAirStaticPressureShape",
+              "SupplyAirStaticPressureSetpointShape",
+              "SupplyFanVFDPowerShape",
+              "SupplyFanVFDEnergyShape",
+              "SupplyFanVFDCurrentShape",
+              "SupplyFanVFDFrequencyShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
