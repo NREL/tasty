@@ -793,6 +793,17 @@
       ]
     },
     {
+      "name": "SupplyFanVFDCurrentShape",
+      "types": [
+        "elec-current"
+      ],
+      "tags": [
+        "discharge",
+        "fan",
+        "sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
