@@ -863,6 +863,18 @@
       ]
     },
     {
+      "name": "OutsideAirWetBulbTemperatureShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "air",
+        "wetBulb",
+        "sensor"
+      ]
+    },
+    {
       "name": "NaturalGasMeterEnergyRateShape",
       "predicates": {
         "requires": [
