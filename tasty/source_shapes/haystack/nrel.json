@@ -1621,6 +1621,37 @@
         ]
       }
     },
+    {
+      "name": "ReturnFanShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ReturnFanRunCommandShape",
+              "ReturnFanRunStatusShape",
+              "ReturnFanVFDSpeedCommandShape",
+              "ReturnFanVFDSpeedFeedbackShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ReturnAirStaticPressureShape",
+              "ReturnAirStaticPressureSetpointShape",
+              "ReturnFanVFDPowerShape",
+              "ReturnFanVFDEnergyShape",
+              "ReturnFanVFDCurrentShape",
+              "ReturnFanVFDFrequencyShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
