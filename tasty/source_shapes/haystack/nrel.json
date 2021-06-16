@@ -1311,6 +1311,21 @@
         "evap"
       ]
     },
+    {
+      "name": "EvaporativePumpRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "pump",
+        "run",
+        "cmd",
+        "cool"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
 
 
     {
