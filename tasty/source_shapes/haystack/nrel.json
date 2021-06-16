@@ -964,6 +964,18 @@
         "return-air-flow-sensor"
       ]
     },
+    {
+      "name": "ReturnFanRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "run",
+        "cmd"
+      ]
+    },
 
 
     {
