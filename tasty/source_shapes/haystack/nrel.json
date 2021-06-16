@@ -1503,6 +1503,18 @@
         "sensor"
       ]
     },
+    {
+      "name": "FreezeStatSensorShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "air",
+        "freezeStat",
+        "sensor"
+      ]
+    },
 
 
     {
