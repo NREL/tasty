@@ -1442,6 +1442,15 @@
         "building"
       ]
     },
+    {
+      "name": "BuildingStaticPressureSetpointShape",
+      "types": [
+        "air-pressure-sp"
+      ],
+      "tags-custom": [
+        "building"
+      ]
+    },
 
 
     {
