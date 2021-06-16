@@ -1168,6 +1168,19 @@
         "cmd"
       ]
     },
+    {
+      "name": "CoolingCoilPumpRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "chilled",
+        "water",
+        "pump",
+        "run",
+        "sensor"
+      ]
+    },
 
 
     {
