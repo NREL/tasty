@@ -2047,6 +2047,31 @@
         ]
       }
     },
+    {
+      "name": "EvaporativeCoolingPumpShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "EvaporativePumpRunCommandShape",
+              "EvaporativePumpRunStatusShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "EvaporativePumpVFDSpeedCommandShape",
+              "EvaporativePumpVFDSpeedFeedbackShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
