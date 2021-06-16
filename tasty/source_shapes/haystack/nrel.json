@@ -1260,6 +1260,18 @@
         "evap"
       ]
     },
+    {
+      "name": "EvaporativeCoolingLeavingAirTemperatureShape",
+      "types": [
+        "air-temp-sensor"
+      ],
+      "tags": [
+        "leaving"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
 
 
     {
