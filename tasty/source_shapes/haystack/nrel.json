@@ -1220,6 +1220,18 @@
         "evap"
       ]
     },
+    {
+      "name": "EvaporativeCoolingOutsideAirTemperatureEnableSetpointShape",
+      "types": [
+        "outside-air-temp-sp"
+      ],
+      "tags": [
+        "enable"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
 
 
     {
