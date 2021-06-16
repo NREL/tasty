@@ -2221,6 +2221,21 @@
         ]
       }
     },
+    {
+      "name": "BuildingStaticPressureControlShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "BuildingStaticPressureShape",
+              "BuildingStaticPressureSetpointShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
