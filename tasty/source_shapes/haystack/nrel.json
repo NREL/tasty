@@ -1340,6 +1340,20 @@
         "evap"
       ]
     },
+    {
+      "name": "EvaporativePumpVFDSpeedCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "pump",
+        "speed",
+        "cmd"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
 
 
     {
