@@ -2379,11 +2379,7 @@
         "EvaporativeCoolingPumpShape",
         "BuildingStaticPressureControlShape",
         "SupplyAirPlenumStaticPressureControlShape",
-        "FaceBypassModulatingDamperControlShape",
-
-        "FilterDifferentialPressureSensorShape",
-        "FreezeStatSensorShape",
-        "WaterLeakSensorShape"
+        "FaceBypassModulatingDamperControlShape"
       ]
     }
   ]
