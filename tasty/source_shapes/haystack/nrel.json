@@ -1232,6 +1232,22 @@
         "evap"
       ]
     },
+    {
+      "name": "EvaporativeCoolingOutsideWetBulbEnableSetpointShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "air",
+        "wetBulb",
+        "enable",
+        "sp"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
 
 
     {
