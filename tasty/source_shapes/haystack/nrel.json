@@ -1130,6 +1130,12 @@
         "sensor"
       ]
     },
+    {
+      "name": "CoolingCoilSupplyWaterTemperatureShape",
+      "types": [
+        "entering-chilled-water-temp-sensor"
+      ]
+    },
 
 
     {
