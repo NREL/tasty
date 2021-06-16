@@ -1070,6 +1070,17 @@
         "sensor"
       ]
     },
+    {
+      "name": "ReliefAirDamperCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "exhaust",
+        "damper",
+        "cmd"
+      ]
+    },
 
 
     {
