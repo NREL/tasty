@@ -1451,6 +1451,15 @@
         "building"
       ]
     },
+    {
+      "name": "SupplyAirPlenumStaticPressureShape",
+      "types": [
+        "discharge-air-pressure-sensor"
+      ],
+      "tags-custom": [
+        "plenum"
+      ]
+    },
 
 
     {
