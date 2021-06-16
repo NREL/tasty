@@ -1465,6 +1465,31 @@
         ]
       }
     },
+    {
+      "name": "CHWCoolingCoilShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ChilledWaterValveCommandShape",
+              "ChilledWaterValveFeedbackShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CoolingCoilSupplyWaterTemperatureShape",
+              "CoolingCoilReturnWaterTemperatureShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "OccupancyModeIndicatorShape",
