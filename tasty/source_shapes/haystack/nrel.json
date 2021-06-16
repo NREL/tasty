@@ -1012,6 +1012,12 @@
         "sensor"
       ]
     },
+    {
+      "name": "ReturnAirStaticPressureShape",
+      "types": [
+        "return-air-pressure-sensor"
+      ]
+    },
 
 
     {
