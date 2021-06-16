@@ -1142,6 +1142,19 @@
         "leaving-chilled-water-temp-sensor"
       ]
     },
+    {
+      "name": "CoolingCoilPumpEnableCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "chilled",
+        "water",
+        "pump",
+        "enable",
+        "cmd"
+      ]
+    },
 
 
     {
