@@ -1433,6 +1433,15 @@
         "sensor"
       ]
     },
+    {
+      "name": "BuildingStaticPressureShape",
+      "types": [
+        "air-pressure-sensor"
+      ],
+      "tags-custom": [
+        "building"
+      ]
+    },
 
 
     {
