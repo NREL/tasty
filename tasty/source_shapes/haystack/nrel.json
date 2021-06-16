@@ -1104,6 +1104,19 @@
         "exhaust-air-flow-sp"
       ]
     },
+    {
+      "name": "ChilledWaterValveCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "chilled",
+        "water",
+        "cool",
+        "valve",
+        "cmd"
+      ]
+    },
 
 
     {
