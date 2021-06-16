@@ -1491,6 +1491,18 @@
         "sensor"
       ]
     },
+    {
+      "name": "FilterDifferentialPressureSensorShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "filter",
+        "delta",
+        "pressure",
+        "sensor"
+      ]
+    },
 
 
     {
