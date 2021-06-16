@@ -1233,7 +1233,7 @@
       ]
     },
     {
-      "name": "EvaporativeCoolingOutsideWetBulbEnableSetpointShape",
+      "name": "EvaporativeCoolingOutsideAirWetBulbEnableSetpointShape",
       "types": [
         "point"
       ],
@@ -1243,6 +1243,18 @@
         "wetBulb",
         "enable",
         "sp"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
+    {
+      "name": "EvaporativeCoolingEnteringAirTemperatureShape",
+      "types": [
+        "air-temp-sensor"
+      ],
+      "tags": [
+        "entering"
       ],
       "tags-custom": [
         "evap"
