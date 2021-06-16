@@ -1018,6 +1018,12 @@
         "return-air-pressure-sensor"
       ]
     },
+    {
+      "name": "ReturnAirStaticPressureSetpointShape",
+      "types": [
+        "return-air-pressure-sp"
+      ]
+    },
 
 
     {
