@@ -1354,6 +1354,20 @@
         "evap"
       ]
     },
+    {
+      "name": "EvaporativePumpVFDSpeedFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "pump",
+        "speed",
+        "sensor"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
 
 
     {
