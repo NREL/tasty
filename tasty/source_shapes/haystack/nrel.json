@@ -1207,6 +1207,19 @@
         "sensor"
       ]
     },
+    {
+      "name": "EvaporativeCoolingModeEnableCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "enable",
+        "cmd"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
 
 
     {
