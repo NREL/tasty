@@ -1515,6 +1515,18 @@
         "sensor"
       ]
     },
+    {
+      "name": "WaterLeakSensorShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "leak"
+      ]
+    },
 
 
     {
