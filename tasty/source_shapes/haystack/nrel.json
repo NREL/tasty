@@ -1155,6 +1155,19 @@
         "cmd"
       ]
     },
+    {
+      "name": "CoolingCoilPumpRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "chilled",
+        "water",
+        "pump",
+        "run",
+        "cmd"
+      ]
+    },
 
 
     {
