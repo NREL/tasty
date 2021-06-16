@@ -1284,6 +1284,19 @@
         "evap"
       ]
     },
+    {
+      "name": "EvaporativeCoolingFillDrainValveCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "valve",
+        "cmd"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
 
 
     {
