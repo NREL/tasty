@@ -1024,6 +1024,17 @@
         "return-air-pressure-sp"
       ]
     },
+    {
+      "name": "ReturnFanVFDPowerShape",
+      "types": [
+        "elec-power"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "sensor"
+      ]
+    },
 
 
     {
