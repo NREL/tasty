@@ -1469,6 +1469,17 @@
         "plenum"
       ]
     },
+    {
+      "name": "FaceBypassModulatingDamperCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "faceBypass",
+        "damper",
+        "cmd"
+      ]
+    },
 
 
     {
