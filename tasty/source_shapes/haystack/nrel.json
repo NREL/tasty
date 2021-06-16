@@ -1035,6 +1035,17 @@
         "sensor"
       ]
     },
+    {
+      "name": "ReturnFanVFDEnergyShape",
+      "types": [
+        "elec-energy"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "sensor"
+      ]
+    },
 
 
     {
