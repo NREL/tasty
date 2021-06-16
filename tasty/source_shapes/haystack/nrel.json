@@ -1046,6 +1046,17 @@
         "sensor"
       ]
     },
+    {
+      "name": "ReturnFanVFDCurrentShape",
+      "types": [
+        "elec-current"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "sensor"
+      ]
+    },
 
 
     {
