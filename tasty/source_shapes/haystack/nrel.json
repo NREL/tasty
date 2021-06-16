@@ -1686,6 +1686,23 @@
         ]
       }
     },
+    {
+      "name": "ReliefAirSectionShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ReliefAirDamperCommandShape",
+              "ReliefAirDamperFeedbackShape",
+              "ReliefAirFlowShape",
+              "ReliefAirFlowSetpointShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
