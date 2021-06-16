@@ -1136,6 +1136,12 @@
         "entering-chilled-water-temp-sensor"
       ]
     },
+    {
+      "name": "CoolingCoilReturnWaterTemperatureShape",
+      "types": [
+        "leaving-chilled-water-temp-sensor"
+      ]
+    },
 
 
     {
