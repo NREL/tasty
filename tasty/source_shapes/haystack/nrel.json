@@ -988,6 +988,18 @@
         "sensor"
       ]
     },
+    {
+      "name": "ReturnFanVFDSpeedCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "speed",
+        "cmd"
+      ]
+    },
 
 
     {
