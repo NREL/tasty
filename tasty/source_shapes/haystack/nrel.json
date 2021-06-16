@@ -1057,6 +1057,19 @@
         "sensor"
       ]
     },
+    {
+      "name": "ReturnFanVFDFrequencyShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "elec",
+        "freq",
+        "sensor"
+      ]
+    },
 
 
     {
