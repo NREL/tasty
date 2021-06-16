@@ -2356,7 +2356,7 @@
       ]
     },
     {
-      "name": "NREL-AHU-VAV-MZ-Mixed-HW-CHW",
+      "name": "NREL-AHU-VAV-MZ-Mixed-HW-CHW-Shape",
       "types": [
         "ahu"
       ],
