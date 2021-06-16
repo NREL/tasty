@@ -1420,6 +1420,19 @@
         "cmd"
       ]
     },
+    {
+      "name": "HeatingCoilPumpVFDSpeedFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "hot",
+        "water",
+        "pump",
+        "speed",
+        "sensor"
+      ]
+    },
 
 
     {
