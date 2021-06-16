@@ -1117,6 +1117,19 @@
         "cmd"
       ]
     },
+    {
+      "name": "ChilledWaterValveFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "chilled",
+        "water",
+        "cool",
+        "valve",
+        "sensor"
+      ]
+    },
 
 
     {
