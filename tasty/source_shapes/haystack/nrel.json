@@ -2018,6 +2018,35 @@
         ]
       }
     },
+    {
+      "name": "EvaporativeCoolingControlShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "EvaporativeCoolingLeavingAirTemperatureShape",
+              "EvaporativeCoolingSumpTemperatureShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "EvaporativeCoolingModeEnableCommandShape",
+              "EvaporativeCoolingOutsideAirTemperatureEnableSetpointShape",
+              "EvaporativeCoolingOutsideAirWetBulbEnableSetpointShape",
+              "EvaporativeCoolingEnteringAirTemperatureShape",
+              "EvaporativeCoolingLeavingAirTemperatureSetpointShape",
+              "EvaporativeCoolingFillDrainValveCommandShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
