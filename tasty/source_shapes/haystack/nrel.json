@@ -1194,6 +1194,19 @@
         "cmd"
       ]
     },
+    {
+      "name": "CoolingCoilPumpVFDSpeedFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "chilled",
+        "water",
+        "pump",
+        "speed",
+        "sensor"
+      ]
+    },
 
 
     {
