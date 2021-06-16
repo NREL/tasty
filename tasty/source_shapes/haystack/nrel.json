@@ -1326,6 +1326,20 @@
         "evap"
       ]
     },
+    {
+      "name": "EvaporativePumpRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "pump",
+        "run",
+        "sensor"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
 
 
     {
