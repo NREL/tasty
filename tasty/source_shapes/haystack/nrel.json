@@ -1081,6 +1081,17 @@
         "cmd"
       ]
     },
+    {
+      "name": "ReliefAirDamperFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "exhaust",
+        "damper",
+        "sensor"
+      ]
+    },
 
 
     {
