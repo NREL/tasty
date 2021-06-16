@@ -1394,6 +1394,19 @@
         "cmd"
       ]
     },
+    {
+      "name": "HeatingCoilPumpRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "hot",
+        "water",
+        "pump",
+        "run",
+        "sensor"
+      ]
+    },
 
 
     {
