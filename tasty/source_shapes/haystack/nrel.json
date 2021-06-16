@@ -1297,6 +1297,20 @@
         "evap"
       ]
     },
+    {
+      "name": "EvaporativeCoolingSumpTemperatureShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "water",
+        "temp",
+        "sensor"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
 
 
     {
