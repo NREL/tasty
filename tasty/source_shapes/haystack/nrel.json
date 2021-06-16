@@ -2137,6 +2137,32 @@
         ]
       }
     },
+    {
+      "name": "HWHeatingCoilPumpShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "HeatingCoilPumpRunCommandShape",
+              "HeatingCoilPumpRunStatusShape",
+              "HeatingCoilPumpVFDSpeedCommandShape",
+              "HeatingCoilPumpVFDSpeedFeedbackShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "HeatingCoilPumpEnableCommandShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
