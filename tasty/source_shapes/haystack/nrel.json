@@ -976,6 +976,18 @@
         "cmd"
       ]
     },
+    {
+      "name": "ReturnFanRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "run",
+        "sensor"
+      ]
+    },
 
 
     {
