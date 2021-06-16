@@ -1000,6 +1000,18 @@
         "cmd"
       ]
     },
+    {
+      "name": "ReturnFanVFDSpeedFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "speed",
+        "sensor"
+      ]
+    },
 
 
     {
