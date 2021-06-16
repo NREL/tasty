@@ -2236,6 +2236,21 @@
         ]
       }
     },
+    {
+      "name": "SupplyAirPlenumStaticPressureControlShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "SupplyAirPlenumStaticPressureShape",
+              "SupplyAirPlenumStaticPressureSetpointShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
