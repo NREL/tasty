@@ -1368,6 +1368,19 @@
         "evap"
       ]
     },
+    {
+      "name": "HeatingCoilPumpEnableCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "hot",
+        "water",
+        "pump",
+        "enable",
+        "cmd"
+      ]
+    },
 
 
     {
