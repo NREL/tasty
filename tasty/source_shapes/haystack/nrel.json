@@ -1098,6 +1098,12 @@
         "exhaust-air-flow-sensor"
       ]
     },
+    {
+      "name": "ReliefAirFlowSetpointShape",
+      "types": [
+        "exhaust-air-flow-sp"
+      ]
+    },
 
 
     {
