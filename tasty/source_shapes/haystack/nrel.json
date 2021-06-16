@@ -2251,6 +2251,21 @@
         ]
       }
     },
+    {
+      "name": "FaceBypassModulatingDamperControlShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "FaceBypassModulatingDamperCommandShape",
+              "FaceBypassModulatingDamperFeedbackShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
