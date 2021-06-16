@@ -1460,6 +1460,15 @@
         "plenum"
       ]
     },
+    {
+      "name": "SupplyAirPlenumStaticPressureSetpointShape",
+      "types": [
+        "discharge-air-pressure-sp"
+      ],
+      "tags-custom": [
+        "plenum"
+      ]
+    },
 
 
     {
