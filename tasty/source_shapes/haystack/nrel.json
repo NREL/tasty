@@ -1092,6 +1092,12 @@
         "sensor"
       ]
     },
+    {
+      "name": "ReliefAirFlowShape",
+      "types": [
+        "exhaust-air-flow-sensor"
+      ]
+    },
 
 
     {
