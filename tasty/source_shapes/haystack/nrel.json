@@ -2354,6 +2354,37 @@
         "ElectricHeatingCoilShape",
         "VAVAirFlowReheatShape"
       ]
+    },
+    {
+      "name": "NREL-AHU-VAV-MZ-Mixed-HW-CHW",
+      "types": [
+        "ahu"
+      ],
+      "shape-mixins": [
+        "OccupancyModeIndicatorShape",
+        "AHUModeControlShape",
+        "AHUResetLogicShape",
+        "SupplyAirSectionShape",
+        "MixedAirSectionShape",
+        "OutsideAirSectionShape",
+        "ReturnAirSectionShape",
+        "ReliefAirSectionShape",
+        "SupplyFanShape",
+        "ReturnFanShape",
+        "CHWCoolingCoilShape",
+        "CHWCoolingCoilPumpShape",
+        "HWHeatingCoilShape",
+        "HWHeatingCoilPumpShape",
+        "EvaporativeCoolingControlShape",
+        "EvaporativeCoolingPumpShape",
+        "BuildingStaticPressureControlShape",
+        "SupplyAirPlenumStaticPressureControlShape",
+        "FaceBypassModulatingDamperControlShape",
+
+        "FilterDifferentialPressureSensorShape",
+        "FreezeStatSensorShape",
+        "WaterLeakSensorShape"
+      ]
     }
   ]
 }
