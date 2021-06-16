@@ -1381,6 +1381,19 @@
         "cmd"
       ]
     },
+    {
+      "name": "HeatingCoilPumpRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "hot",
+        "water",
+        "pump",
+        "run",
+        "cmd"
+      ]
+    },
 
 
     {
