@@ -1480,6 +1480,17 @@
         "cmd"
       ]
     },
+    {
+      "name": "FaceBypassModulatingDamperFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "faceBypass",
+        "damper",
+        "sensor"
+      ]
+    },
 
 
     {
