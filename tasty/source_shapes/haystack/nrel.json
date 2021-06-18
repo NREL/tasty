@@ -1600,6 +1600,20 @@
         "dx"
       ]
     },
+    {
+      "name": "DXCoolingCompressorLoadCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cool",
+        "load",
+        "cmd"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
 
 
     {
