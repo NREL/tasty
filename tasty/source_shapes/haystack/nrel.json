@@ -1642,6 +1642,20 @@
         "dx"
       ]
     },
+    {
+      "name": "DXHeatingCompressorLoadCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "load",
+        "cmd"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
 
 
     {
