@@ -1614,6 +1614,20 @@
         "dx"
       ]
     },
+    {
+      "name": "DXHeatingCompressorRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "run",
+        "cmd"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
 
 
     {
