@@ -1628,6 +1628,20 @@
         "dx"
       ]
     },
+    {
+      "name": "DXHeatingCompressorRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "run",
+        "sensor"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
 
 
     {
