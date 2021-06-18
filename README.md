@@ -6,20 +6,23 @@ Tasty was created to simplify the generation and validation of metadata related 
 - [Project Haystack](https://project-haystack.org/)
 - [ASHRAE Standard 223P](https://www.ashrae.org/about/news/2018/ashrae-s-bacnet-committee-project-haystack-and-brick-schema-collaborating-to-provide-unified-data-semantic-modeling-solution)
 
-# Getting Started
+# Installing
 
-1. Clone or download the repository.
-2. Install [Python](https://www.python.org/downloads/) (>=3.3 recommended).
-3. Install [Poetry](https://python-poetry.org/docs/#installation).
-4. Create a virtual environment within the repository. The following command will create a virtual environment with [venv](https://docs.python.org/3/library/venv.html) (included with Python >=3.3) named `venv_name`.
+## Prerequisites
+- Clone or download the repository.
+- Install [Python](https://www.python.org/downloads/) (>=3.3 recommended).
+- Install [Poetry](https://python-poetry.org/docs/#installation).
+
+## Steps
+1. Create a virtual environment within the repository. The following command will create a virtual environment with [venv](https://docs.python.org/3/library/venv.html) (included with Python >=3.3) named `venv_name`.
    ```bash
    python3 -m venv venv_name
    ```
-5. Install dependencies.
+2. Install dependencies.
    ```bash
    poetry install
    ```
-6. Run tasty to confirm that it's working, which should show a message describing its usage.
+3. Run tasty to confirm that it's working, which should show a message describing its usage.
    ```bash
    poetry run tasty
    ```
