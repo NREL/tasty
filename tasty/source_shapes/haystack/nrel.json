@@ -1527,6 +1527,21 @@
         "leak"
       ]
     },
+    {
+      "name": "DXCompressorRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "cool",
+        "run",
+        "cmd"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
 
 
     {
