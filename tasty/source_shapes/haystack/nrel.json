@@ -2347,6 +2347,22 @@
         ]
       }
     },
+    {
+      "name": "DXHeatingCoolingCoilShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DXCompressorRunCommandShape",
+              "DXCompressorRunStatusShape",
+              "DXCompressorLoadCommandShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
