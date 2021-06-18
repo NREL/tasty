@@ -451,6 +451,1085 @@
       ]
     },
     {
+      "name": "AHUOperatingModeShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sp"
+      ],
+      "tags-custom": [
+        "operating",
+        "mode"
+      ]
+    },
+    {
+      "name": "CoolingOATemperatureEnableSetpointShape",
+      "types": [
+        "outside-air-temp-sp"
+      ],
+      "tags": [
+        "cooling",
+        "enable"
+      ]
+    },
+    {
+      "name": "CoolingOAWetBulbEnableSetpointShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cooling",
+        "outside",
+        "air",
+        "wetBulb",
+        "enable",
+        "sp"
+      ]
+    },
+    {
+      "name": "EconomizerOATemperatureEnableSetpointShape",
+      "types": [
+        "outside-air-temp-sp"
+      ],
+      "tags": [
+        "enable"
+      ],
+      "tags-custom": [
+        "econ"
+      ]
+    },
+    {
+      "name": "EconomizerOAWetBulbEnableSetpointShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "air",
+        "wetBulb",
+        "enable",
+        "sp"
+      ],
+      "tags-custom": [
+        "econ"
+      ]
+    },
+    {
+      "name": "HeatingOATemperatureEnableSetpointShape",
+      "types": [
+        "outside-air-temp-sp"
+      ],
+      "tags": [
+        "heating",
+        "enable"
+      ]
+    },
+    {
+      "name": "PressureRequestCountShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "pressure",
+        "sensor"
+      ],
+      "tags-custom": [
+        "request"
+      ]
+    },
+    {
+      "name": "PressureRequestsIgnoredShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "pressure",
+        "sp"
+      ],
+      "tags-custom": [
+        "request"
+      ]
+    },
+    {
+      "name": "CoolingRequestCountShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cooling",
+        "sensor"
+      ],
+      "tags-custom": [
+        "request"
+      ]
+    },
+    {
+      "name": "CoolingRequestsIgnoredShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cooling",
+        "sp"
+      ],
+      "tags-custom": [
+        "request"
+      ]
+    },
+    {
+      "name": "HeatingRequestCountShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heating",
+        "sensor"
+      ],
+      "tags-custom": [
+        "request"
+      ]
+    },
+    {
+      "name": "HeatingRequestsIgnoredShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heating",
+        "sp"
+      ],
+      "tags-custom": [
+        "request"
+      ]
+    },
+    {
+      "name": "SupplyAirHumidityShape",
+      "types": [
+        "discharge-air-humidity-sensor"
+      ]
+    },
+    {
+      "name": "SupplyAirHumiditySetpointShape",
+      "types": [
+        "discharge-air-humidity-sp"
+      ]
+    },
+    {
+      "name": "SupplyAirTemperatureShape",
+      "types": [
+        "discharge-air-temp-sensor"
+      ]
+    },
+    {
+      "name": "SupplyAirTemperatureSetpointShape",
+      "types": [
+        "discharge-air-temp-sp"
+      ],
+      "tags": [
+        "effective"
+      ]
+    },
+    {
+      "name": "SupplyAirTemperatureCoolingSetpointShape",
+      "types": [
+        "discharge-air-temp-sp"
+      ],
+      "tags": [
+        "cooling"
+      ]
+    },
+    {
+      "name": "SupplyAirTemperatureHeatingSetpointShape",
+      "types": [
+        "discharge-air-temp-sp"
+      ],
+      "tags": [
+        "heating"
+      ]
+    },
+    {
+      "name": "SupplyAirDamperCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "discharge",
+        "damper",
+        "cmd"
+      ]
+    },
+    {
+      "name": "SupplyAirDamperFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "discharge",
+        "damper",
+        "sensor"
+      ]
+    },
+    {
+      "name": "SupplyAirFlowShape",
+      "types": [
+        "discharge-air-flow-sensor"
+      ]
+    },
+    {
+      "name": "SupplyAirFlowSetpointShape",
+      "types": [
+        "discharge-air-flow-sp"
+      ]
+    },
+    {
+      "name": "SupplyFanRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "discharge",
+        "fan",
+        "run",
+        "cmd"
+      ]
+    },
+    {
+      "name": "SupplyFanRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "discharge",
+        "fan",
+        "run",
+        "sensor"
+      ]
+    },
+    {
+      "name": "SupplyFanVFDSpeedCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "discharge",
+        "fan",
+        "speed",
+        "cmd"
+      ]
+    },
+    {
+      "name": "SupplyFanVFDSpeedFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "discharge",
+        "fan",
+        "speed",
+        "sensor"
+      ]
+    },
+    {
+      "name": "SupplyAirStaticPressureShape",
+      "types": [
+        "discharge-air-pressure-sensor"
+      ]
+    },
+    {
+      "name": "SupplyAirStaticPressureSetpointShape",
+      "types": [
+        "discharge-air-pressure-sp"
+      ]
+    },
+    {
+      "name": "SupplyFanVFDPowerShape",
+      "types": [
+        "elec-power"
+      ],
+      "tags": [
+        "discharge",
+        "fan",
+        "sensor"
+      ]
+    },
+    {
+      "name": "SupplyFanVFDEnergyShape",
+      "types": [
+        "elec-energy"
+      ],
+      "tags": [
+        "discharge",
+        "fan",
+        "sensor"
+      ]
+    },
+    {
+      "name": "SupplyFanVFDCurrentShape",
+      "types": [
+        "elec-current"
+      ],
+      "tags": [
+        "discharge",
+        "fan",
+        "sensor"
+      ]
+    },
+    {
+      "name": "SupplyFanVFDFrequencyShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "discharge",
+        "fan",
+        "elec",
+        "freq",
+        "sensor"
+      ]
+    },
+    {
+      "name": "MixedAirTemperatureShape",
+      "types": [
+        "mixed-air-temp-sensor"
+      ]
+    },
+    {
+      "name": "MixedAirTemperatureSetpointShape",
+      "types": [
+        "mixed-air-temp-sp"
+      ]
+    },
+    {
+      "name": "MixedAirDamperCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "mixed",
+        "damper",
+        "cmd"
+      ]
+    },
+    {
+      "name": "MixedAirDamperFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "mixed",
+        "damper",
+        "sensor"
+      ]
+    },
+    {
+      "name": "MixedAirFlowShape",
+      "types": [
+        "mixed-air-flow-sensor"
+      ]
+    },
+    {
+      "name": "OutsideAirDryBulbTemperatureShape",
+      "types": [
+        "outside-air-temp-sensor"
+      ]
+    },
+    {
+      "name": "OutsideAirWetBulbTemperatureShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "air",
+        "wetBulb",
+        "sensor"
+      ]
+    },
+    {
+      "name": "OutsideAirRelativeHumidityShape",
+      "types": [
+        "outside-air-humidity-sensor"
+      ]
+    },
+    {
+      "name": "OutsideAirDamperCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "damper",
+        "cmd"
+      ]
+    },
+    {
+      "name": "OutsideAirDamperFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "damper",
+        "sensor"
+      ]
+    },
+    {
+      "name": "OutsideAirDamperMinimumSetpointShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "damper",
+        "sp"
+      ],
+      "tags-custom": [
+        "min"
+      ]
+    },
+    {
+      "name": "OutsideAirFlowShape",
+      "types": [
+        "outside-air-flow-sensor"
+      ]
+    },
+    {
+      "name": "OutsideAirFlowSetpointShape",
+      "types": [
+        "outside-air-flow-sp"
+      ]
+    },
+    {
+      "name": "ReturnAirTemperatureShape",
+      "types": [
+        "return-air-temp-sensor"
+      ]
+    },
+    {
+      "name": "ReturnAirHumidityShape",
+      "types": [
+        "return-air-humidity-sensor"
+      ]
+    },
+    {
+      "name": "ReturnAirCO2Shape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "air",
+        "co2",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ReturnAirCO2SetpointShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "air",
+        "co2",
+        "sp"
+      ]
+    },
+    {
+      "name": "ReturnAirDamperCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "damper",
+        "cmd"
+      ]
+    },
+    {
+      "name": "ReturnAirDamperFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "damper",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ReturnAirFlowShape",
+      "types": [
+        "return-air-flow-sensor"
+      ]
+    },
+    {
+      "name": "ReturnFanRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "run",
+        "cmd"
+      ]
+    },
+    {
+      "name": "ReturnFanRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "run",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ReturnFanVFDSpeedCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "speed",
+        "cmd"
+      ]
+    },
+    {
+      "name": "ReturnFanVFDSpeedFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "speed",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ReturnAirStaticPressureShape",
+      "types": [
+        "return-air-pressure-sensor"
+      ]
+    },
+    {
+      "name": "ReturnAirStaticPressureSetpointShape",
+      "types": [
+        "return-air-pressure-sp"
+      ]
+    },
+    {
+      "name": "ReturnFanVFDPowerShape",
+      "types": [
+        "elec-power"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ReturnFanVFDEnergyShape",
+      "types": [
+        "elec-energy"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ReturnFanVFDCurrentShape",
+      "types": [
+        "elec-current"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ReturnFanVFDFrequencyShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "return",
+        "fan",
+        "elec",
+        "freq",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ReliefAirDamperCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "exhaust",
+        "damper",
+        "cmd"
+      ]
+    },
+    {
+      "name": "ReliefAirDamperFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "exhaust",
+        "damper",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ReliefAirFlowShape",
+      "types": [
+        "exhaust-air-flow-sensor"
+      ]
+    },
+    {
+      "name": "ReliefAirFlowSetpointShape",
+      "types": [
+        "exhaust-air-flow-sp"
+      ]
+    },
+    {
+      "name": "ChilledWaterValveCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "chilled",
+        "water",
+        "cool",
+        "valve",
+        "cmd"
+      ]
+    },
+    {
+      "name": "ChilledWaterValveFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "chilled",
+        "water",
+        "cool",
+        "valve",
+        "sensor"
+      ]
+    },
+    {
+      "name": "CoolingCoilSupplyWaterTemperatureShape",
+      "types": [
+        "entering-chilled-water-temp-sensor"
+      ]
+    },
+    {
+      "name": "CoolingCoilReturnWaterTemperatureShape",
+      "types": [
+        "leaving-chilled-water-temp-sensor"
+      ]
+    },
+    {
+      "name": "CoolingCoilPumpEnableCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "chilled",
+        "water",
+        "pump",
+        "enable",
+        "cmd"
+      ]
+    },
+    {
+      "name": "CoolingCoilPumpRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "chilled",
+        "water",
+        "pump",
+        "run",
+        "cmd"
+      ]
+    },
+    {
+      "name": "CoolingCoilPumpRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "chilled",
+        "water",
+        "pump",
+        "run",
+        "sensor"
+      ]
+    },
+    {
+      "name": "CoolingCoilPumpVFDSpeedCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "chilled",
+        "water",
+        "pump",
+        "speed",
+        "cmd"
+      ]
+    },
+    {
+      "name": "CoolingCoilPumpVFDSpeedFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "chilled",
+        "water",
+        "pump",
+        "speed",
+        "sensor"
+      ]
+    },
+    {
+      "name": "EvaporativeCoolingModeEnableCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "enable",
+        "cmd"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
+    {
+      "name": "EvaporativeCoolingOutsideAirTemperatureEnableSetpointShape",
+      "types": [
+        "outside-air-temp-sp"
+      ],
+      "tags": [
+        "enable"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
+    {
+      "name": "EvaporativeCoolingOutsideAirWetBulbEnableSetpointShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "air",
+        "wetBulb",
+        "enable",
+        "sp"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
+    {
+      "name": "EvaporativeCoolingEnteringAirTemperatureShape",
+      "types": [
+        "air-temp-sensor"
+      ],
+      "tags": [
+        "entering"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
+    {
+      "name": "EvaporativeCoolingLeavingAirTemperatureShape",
+      "types": [
+        "air-temp-sensor"
+      ],
+      "tags": [
+        "leaving"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
+    {
+      "name": "EvaporativeCoolingLeavingAirTemperatureSetpointShape",
+      "types": [
+        "air-temp-sp"
+      ],
+      "tags": [
+        "leaving"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
+    {
+      "name": "EvaporativeCoolingFillDrainValveCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "valve",
+        "cmd"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
+    {
+      "name": "EvaporativeCoolingSumpTemperatureShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "water",
+        "temp",
+        "sensor"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
+    {
+      "name": "EvaporativePumpRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "pump",
+        "run",
+        "cmd",
+        "cool"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
+    {
+      "name": "EvaporativePumpRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "pump",
+        "run",
+        "sensor"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
+    {
+      "name": "EvaporativePumpVFDSpeedCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "pump",
+        "speed",
+        "cmd"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
+    {
+      "name": "EvaporativePumpVFDSpeedFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "pump",
+        "speed",
+        "sensor"
+      ],
+      "tags-custom": [
+        "evap"
+      ]
+    },
+    {
+      "name": "HeatingCoilPumpEnableCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "hot",
+        "water",
+        "pump",
+        "enable",
+        "cmd"
+      ]
+    },
+    {
+      "name": "HeatingCoilPumpRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "hot",
+        "water",
+        "pump",
+        "run",
+        "cmd"
+      ]
+    },
+    {
+      "name": "HeatingCoilPumpRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "hot",
+        "water",
+        "pump",
+        "run",
+        "sensor"
+      ]
+    },
+    {
+      "name": "HeatingCoilPumpVFDSpeedCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "hot",
+        "water",
+        "pump",
+        "speed",
+        "cmd"
+      ]
+    },
+    {
+      "name": "HeatingCoilPumpVFDSpeedFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "hot",
+        "water",
+        "pump",
+        "speed",
+        "sensor"
+      ]
+    },
+    {
+      "name": "BuildingStaticPressureShape",
+      "types": [
+        "air-pressure-sensor"
+      ],
+      "tags-custom": [
+        "building"
+      ]
+    },
+    {
+      "name": "BuildingStaticPressureSetpointShape",
+      "types": [
+        "air-pressure-sp"
+      ],
+      "tags-custom": [
+        "building"
+      ]
+    },
+    {
+      "name": "SupplyAirPlenumStaticPressureShape",
+      "types": [
+        "discharge-air-pressure-sensor"
+      ],
+      "tags-custom": [
+        "plenum"
+      ]
+    },
+    {
+      "name": "SupplyAirPlenumStaticPressureSetpointShape",
+      "types": [
+        "discharge-air-pressure-sp"
+      ],
+      "tags-custom": [
+        "plenum"
+      ]
+    },
+    {
+      "name": "FaceBypassModulatingDamperCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "faceBypass",
+        "damper",
+        "cmd"
+      ]
+    },
+    {
+      "name": "FaceBypassModulatingDamperFeedbackShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "faceBypass",
+        "damper",
+        "sensor"
+      ]
+    },
+    {
+      "name": "FilterDifferentialPressureSensorShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "filter",
+        "delta",
+        "pressure",
+        "sensor"
+      ]
+    },
+    {
+      "name": "FreezeStatSensorShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "outside",
+        "air",
+        "freezeStat",
+        "sensor"
+      ]
+    },
+    {
+      "name": "WaterLeakSensorShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "sensor"
+      ],
+      "tags-custom": [
+        "leak"
+      ]
+    },
+
+
+    {
       "name": "NaturalGasMeterFlowRateShape",
       "predicates": {
         "requires": [
@@ -772,6 +1851,459 @@
       }
     },
     {
+      "name": "CHWCoolingCoilShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ChilledWaterValveCommandShape",
+              "ChilledWaterValveFeedbackShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CoolingCoilSupplyWaterTemperatureShape",
+              "CoolingCoilReturnWaterTemperatureShape"
+            ]
+          }
+        ]
+      }
+    },
+
+    {
+      "name": "OccupancyModeIndicatorShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "OccupancyModeBinaryShape",
+              "OccupancyModeStandbyShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "AHUModeControlShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "AHUOperatingModeShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CoolingOATemperatureEnableSetpointShape",
+              "CoolingOAWetBulbEnableSetpointShape",
+              "EconomizerOATemperatureEnableSetpointShape",
+              "EconomizerOAWetBulbEnableSetpointShape",
+              "HeatingOATemperatureEnableSetpointShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "AHUResetLogicShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "PressureRequestCountShape",
+              "PressureRequestsIgnoredShape",
+              "CoolingRequestCountShape",
+              "CoolingRequestsIgnoredShape",
+              "HeatingRequestCountShape",
+              "HeatingRequestsIgnoredShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "SupplyAirSectionShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "SupplyAirHumidityShape",
+              "SupplyAirTemperatureShape",
+              "SupplyAirTemperatureSetpointShape",
+              "SupplyAirFlowShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "SupplyAirHumiditySetpointShape",
+              "SupplyAirTemperatureCoolingSetpointShape",
+              "SupplyAirTemperatureHeatingSetpointShape",
+              "SupplyAirDamperCommandShape",
+              "SupplyAirDamperFeedbackShape",
+              "SupplyAirFlowSetpointShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "SupplyFanShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "SupplyFanRunCommandShape",
+              "SupplyFanRunStatusShape",
+              "SupplyFanVFDSpeedCommandShape",
+              "SupplyFanVFDSpeedFeedbackShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "SupplyAirStaticPressureShape",
+              "SupplyAirStaticPressureSetpointShape",
+              "SupplyFanVFDPowerShape",
+              "SupplyFanVFDEnergyShape",
+              "SupplyFanVFDCurrentShape",
+              "SupplyFanVFDFrequencyShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "MixedAirSectionShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "MixedAirTemperatureShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "MixedAirTemperatureSetpointShape",
+              "MixedAirDamperCommandShape",
+              "MixedAirDamperFeedbackShape",
+              "MixedAirFlowShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "OutsideAirConditionsShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "OutsideAirDryBulbTemperatureShape",
+              "OutsideAirRelativeHumidityShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "OutsideAirWetBulbTemperatureShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "OutsideAirSectionShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "OutsideAirDamperCommandShape",
+              "OutsideAirDamperFeedbackShape",
+              "OutsideAirFlowShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "OutsideAirDamperMinimumSetpointShape",
+              "OutsideAirFlowSetpointShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ReturnAirSectionShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ReturnAirTemperatureShape",
+              "ReturnAirHumidityShape",
+              "ReturnAirDamperCommandShape",
+              "ReturnAirDamperFeedbackShape",
+              "ReturnAirFlowShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ReturnAirCO2Shape",
+              "ReturnAirCO2SetpointShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ReturnFanShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ReturnFanRunCommandShape",
+              "ReturnFanRunStatusShape",
+              "ReturnFanVFDSpeedCommandShape",
+              "ReturnFanVFDSpeedFeedbackShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ReturnAirStaticPressureShape",
+              "ReturnAirStaticPressureSetpointShape",
+              "ReturnFanVFDPowerShape",
+              "ReturnFanVFDEnergyShape",
+              "ReturnFanVFDCurrentShape",
+              "ReturnFanVFDFrequencyShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ReliefAirSectionShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ReliefAirDamperCommandShape",
+              "ReliefAirDamperFeedbackShape",
+              "ReliefAirFlowShape",
+              "ReliefAirFlowSetpointShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "CHWCoolingCoilPumpShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CoolingCoilPumpRunCommandShape",
+              "CoolingCoilPumpRunStatusShape",
+              "CoolingCoilPumpVFDSpeedCommandShape",
+              "CoolingCoilPumpVFDSpeedFeedbackShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "CoolingCoilPumpEnableCommandShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "EvaporativeCoolingControlShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "EvaporativeCoolingLeavingAirTemperatureShape",
+              "EvaporativeCoolingSumpTemperatureShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "EvaporativeCoolingModeEnableCommandShape",
+              "EvaporativeCoolingOutsideAirTemperatureEnableSetpointShape",
+              "EvaporativeCoolingOutsideAirWetBulbEnableSetpointShape",
+              "EvaporativeCoolingEnteringAirTemperatureShape",
+              "EvaporativeCoolingLeavingAirTemperatureSetpointShape",
+              "EvaporativeCoolingFillDrainValveCommandShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "EvaporativeCoolingPumpShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "EvaporativePumpRunCommandShape",
+              "EvaporativePumpRunStatusShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "EvaporativePumpVFDSpeedCommandShape",
+              "EvaporativePumpVFDSpeedFeedbackShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "HWHeatingCoilPumpShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "HeatingCoilPumpRunCommandShape",
+              "HeatingCoilPumpRunStatusShape",
+              "HeatingCoilPumpVFDSpeedCommandShape",
+              "HeatingCoilPumpVFDSpeedFeedbackShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "HeatingCoilPumpEnableCommandShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "BuildingStaticPressureControlShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "BuildingStaticPressureShape",
+              "BuildingStaticPressureSetpointShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "SupplyAirPlenumStaticPressureControlShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "SupplyAirPlenumStaticPressureShape",
+              "SupplyAirPlenumStaticPressureSetpointShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "FaceBypassModulatingDamperControlShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "FaceBypassModulatingDamperCommandShape",
+              "FaceBypassModulatingDamperFeedbackShape"
+            ]
+          }
+        ]
+      }
+    },
+
+    {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
       "types": [
         "coolingOnly-vav"
@@ -821,6 +2353,33 @@
         "VAVAirFlowControlShape",
         "ElectricHeatingCoilShape",
         "VAVAirFlowReheatShape"
+      ]
+    },
+    {
+      "name": "NREL-AHU-VAV-MZ-Mixed-HW-CHW-Shape",
+      "types": [
+        "ahu"
+      ],
+      "shape-mixins": [
+        "OccupancyModeIndicatorShape",
+        "AHUModeControlShape",
+        "AHUResetLogicShape",
+        "SupplyAirSectionShape",
+        "MixedAirSectionShape",
+        "OutsideAirSectionShape",
+        "ReturnAirSectionShape",
+        "ReliefAirSectionShape",
+        "SupplyFanShape",
+        "ReturnFanShape",
+        "CHWCoolingCoilShape",
+        "CHWCoolingCoilPumpShape",
+        "HWHeatingCoilShape",
+        "HWHeatingCoilPumpShape",
+        "EvaporativeCoolingControlShape",
+        "EvaporativeCoolingPumpShape",
+        "BuildingStaticPressureControlShape",
+        "SupplyAirPlenumStaticPressureControlShape",
+        "FaceBypassModulatingDamperControlShape"
       ]
     }
   ]
