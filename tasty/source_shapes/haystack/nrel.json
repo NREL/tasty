@@ -1542,6 +1542,21 @@
         "dx"
       ]
     },
+    {
+      "name": "DXCompressorRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "cool",
+        "run",
+        "sensor"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
 
 
     {
