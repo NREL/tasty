@@ -1527,6 +1527,135 @@
         "leak"
       ]
     },
+    {
+      "name": "DXCompressorRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "cool",
+        "run",
+        "cmd"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
+    {
+      "name": "DXCompressorRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "cool",
+        "run",
+        "sensor"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
+    {
+      "name": "DXCompressorLoadCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "cool",
+        "load",
+        "cmd"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
+    {
+      "name": "DXCoolingCompressorRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cool",
+        "run",
+        "cmd"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
+    {
+      "name": "DXCoolingCompressorRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cool",
+        "run",
+        "sensor"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
+    {
+      "name": "DXCoolingCompressorLoadCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "cool",
+        "load",
+        "cmd"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
+    {
+      "name": "DXHeatingCompressorRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "run",
+        "cmd"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
+    {
+      "name": "DXHeatingCompressorRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "run",
+        "sensor"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
+    {
+      "name": "DXHeatingCompressorLoadCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "heat",
+        "load",
+        "cmd"
+      ],
+      "tags-custom": [
+        "dx"
+      ]
+    },
 
 
     {
@@ -2302,6 +2431,54 @@
         ]
       }
     },
+    {
+      "name": "DXHeatingCoolingCoilShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DXCompressorRunCommandShape",
+              "DXCompressorRunStatusShape",
+              "DXCompressorLoadCommandShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "DXCoolingCoilShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DXCoolingCompressorRunCommandShape",
+              "DXCoolingCompressorRunStatusShape",
+              "DXCoolingCompressorLoadCommandShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "DXHeatingCoilShape",
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DXHeatingCompressorRunCommandShape",
+              "DXHeatingCompressorRunStatusShape",
+              "DXHeatingCompressorLoadCommandShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
@@ -2377,6 +2554,41 @@
         "HWHeatingCoilPumpShape",
         "EvaporativeCoolingControlShape",
         "EvaporativeCoolingPumpShape",
+        "BuildingStaticPressureControlShape",
+        "SupplyAirPlenumStaticPressureControlShape",
+        "FaceBypassModulatingDamperControlShape"
+      ]
+    },
+    {
+      "name": "NREL-AHU-VAV-SZ-Heat-Pump-Elec-Backup-Shape",
+      "types": [
+        "ahu"
+      ],
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "FilterDifferentialPressureSensorShape"
+            ]
+          }
+        ]
+      },
+      "shape-mixins": [
+        "ZoneThermalComfortSensorsShape",
+        "ZoneOccupancySensorsShape",
+        "ZoneCoolingSetpointsShape",
+        "ZoneHeatingSetpointsShape",
+        "OccupancyModeIndicatorShape",
+        "AHUModeControlShape",
+        "SupplyAirSectionShape",
+        "MixedAirSectionShape",
+        "OutsideAirSectionShape",
+        "ReturnAirSectionShape",
+        "SupplyFanShape",
+        "DXHeatingCoolingCoilShape",
+        "ElectricHeatingCoilShape",
         "BuildingStaticPressureControlShape",
         "SupplyAirPlenumStaticPressureControlShape",
         "FaceBypassModulatingDamperControlShape"
