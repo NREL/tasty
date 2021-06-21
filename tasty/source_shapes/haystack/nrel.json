@@ -1738,6 +1738,17 @@
         "sensor"
       ]
     },
+    {
+      "name": "ReliefFanVFDCurrentShape",
+      "types": [
+        "elec-current"
+      ],
+      "tags": [
+        "exhaust",
+        "fan",
+        "sensor"
+      ]
+    },
 
 
     {
