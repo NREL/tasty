@@ -2674,6 +2674,27 @@
       "types": [
         "ahu"
       ],
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "FreezeStatSensorShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "FilterDifferentialPressureSensorShape",
+              "WaterLeakSensorShape"
+            ]
+          }
+        ]
+      },
       "shape-mixins": [
         "OccupancyModeIndicatorShape",
         "AHUModeControlShape",
