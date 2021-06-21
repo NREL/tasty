@@ -1749,6 +1749,19 @@
         "sensor"
       ]
     },
+    {
+      "name": "ReliefFanVFDFrequencyShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "exhaust",
+        "fan",
+        "elec",
+        "freq",
+        "sensor"
+      ]
+    },
 
 
     {
