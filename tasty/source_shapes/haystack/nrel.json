@@ -2730,6 +2730,40 @@
         "SupplyAirPlenumStaticPressureControlShape",
         "FaceBypassModulatingDamperControlShape"
       ]
+    },
+    {
+      "name": "NREL-AHU-VAV-MZ-Relief-Heat-Pump-Elec-Backup-Shape",
+      "types": [
+        "ahu"
+      ],
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "FilterDifferentialPressureSensorShape"
+            ]
+          }
+        ]
+      },
+      "shape-mixins": [
+        "OccupancyModeIndicatorShape",
+        "AHUModeControlShape",
+        "AHUResetLogicShape",
+        "SupplyAirSectionShape",
+        "MixedAirSectionShape",
+        "OutsideAirSectionShape",
+        "ReturnAirSectionShape",
+        "ReliefAirSectionShape",
+        "SupplyFanShape",
+        "ReliefFanShape",
+        "DXHeatingCoolingCoilShape",
+        "ElectricHeatingCoilShape",
+        "BuildingStaticPressureControlShape",
+        "SupplyAirPlenumStaticPressureControlShape",
+        "FaceBypassModulatingDamperControlShape"
+      ]
     }
   ]
 }
