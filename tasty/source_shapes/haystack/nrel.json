@@ -1727,6 +1727,17 @@
         "sensor"
       ]
     },
+    {
+      "name": "ReliefFanVFDEnergyShape",
+      "types": [
+        "elec-energy"
+      ],
+      "tags": [
+        "exhaust",
+        "fan",
+        "sensor"
+      ]
+    },
 
 
     {
