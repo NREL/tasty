@@ -1668,6 +1668,18 @@
         "cmd"
       ]
     },
+    {
+      "name": "ReliefFanRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "exhaust",
+        "fan",
+        "run",
+        "sensor"
+      ]
+    },
 
 
     {
