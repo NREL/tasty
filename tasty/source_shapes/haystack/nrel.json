@@ -1716,6 +1716,17 @@
         "exhaust-air-pressure-sp"
       ]
     },
+    {
+      "name": "ReliefFanVFDPowerShape",
+      "types": [
+        "elec-power"
+      ],
+      "tags": [
+        "exhaust",
+        "fan",
+        "sensor"
+      ]
+    },
 
 
     {
