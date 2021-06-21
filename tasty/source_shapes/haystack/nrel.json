@@ -2387,6 +2387,37 @@
       }
     },
     {
+      "name": "ReliefFanShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ReliefFanRunCommandShape",
+              "ReliefFanRunStatusShape",
+              "ReliefFanVFDSpeedCommandShape",
+              "ReliefFanVFDSpeedFeedbackShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ReliefAirStaticPressureShape",
+              "ReliefAirStaticPressureSetpointShape",
+              "ReliefFanVFDPowerShape",
+              "ReliefFanVFDEnergyShape",
+              "ReliefFanVFDCurrentShape",
+              "ReliefFanVFDFrequencyShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "name": "CHWCoolingCoilPumpShape",
       "predicates": {
         "requires": [
