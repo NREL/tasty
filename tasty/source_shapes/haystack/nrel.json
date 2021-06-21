@@ -1710,6 +1710,12 @@
         "exhaust-air-pressure-sensor"
       ]
     },
+    {
+      "name": "ReliefAirStaticPressureSetpointShape",
+      "types": [
+        "exhaust-air-pressure-sp"
+      ]
+    },
 
 
     {
