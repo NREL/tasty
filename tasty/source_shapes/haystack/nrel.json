@@ -2564,6 +2564,17 @@
       "types": [
         "ahu"
       ],
+      "predicates": {
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "FilterDifferentialPressureSensorShape"
+            ]
+          }
+        ]
+      },
       "shape-mixins": [
         "ZoneThermalComfortSensorsShape",
         "ZoneOccupancySensorsShape",
