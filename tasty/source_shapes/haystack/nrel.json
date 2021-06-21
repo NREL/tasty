@@ -1680,6 +1680,18 @@
         "sensor"
       ]
     },
+    {
+      "name": "ReliefFanVFDSpeedCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "exhaust",
+        "fan",
+        "speed",
+        "cmd"
+      ]
+    },
 
 
     {
