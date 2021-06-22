@@ -16,15 +16,22 @@ V3_9_10 = '3.9.10'
 # Brick relevant constants
 BRICK = 'Brick'
 V1_1 = '1.1'
+V1_2 = '1.2'
 
 # Standard namespaces
 XML = Namespace("http://www.w3.org/1998/namespace#")
 XMLS = Namespace("http://www.w3.org/2001/XMLSchema#")
 
 # Define versioned Brick Namespaces
+# 1.1.0
 BRICK_1_1 = Namespace("https://brickschema.org/schema/1.1/Brick#")
 TAG_1_1 = Namespace("https://brickschema.org/schema/1.1/BrickTag#")
 BSH_1_1 = Namespace("https://brickschema.org/schema/1.1/BrickShape#")
+
+# 1.2.0
+BRICK_1_2 = Namespace("https://brickschema.org/schema/Brick#")
+TAG_1_2 = Namespace("https://brickschema.org/schema/BrickTag#")
+BSH_1_2 = Namespace("https://brickschema.org/schema/BrickShape#")
 
 # Define versioned Haystack Namespaces
 # 3.9.9
@@ -55,7 +62,7 @@ TAG_DEFAULT = None
 BSH_DEFAULT = None
 
 SUPPORTED_SCHEMAS = {
-    BRICK: [V1_1],
+    BRICK: [V1_1, V1_2],
     HAYSTACK: [V3_9_9, V3_9_10]
 }
 
