@@ -56,6 +56,10 @@ def bind_versioned_prefixes(graph: Graph, schema: str, version: str) -> None:
             graph.bind("brick", tc.BRICK_1_1)
             graph.bind("tag", tc.TAG_1_1)
             graph.bind("bsh", tc.BSH_1_1)
+        elif version == tc.V1_2:
+            graph.bind("brick", tc.BRICK_1_2)
+            graph.bind("tag", tc.TAG_1_2)
+            graph.bind("bsh", tc.BSH_1_2)
     elif schema == tc.HAYSTACK:
         if version == tc.V3_9_9:
             graph.bind("ph", tc.PH_3_9_9)
@@ -166,41 +170,41 @@ def graph_to_hayson_string(graph: Graph) -> str:
             uri_fragment_list = key.split("#")
             if key == "@id":
                 dis = val
-                json_ld_dict .update({"dis": dis})
+                json_ld_dict.update({"dis": dis})
             elif key == "@type":
                 tags = val[0].split('#')[1]
                 multitag = tags.split("-")
-                [json_ld_dict .update({tag: "m"}) for tag in multitag]
+                [json_ld_dict.update({tag: "m"}) for tag in multitag]
             elif uri_fragment_list[1] == "hasTag":
                 for tag1 in val:
                     for k, v in tag1.items():
                         if k == "@id":
                             t = v.split("#")[1]
-                            json_ld_dict .update({t: ":m"})
+                            json_ld_dict.update({t: ":m"})
             elif uri_fragment_list[1] == "equipRef":
                 for ref in val:
                     for k, v in ref.items():
                         if k == "@id":
                             t = v.split("/")[1]
-                            json_ld_dict .update({"equipRef": v})
+                            json_ld_dict.update({"equipRef": v})
             elif uri_fragment_list[1] == "condenserWaterRef":
                 for ref in val:
                     for k, v in ref.items():
                         if k == "@id":
                             t = v.split("/")[1]
-                            json_ld_dict .update({"condenserWaterRef": v})
+                            json_ld_dict.update({"condenserWaterRef": v})
             elif uri_fragment_list[1] == "hotWaterRef":
                 for ref in val:
                     for k, v in ref.items():
                         if k == "@id":
                             t = v.split("/")[1]
-                            json_ld_dict .update({"hotWaterRef": v})
+                            json_ld_dict.update({"hotWaterRef": v})
             elif uri_fragment_list[1] == "airRef":
                 for ref in val:
                     for k, v in ref.items():
                         if k == "@id":
                             t = v.split("/")[1]
-                            json_ld_dict .update({"airRef": v})
+                            json_ld_dict.update({"airRef": v})
 
             hayson_dict["rows"].append(json_ld_dict)
 
