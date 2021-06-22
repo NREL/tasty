@@ -111,7 +111,7 @@ chw_flow_sensor.type_docs() # 'Sensor which measures the volumetric flow of chil
 chw_flow_sensor.type_uri() # 'https://project-haystack.org/def/phIoT/3.9.10#chilled-water-flow-sensor'
 
 # Generate an id for the point and bind it to a namespace
-chw_flow_sensor.gen_uuid() # UUID('2733f091-be5b-4983-b701-b7e42c52b72c')
+chw_flow_sensor.set_id() # UUID('2733f091-be5b-4983-b701-b7e42c52b72c')
 chw_flow_sensor.set_namespace(EX) # True
 
 # Add the entity to the graph hg
