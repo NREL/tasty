@@ -217,6 +217,20 @@ sample:NREL-AHU-01-FaceBypassModulatingDamperFeedbackShape a phIoT:point ;
         phIoT:sensor ;
     phIoT:equipRef sample:NREL-AHU-01 .
 
+sample:NREL-AHU-01-FilterDifferentialPressureSensorShape a phIoT:point ;
+    ph:hasTag phIoT:delta,
+        phIoT:filter,
+        phIoT:sensor,
+        phScience:pressure ;
+    phIoT:equipRef sample:NREL-AHU-01 .
+
+sample:NREL-AHU-01-FreezeStatSensorShape a phIoT:point ;
+    ph:hasTag phIoT:freezeStat,
+        phIoT:outside,
+        phIoT:sensor,
+        phScience:air ;
+    phIoT:equipRef sample:NREL-AHU-01 .
+
 sample:NREL-AHU-01-HeatingCoilPumpEnableCommandShape a phIoT:point ;
     ph:hasTag phIoT:cmd,
         phIoT:enable,
@@ -583,6 +597,11 @@ sample:NREL-AHU-01-SupplyFanVFDSpeedFeedbackShape a phIoT:point ;
         phIoT:fan,
         phIoT:sensor,
         phScience:speed ;
+    phIoT:equipRef sample:NREL-AHU-01 .
+
+sample:NREL-AHU-01-WaterLeakSensorShape a phIoT:point ;
+    ph:hasTag phCustom:leak,
+        phIoT:sensor ;
     phIoT:equipRef sample:NREL-AHU-01 .
 
 sample:NREL-AHU-01 a phIoT:ahu .

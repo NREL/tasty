@@ -1,0 +1,446 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix ph: <https://project-haystack.org/def/ph/3.9.10#> .
+@prefix phCustom: <https://project-haystack.org/def/custom#> .
+@prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.10#> .
+@prefix phScience: <https://project-haystack.org/def/phScience/3.9.10#> .
+@prefix sample: <urn:sample/> .
+
+
+###################################################################################
+### NREL AHU Type-3 (VAV MZ Unit w/ Relief Fan, Heat Pump, and Electric Backup) ###
+###################################################################################
+sample:NREL-AHU-03-AHUOperatingModeShape a phIoT:point ;
+    ph:hasTag phCustom:mode,
+        phCustom:operating,
+        phIoT:sp ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-BuildingStaticPressureSetpointShape a phIoT:air-pressure-sp ;
+    ph:hasTag phCustom:building ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-BuildingStaticPressureShape a phIoT:air-pressure-sensor ;
+    ph:hasTag phCustom:building ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-CoolingOATemperatureEnableSetpointShape a phIoT:outside-air-temp-sp ;
+    ph:hasTag phIoT:cooling,
+        phIoT:enable ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-CoolingOAWetBulbEnableSetpointShape a phIoT:point ;
+    ph:hasTag phIoT:cooling,
+        phIoT:enable,
+        phIoT:outside,
+        phIoT:sp,
+        phScience:air,
+        phScience:wetBulb ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-CoolingRequestCountShape a phIoT:point ;
+    ph:hasTag phCustom:request,
+        phIoT:cooling,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-CoolingRequestsIgnoredShape a phIoT:point ;
+    ph:hasTag phCustom:request,
+        phIoT:cooling,
+        phIoT:sp ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-DXCompressorLoadCommandShape a phIoT:point ;
+    ph:hasTag phCustom:dx,
+        phIoT:cmd,
+        phIoT:cool,
+        phIoT:heat,
+        phIoT:load ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-DXCompressorRunCommandShape a phIoT:point ;
+    ph:hasTag phCustom:dx,
+        phIoT:cmd,
+        phIoT:cool,
+        phIoT:heat,
+        phIoT:run ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-DXCompressorRunStatusShape a phIoT:point ;
+    ph:hasTag phCustom:dx,
+        phIoT:cool,
+        phIoT:heat,
+        phIoT:run,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-EconomizerOATemperatureEnableSetpointShape a phIoT:outside-air-temp-sp ;
+    ph:hasTag phCustom:econ,
+        phIoT:enable ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-EconomizerOAWetBulbEnableSetpointShape a phIoT:point ;
+    ph:hasTag phCustom:econ,
+        phIoT:enable,
+        phIoT:outside,
+        phIoT:sp,
+        phScience:air,
+        phScience:wetBulb ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ElectricHeatingBinaryCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:heat,
+        phIoT:run,
+        phScience:elec ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ElectricHeatingBinaryFeedbackShape a phIoT:point ;
+    ph:hasTag phIoT:heat,
+        phIoT:run,
+        phIoT:sensor,
+        phScience:elec ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ElectricHeatingPercentCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:heat,
+        phIoT:load,
+        phScience:elec ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ElectricHeatingPercentFeedbackShape a phIoT:point ;
+    ph:hasTag phIoT:heat,
+        phIoT:load,
+        phIoT:sensor,
+        phScience:elec ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-FaceBypassModulatingDamperCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:damper,
+        phIoT:faceBypass ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-FaceBypassModulatingDamperFeedbackShape a phIoT:point ;
+    ph:hasTag phIoT:damper,
+        phIoT:faceBypass,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-FilterDifferentialPressureSensorShape a phIoT:point ;
+    ph:hasTag phIoT:delta,
+        phIoT:filter,
+        phIoT:sensor,
+        phScience:pressure ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-HeatingOATemperatureEnableSetpointShape a phIoT:outside-air-temp-sp ;
+    ph:hasTag phIoT:enable,
+        phIoT:heating ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-HeatingRequestCountShape a phIoT:point ;
+    ph:hasTag phCustom:request,
+        phIoT:heating,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-HeatingRequestsIgnoredShape a phIoT:point ;
+    ph:hasTag phCustom:request,
+        phIoT:heating,
+        phIoT:sp ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-MixedAirDamperCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:damper,
+        phIoT:mixed ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-MixedAirDamperFeedbackShape a phIoT:point ;
+    ph:hasTag phIoT:damper,
+        phIoT:mixed,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-MixedAirFlowShape a phIoT:mixed-air-flow-sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-MixedAirTemperatureSetpointShape a phIoT:mixed-air-temp-sp ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-MixedAirTemperatureShape a phIoT:mixed-air-temp-sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-OccupancyModeBinaryShape a phIoT:point ;
+    ph:hasTag phIoT:occupied,
+        phIoT:sp ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-OccupancyModeStandbyShape a phIoT:point ;
+    ph:hasTag phCustom:mode,
+        phIoT:occ,
+        phIoT:sp ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-OutsideAirDamperCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:damper,
+        phIoT:outside ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-OutsideAirDamperFeedbackShape a phIoT:point ;
+    ph:hasTag phIoT:damper,
+        phIoT:outside,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-OutsideAirDamperMinimumSetpointShape a phIoT:point ;
+    ph:hasTag phCustom:min,
+        phIoT:damper,
+        phIoT:outside,
+        phIoT:sp ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-OutsideAirFlowSetpointShape a phIoT:outside-air-flow-sp ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-OutsideAirFlowShape a phIoT:outside-air-flow-sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-PressureRequestCountShape a phIoT:point ;
+    ph:hasTag phCustom:request,
+        phIoT:sensor,
+        phScience:pressure ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-PressureRequestsIgnoredShape a phIoT:point ;
+    ph:hasTag phCustom:request,
+        phIoT:sp,
+        phScience:pressure ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReliefAirDamperCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:damper,
+        phIoT:exhaust ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReliefAirDamperFeedbackShape a phIoT:point ;
+    ph:hasTag phIoT:damper,
+        phIoT:exhaust,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReliefAirFlowSetpointShape a phIoT:exhaust-air-flow-sp ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReliefAirFlowShape a phIoT:exhaust-air-flow-sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReliefAirStaticPressureSetpointShape a phIoT:exhaust-air-pressure-sp ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReliefAirStaticPressureShape a phIoT:exhaust-air-pressure-sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReliefFanRunCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:exhaust,
+        phIoT:fan,
+        phIoT:run ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReliefFanRunStatusShape a phIoT:point ;
+    ph:hasTag phIoT:exhaust,
+        phIoT:fan,
+        phIoT:run,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReliefFanVFDCurrentShape a phScience:elec-current ;
+    ph:hasTag phIoT:exhaust,
+        phIoT:fan,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReliefFanVFDEnergyShape a phScience:elec-energy ;
+    ph:hasTag phIoT:exhaust,
+        phIoT:fan,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReliefFanVFDFrequencyShape a phIoT:point ;
+    ph:hasTag phIoT:exhaust,
+        phIoT:fan,
+        phIoT:sensor,
+        phScience:elec,
+        phScience:freq ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReliefFanVFDPowerShape a phScience:elec-power ;
+    ph:hasTag phIoT:exhaust,
+        phIoT:fan,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReliefFanVFDSpeedCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:exhaust,
+        phIoT:fan,
+        phScience:speed ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReliefFanVFDSpeedFeedbackShape a phIoT:point ;
+    ph:hasTag phIoT:exhaust,
+        phIoT:fan,
+        phIoT:sensor,
+        phScience:speed ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReturnAirCO2SetpointShape a phIoT:point ;
+    ph:hasTag phIoT:return,
+        phIoT:sp,
+        phScience:air,
+        phScience:co2 ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReturnAirCO2Shape a phIoT:point ;
+    ph:hasTag phIoT:return,
+        phIoT:sensor,
+        phScience:air,
+        phScience:co2 ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReturnAirDamperCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:damper,
+        phIoT:return ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReturnAirDamperFeedbackShape a phIoT:point ;
+    ph:hasTag phIoT:damper,
+        phIoT:return,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReturnAirFlowShape a phIoT:return-air-flow-sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReturnAirHumidityShape a phIoT:return-air-humidity-sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-ReturnAirTemperatureShape a phIoT:return-air-temp-sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyAirDamperCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:damper,
+        phIoT:discharge ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyAirDamperFeedbackShape a phIoT:point ;
+    ph:hasTag phIoT:damper,
+        phIoT:discharge,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyAirFlowShape a phIoT:discharge-air-flow-sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyAirHumiditySetpointShape a phIoT:discharge-air-humidity-sp ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyAirHumidityShape a phIoT:discharge-air-humidity-sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyAirPlenumStaticPressureSetpointShape a phIoT:discharge-air-pressure-sp ;
+    ph:hasTag phCustom:plenum ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyAirPlenumStaticPressureShape a phIoT:discharge-air-pressure-sensor ;
+    ph:hasTag phCustom:plenum ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyAirStaticPressureSetpointShape a phIoT:discharge-air-pressure-sp ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyAirStaticPressureShape a phIoT:discharge-air-pressure-sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyAirTemperatureCoolingSetpointShape a phIoT:discharge-air-temp-sp ;
+    ph:hasTag phIoT:cooling ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyAirTemperatureHeatingSetpointShape a phIoT:discharge-air-temp-sp ;
+    ph:hasTag phIoT:heating ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyAirTemperatureSetpointShape a phIoT:discharge-air-temp-sp ;
+    ph:hasTag phIoT:effective ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyAirTemperatureShape a phIoT:discharge-air-temp-sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyFanRunCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:discharge,
+        phIoT:fan,
+        phIoT:run ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyFanRunStatusShape a phIoT:point ;
+    ph:hasTag phIoT:discharge,
+        phIoT:fan,
+        phIoT:run,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyFanVFDCurrentShape a phScience:elec-current ;
+    ph:hasTag phIoT:discharge,
+        phIoT:fan,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyFanVFDEnergyShape a phScience:elec-energy ;
+    ph:hasTag phIoT:discharge,
+        phIoT:fan,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyFanVFDFrequencyShape a phIoT:point ;
+    ph:hasTag phIoT:discharge,
+        phIoT:fan,
+        phIoT:sensor,
+        phScience:elec,
+        phScience:freq ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyFanVFDPowerShape a phScience:elec-power ;
+    ph:hasTag phIoT:discharge,
+        phIoT:fan,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyFanVFDSpeedCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:discharge,
+        phIoT:fan,
+        phScience:speed ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03-SupplyFanVFDSpeedFeedbackShape a phIoT:point ;
+    ph:hasTag phIoT:discharge,
+        phIoT:fan,
+        phIoT:sensor,
+        phScience:speed ;
+    phIoT:equipRef sample:NREL-AHU-03 .
+
+sample:NREL-AHU-03 a phIoT:ahu .
