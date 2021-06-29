@@ -91,14 +91,14 @@ class ShapesGenerator:
         self.shapes_graph.serialize(destination=os.path.join(self.generated_shapes_dir, file_name), format='turtle')
         return True
 
-    def add_all_tags(self, shape_map: Dict, namespaced_shape: URIRef) -> int:
+    def add_all_tags(self, shape_map: Dict, namespaced_shape: URIRef, context: str) -> int:
         """
         Considers both 'tags' and 'tags-custom' keys.
+        :param context:
         :param shape_map:
         :param namespaced_shape:
         :return:
         """
-        assert shape_map.get('tags') is not None, f"There must be a 'tags' key in {shape_map}"
         count_tags = 0
 
         def add_tag_as_bnode(namespaced_tag):
@@ -110,15 +110,33 @@ class ShapesGenerator:
             self.shapes_graph.add((prop_bn, SH.qualifiedMinCount, Literal(1)))
             self.shapes_graph.add((qvs_bn, SH.hasValue, namespaced_tag))
 
-        for tag in shape_map['tags']:
-            tag_ns = tg.get_namespaced_term(self.ontology, tag)
-            if tag_ns:
+        if context == 'Both':
+            for tag in shape_map['tags']:
+                tag_ns = tg.get_namespaced_term(self.ontology, tag)
+                if tag_ns:
+                    count_tags += 1
+                    add_tag_as_bnode(tag_ns)
+                else:
+                    raise te.TastyError(
+                        f"tag '{tag}' not part of the ontology. If it is custom, add it to the 'tags-custom' key.")
+
+            self.shapes_graph.bind('phCustom', tc.PH_CUSTOM)
+            for tag in shape_map['tags-custom']:
+                tag_ns = tc.PH_CUSTOM[tag]
                 count_tags += 1
                 add_tag_as_bnode(tag_ns)
-            else:
-                raise te.TastyError(f"tag '{tag}' not part of the ontology. If it is custom, add it to the 'tags-custom' key.")
 
-        if shape_map.get('tags-custom') is not None:
+        elif context == 'tags':
+            for tag in shape_map['tags']:
+                tag_ns = tg.get_namespaced_term(self.ontology, tag)
+                if tag_ns:
+                    count_tags += 1
+                    add_tag_as_bnode(tag_ns)
+                else:
+                    raise te.TastyError(
+                        f"tag '{tag}' not part of the ontology. If it is custom, add it to the 'tags-custom' key.")
+
+        else:
             self.shapes_graph.bind('phCustom', tc.PH_CUSTOM)
             for tag in shape_map['tags-custom']:
                 tag_ns = tc.PH_CUSTOM[tag]
@@ -142,8 +160,6 @@ class ShapesGenerator:
         :param namespaced_shape:
         :return:
         """
-        assert shape_map.get("types") is not None, f"There must be a 'type' key in {shape_map}"
-
         count_types = 0
         for each_type in shape_map["types"]:
             type_ns = tg.get_namespaced_term(self.ontology, each_type)
@@ -304,13 +320,18 @@ class ShapesGenerator:
         :param shape:
         :return:
         """
-        # add tag requirements to shacl shape
-        if shape.get('tags') is not None:
-            self.add_all_tags(shape, ns_shape)
-
+        # cannot assert here because some equip has type - may only need to assert with simple shapes
         # add typing requirements to shacl shape
         if shape.get("types") is not None:
             self.add_all_types(shape, ns_shape)
+
+        # add tag requirements to shacl shape
+        if 'tags' in shape and 'tags-custom' in shape:
+            self.add_all_tags(shape, ns_shape, context="Both")
+        elif 'tags' in shape:
+            self.add_all_tags(shape, ns_shape, context="tags")
+        elif 'tags-custom' in shape:
+            self.add_all_tags(shape, ns_shape, context="tags-custom")
 
         # add other relationship requirements
         required = shape.get('predicates', {}).get('requires', {})
