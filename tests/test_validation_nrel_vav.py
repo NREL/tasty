@@ -49,7 +49,7 @@ class TestNRELVavCoolingOnly:
     @pytest.mark.parametrize('shape_name, target_node, remove_from_node, remove_markers, num_runs', [
         [
             tc.PH_SHAPES_NREL[SHAPE], NAMESPACE[SAMPLE],
-            NAMESPACE['NREL-VAV-01-ZoneRelativeHumiditySensor'], ['zone'], 2
+            NAMESPACE['NREL-VAV-01-ZoneRelativeHumidityShape'], ['zone'], 2
         ],
     ])
     def test_is_invalid(self, get_haystack_nrel_data, get_haystack_all_generated_shapes, shape_name, target_node,

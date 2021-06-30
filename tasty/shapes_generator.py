@@ -149,6 +149,7 @@ class ShapesGenerator:
         self.shapes_graph.add((namespaced_shape, SH.property, bn))
         self.shapes_graph.add((bn, SH.path, tc.PH_DEFAULT.hasTag))
         self.shapes_graph.add((bn, SH.minCount, Literal(count_tags)))
+        self.shapes_graph.add((bn, SH.maxCount, Literal(count_tags)))
 
         return count_tags
 
