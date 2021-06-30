@@ -101,7 +101,7 @@ class ShapesGenerator:
         """
         count_tags = 0
 
-        def add_tag_as_bnode(namespaced_tag, collision=None):
+        def add_tag_as_bnode(namespaced_tag):
             prop_bn = BNode()
             qvs_bn = BNode()
             self.shapes_graph.add((namespaced_shape, SH.property, prop_bn))
@@ -141,7 +141,7 @@ class ShapesGenerator:
             for tag in shape_map['tags-custom']:
                 tag_ns = tc.PH_CUSTOM[tag]
                 count_tags += 1
-                add_tag_as_bnode(tag_ns, True)
+                add_tag_as_bnode(tag_ns)
 
         # Here we just add a minCount equal to the total number of tags
         # as a secondary step. Helpful for debugging
