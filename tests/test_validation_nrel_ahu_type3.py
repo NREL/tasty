@@ -10,12 +10,13 @@ from tests.conftest import run_another, get_validate_dir
 
 
 NAMESPACE = Namespace('urn:sample/')
-SHAPE = 'NREL-VAV-SD-Cooling-Only-Shape'
-SAMPLE = 'NREL-VAV-01'
-TTL_FILE_PREFIX = 'TestNRELVavCoolingOnly'
+SHAPE = 'NREL_AHU_VAV_MZ_Relief_Heat_Pump_Elec_Backup_Shape'
+SHAPE1 = 'NREL-AHU-VAV-MZ-Relief-Heat-Pump-Elec-Backup-Shape'
+SAMPLE = 'NREL-AHU-03'
+TTL_FILE_PREFIX = 'TestNRELAHU3'
 
 
-class TestNRELVavCoolingOnly:
+class TestNRELVavElecReheat:
 
     @pytest.mark.parametrize('shape_name, target_node', [
         [tc.PH_SHAPES_NREL[SHAPE], NAMESPACE[SAMPLE]]
@@ -48,8 +49,8 @@ class TestNRELVavCoolingOnly:
 
     @pytest.mark.parametrize('shape_name, target_node, remove_from_node, remove_markers, num_runs', [
         [
-            tc.PH_SHAPES_NREL[SHAPE], NAMESPACE[SAMPLE],
-            NAMESPACE['NREL-VAV-01-ZoneRelativeHumidityShape'], ['zone'], 2
+            tc.PH_SHAPES_NREL[SHAPE1], NAMESPACE[SAMPLE],
+            NAMESPACE['NREL-AHU-01-OutsideAirDamperCommandShape'], ['damper'], 2
         ],
     ])
     def test_is_invalid(self, get_haystack_nrel_data, get_haystack_all_generated_shapes, shape_name, target_node,

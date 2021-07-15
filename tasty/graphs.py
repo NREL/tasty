@@ -1,6 +1,8 @@
+import json
 import os
-
 from typing import List, Union
+import uuid
+
 from rdflib import Graph, Namespace, OWL, RDF, RDFS, SKOS, SH, URIRef
 
 import tasty.constants as tc
@@ -54,6 +56,10 @@ def bind_versioned_prefixes(graph: Graph, schema: str, version: str) -> None:
             graph.bind("brick", tc.BRICK_1_1)
             graph.bind("tag", tc.TAG_1_1)
             graph.bind("bsh", tc.BSH_1_1)
+        elif version == tc.V1_2:
+            graph.bind("brick", tc.BRICK_1_2)
+            graph.bind("tag", tc.TAG_1_2)
+            graph.bind("bsh", tc.BSH_1_2)
     elif schema == tc.HAYSTACK:
         if version == tc.V3_9_9:
             graph.bind("ph", tc.PH_3_9_9)
@@ -144,3 +150,78 @@ def get_namespaced_term(ontology: Graph, term: str) -> Union[URIRef, bool]:
         ns = potential_namespaces[0]
         return ns[term]
     return False
+
+
+def graph_to_hayson_string(graph: Graph) -> str:
+    """
+    Return the Haystack JSON (Hayson) encoding of an RDF graph.
+    :param graph: [rdflib.Graph]
+    :return: [str]
+    """
+    hayson_dict = {
+        "meta": {"ver": "3.0"},
+        "cols": [],
+        "rows": []
+    }
+    json_ld_str = json.loads(graph.serialize(format='json-ld').decode('utf-8'))
+    for row in json_ld_str:
+        json_ld_dict = {"id": str(uuid.uuid4())}
+        for key, val in row.items():
+            uri_fragment_list = key.split("#")
+            if key == "@id":
+                dis = val
+                json_ld_dict.update({"dis": dis})
+            elif key == "@type":
+                tags = val[0].split('#')[1]
+                multitag = tags.split("-")
+                [json_ld_dict.update({tag: "m"}) for tag in multitag]
+            elif uri_fragment_list[1] == "hasTag":
+                for tag1 in val:
+                    for k, v in tag1.items():
+                        if k == "@id":
+                            t = v.split("#")[1]
+                            json_ld_dict.update({t: ":m"})
+            elif uri_fragment_list[1] == "equipRef":
+                for ref in val:
+                    for k, v in ref.items():
+                        if k == "@id":
+                            t = v.split("/")[1]
+                            json_ld_dict.update({"equipRef": v})
+            elif uri_fragment_list[1] == "condenserWaterRef":
+                for ref in val:
+                    for k, v in ref.items():
+                        if k == "@id":
+                            t = v.split("/")[1]
+                            json_ld_dict.update({"condenserWaterRef": v})
+            elif uri_fragment_list[1] == "hotWaterRef":
+                for ref in val:
+                    for k, v in ref.items():
+                        if k == "@id":
+                            t = v.split("/")[1]
+                            json_ld_dict.update({"hotWaterRef": v})
+            elif uri_fragment_list[1] == "airRef":
+                for ref in val:
+                    for k, v in ref.items():
+                        if k == "@id":
+                            t = v.split("/")[1]
+                            json_ld_dict.update({"airRef": v})
+
+            hayson_dict["rows"].append(json_ld_dict)
+
+    seen = set()
+    hayson_rows_list = []
+    cols = set()
+    hayson_cols_list = []
+    for d in hayson_dict["rows"]:
+        t = tuple(d.items())
+        if t not in seen:
+            seen.add(t)
+            hayson_rows_list.append(d)
+            for tag in t:
+                cols.add(tag[0])
+
+    [hayson_cols_list.append({"name": tag}) for tag in cols]
+
+    hayson_dict["cols"] = hayson_cols_list
+    hayson_dict["rows"] = hayson_rows_list
+    return json.dumps(hayson_dict)

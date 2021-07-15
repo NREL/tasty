@@ -224,6 +224,22 @@ def get_haystack_nrel_data():
     return n
 
 
+@pytest.fixture
+def get_haystack_nrel_vav_hw_reheat_data():
+    n = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
+    f = os.path.join(os.path.dirname(__file__), 'files/data/haystack_nrel_vav_hw_reheat.ttl')
+    n.parse(f, format='turtle')
+    return n
+
+
+@pytest.fixture
+def get_haystack_nrel_natural_gas_meter_data():
+    n = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
+    f = os.path.join(os.path.dirname(__file__), 'files/data/haystack_nrel_natural_gas_meter_data.ttl')
+    n.parse(f, format='turtle')
+    return n
+
+
 def get_single_node_validation_query():
     # -- This query returns us three values that looks like:
     #    (focus_node, path, missing_value)

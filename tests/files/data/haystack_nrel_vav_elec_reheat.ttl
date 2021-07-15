@@ -1,0 +1,208 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.10#> .
+@prefix ph: <https://project-haystack.org/def/ph/3.9.10#> .
+@prefix phCustom: <https://project-haystack.org/def/custom#> .
+@prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.10#> .
+@prefix phScience: <https://project-haystack.org/def/phScience/3.9.10#> .
+@prefix sample: <urn:sample/> .
+
+
+################################
+### NREL VAV w/ Elec Reheat ###
+################################
+sample:NREL-VAV-Elec-Reheat-01-BinaryOccupancySensorShape a phIoT:point ;
+    ph:hasTag phCustom:occupancyIndicator,
+        phIoT:occupied,
+        phIoT:sensor ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-CoolingRequestsShape a phIoT:point ;
+    ph:hasTag phCustom:request,
+        phIoT:cmd,
+        phIoT:cooling ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-DischargeAirDamperCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:damper,
+        phIoT:discharge,
+        phScience:air ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-DischargeAirDamperFeedbackShape a phIoT:air-sensor ;
+    ph:hasTag phIoT:damper,
+        phIoT:discharge ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-DischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+    ph:hasTag phIoT:effective ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-DischargeAirFlowShape a phIoT:discharge-air-flow-sensor ;
+    ph:hasTag phIoT:leaving ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-DischargeAirTemperatureSetpointShape a phIoT:discharge-air-temp-sp ;
+    ph:hasTag phIoT:leaving ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-DischargeAirTemperatureShape a phIoT:discharge-air-temp-sensor ;
+    ph:hasTag phIoT:leaving ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-ElectricHeatingBinaryCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:heat,
+        phIoT:run,
+        phScience:elec ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-ElectricHeatingBinaryFeedbackShape a phIoT:point ;
+    ph:hasTag phIoT:heat,
+        phIoT:run,
+        phIoT:sensor,
+        phScience:elec ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-ElectricHeatingPercentCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:heat,
+        phIoT:load,
+        phScience:elec ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-ElectricHeatingPercentFeedbackShape a phIoT:point ;
+    ph:hasTag phIoT:heat,
+        phIoT:load,
+        phIoT:sensor,
+        phScience:elec ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-InletAirTemperatureShape a phIoT:air-temp-sensor ;
+    ph:hasTag phIoT:entering ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-MaximumCoolingDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+    ph:hasTag phCustom:max,
+        phIoT:cooling ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-MaximumDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+    ph:hasTag phCustom:max ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-MaximumHeatingDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+    ph:hasTag phCustom:max,
+        phIoT:heating ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-MinimumCoolingDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+    ph:hasTag phCustom:min,
+        phIoT:cooling ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-MinimumDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+    ph:hasTag phCustom:min ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-MinimumHeatingDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+    ph:hasTag phCustom:min,
+        phIoT:heating ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-OccupancyModeBinaryShape a phIoT:point ;
+    ph:hasTag phIoT:occupied,
+        phIoT:sp ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-OccupancyModeStandbyShape a phIoT:point ;
+    ph:hasTag phCustom:mode,
+        phIoT:occ,
+        phIoT:sp ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-OccupancyOverrideCommandShape a phIoT:point ;
+    ph:hasTag phIoT:cmd,
+        phIoT:occupied ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-ZoneEquipmentOperatingStateShape a phIoT:point ;
+    ph:hasTag phCustom:mode,
+        phCustom:operating,
+        phIoT:sp ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-ZoneRelativeHumidityShape a phIoT:air-humidity-sensor ;
+    ph:hasTag phIoT:zone ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-ZoneTemperatureCoolingEffectiveSetpointShape a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:cooling,
+        phIoT:effective,
+        phIoT:zone ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-ZoneTemperatureCoolingOccupiedSetpointShape a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:cooling,
+        phIoT:occ,
+        phIoT:zone ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-ZoneTemperatureCoolingStandbySetpointShape a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:cooling,
+        phIoT:standby,
+        phIoT:zone ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-ZoneTemperatureCoolingUnoccupiedSetpointShape a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:cooling,
+        phIoT:unocc,
+        phIoT:zone ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-ZoneTemperatureHeatingEffectiveSetpointShape a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:effective,
+        phIoT:heating,
+        phIoT:zone ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-ZoneTemperatureHeatingOccupiedSetpointShape a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:heating,
+        phIoT:occ,
+        phIoT:zone ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-ZoneTemperatureHeatingStandbySetpointShape a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:heating,
+        phIoT:standby,
+        phIoT:zone ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-ZoneTemperatureHeatingUnoccupiedSetpointShape a phIoT:air-temp-sp ;
+    ph:hasTag phIoT:heating,
+        phIoT:unocc,
+        phIoT:zone ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-zone-air-co2-sensor-shape a phIoT:point ;
+    ph:hasTag phIoT:sensor,
+        phIoT:zone,
+        phScience:air,
+        phScience:co2 ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-zone-air-co2-sp-shape a phIoT:point ;
+    ph:hasTag phIoT:sp,
+        phIoT:zone,
+        phScience:air,
+        phScience:co2 ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01-zone-air-temp-sensor-shape a phIoT:air-temp-sensor ;
+    ph:hasTag phIoT:zone ;
+    phIoT:equipRef sample:NREL-VAV-Elec-Reheat-01 .
+
+sample:NREL-VAV-Elec-Reheat-01 a phIoT:vav .
