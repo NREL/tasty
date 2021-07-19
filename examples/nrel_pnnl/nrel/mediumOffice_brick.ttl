@@ -1,0 +1,1076 @@
+@prefix brick: <https://brickschema.org/schema/Brick#> .
+@prefix mediumOffice: <mediumOffice/> .
+
+mediumOffice:5-Zone-PVAV-1-Fan a brick:Discharge_Fan ;
+    brick:isPartOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Mass_Flow_Rate-1 a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf <mediumOffice/5-Zone-PVAV-1-2spd-DX-Clg-Coil-360kBtu/hr-9.8EER> .
+
+mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Relative_Humidity-1 a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf <mediumOffice/5-Zone-PVAV-1-2spd-DX-Clg-Coil-360kBtu/hr-9.8EER> .
+
+mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Temperature-1 a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf <mediumOffice/5-Zone-PVAV-1-2spd-DX-Clg-Coil-360kBtu/hr-9.8EER> .
+
+mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil_Cooling_Coil_Total_Cooling_Rate a brick:Heating_Thermal_Power_Sensor ;
+    brick:isPointOf <mediumOffice/5-Zone-PVAV-1-2spd-DX-Clg-Coil-360kBtu/hr-9.8EER> .
+
+mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil_Heating_Coil_Air_Heating_Rate a brick:Heating_Thermal_Power_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil_Heating_Coil_NaturalGas_Rate a brick:Energy_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-1-Mixed-Air-Node_System_Node_Mass_Flow_Rate a brick:Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Mixed-Air-Node_System_Node_Relative_Humidity a brick:Mixed_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Mixed-Air-Node_System_Node_Temperature a brick:Mixed_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Outdoor-Air-Node_System_Node_Dewpoint_Temperature a brick:Outside_Air_Dewpoint_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Outdoor-Air-Node_System_Node_Mass_Flow_Rate a brick:Outside_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Outdoor-Air-Node_System_Node_Relative_Humidity a brick:Outside_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Outdoor-Air-Node_System_Node_Temperature a brick:Outside_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Relief-Air-Node_System_Node_Mass_Flow_Rate a brick:Exhaust_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Relief-Air-Node_System_Node_Relative_Humidity a brick:Exhaust_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Relief-Air-Node_System_Node_Temperature a brick:Exhaust_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Supply-Inlet-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Supply-Inlet-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Supply-Inlet-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Supply-Outlet-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Supply-Outlet-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-1-Supply-Outlet-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-2-Fan a brick:Discharge_Fan ;
+    brick:isPartOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Mass_Flow_Rate-1 a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf <mediumOffice/5-Zone-PVAV-2-2spd-DX-Clg-Coil-376kBtu/hr-9.8EER> .
+
+mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Relative_Humidity-1 a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf <mediumOffice/5-Zone-PVAV-2-2spd-DX-Clg-Coil-376kBtu/hr-9.8EER> .
+
+mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Temperature-1 a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf <mediumOffice/5-Zone-PVAV-2-2spd-DX-Clg-Coil-376kBtu/hr-9.8EER> .
+
+mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil_Cooling_Coil_Total_Cooling_Rate a brick:Heating_Thermal_Power_Sensor ;
+    brick:isPointOf <mediumOffice/5-Zone-PVAV-2-2spd-DX-Clg-Coil-376kBtu/hr-9.8EER> .
+
+mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil_Heating_Coil_Air_Heating_Rate a brick:Heating_Thermal_Power_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil_Heating_Coil_NaturalGas_Rate a brick:Energy_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-2-Mixed-Air-Node_System_Node_Mass_Flow_Rate a brick:Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Mixed-Air-Node_System_Node_Relative_Humidity a brick:Mixed_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Mixed-Air-Node_System_Node_Temperature a brick:Mixed_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Outdoor-Air-Node_System_Node_Dewpoint_Temperature a brick:Outside_Air_Dewpoint_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Outdoor-Air-Node_System_Node_Mass_Flow_Rate a brick:Outside_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Outdoor-Air-Node_System_Node_Relative_Humidity a brick:Outside_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Outdoor-Air-Node_System_Node_Temperature a brick:Outside_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Relief-Air-Node_System_Node_Mass_Flow_Rate a brick:Exhaust_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Relief-Air-Node_System_Node_Relative_Humidity a brick:Exhaust_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Relief-Air-Node_System_Node_Temperature a brick:Exhaust_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Supply-Inlet-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Supply-Inlet-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Supply-Inlet-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Supply-Outlet-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Supply-Outlet-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-2-Supply-Outlet-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-Fan a brick:Discharge_Fan ;
+    brick:isPartOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Mass_Flow_Rate-1 a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf <mediumOffice/5-Zone-PVAV-2spd-DX-Clg-Coil-445kBtu/hr-9.8EER> .
+
+mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Relative_Humidity-1 a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf <mediumOffice/5-Zone-PVAV-2spd-DX-Clg-Coil-445kBtu/hr-9.8EER> .
+
+mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil-Outlet-Air-Node_System_Node_Temperature-1 a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf <mediumOffice/5-Zone-PVAV-2spd-DX-Clg-Coil-445kBtu/hr-9.8EER> .
+
+mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil_Cooling_Coil_Total_Cooling_Rate a brick:Heating_Thermal_Power_Sensor ;
+    brick:isPointOf <mediumOffice/5-Zone-PVAV-2spd-DX-Clg-Coil-445kBtu/hr-9.8EER> .
+
+mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil_Heating_Coil_Air_Heating_Rate a brick:Heating_Thermal_Power_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil_Heating_Coil_NaturalGas_Rate a brick:Energy_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil .
+
+mediumOffice:5-Zone-PVAV-Mixed-Air-Node_System_Node_Mass_Flow_Rate a brick:Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Mixed-Air-Node_System_Node_Relative_Humidity a brick:Mixed_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Mixed-Air-Node_System_Node_Temperature a brick:Mixed_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Outdoor-Air-Node_System_Node_Dewpoint_Temperature a brick:Outside_Air_Dewpoint_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Outdoor-Air-Node_System_Node_Mass_Flow_Rate a brick:Outside_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Outdoor-Air-Node_System_Node_Relative_Humidity a brick:Outside_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Outdoor-Air-Node_System_Node_Temperature a brick:Outside_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Relief-Air-Node_System_Node_Mass_Flow_Rate a brick:Exhaust_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Relief-Air-Node_System_Node_Relative_Humidity a brick:Exhaust_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Relief-Air-Node_System_Node_Temperature a brick:Exhaust_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Supply-Inlet-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Supply-Inlet-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Supply-Inlet-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Supply-Outlet-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Supply-Outlet-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-Supply-Outlet-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:Core_bottom-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Core_bottom-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN .
+
+mediumOffice:Core_bottom-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN .
+
+mediumOffice:Core_bottom-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN .
+
+mediumOffice:Core_bottom-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN-VAV-Terminal .
+
+mediumOffice:Core_bottom-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN-VAV-Terminal .
+
+mediumOffice:Core_bottom-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN-VAV-Terminal .
+
+mediumOffice:Core_bottom-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Core_bottom-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Core_bottom-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN-VAV-Terminal .
+
+mediumOffice:Core_bottom-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN-VAV-Terminal .
+
+mediumOffice:Core_bottom-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN .
+
+mediumOffice:Core_bottom-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN .
+
+mediumOffice:Core_bottom-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN .
+
+mediumOffice:Core_bottom-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Core_bottom-ZN .
+
+mediumOffice:Core_mid-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Core_mid-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Core_mid-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Core_mid-ZN .
+
+mediumOffice:Core_mid-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Core_mid-ZN .
+
+mediumOffice:Core_mid-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Core_mid-ZN .
+
+mediumOffice:Core_mid-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Core_mid-ZN-VAV-Terminal .
+
+mediumOffice:Core_mid-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Core_mid-ZN-VAV-Terminal .
+
+mediumOffice:Core_mid-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Core_mid-ZN-VAV-Terminal .
+
+mediumOffice:Core_mid-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Core_mid-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Core_mid-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Core_mid-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Core_mid-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Core_mid-ZN-VAV-Terminal .
+
+mediumOffice:Core_mid-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Core_mid-ZN-VAV-Terminal .
+
+mediumOffice:Core_mid-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Core_mid-ZN .
+
+mediumOffice:Core_mid-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Core_mid-ZN .
+
+mediumOffice:Core_mid-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Core_mid-ZN .
+
+mediumOffice:Core_mid-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Core_mid-ZN .
+
+mediumOffice:Core_top-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Core_top-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Core_top-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Core_top-ZN .
+
+mediumOffice:Core_top-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Core_top-ZN .
+
+mediumOffice:Core_top-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Core_top-ZN .
+
+mediumOffice:Core_top-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Core_top-ZN-VAV-Terminal .
+
+mediumOffice:Core_top-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Core_top-ZN-VAV-Terminal .
+
+mediumOffice:Core_top-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Core_top-ZN-VAV-Terminal .
+
+mediumOffice:Core_top-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Core_top-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Core_top-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Core_top-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Core_top-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Core_top-ZN-VAV-Terminal .
+
+mediumOffice:Core_top-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Core_top-ZN-VAV-Terminal .
+
+mediumOffice:Core_top-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Core_top-ZN .
+
+mediumOffice:Core_top-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Core_top-ZN .
+
+mediumOffice:Core_top-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Core_top-ZN .
+
+mediumOffice:Core_top-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Core_top-ZN .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_1-ZN .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_2-ZN .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_3-ZN .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_bot_ZN_4-ZN .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_1-ZN .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_2-ZN .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_3-ZN .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_mid_ZN_4-ZN .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_1-ZN .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_2-ZN .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_3-ZN .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-Electric-Reheat-Coil_Heating_Coil_Electricity_Rate a brick:Electrical_Power_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-Return-Air-Node_System_Node_Mass_Flow_Rate a brick:Return_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-Return-Air-Node_System_Node_Relative_Humidity a brick:Return_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-Return-Air-Node_System_Node_Temperature a brick:Return_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Mass_Flow_Rate a brick:Discharge_Air_Flow_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN-Electric-Reheat-Coil .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-VAV-Terminal-Zone-Air-Terminal-Minimum-Air-Flow-Fraction a brick:Min_Position_Setpoint_Limit ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-VAV-Terminal-Zone-Air-Terminal-VAV-Damper-Position a brick:Damper_Position_Command ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-Zone-Air-Node-Zone-Temperature-Control-Cooling-Setpoint a brick:Zone_Air_Cooling_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-Zone-Air-Node-Zone-Temperature-Control-Heating-Setpoint a brick:Zone_Air_Heating_Temperature_Setpoint ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-Zone-Air-Node_System_Node_Relative_Humidity a brick:Zone_Air_Humidity_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-Zone-Air-Node_System_Node_Temperature a brick:Zone_Air_Temperature_Sensor ;
+    brick:isPointOf mediumOffice:Perimeter_top_ZN_4-ZN .
+
+<mediumOffice/-MediumOffice-ASHRAE-169-2013-2A-created:-2021-05-19-12:07:23--0600> a brick:Building .
+
+mediumOffice:Core_bottom-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Core_bottom-ZN-VAV-Terminal .
+
+mediumOffice:Core_mid-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Core_mid-ZN-VAV-Terminal .
+
+mediumOffice:Core_top-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Core_top-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Perimeter_bot_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Perimeter_bot_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Perimeter_bot_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Perimeter_bot_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Perimeter_mid_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Perimeter_mid_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Perimeter_mid_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Perimeter_mid_ZN_4-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Perimeter_top_ZN_1-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Perimeter_top_ZN_2-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Perimeter_top_ZN_3-ZN-VAV-Terminal .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-Electric-Reheat-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:Perimeter_top_ZN_4-ZN-VAV-Terminal .
+
+<mediumOffice/5-Zone-PVAV-1-2spd-DX-Clg-Coil-360kBtu/hr-9.8EER> a brick:Cooling_Coil ;
+    brick:isPartOf mediumOffice:5-Zone-PVAV-1 .
+
+<mediumOffice/5-Zone-PVAV-2-2spd-DX-Clg-Coil-376kBtu/hr-9.8EER> a brick:Cooling_Coil ;
+    brick:isPartOf mediumOffice:5-Zone-PVAV-2 .
+
+<mediumOffice/5-Zone-PVAV-2spd-DX-Clg-Coil-445kBtu/hr-9.8EER> a brick:Cooling_Coil ;
+    brick:isPartOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:5-Zone-PVAV-1-Main-Gas-Htg-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:5-Zone-PVAV-2-Main-Gas-Htg-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:5-Zone-PVAV-Main-Gas-Htg-Coil a brick:Heating_Coil ;
+    brick:isPartOf mediumOffice:5-Zone-PVAV .
+
+mediumOffice:Core_bottom-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Core_bottom-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV .
+
+mediumOffice:Core_mid-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Core_mid-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:Core_top-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Core_top-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Perimeter_bot_ZN_1-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Perimeter_bot_ZN_2-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Perimeter_bot_ZN_3-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Perimeter_bot_ZN_4-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Perimeter_mid_ZN_1-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Perimeter_mid_ZN_2-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Perimeter_mid_ZN_3-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Perimeter_mid_ZN_4-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV-1 .
+
+mediumOffice:Perimeter_top_ZN_1-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Perimeter_top_ZN_1-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:Perimeter_top_ZN_2-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Perimeter_top_ZN_2-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:Perimeter_top_ZN_3-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Perimeter_top_ZN_3-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:Perimeter_top_ZN_4-ZN-VAV-Terminal a brick:VAV ;
+    brick:hasLocation mediumOffice:Perimeter_top_ZN_4-ZN ;
+    brick:isFedBy mediumOffice:5-Zone-PVAV-2 .
+
+mediumOffice:Core_bottom-ZN a brick:HVAC_Zone .
+
+mediumOffice:Core_mid-ZN a brick:HVAC_Zone .
+
+mediumOffice:Core_top-ZN a brick:HVAC_Zone .
+
+mediumOffice:Perimeter_bot_ZN_1-ZN a brick:HVAC_Zone .
+
+mediumOffice:Perimeter_bot_ZN_2-ZN a brick:HVAC_Zone .
+
+mediumOffice:Perimeter_bot_ZN_3-ZN a brick:HVAC_Zone .
+
+mediumOffice:Perimeter_bot_ZN_4-ZN a brick:HVAC_Zone .
+
+mediumOffice:Perimeter_mid_ZN_1-ZN a brick:HVAC_Zone .
+
+mediumOffice:Perimeter_mid_ZN_2-ZN a brick:HVAC_Zone .
+
+mediumOffice:Perimeter_mid_ZN_3-ZN a brick:HVAC_Zone .
+
+mediumOffice:Perimeter_mid_ZN_4-ZN a brick:HVAC_Zone .
+
+mediumOffice:Perimeter_top_ZN_1-ZN a brick:HVAC_Zone .
+
+mediumOffice:Perimeter_top_ZN_2-ZN a brick:HVAC_Zone .
+
+mediumOffice:Perimeter_top_ZN_3-ZN a brick:HVAC_Zone .
+
+mediumOffice:Perimeter_top_ZN_4-ZN a brick:HVAC_Zone .
+
+mediumOffice:5-Zone-PVAV a brick:AHU ;
+    brick:hasLocation <mediumOffice/-MediumOffice-ASHRAE-169-2013-2A-created:-2021-05-19-12:07:23--0600> .
+
+mediumOffice:5-Zone-PVAV-1 a brick:AHU ;
+    brick:hasLocation <mediumOffice/-MediumOffice-ASHRAE-169-2013-2A-created:-2021-05-19-12:07:23--0600> .
+
+mediumOffice:5-Zone-PVAV-2 a brick:AHU ;
+    brick:hasLocation <mediumOffice/-MediumOffice-ASHRAE-169-2013-2A-created:-2021-05-19-12:07:23--0600> .
+
