@@ -1,0 +1,6 @@
+@prefix ph: <https://project-haystack.org/def/ph/3.9.10#> .
+@prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.10#> .
+@prefix sample: <urn:sample/> .
+
+sample:point-01 a phIoT:discharge-air-flow-sp ;
+    ph:hasTag <https://project-haystack.org/def/custom#min> .

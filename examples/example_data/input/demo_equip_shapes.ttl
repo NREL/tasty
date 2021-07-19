@@ -1,0 +1,92 @@
+@prefix nrel: <https://project-haystack.org/datashapes/nrel#> .
+@prefix oap: <https://oap.buildingsiot.com#> .
+@prefix ph: <https://project-haystack.org/def/ph/3.9.10#> .
+@prefix phCustom: <https://project-haystack.org/def/custom#> .
+@prefix phIct: <https://project-haystack.org/def/phIct/3.9.10#> .
+@prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.10#> .
+@prefix phScience: <https://project-haystack.org/def/phScience/3.9.10#> .
+@prefix phShapes: <https://project-haystack.org/datashapes/core#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+nrel:TestShape1 a sh:NodeShape ;
+    sh:class phIoT:point ;
+    sh:property [ sh:path ph:hasTag ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:hasValue phIoT:a] ],
+        [ sh:minCount 1 ;
+            sh:path ph:hasTag ],
+        [ sh:maxCount 1 ;
+
+            sh:path ph:hasTag ] .
+
+nrel:TestShape2 a sh:NodeShape ;
+    sh:class phIoT:point ;
+    sh:property [ sh:path ph:hasTag ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:hasValue phIoT:a ] ],
+        [ sh:path ph:hasTag ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:hasValue phIoT:b ] ],
+        [ sh:minCount 2 ;
+            sh:path ph:hasTag ],
+        [ sh:maxCount 2 ;
+            sh:path ph:hasTag ] .
+
+nrel:TestShape3 a sh:NodeShape ;
+    sh:class phIoT:air-temp-sensor ;
+    sh:property [ sh:path ph:hasTag ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:hasValue phIoT:c] ],
+        [ sh:minCount 1 ;
+            sh:path ph:hasTag ],
+        [ sh:maxCount 1 ;
+            sh:path ph:hasTag ] .
+
+nrel:TestShape4 a sh:NodeShape ;
+    sh:class phIoT:point ;
+    sh:property [ sh:path ph:hasTag ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:hasValue phIoT:c ] ],
+        [ sh:path ph:hasTag ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:hasValue phIoT:d ] ],
+        [ sh:minCount 2 ;
+            sh:path ph:hasTag ],
+        [ sh:maxCount 2 ;
+            sh:path ph:hasTag ] .
+
+nrel:TestFunctionalShape1 a sh:NodeShape ;
+    sh:property [ sh:minCount 1 ;
+            sh:path [ sh:inversePath phIoT:equipRef ] ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:TestShape1 ;
+            sh:qualifiedValueShapesDisjoint true ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:TestShape2 ;
+            sh:qualifiedValueShapesDisjoint true ] .
+
+nrel:TestFunctionalShape2 a sh:NodeShape ;
+    sh:property [ sh:minCount 1 ;
+            sh:path [ sh:inversePath phIoT:equipRef ] ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:TestShape3 ;
+            sh:qualifiedValueShapesDisjoint true ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:TestShape4 ;
+            sh:qualifiedValueShapesDisjoint true ] .
+
+nrel:NREL-VAV-Standard a sh:NodeShape ;
+    sh:class phIoT:vav ;
+    sh:targetNode <urn:sample/My-NREL-VAV> ;
+    sh:node
+        nrel:TestFunctionalShape1 ,
+        nrel:TestFunctionalShape2 .

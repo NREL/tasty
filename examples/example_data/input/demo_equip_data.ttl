@@ -1,0 +1,27 @@
+@prefix nrel: <https://project-haystack.org/datashapes/nrel#> .
+@prefix oap: <https://oap.buildingsiot.com#> .
+@prefix ph: <https://project-haystack.org/def/ph/3.9.10#> .
+@prefix phCustom: <https://project-haystack.org/def/custom#> .
+@prefix phIct: <https://project-haystack.org/def/phIct/3.9.10#> .
+@prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.10#> .
+@prefix phScience: <https://project-haystack.org/def/phScience/3.9.10#> .
+@prefix phShapes: <https://project-haystack.org/datashapes/core#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sample: <urn:sample/> .
+
+sample:NREL-Equip-Test-TestPoint1 a phIoT:point ;
+    ph:hasTag phIoT:a ;
+    phIoT:equipRef sample:My-NREL-VAV .
+
+sample:NREL-Equip-Test-TestPoint2 a phIoT:point ;
+    ph:hasTag phIoT:a,
+        phIoT:b;
+    phIoT:equipRef sample:My-NREL-VAV .
+
+sample:NREL-Equip-Test-TestPoint4 a phIoT:point ;
+    ph:hasTag phIoT:c,
+        phIoT:d;
+    phIoT:equipRef sample:My-NREL-VAV .
+
+sample:My-NREL-VAV a phIoT:vav .
