@@ -410,3 +410,67 @@ class BrickEquipmentDefs(EntityDefs):
             ?n rdfs:subClassOf* brick:Equipment .
             ?n rdfs:label ?doc .
         }'''
+
+class BrickZoneDefs(EntityDefs):
+    """
+    A class with attributes corresponding to first class Brick equipment types.
+    Attributes are only added upon calling the 'bind' method.
+    """
+
+    def __init__(self, version):
+        super().__init__(tc.BRICK, version)
+        self.query = '''SELECT ?n ?doc WHERE {
+            ?n rdfs:subClassOf* brick:Zone .
+            ?n rdfs:label ?doc .
+        }'''
+
+class BrickLocationDefs(EntityDefs):
+    """
+    A class with attributes corresponding to first class Brick equipment types.
+    Attributes are only added upon calling the 'bind' method.
+    """
+
+    def __init__(self, version):
+        super().__init__(tc.BRICK, version)
+        self.query = '''SELECT ?n ?doc WHERE {
+            ?n rdfs:subClassOf* brick:Location .
+            ?n rdfs:label ?doc .
+        }'''
+
+class BrickRefDefs(EntityDefs):
+    """
+    A class with attributes corresponding to Haystack object properties
+    Attributes are only added upon calling the 'bind' method.
+    """
+
+    def __init__(self, version):
+        super().__init__(tc.BRICK, version)
+        self.query = '''SELECT ?r ?doc WHERE {
+            ?r a owl:ObjectProperty .
+            ?n skos:definition ?doc .
+        }'''
+
+    def bind(self) -> None:
+        """
+        Create an attribute for each first class type. The value of each
+        attribute is an EntityType.
+        :return:
+        """
+        assert self.query is not None, 'A query string must be defined'
+        self.result = self.ontology.query(self.query)
+        for node in self.result:
+            name = node[0].split('#')[1]
+            self.__setattr__(name.replace('-', '_'), RefType(node[0], node[1]))
+
+class BrickGasDefs(EntityDefs):
+    """
+    A class with attributes corresponding to first class Brick equipment types.
+    Attributes are only added upon calling the 'bind' method.
+    """
+
+    def __init__(self, version):
+        super().__init__(tc.BRICK, version)
+        self.query = '''SELECT ?n ?doc WHERE {
+            ?n rdfs:subClassOf* brick:Gas .
+            ?n rdfs:label ?doc .
+        }'''
