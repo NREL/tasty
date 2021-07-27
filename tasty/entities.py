@@ -462,7 +462,7 @@ class BrickRefDefs(EntityDefs):
             name = node[0].split('#')[1]
             self.__setattr__(name.replace('-', '_'), RefType(node[0], node[1]))
 
-class BrickGasDefs(EntityDefs):
+class BrickSystemDefs(EntityDefs):
     """
     A class with attributes corresponding to first class Brick equipment types.
     Attributes are only added upon calling the 'bind' method.
@@ -471,6 +471,6 @@ class BrickGasDefs(EntityDefs):
     def __init__(self, version):
         super().__init__(tc.BRICK, version)
         self.query = '''SELECT ?n ?doc WHERE {
-            ?n rdfs:subClassOf* brick:Gas .
+            ?n rdfs:subClassOf* brick:System .
             ?n rdfs:label ?doc .
         }'''

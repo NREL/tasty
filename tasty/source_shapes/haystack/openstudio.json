@@ -28,12 +28,17 @@
         "tags": ["elecHeating"]
     },
     {
+        "name": "WaterHeatingCoilShape",
+        "types": ["heatingCoil"],
+        "tags": ["hotWaterHeating"]
+    },
+    {
         "name": "DXHeatingCoilShape",
         "types": ["heatingCoil"],
         "tags": ["dxHeating"]
     },
     {
-        "name": "DXCoolingCoilShape",
+        "name": "OSDXCoolingCoilShape",
         "types": ["coolingCoil"],
         "tags": ["dxCooling"]
     },
@@ -76,6 +81,16 @@
         "name": "CoolingCapacitySensorShape",
         "types": ["point"],
         "tags": ["coolingCapacity", "sensor"]
+    },
+    {
+        "name": "DamperCmdShape",
+        "types": ["point"],
+        "tags": ["damper", "cmd"]
+    },
+    {
+        "name": "MinAirFractionSetpointShape",
+        "types": ["point"],
+        "tags": ["minVal", "damper", "sp"]
     }
     ]
 }
