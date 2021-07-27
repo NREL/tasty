@@ -19,9 +19,20 @@ sample:NREL-Equip-Test-TestPoint2 a phIoT:point ;
         phIoT:b;
     phIoT:equipRef sample:My-NREL-VAV .
 
+
 sample:NREL-Equip-Test-TestPoint4 a phIoT:point ;
     ph:hasTag phIoT:c,
         phIoT:d;
+    phIoT:equipRef sample:My-NREL-VAV .
+
+sample:NREL-Equip-Test-TestPoint5 a phIoT:discharge-air-pressure-sensor ;
+    phIoT:equipRef sample:My-NREL-VAV .
+
+sample:NREL-Equip-Test-TestPoint6 a phIoT:discharge-air-pressure-sp ;
+    phIoT:equipRef sample:My-NREL-VAV .
+
+sample:NREL-Equip-Test-TestPoint7 a phIoT:fan ;
+    ph:hasTag phIoT:sensor ;
     phIoT:equipRef sample:My-NREL-VAV .
 
 sample:My-NREL-VAV a phIoT:vav .

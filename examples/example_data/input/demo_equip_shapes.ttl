@@ -17,7 +17,6 @@ nrel:TestShape1 a sh:NodeShape ;
         [ sh:minCount 1 ;
             sh:path ph:hasTag ],
         [ sh:maxCount 1 ;
-
             sh:path ph:hasTag ] .
 
 nrel:TestShape2 a sh:NodeShape ;
@@ -56,6 +55,22 @@ nrel:TestShape4 a sh:NodeShape ;
         [ sh:maxCount 2 ;
             sh:path ph:hasTag ] .
 
+nrel:TestShape5 a sh:NodeShape ;
+    sh:class phIoT:discharge-air-pressure-sensor .
+
+nrel:TestShape6 a sh:NodeShape ;
+    sh:class phIoT:discharge-air-pressure-sp .
+
+nrel:TestShape7 a sh:NodeShape ;
+    sh:class phIoT:fan ;
+    sh:property [ sh:path ph:hasTag ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:hasValue phIoT:sensor ] ],
+        [ sh:minCount 1 ;
+            sh:path ph:hasTag ] .
+        [ sh:maxCount 1 ;
+            sh:path ph:hasTag ] .
+
 nrel:TestFunctionalShape1 a sh:NodeShape ;
     sh:property [ sh:minCount 1 ;
             sh:path [ sh:inversePath phIoT:equipRef ] ],
@@ -84,9 +99,38 @@ nrel:TestFunctionalShape2 a sh:NodeShape ;
             sh:qualifiedValueShape nrel:TestShape4 ;
             sh:qualifiedValueShapesDisjoint true ] .
 
+
+nrel:TestFunctionalShape3 a sh:NodeShape ;
+    sh:property [ sh:minCount 1 ;
+            sh:path [ sh:inversePath phIoT:equipRef ] ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:TestShape5 ;
+            sh:qualifiedValueShapesDisjoint true ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:TestShape6 ;
+            sh:qualifiedValueShapesDisjoint true ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:TestShape7 ;
+            sh:qualifiedValueShapesDisjoint true ] .
+
 nrel:NREL-VAV-Standard a sh:NodeShape ;
     sh:class phIoT:vav ;
-    sh:targetNode <urn:sample/My-NREL-VAV> ;
     sh:node
         nrel:TestFunctionalShape1 ,
+        nrel:TestFunctionalShape2 .
+
+nrel:High-Minimum-Fan-Speed-Fault a sh:NodeShape ;
+    sh:class phIoT:vav ;
+    sh:node
+        nrel:TestFunctionalShape3 .
+
+nrel:G36-VAV-Standard a sh:NodeShape ;
+    sh:class phIoT:vav ;
+    sh:node
         nrel:TestFunctionalShape2 .
