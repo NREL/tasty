@@ -51,7 +51,7 @@ class PointTree:
             # create new root node
             # for now passing in an empty string so that no tags are added to the root
             # eventually we may want "point" as a tag, but it's currently not in the generated shapes
-            self.root = PointNode("", None)
+            self.root = PointNode("point", None)
 
         # assert that there can only be one root value
         assert count == 1
@@ -66,7 +66,7 @@ class PointTree:
             parentNode.add_child(new_node)
             self.add_subnodes(graph, new_node, s)
 
-    def determine_first_class_point_type(self, root: 'PointNode', input_tags) -> str:
+    def determine_first_class_point_type(self, root: 'PointNode', input_tags) -> 'PointNode':
         # iterate over children node
         for node in root.children:
 
@@ -86,10 +86,10 @@ class PointTree:
         # if the point does not match any of the tags, than return the root
         # print(root.parent)
         # print(self.root)
-        if root.parent is self.root or root.type == "":
+        if root.parent is self.root:
             # print("same")
-            return "point"
-        return root.type
+            return self.root
+        return root
 
 
 # print("hello")
@@ -101,5 +101,5 @@ class PointTree:
 # r = pt.get_root()
 # print(len(r.tags))
 
-# fcn = pt.determine_first_class_point_type(r, ["cmd", "damper", "air", "discharge"])
-# print(fcn)
+# fcn = pt.determine_first_class_point_type(r, ["zone", "temp", "air", "sp"])
+# print(fcn.type)
