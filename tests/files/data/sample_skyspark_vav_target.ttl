@@ -53,13 +53,15 @@ sample:211c90ab-701fa511 a bacnet:bacnetPoint ;
     ph:unit "\u00b0F" .
 
 sample:211c90b6-52117d4d a bacnet:bacnetPoint ;
-    ph:hasTag phScience:air,
-        bacnet:bacnetPoint,
-        phIoT:cur,
-        phIoT:his,
-        phIoT:point,
-        phIoT:sp,
-        phScience:temp,
+    a phIoT:air-temp-sp ;
+    ph:hasTag
+        # phScience:air,
+        # bacnet:bacnetPoint,
+        # phIoT:cur,
+        # phIoT:his,
+        # phIoT:point,
+        # phIoT:sp,
+        # phScience:temp,
         phIoT:zone ;
     rdfs:label "S&TF UFVAV-3 Zone Temp Setpt" ;
     bacnet:bacnetConnRef sample:211c8a83-ef5c639d ;
@@ -150,11 +152,12 @@ sample:22f5d821-8e310c3e a phIoT:his-point ;
     ph:tz "Denver" .
 
 sample:211c90b7-f2430aa1 a bacnet:bacnetPoint ;
-    ph:hasTag bacnet:bacnetPoint,
-        phIoT:cur,
-        phIoT:his,
-        point:hisCollectCov,
-        phIoT:point,
+    ph:hasTag
+        # bacnet:bacnetPoint,
+        # phIoT:cur,
+        # phIoT:his,
+        # point:hisCollectCov,
+        # phIoT:point,
         phIoT:sensor,
         phIoT:unocc ;
     rdfs:label "S&TF UFVAV-3 Unocc Override" ;
