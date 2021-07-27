@@ -11,12 +11,12 @@
 @prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.10#> .
 @prefix point: <https://skyfoundry.com/def/point/3.0.27#> .
 @prefix sql: <https://skyfoundry.com/def/sql/3.0.27#> .
-@prefix sample: <urn:sample/> .
+@prefix _: <urn:/_#> .
 
 ph:hasTag a owl:ObjectProperty ;
     rdfs:range ph:marker .
 
-sample:211c90ab-701fa511 a bacnet:bacnetPoint ;
+_:211c90ab-701fa511 a bacnet:bacnetPoint ;
     ph:hasTag phScience:air,
         bacnet:bacnetPoint,
         phIoT:his,
@@ -25,32 +25,32 @@ sample:211c90ab-701fa511 a bacnet:bacnetPoint ;
         phScience:temp,
         phIoT:zone ;
     rdfs:label "S&TF UFVAV-3 Zone Temp" ;
-    bacnet:bacnetConnRef sample:211c8a83-ef5c639d ;
+    bacnet:bacnetConnRef _:211c8a83-ef5c639d ;
     bacnet:bacnetCur "AI5" ;
-    sample:bacnetDis "RM TEMP" ;
+    _:bacnetDis "RM TEMP" ;
     bacnet:bacnetHis "TL3" ;
-    sample:bacnetObjectType "ANALOG_INPUT" ;
-    sample:connRef sample:211c8a83-ef5c639d ;
-    conn:connTuningRef sample:1f4a131c-3f1fcc51 ;
+    _:bacnetObjectType "ANALOG_INPUT" ;
+    _:connRef _:211c8a83-ef5c639d ;
+    conn:connTuningRef _:1f4a131c-3f1fcc51 ;
     phIoT:curStatus "unknown" ;
     core:disMacro "$equipRef $navName" ;
-    phIoT:equipRef sample:214466de-7abb28a7 ;
+    phIoT:equipRef _:214466de-7abb28a7 ;
     his:hisAppendNA 30 ;
-
+    his:hisEnd 2021;
     his:hisSize 31997 ;
 
     phIoT:hisStatus "ok" ;
     ph:kind "Number" ;
     core:navName "Zone Temp" ;
-    phIoT:siteRef sample:211601cb-e3e5e9b3 ;
-    phIoT:spaceRef sample:2184f1be-29c172a8 ;
-    sql:sqlConnRef sample:24a0194c-adac2f1d ;
-    sample:sqlTable "CopperCube_SERF_STF_Area_37034_TL3" ;
-    sample:sqlTz "America/Phoenix" ;
+    phIoT:siteRef _:211601cb-e3e5e9b3 ;
+    phIoT:spaceRef _:2184f1be-29c172a8 ;
+    sql:sqlConnRef _:24a0194c-adac2f1d ;
+    _:sqlTable "CopperCube_SERF_STF_Area_37034_TL3" ;
+    _:sqlTz "America/Phoenix" ;
     ph:tz "Denver" ;
     ph:unit "\u00b0F" .
 
-sample:211c90b6-52117d4d a bacnet:bacnetPoint ;
+_:211c90b6-52117d4d a bacnet:bacnetPoint ;
     ph:hasTag phScience:air,
         bacnet:bacnetPoint,
         phIoT:cur,
@@ -60,16 +60,16 @@ sample:211c90b6-52117d4d a bacnet:bacnetPoint ;
         phScience:temp,
         phIoT:zone ;
     rdfs:label "S&TF UFVAV-3 Zone Temp Setpt" ;
-    bacnet:bacnetConnRef sample:211c8a83-ef5c639d ;
+    bacnet:bacnetConnRef _:211c8a83-ef5c639d ;
     bacnet:bacnetCur "AV11" ;
-    sample:bacnetDis "RM TEMP STPT" ;
-    sample:bacnetObjectType "ANALOG_VALUE" ;
-    sample:connRef sample:211c8a83-ef5c639d ;
-    conn:connTuningRef sample:1f40f395-5a02b62e ;
+    _:bacnetDis "RM TEMP STPT" ;
+    _:bacnetObjectType "ANALOG_VALUE" ;
+    _:connRef _:211c8a83-ef5c639d ;
+    conn:connTuningRef _:1f40f395-5a02b62e ;
     phIoT:curStatus "ok" ;
     phIoT:curVal 74 ;
     core:disMacro "$equipRef $navName" ;
-    phIoT:equipRef sample:214466de-7abb28a7 ;
+    phIoT:equipRef _:214466de-7abb28a7 ;
     his:hisAppendNA 30 ;
     point:hisCollectInterval 5 ;
     point:hisCollectWriteFreq 15 ;
@@ -79,12 +79,12 @@ sample:211c90b6-52117d4d a bacnet:bacnetPoint ;
     phIoT:hisStatus "ok" ;
     ph:kind "Number" ;
     core:navName "Zone Temp Setpt" ;
-    phIoT:siteRef sample:211601cb-e3e5e9b3 ;
-    phIoT:spaceRef sample:2184f1be-29c172a8 ;
+    phIoT:siteRef _:211601cb-e3e5e9b3 ;
+    phIoT:spaceRef _:2184f1be-29c172a8 ;
     ph:tz "Denver" ;
     ph:unit "\u00b0F" .
 
-sample:211c90b6-0da18cd7 a bacnet:bacnetPoint ;
+_:211c90b6-0da18cd7 a bacnet:bacnetPoint ;
     ph:hasTag phScience:air,
         bacnet:bacnetPoint,
         phIoT:cmd,
@@ -94,16 +94,16 @@ sample:211c90b6-0da18cd7 a bacnet:bacnetPoint ;
         phIoT:his,
         phIoT:point ;
     rdfs:label "S&TF UFVAV-3 Damper" ;
-    bacnet:bacnetConnRef sample:211c8a83-ef5c639d ;
+    bacnet:bacnetConnRef _:211c8a83-ef5c639d ;
     bacnet:bacnetCur "AV7" ;
-    sample:bacnetDis "DMP POS" ;
-    sample:bacnetObjectType "ANALOG_VALUE" ;
-    sample:connRef sample:211c8a83-ef5c639d ;
-    conn:connTuningRef sample:1f40f395-5a02b62e ;
+    _:bacnetDis "DMP POS" ;
+    _:bacnetObjectType "ANALOG_VALUE" ;
+    _:connRef _:211c8a83-ef5c639d ;
+    conn:connTuningRef _:1f40f395-5a02b62e ;
     phIoT:curStatus "ok" ;
     phIoT:curVal 0 ;
     core:disMacro "$equipRef $navName" ;
-    phIoT:equipRef sample:214466de-7abb28a7 ;
+    phIoT:equipRef _:214466de-7abb28a7 ;
     his:hisAppendNA 30 ;
     point:hisCollectInterval 5 ;
     point:hisCollectWriteFreq 15 ;
@@ -113,40 +113,40 @@ sample:211c90b6-0da18cd7 a bacnet:bacnetPoint ;
     phIoT:hisStatus "ok" ;
     ph:kind "Number" ;
     core:navName "Damper" ;
-    phIoT:siteRef sample:211601cb-e3e5e9b3 ;
-    phIoT:spaceRef sample:2184f1be-29c172a8 ;
+    phIoT:siteRef _:211601cb-e3e5e9b3 ;
+    phIoT:spaceRef _:2184f1be-29c172a8 ;
     ph:tz "Denver" ;
     ph:unit "%" .
 
-sample:214466de-7abb28a7 a phIoT:vav ;
+_:214466de-7abb28a7 a phIoT:vav ;
     ph:hasTag phIoT:equip,
         phIoT:vav ;
     rdfs:label "S&TF UFVAV-3" ;
-    sample:ahuRef sample:21164218-5fab5c91 ;
-    bacnet:bacnetConnRef sample:211c8a83-ef5c639d ;
-    sample:bacnetDeviceId 37034 ;
-    sample:connRef sample:211c8a83-ef5c639d ;
+    _:ahuRef _:21164218-5fab5c91 ;
+    bacnet:bacnetConnRef _:211c8a83-ef5c639d ;
+    _:bacnetDeviceId 37034 ;
+    _:connRef _:211c8a83-ef5c639d ;
     core:disMacro "$siteRef $navName" ;
     core:navName "UFVAV-3" ;
-    phIoT:siteRef sample:211601cb-e3e5e9b3 ;
-    phIoT:spaceRef sample:2184f1be-29c172a8 .
+    phIoT:siteRef _:211601cb-e3e5e9b3 ;
+    phIoT:spaceRef _:2184f1be-29c172a8 .
 
-sample:22f5d821-8e310c3e a phIoT:his-point ;
+_:22f5d821-8e310c3e a phIoT:his-point ;
     ph:hasTag phIoT:his,
         phIoT:occupied,
         phIoT:point,
         phIoT:sensor ;
     rdfs:label "S&TF UFVAV-3 Schedule" ;
     core:disMacro "$equipRef $navName" ;
-    phIoT:equipRef sample:214466de-7abb28a7 ;
-    sample:hisFunc "calcMirrorHisPoint(_,_,_,_,@p:stm_campus:r:22f4de28-7e5ea4aa)" ;
+    phIoT:equipRef _:214466de-7abb28a7 ;
+    _:hisFunc "calcMirrorHisPoint(_,_,_,_,@p:stm_campus:r:22f4de28-7e5ea4aa)" ;
     ph:kind "Bool" ;
     core:navName "Schedule" ;
-    phIoT:siteRef sample:211601cb-e3e5e9b3 ;
-    phIoT:spaceRef sample:2184f1be-29c172a8 ;
+    phIoT:siteRef _:211601cb-e3e5e9b3 ;
+    phIoT:spaceRef _:2184f1be-29c172a8 ;
     ph:tz "Denver" .
 
-sample:211c90b7-f2430aa1 a bacnet:bacnetPoint ;
+_:211c90b7-f2430aa1 a bacnet:bacnetPoint ;
     ph:hasTag bacnet:bacnetPoint,
         phIoT:cur,
         phIoT:his,
@@ -155,17 +155,17 @@ sample:211c90b7-f2430aa1 a bacnet:bacnetPoint ;
         phIoT:sensor,
         phIoT:unocc ;
     rdfs:label "S&TF UFVAV-3 Unocc Override" ;
-    bacnet:bacnetConnRef sample:211c8a83-ef5c639d ;
+    bacnet:bacnetConnRef _:211c8a83-ef5c639d ;
     bacnet:bacnetCur "BI6" ;
-    sample:bacnetDis "UNOCC OVRD" ;
-    sample:bacnetObjectType "BINARY_INPUT" ;
-    sample:connRef sample:211c8a83-ef5c639d ;
-    conn:connTuningRef sample:1f40f395-5a02b62e ;
+    _:bacnetDis "UNOCC OVRD" ;
+    _:bacnetObjectType "BINARY_INPUT" ;
+    _:connRef _:211c8a83-ef5c639d ;
+    conn:connTuningRef _:1f40f395-5a02b62e ;
     phIoT:curStatus "ok" ;
     phIoT:curVal false ;
     core:disMacro "$equipRef $navName" ;
     ph:enum "OFF,ON" ;
-    phIoT:equipRef sample:214466de-7abb28a7 ;
+    phIoT:equipRef _:214466de-7abb28a7 ;
     point:hisCollectWriteFreq 15 ;
 
     phIoT:hisMode "cov" ;
@@ -174,6 +174,6 @@ sample:211c90b7-f2430aa1 a bacnet:bacnetPoint ;
     phIoT:hisStatus "ok" ;
     ph:kind "Bool" ;
     core:navName "Unocc Override" ;
-    phIoT:siteRef sample:211601cb-e3e5e9b3 ;
-    phIoT:spaceRef sample:2184f1be-29c172a8 ;
+    phIoT:siteRef _:211601cb-e3e5e9b3 ;
+    phIoT:spaceRef _:2184f1be-29c172a8 ;
     ph:tz "Denver" .
