@@ -1,5 +1,4 @@
 import os
-from copy import deepcopy
 from rdflib import OWL, RDF, RDFS
 from tasty import constants as tc
 from tasty import graphs as tg
@@ -37,7 +36,7 @@ class PointTree:
         self.generate_point_tree(file_name)
 
     def get_root(self) -> 'PointNode':
-        return deepcopy(self.root)
+        return self.root
 
     def generate_point_tree(self, file_name: str):
         graph = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
@@ -85,17 +84,22 @@ class PointTree:
                     return self.determine_first_class_point_type(node, input_tags)
 
         # if the point does not match any of the tags, than return the root
+        # print(root.parent)
+        # print(self.root)
+        if root.parent is self.root or root.type == "":
+            # print("same")
+            return "point"
         return root.type
 
 
-print("hello")
-p = PointNode("air-sensor-sp", "parent")
-print(p.tags)
-print(p.parent)
+# print("hello")
+# p = PointNode("air-sensor-sp", "parent")
+# print(p.tags)
+# print(p.parent)
 
-pt = PointTree('schemas/haystack/defs_3_9_10.ttl', 'point')
-r = pt.get_root()
-print(len(r.tags))
+# pt = PointTree('schemas/haystack/defs_3_9_10.ttl', 'point')
+# r = pt.get_root()
+# print(len(r.tags))
 
-fcn = pt.determine_first_class_point_type(r, ["air", "flow", "sensor", "discharge"])
-print(fcn)
+# fcn = pt.determine_first_class_point_type(r, ["cmd", "damper", "air", "discharge"])
+# print(fcn)
