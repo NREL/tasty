@@ -1,0 +1,193 @@
+@prefix nrel: <https://project-haystack.org/datashapes/nrel#> .
+@prefix oap: <https://oap.buildingsiot.com#> .
+@prefix ph: <https://project-haystack.org/def/ph/3.9.10#> .
+@prefix phCustom: <https://project-haystack.org/def/custom#> .
+@prefix phIct: <https://project-haystack.org/def/phIct/3.9.10#> .
+@prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.10#> .
+@prefix phScience: <https://project-haystack.org/def/phScience/3.9.10#> .
+@prefix phShapes: <https://project-haystack.org/datashapes/core#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sample: <urn:sample/> .
+
+sample:NREL-Equip-Test-TestPoint1 a phIoT:point ;
+    ph:hasTag phIoT:a ;
+    phIoT:equipRef sample:NREL-Equip-Test .
+
+sample:NREL-Equip-Test-TestPoint2 a phIoT:point ;
+    ph:hasTag phIoT:a,
+        phIoT:b;
+    phIoT:equipRef sample:NREL-Equip-Test .
+
+sample:NREL-Equip-Test-TestPoint3 a phIoT:point ;
+    ph:hasTag phIoT:c ;
+    phIoT:equipRef sample:NREL-Equip-Test .
+
+sample:NREL-Equip-Test-TestPoint4 a phIoT:point ;
+    ph:hasTag phIoT:c,
+        phIoT:d;
+    phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-MaximumDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+#     ph:hasTag phCustom:foo ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-MinimumDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+#     ph:hasTag phCustom:bar ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-BinaryOccupancySensorShape a phIoT:point ;
+#     ph:hasTag phCustom:occupancyIndicator,
+#         phIoT:occupied,
+#         phIoT:sensor ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-CoolingRequestsShape a phIoT:point ;
+#     ph:hasTag phCustom:request,
+#         phIoT:cmd,
+#         phIoT:cooling ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-DischargeAirDamperCommandShape a phIoT:point ;
+#     ph:hasTag phIoT:cmd,
+#         phIoT:damper,
+#         phIoT:discharge,
+#         phScience:air ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-DischargeAirDamperFeedbackShape a phIoT:air-sensor ;
+#     ph:hasTag phIoT:damper,
+#         phIoT:discharge ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-DischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+#     ph:hasTag phIoT:effective ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-DischargeAirFlowShape a phIoT:discharge-air-flow-sensor ;
+#     ph:hasTag phIoT:leaving ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-DischargeAirTemperatureShape a phIoT:discharge-air-temp-sensor ;
+#     ph:hasTag phIoT:leaving ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-HeatingRequestsShape a phIoT:point ;
+#     ph:hasTag phCustom:request,
+#         phIoT:cmd,
+#         phIoT:heating ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-MaximumCoolingDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+#     ph:hasTag phCustom:max,
+#         phIoT:cooling ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-MaximumHeatingDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+#     ph:hasTag phCustom:max,
+#         phIoT:heating ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-MinimumCoolingDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+#     ph:hasTag phCustom:min,
+#         phIoT:cooling ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-MinimumHeatingDischargeAirFlowSetpointShape a phIoT:discharge-air-flow-sp ;
+#     ph:hasTag phCustom:min,
+#         phIoT:heating ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-OccupancyModeBinaryShape a phIoT:point ;
+#     ph:hasTag phIoT:occupied,
+#         phIoT:sp ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-OccupancyModeStandbyShape a phIoT:point ;
+#     ph:hasTag phCustom:mode,
+#         phIoT:occ,
+#         phIoT:sp ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-OccupancyOverrideCommandShape a phIoT:point ;
+#     ph:hasTag phIoT:cmd,
+#         phIoT:occupied ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-ZoneEquipmentOperatingStateShape a phIoT:point ;
+#     ph:hasTag phCustom:mode,
+#         phCustom:operating,
+#         phIoT:sp ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-ZoneRelativeHumidityShape a phIoT:air-humidity-sensor ;
+#     ph:hasTag phIoT:zone ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-ZoneTemperatureCoolingEffectiveSetpointShape a phIoT:air-temp-sp ;
+#     ph:hasTag phIoT:cooling,
+#         phIoT:effective,
+#         phIoT:zone ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-ZoneTemperatureCoolingOccupiedSetpointShape a phIoT:air-temp-sp ;
+#     ph:hasTag phIoT:cooling,
+#         phIoT:occ,
+#         phIoT:zone ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-ZoneTemperatureCoolingStandbySetpointShape a phIoT:air-temp-sp ;
+#     ph:hasTag phIoT:cooling,
+#         phIoT:standby,
+#         phIoT:zone ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-ZoneTemperatureCoolingUnoccupiedSetpointShape a phIoT:air-temp-sp ;
+#     ph:hasTag phIoT:cooling,
+#         phIoT:unocc,
+#         phIoT:zone ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-ZoneTemperatureHeatingEffectiveSetpointShape a phIoT:air-temp-sp ;
+#     ph:hasTag phIoT:effective,
+#         phIoT:heating,
+#         phIoT:zone ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-ZoneTemperatureHeatingOccupiedSetpointShape a phIoT:air-temp-sp ;
+#     ph:hasTag phIoT:heating,
+#         phIoT:occ,
+#         phIoT:zone ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-ZoneTemperatureHeatingStandbySetpointShape a phIoT:air-temp-sp ;
+#     ph:hasTag phIoT:heating,
+#         phIoT:standby,
+#         phIoT:zone ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-ZoneTemperatureHeatingUnoccupiedSetpointShape a phIoT:air-temp-sp ;
+#     ph:hasTag phIoT:heating,
+#         phIoT:unocc,
+#         phIoT:zone ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-zone-air-co2-sensor-shape a phIoT:point ;
+#     ph:hasTag phIoT:sensor,
+#         phIoT:zone,
+#         phScience:air,
+#         phScience:co2 ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-zone-air-co2-sp-shape a phIoT:point ;
+#     ph:hasTag phIoT:sp,
+#         phIoT:zone,
+#         phScience:air,
+#         phScience:co2 ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+# sample:NREL-Equip-Test-zone-air-temp-sensor-shape a phIoT:air-temp-sensor ;
+#     ph:hasTag phIoT:zone ;
+#     phIoT:equipRef sample:NREL-Equip-Test .
+
+sample:NREL-Equip-Test a phIoT:vav .
