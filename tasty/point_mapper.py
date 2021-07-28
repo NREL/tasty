@@ -17,12 +17,10 @@ class PointNode:
         self.children.append(child)
 
     def load_tags(self):
-        # # ignore an empty string
-        # if(self.type != ""):
-
         self.tags = self.type.split("-")
 
         # remove empty strings and 'point'
+        # eventually we may want "point" as a tag, but it's currently not in the "source" or "generated" shapes
         for tag in self.tags:
             if(tag == '' or tag == 'point'):
                 self.tags.remove(tag)
@@ -49,8 +47,7 @@ class PointTree:
         for s, p, o in graph.triples((root_uri, RDF.type, OWL.Class)):
             count += 1
             # create new root node
-            # for now passing in an empty string so that no tags are added to the root
-            # eventually we may want "point" as a tag, but it's currently not in the generated shapes
+            # for now passing in an "point" - the load_tags method will ignore this so no tags are added to the root
             self.root = PointNode("point", None)
 
         # assert that there can only be one root value
