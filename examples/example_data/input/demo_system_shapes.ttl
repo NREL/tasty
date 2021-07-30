@@ -1,0 +1,207 @@
+@prefix nrel: <https://project-haystack.org/datashapes/nrel#> .
+@prefix oap: <https://oap.buildingsiot.com#> .
+@prefix ph: <https://project-haystack.org/def/ph/3.9.10#> .
+@prefix phCustom: <https://project-haystack.org/def/custom#> .
+@prefix phIct: <https://project-haystack.org/def/phIct/3.9.10#> .
+@prefix phIoT: <https://project-haystack.org/def/phIoT/3.9.10#> .
+@prefix phScience: <https://project-haystack.org/def/phScience/3.9.10#> .
+@prefix phShapes: <https://project-haystack.org/datashapes/core#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+nrel:TestShape1 a sh:NodeShape ;
+    sh:class phIoT:point ;
+    sh:property [ sh:path ph:hasTag ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:hasValue phIoT:a] ],
+        [ sh:minCount 1 ;
+            sh:path ph:hasTag ],
+        [ sh:maxCount 1 ;
+            sh:path ph:hasTag ] .
+
+nrel:TestShape2 a sh:NodeShape ;
+    sh:class phIoT:point ;
+    sh:property [ sh:path ph:hasTag ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:hasValue phIoT:a ] ],
+        [ sh:path ph:hasTag ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:hasValue phIoT:b ] ],
+        [ sh:minCount 2 ;
+            sh:path ph:hasTag ],
+        [ sh:maxCount 2 ;
+            sh:path ph:hasTag ] .
+
+nrel:TestShape3 a sh:NodeShape ;
+    sh:class phIoT:air-temp-sensor ;
+    sh:property [ sh:path ph:hasTag ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:hasValue phIoT:c] ],
+        [ sh:minCount 1 ;
+            sh:path ph:hasTag ],
+        [ sh:maxCount 1 ;
+            sh:path ph:hasTag ] .
+
+nrel:TestShape4 a sh:NodeShape ;
+    sh:class phIoT:air-temp-sp ;
+    sh:property [ sh:path ph:hasTag ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:hasValue phIoT:c ] ],
+        [ sh:path ph:hasTag ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:hasValue phIoT:d ] ],
+        [ sh:minCount 2 ;
+            sh:path ph:hasTag ],
+        [ sh:maxCount 2 ;
+            sh:path ph:hasTag ] .
+
+nrel:TestShape5 a sh:NodeShape ;
+    sh:class phIoT:discharge-air-pressure-sensor .
+
+nrel:TestShape6 a sh:NodeShape ;
+    sh:class phIoT:discharge-air-pressure-sp .
+
+nrel:TestShape7 a sh:NodeShape ;
+    sh:class phIoT:fan ;
+    sh:property [ sh:path ph:hasTag ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape [ sh:hasValue phIoT:sensor ] ],
+        [ sh:minCount 1 ;
+            sh:path ph:hasTag ] .
+        [ sh:maxCount 1 ;
+            sh:path ph:hasTag ] .
+
+nrel:TestFunctionalShape1 a sh:NodeShape ;
+    sh:property [ sh:minCount 1 ;
+            sh:path [ sh:inversePath phIoT:equipRef ] ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:TestShape1 ;
+            sh:qualifiedValueShapesDisjoint true ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:TestShape2 ;
+            sh:qualifiedValueShapesDisjoint true ] .
+
+nrel:TestFunctionalShape2 a sh:NodeShape ;
+    sh:property [ sh:minCount 1 ;
+            sh:path [ sh:inversePath phIoT:equipRef ] ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:TestShape3 ;
+            sh:qualifiedValueShapesDisjoint true ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:TestShape4 ;
+            sh:qualifiedValueShapesDisjoint true ] .
+
+
+nrel:TestFunctionalShape3 a sh:NodeShape ;
+    sh:property [ sh:minCount 1 ;
+            sh:path [ sh:inversePath phIoT:equipRef ] ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:TestShape5 ;
+            sh:qualifiedValueShapesDisjoint true ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:TestShape6 ;
+            sh:qualifiedValueShapesDisjoint true ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:TestShape7 ;
+            sh:qualifiedValueShapesDisjoint true ] .
+
+nrel:TestFunctionalShape4 a sh:NodeShape ;
+    sh:property [ sh:minCount 1 ;
+            sh:path [ sh:inversePath phIoT:equipRef ] ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:NREL-MZ-AHU-FAN-Standard ;
+            sh:qualifiedValueShapesDisjoint true ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:NREL-HTG-COIL ;
+            sh:qualifiedValueShapesDisjoint true ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:NREL-DXCLG-COIL ;
+            sh:qualifiedValueShapesDisjoint true ] ,
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 2 ;
+            sh:qualifiedMinCount 2 ;
+            sh:qualifiedValueShape nrel:NREL-VAV-Standard ;
+            sh:qualifiedValueShapesDisjoint true ] .
+
+nrel:TestFunctionalShape5 a sh:NodeShape ;
+    sh:property [ sh:minCount 1 ;
+            sh:path [ sh:inversePath phIoT:equipRef ] ],
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 1 ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedValueShape nrel:Discharge-Air-Temp-Sensor-Point ;
+            sh:qualifiedValueShapesDisjoint true ] ,
+        [ sh:path [ sh:inversePath phIoT:equipRef ] ;
+            sh:qualifiedMaxCount 2 ;
+            sh:qualifiedMinCount 2 ;
+            sh:qualifiedValueShape nrel:Downstream-Point-Reqs ;
+            sh:qualifiedValueShapesDisjoint true ] .
+
+nrel:Discharge-Air-Temp-Sensor-Point a sh:NodeShape ;
+    sh:class phIoT:discharge-air-temp-sensor .
+
+nrel:Zone-Air-Temp-Sensor-Point a sh:NodeShape ;
+    sh:class phIoT:air-temp-sensor .
+
+nrel:Zone-Air-Temp-Setpoint-Point a sh:NodeShape ;
+    sh:class phIoT:air-temp-sp .
+
+nrel:NREL-VAV-Standard a sh:NodeShape ;
+    sh:class phIoT:vav ;
+    sh:node
+        nrel:TestFunctionalShape1 ,
+        nrel:TestFunctionalShape2 .
+
+nrel:NREL-MZ-AHU-FAN-Standard a sh:NodeShape ;
+    sh:class phIoT:fan .
+
+nrel:NREL-HTG-COIL a sh:NodeShape ;
+    sh:class phIoT:heatingCoil .
+
+nrel:NREL-DXCLG-COIL a sh:NodeShape ;
+    sh:class phIoT:coolingCoil .
+
+nrel:High-Minimum-Fan-Speed-Fault a sh:NodeShape ;
+    sh:class phIoT:vav ;
+    sh:node
+        nrel:TestFunctionalShape3 .
+
+nrel:G36-VAV-Standard a sh:NodeShape ;
+    sh:class phIoT:vav ;
+    sh:node
+        nrel:TestFunctionalShape2 .
+
+nrel:NREL-MZ-AHU-Standard a sh:NodeShape ;
+    sh:class phIoT:ahu ;
+    sh:node
+        nrel:TestFunctionalShape4 .
+
+nrel:Downstream-Point-Reqs a sh:NodeShape ;
+    sh:class phIoT:vav ;
+    sh:node
+        nrel:TestFunctionalShape2 .
+
+nrel:Zone-Damper-Stuck-Closed-Fault a sh:NodeShape ;
+    sh:class phIoT:ahu ;
+    sh:node
+        nrel:TestFunctionalShape5 .

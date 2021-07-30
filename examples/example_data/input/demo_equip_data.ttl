@@ -19,6 +19,9 @@ sample:NREL-Equip-Test-TestPoint2 a phIoT:point ;
         phIoT:b;
     phIoT:equipRef sample:My-NREL-VAV .
 
+sample:NREL-Equip-Test-TestPoint3 a phIoT:air-temp-sensor ;
+    ph:hasTag phIoT:c ;
+    phIoT:equipRef sample:My-NREL-VAV .
 
 sample:NREL-Equip-Test-TestPoint4 a phIoT:point ;
     ph:hasTag phIoT:c,
