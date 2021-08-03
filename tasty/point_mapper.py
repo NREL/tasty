@@ -95,8 +95,13 @@ class PointTree:
 # print(p.parent)
 
 # pt = PointTree('schemas/haystack/defs_3_9_10.ttl', 'point')
+# print("created 'PointTree' using 'schemas/haystack/defs_3_9_10.ttl' and 'point' as the root element")
 # r = pt.get_root()
-# print(len(r.tags))
+# # print(len(r.tags))
+# print(f"root: {r.type} \ttags: {r.tags}")
+# for child in r.children:
+#     print(f"\tchild: {child.type:<20} tags: {child.tags}")
+
 
 # fcn = pt.determine_first_class_point_type(r, ["zone", "temp", "air", "sp"])
 # print(fcn.type)
