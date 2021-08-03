@@ -4,6 +4,7 @@ import requests
 def make_get_request(api_url_endpoint: str, query_string: str, format: str = 'json'):
     """
     Make a get request to a (Skyspark) api endpoint.
+
     :param api_url_endpoint: the url enpoint for the (Skyspark) api
     :type api_url_endpoint: str
     :param query_string: the (axon) query string to include in the request
@@ -39,19 +40,28 @@ def make_get_request(api_url_endpoint: str, query_string: str, format: str = 'js
     )
 
 
-axon_query_string = '(point and equipRef->navName=="UFVAV-3") or (equip and navName=="UFVAV-3")'
+def save_response(response_data, filename):
+    """
+    Save the response data to the given file
 
-api_url_endpoint = 'https://internal-apis.nrel.gov/intelligentcampus/stm_campus/read'
+    :param response_data: the data to be saved
+    :param filename: the filepath/filename to save the data
+    """
+    with open(filename, 'w') as file:
+        file.write(response_data)
 
-response = make_get_request(api_url_endpoint, axon_query_string, 'turtle')
 
-print(response.status_code, end=" - ")
-if response.status_code == 200:
-    print("Sucess")
-elif response.status_code == 404:
-    print("Not Found")
+# axon_query_string = '(point and equipRef->navName=="UFVAV-3") or (equip and navName=="UFVAV-3")'
 
-# print(response.headers['Content-Type'])
-# response.encoding = 'utf-8'
-raw_skyspark_data = response.text
-print(raw_skyspark_data)
+# api_url_endpoint = 'https://internal-apis.nrel.gov/intelligentcampus/stm_campus/read'
+
+# response = make_get_request(api_url_endpoint, axon_query_string, 'turtle')
+
+# print(response.status_code, end = " - ")
+# if response.status_code == 200:
+#     print("Sucess")
+# elif response.status_code == 404:
+#     print("Not Found")
+
+# raw_skyspark_data = response.text
+# print(raw_skyspark_data)
