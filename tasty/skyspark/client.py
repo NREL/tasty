@@ -1,5 +1,12 @@
 import requests
 
+# wrap in client classs
+
+
+# make parameters instance variables
+
+
+# construct query method
 
 def make_get_request(api_url_endpoint: str, query_string: str, format: str = 'json'):
     """
