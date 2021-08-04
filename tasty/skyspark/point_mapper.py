@@ -1,4 +1,3 @@
-import os
 from rdflib import OWL, RDF, RDFS
 from tasty import constants as tc
 from tasty import graphs as tg
@@ -38,8 +37,8 @@ class PointTree:
 
     def generate_point_tree(self, file_name: str):
         graph = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
-        f = os.path.join(os.path.dirname(__file__), file_name)
-        graph.parse(f, format='turtle')
+        # f = os.path.join(os.path.dirname(__file__), file_name)
+        graph.parse(file_name, format='turtle')
 
         # get root of graph from rdf graph
         root_uri = tc.PHIOT_3_9_10[self.root_type]
