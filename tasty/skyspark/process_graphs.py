@@ -6,7 +6,7 @@ from rdflib import Namespace, RDF, SH
 
 from tasty import constants as tc
 from tasty import graphs as tg
-from tasty import point_mapper as pm
+from tasty.skyspark import point_mapper as pm
 
 # ----------------------------------------
 # Variables and Constants
@@ -129,7 +129,8 @@ def remove_invalid_tags(data_graph, schema=tc.HAYSTACK):
 
 def add_first_class_point_types(data_graph):
     # load the point tree
-    pt = pm.PointTree('schemas/haystack/defs_3_9_10.ttl', 'point')
+    file = os.path.join(os.path.dirname(__file__), '../schemas/haystack/defs_3_9_10.ttl')
+    pt = pm.PointTree(file, 'point')
     root = pt.get_root()
 
     # Get all 'points' that have a 'equipRef' tag
