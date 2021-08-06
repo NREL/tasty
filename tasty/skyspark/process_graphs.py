@@ -2,7 +2,7 @@ import re
 import os
 import json
 
-from rdflib import Namespace, RDF, SH
+from rdflib import Namespace, RDF, SH, BNode
 
 from tasty import constants as tc
 from tasty import graphs as tg
@@ -18,7 +18,6 @@ PHCUSTOM = Namespace("https://project-haystack.org/def/custom#")
 # POINT = Namespace("https://skyfoundry.com/def/point/3.0.27#")
 # BACNET = Namespace("https://skyfoundry.com/def/bacnet/3.0.27#")
 
-input_namespace_uri = 'urn:/_#'
 source_shapes_dir = os.path.join(os.path.dirname(__file__), '../source_shapes')
 
 # ----------------------------------------
@@ -28,7 +27,8 @@ source_shapes_dir = os.path.join(os.path.dirname(__file__), '../source_shapes')
 
 class SkysparkGraphProcessor:
 
-    def __init__(self, schema=tc.HAYSTACK, version=tc.V3_9_10):
+    def __init__(self, input_namespace_uri, schema=tc.HAYSTACK, version=tc.V3_9_10):
+        self.input_namespace_uri = input_namespace_uri
         self.schema = schema
         self.version = version
         self.ontology_graph = tg.load_ontology(schema, version)
@@ -50,7 +50,7 @@ class SkysparkGraphProcessor:
         filedata = re.sub(r';\n.*\^{2}xsd:dateTime.*.', '.', filedata)
 
         # add urn namespace to graph
-        filedata = re.sub('@prefix', '@prefix _: <' + input_namespace_uri + '> .\n@prefix', filedata, count=1)
+        filedata = re.sub('@prefix', '@prefix _: <' + self.input_namespace_uri + '> .\n@prefix', filedata, count=1)
 
         # change the project haystack namespaces to v10
         filedata = re.sub('/3.9.9', '/3.9.10', filedata)
@@ -167,3 +167,18 @@ class SkysparkGraphProcessor:
         shapes_graph = helpers.parse_file_to_graph(shapes_graph_filename, self.schema, self.version)
         self.add_target_nodes(shapes_graph, target_node, shape_name)
         return shapes_graph
+
+    def determine_missing_points(self, results_graph):
+        missing_points = []
+
+        # Find the Validation Results
+        for subject, predicate, object in results_graph.triples((None, RDF.type, SH.ValidationResult)):
+            # check if Validation result points to a BNode
+            for node in results_graph.objects(subject=subject, predicate=SH.sourceShape):
+                # if it points to a BNode wee assume it's a constraint on a functional group has a `sh:qualifiedValueShape`
+                # which should be a URI of one of the simple shapes - our missing point
+                if isinstance(node, BNode):
+                    point = results_graph.value(subject=node, predicate=SH.qualifiedValueShape)
+                    missing_points.append(point)
+
+        return missing_points
