@@ -48,3 +48,13 @@ class SkysparkClient:
                 'Accept': accept_type
             }
         )
+
+    def generate_axon_query_for_equip(self, nav_name: str):
+        """
+        This method generates a query for a given peice of a equipment. Given the equipment's "navName" the query string
+        will query for the equipment itself and all points that have it as an equipRef.
+
+        :nav_name: the navName (from Skyspark) of the equipment for which to generate the query
+        """
+        query_string = "(point and equipRef->navName==\"" + nav_name + "\") or (equip and navName==\"" + nav_name + "\")"
+        return query_string
