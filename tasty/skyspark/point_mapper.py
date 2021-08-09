@@ -5,6 +5,7 @@ from tasty import graphs as tg
 
 class PointNode:
 
+    # -- Class Constructor --
     def __init__(self, type: str, parent):
         self.type = type
         self.parent = parent
@@ -12,10 +13,21 @@ class PointNode:
         self.tags = []
         self.load_tags()
 
-    def add_child(self, child):
+    def add_child(self, child: 'PointNode'):
+        """
+        Add a child (node) to the given node
+
+        :param child: the child node to add
+        :type child: PointNode
+        """
         self.children.append(child)
 
     def load_tags(self):
+        """
+        Load the tags for this node based on the 'type' string passed in at instantiation. This method will split the
+        'type' on hyphens and add each word as a tag to the node. The tag "point" is removed (this may be updated at
+        a later time)
+        """
         self.tags = self.type.split("-")
 
         # remove empty strings and 'point'
@@ -24,38 +36,60 @@ class PointNode:
             if(tag == '' or tag == 'point'):
                 self.tags.remove(tag)
 
+# Note this data structure implicitly assumes that points fall into a tree-like hierarchy and that each point can only be
+# a subtype of ONE point type. This may not be the actual case in some systems and may need to be re-considered at another
+# time. Also because of this, if 'his', 'cur', 'writable', or 'weather' tags are not removed, first class point may not be
+# correct, as it assumes mutual exclusivity.
+
 
 class PointTree:
-    def __init__(self, file_name: str, root_type: str):
+
+    # -- Class Constructor --
+    def __init__(self, filename: str, root_type: str):
         self.root_type = root_type
-        self.file_name = file_name
+        self.filename = filename
         self.root = None
-        self.generate_point_tree(file_name)
+        self.generate_point_tree(filename)
 
     def get_root(self) -> 'PointNode':
         return self.root
 
-    def generate_point_tree(self, file_name: str):
-        graph = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
-        # f = os.path.join(os.path.dirname(__file__), file_name)
-        graph.parse(file_name, format='turtle')
+    def generate_point_tree(self, filename: str):
+        """
+        Generates/populates a PointTree based on a schema definition file (e.g. 'schemas/haystack/defs_3_9_10.ttl') which
+        describes the desired ontology.
 
-        # get root of graph from rdf graph
+        :param filename: the filepath/filename from which to generate the PointTree
+        """
+        # parse the file to an rdf graph
+        graph = tg.get_versioned_graph(tc.HAYSTACK, tc.V3_9_10)
+        graph.parse(filename, format='turtle')
+
+        # get root of graph from the rdf graph
         root_uri = tc.PHIOT_3_9_10[self.root_type]
         count = 0
         for s, p, o in graph.triples((root_uri, RDF.type, OWL.Class)):
             count += 1
             # create new root node
-            # for now passing in an "point" - the load_tags method will ignore this so no tags are added to the root
+            # for now passing in a type of "point" - the load_tags method will ignore this so no tags are added to the root
             self.root = PointNode("point", None)
 
         # assert that there can only be one root value
         assert count == 1
 
-        # now iterate over all items which are a subclass of "point"
+        # now iterate over all items which are a subclass of "point" and recursively add all subnodes
         self.add_subnodes(graph, self.root, root_uri)
 
     def add_subnodes(self, graph, parentNode: 'PointNode', parentUri):
+        """
+        Adds all subnodes of a given parent node to the PointTree. Given an rdf graph and a parent node in that graph,
+        this method adds subtypes of the root node as children to the root, and recursively does the same for each child
+        node untill all subtypes are discovered and the PointTree is fully populated.
+
+        :param graph: the rdf graph describing the given ontology from which to construct the PointTree
+        :param parentNode: the parent node as a PointNode, for which all subtypes should be added
+        :param parentUri: the uri of the parent node in the rdf graph
+        """
         for s, p, o in graph.triples((None, RDFS.subClassOf, parentUri)):
             # print(s[s.find('#')+1:])
             new_node = PointNode(s[s.find('#') + 1:], parentNode)
@@ -63,6 +97,14 @@ class PointTree:
             self.add_subnodes(graph, new_node, s)
 
     def determine_first_class_point_type(self, root: 'PointNode', input_tags) -> 'PointNode':
+        """
+        Determines the first-class-point-type based on a given set of tags starting at the given root node.
+        This method looks at the root node and then recursively at each subnode untill the set of tags stops
+        matching the point type.
+
+        :param root: the node at which to begin checking against
+        :param input_tags: a list of the tags to use to identify the point type
+        """
         # iterate over children node
         for node in root.children:
 
@@ -79,16 +121,16 @@ class PointTree:
                     # check the next level of nodes
                     return self.determine_first_class_point_type(node, input_tags)
 
-        # if the point does not match any of the tags, than return the root
-        # print(root.parent)
-        # print(self.root)
+        # Otherwise the point does not match any of the tags; return the root (i.e. the most specific point type mathced thus far)
+
+        # (but if the root is one of the immediate children of 'point', then just return 'point' - this is idiosyncratic to the
+        # current implementation of the the PointTree and schema)
         if root.parent is self.root:
-            # print("same")
             return self.root
+
         return root
 
-
-# print("hello")
+# -------------------- Sample Code --------------------------)
 # p = PointNode("air-sensor-sp", "parent")
 # print(p.tags)
 # print(p.parent)

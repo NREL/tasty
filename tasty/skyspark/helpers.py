@@ -1,27 +1,55 @@
 from tasty import constants as tc
 from tasty import graphs as tg
 
+# -- Helper function to save data to a file
+
 
 def save_data_to_file(data, filename):
     """
-    Save the response data to the given file
+    Save the given data to the given file
 
-    :param response_data: the data to be saved
-    :param filename: the filepath/filename to save the data
+    :param data: the data to be saved
+    :param filename: the filepath/filename in which to save the data
     """
     with open(filename, 'w') as file:
         file.write(data)
 
+# -- Helper function to parse data from a file to an rdflib graph
 
-def parse_file_to_graph(file, schema=tc.HAYSTACK, version=tc.V3_9_10, format_type='turtle'):
+
+def parse_file_to_graph(filename, schema=tc.HAYSTACK, version=tc.V3_9_10, format_type='turtle'):
+    """
+    Parse the data from the given file to a graph (rdflib) with the given schema.
+
+    :param filename: the filepath/filename from which to parse
+    :param schema: the schema of the graph to be created; defualt is Haystack
+    :param schema: the version of the schema; defualt is v3.9.10 (Haystack)
+    :param format_type: the format of the file to be read parsed; defualt is 'turtle'
+    """
     g = tg.get_versioned_graph(schema, version)
-    g.parse(file, format=format_type)
+    g.parse(filename, format=format_type)
     return g
 
-
-def print_graph_to_file(g, filename, format_type='turtle'):
-    g.serialize(filename, format=format_type)
+# -- Helper function to serialize a graph to a file
 
 
-def print_graph(g):
-    print(g.serialize(format='turtle').decode('utf-8'))
+def print_graph_to_file(graph, filename, format_type='turtle'):
+    """
+    Serialize the given graph (rdflib) to the given file with the given format.
+
+    :param graph: the rdflib graph to serialize
+    :param filename: the filepath/filename in which to save the serialized graph
+    :param format_type: the format in which to serialize the graph; defualt is 'turtle'
+    """
+    graph.serialize(filename, format=format_type)
+
+# -- Helper functin to print a graph to the terminal/console
+
+
+def print_graph(graph):
+    """
+    Print the given graph (rdflib) to the terminal
+
+    :param graph: the rdflib graph to print
+    """
+    print(graph.serialize(format='turtle').decode('utf-8'))

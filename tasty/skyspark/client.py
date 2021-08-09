@@ -7,12 +7,14 @@ import requests
 
 class SkysparkClient:
 
+    # -- Class Constructor --
     def __init__(self, api_url_endpoint):
         self.api_url_endpoint = api_url_endpoint
 
     def make_get_request(self, query_string: str, format: str = 'json'):
         """
-        Make a get request to a (Skyspark) api endpoint.
+        Make a get request to a (Skyspark) api endpoint. Note that the query string must be a valid
+        'axon' query.
 
         :param query_string: the (axon) query string to include in the request
         :type query_string: str
@@ -22,6 +24,8 @@ class SkysparkClient:
         :return: the get response
         :rtype: requests.Response Object
         """
+
+        # set "Accept" header value based on specified format
         if(format == 'turtle'):
             accept_type = 'text/turtle'
         elif(format == 'csv'):
@@ -34,9 +38,8 @@ class SkysparkClient:
             accept_type = 'text/zinc'
         elif(format == 'trio'):
             accept_type = 'text/trio'
-        # making json the default format
         else:
-            accept_type = 'application/json'
+            accept_type = 'application/json'  # use json if no other matches
 
         return requests.get(
             self.api_url_endpoint,
