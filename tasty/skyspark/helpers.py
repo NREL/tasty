@@ -1,8 +1,6 @@
 from tasty import constants as tc
 from tasty import graphs as tg
 
-# -- Helper function to save data to a file
-
 
 def save_data_to_file(data, filename):
     """
@@ -13,8 +11,6 @@ def save_data_to_file(data, filename):
     """
     with open(filename, 'w') as file:
         file.write(data)
-
-# -- Helper function to parse data from a file to an rdflib graph
 
 
 def parse_file_to_graph(filename, schema=tc.HAYSTACK, version=tc.V3_9_10, format_type='turtle'):
@@ -30,8 +26,6 @@ def parse_file_to_graph(filename, schema=tc.HAYSTACK, version=tc.V3_9_10, format
     g.parse(filename, format=format_type)
     return g
 
-# -- Helper function to serialize a graph to a file
-
 
 def print_graph_to_file(graph, filename, format_type='turtle'):
     """
@@ -42,8 +36,6 @@ def print_graph_to_file(graph, filename, format_type='turtle'):
     :param format_type: the format in which to serialize the graph; defualt is 'turtle'
     """
     graph.serialize(filename, format=format_type)
-
-# -- Helper functin to print a graph to the terminal/console
 
 
 def print_graph(graph):
