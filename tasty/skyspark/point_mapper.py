@@ -4,8 +4,13 @@ from tasty import graphs as tg
 
 
 class PointNode:
+    """
+    A generic "Point Node" which represents a haystack/skyspark point type. A node is defined by
+    a type (a first class entity type); a set of associated tags (typically the hyphenated components
+    of the 'type') ; a parent (except in the case of the root node where the parent is null); and set
+    of children - child nodes have tag sets which are super sets of their parent's tag set.
+    """
 
-    # -- Class Constructor --
     def __init__(self, type: str, parent):
         self.type = type
         self.parent = parent
@@ -36,15 +41,21 @@ class PointNode:
             if(tag == '' or tag == 'point'):
                 self.tags.remove(tag)
 
-# Note this data structure implicitly assumes that points fall into a tree-like hierarchy and that each point can only be
-# a subtype of ONE point type. This may not be the actual case in some systems and may need to be re-considered at another
-# time. Also because of this, if 'his', 'cur', 'writable', or 'weather' tags are not removed, first class point may not be
-# correct, as it assumes mutual exclusivity.
-
 
 class PointTree:
+    """
+    A data structure comprising a tree of PointNodes. The tree is defined by a root PointNode,
+    of which all the other PointNodes are descendents. When traversing this data structure from
+    the root downwards, the tag set of each successive PointNode is more specific than (i.e. is a
+    superset of) the direct ancestors of that PointNode.
 
-    # -- Class Constructor --
+    NOTE: this data structure implicitly assumes that points fall into a tree-like hierarchy and
+    that each point can only be a subtype of ONE point type. This may not be the actual case in
+    some systems and may need to be re-considered at another time. Also because of this, if 'his',
+    'cur', 'writable', or 'weather' tags are not removed first, first-class-point-types determined
+    may not be correct, as it assumes mutual exclusivity.
+    """
+
     def __init__(self, filename: str, root_type: str):
         self.root_type = root_type
         self.filename = filename
@@ -111,17 +122,18 @@ class PointTree:
             counter = 0
             # iterate over the node tags
             for tag in node.tags:
-                # if the tag is not in the input tag set, break and go to next node
-                if(tag not in input_tags):
-                    break
-                # otherwise the tag is in the set, increment the count
-                counter += 1
-                # if all tags are there, then the input point is a subtype of this node
-                if counter == len(node.tags):
-                    # check the next level of nodes
-                    return self.determine_first_class_point_type(node, input_tags)
+                # if the tag is in the input tag set
+                if(tag in input_tags):
+                    # increment the count
+                    counter += 1
+                    # if all tags are there, then the input point is a subtype of this node
+                    if counter == len(node.tags):
+                        # check the next level of nodes
+                        return self.determine_first_class_point_type(node, input_tags)
 
-        # Otherwise the point does not match any of the tags; return the root (i.e. the most specific point type mathced thus far)
+                # otherwise the tag is not in the input tag set; go to the next node
+
+        # otherwise the point does not match any of the tags; return the root (i.e. the most specific point type matched thus far)
 
         # (but if the root is one of the immediate children of 'point', then just return 'point' - this is idiosyncratic to the
         # current implementation of the the PointTree and schema)
@@ -129,20 +141,3 @@ class PointTree:
             return self.root
 
         return root
-
-# -------------------- Sample Code --------------------------)
-# p = PointNode("air-sensor-sp", "parent")
-# print(p.tags)
-# print(p.parent)
-
-# pt = PointTree('schemas/haystack/defs_3_9_10.ttl', 'point')
-# print("created 'PointTree' using 'schemas/haystack/defs_3_9_10.ttl' and 'point' as the root element")
-# r = pt.get_root()
-# # print(len(r.tags))
-# print(f"root: {r.type} \ttags: {r.tags}")
-# for child in r.children:
-#     print(f"\tchild: {child.type:<20} tags: {child.tags}")
-
-
-# fcn = pt.determine_first_class_point_type(r, ["zone", "temp", "air", "sp"])
-# print(fcn.type)
