@@ -15,6 +15,21 @@ PHCUSTOM = Namespace("https://project-haystack.org/def/custom#")
 
 source_shapes_dir = os.path.join(os.path.dirname(__file__), '../source_shapes')
 
+ph_versioned_ns_dict = {
+    tc.V3_9_9: {
+        'ph': tc.PH_3_9_9,
+        'phict': tc.PHICT_3_9_9,
+        'phscience': tc.PHSCIENCE_3_9_9,
+        'phiot': tc.PHIOT_3_9_9,
+    },
+    tc.V3_9_10: {
+        'ph': tc.PH_3_9_10,
+        'phict': tc.PHICT_3_9_10,
+        'phscience': tc.PHSCIENCE_3_9_10,
+        'phiot': tc.PHIOT_3_9_10
+    }
+}
+
 
 class SkysparkGraphProcessor:
     """
@@ -144,10 +159,10 @@ class SkysparkGraphProcessor:
         valid_tags_ns = valid_tags['namespaced']
 
         # Iterate over all points in the graph (anything with an "equipRef" tag)
-        for s1, p1, o1 in data_graph.triples((None, tc.PHIOT_3_9_10["equipRef"], None)):
+        for s1, p1, o1 in data_graph.triples((None, ph_versioned_ns_dict[self.version]['phiot']["equipRef"], None)):
             print(f"...processing node: \t{s1}")
             # iterate over each tag
-            for s, p, o in data_graph.triples((s1, tc.PH_3_9_10["hasTag"], None)):
+            for s, p, o in data_graph.triples((s1, ph_versioned_ns_dict[self.version]['ph']["hasTag"], None)):
                 # if the tag is not in the list of valid tags, remove it
                 if o not in valid_tags_ns:
                     data_graph.remove((s, p, o))
@@ -165,13 +180,13 @@ class SkysparkGraphProcessor:
         root = pt.get_root()
 
         # Get all 'points' that have a 'equipRef' tag
-        for s, p, o in data_graph.triples((None, tc.PHIOT_3_9_10["equipRef"], None)):
+        for s, p, o in data_graph.triples((None, ph_versioned_ns_dict[self.version]['phiot']["equipRef"], None)):
             print(f"Point: \t{s}")
             print(f"Tags: ", end="")
 
             # get the tags for this point
             tags = []
-            for s1, p1, o1 in data_graph.triples((s, tc.PH_3_9_10["hasTag"], None)):
+            for s1, p1, o1 in data_graph.triples((s, ph_versioned_ns_dict[self.version]['ph']["hasTag"], None)):
                 tag = o1[o1.find('#') + 1:]
                 print(f"\t{tag}")
                 tags.append(tag)
@@ -181,14 +196,14 @@ class SkysparkGraphProcessor:
             print(f"\t...First Class Entity Type: {fc_point.type}\n")
 
             # add first class point type as class to the point
-            data_graph.add((s, RDF.type, tc.PHIOT_3_9_10[fc_point.type]))
+            data_graph.add((s, RDF.type, ph_versioned_ns_dict[self.version]['phiot'][fc_point.type]))
             # remove the tags associated with first class point
             for tag in fc_point.tags:
                 # using all three namespaces because i do not know which is correct
                 # TODO: develop method for determining proper namespace
-                data_graph.remove((s, tc.PH_3_9_10["hasTag"], tc.PHIOT_3_9_10[tag]))
-                data_graph.remove((s, tc.PH_3_9_10["hasTag"], tc.PHSCIENCE_3_9_10[tag]))
-                data_graph.remove((s, tc.PH_3_9_10["hasTag"], tc.PH_3_9_10[tag]))
+                data_graph.remove((s, ph_versioned_ns_dict[self.version]['ph']["hasTag"], ph_versioned_ns_dict[self.version]['phiot'][tag]))
+                data_graph.remove((s, ph_versioned_ns_dict[self.version]['ph']["hasTag"], ph_versioned_ns_dict[self.version]['phscience'][tag]))
+                data_graph.remove((s, ph_versioned_ns_dict[self.version]['ph']["hasTag"], ph_versioned_ns_dict[self.version]['ph'][tag]))
 
     def add_target_nodes(self, shapes_graph, target_node, shape_name):
         """
