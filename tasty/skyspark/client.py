@@ -6,6 +6,11 @@ import requests
 
 
 class SkysparkClient:
+    """
+    This class is a wrapper for the SkySpark web API. It is defined with a URL endpoint;
+    once it is instantiated it can be used to make a get request from the API and can also
+    to generate the proper axon query.
+    """
 
     # -- Class Constructor --
     def __init__(self, api_url_endpoint):
@@ -26,20 +31,19 @@ class SkysparkClient:
         """
 
         # set "Accept" header value based on specified format
-        if(format == 'turtle'):
-            accept_type = 'text/turtle'
-        elif(format == 'csv'):
-            accept_type = 'text/csv'
-        elif(format == 'json'):
-            accept_type = 'application/json'
-        elif(format == 'json-ld'):
-            accept_type = 'application/ld+json'
-        elif(format == 'zinc'):
-            accept_type = 'text/zinc'
-        elif(format == 'trio'):
-            accept_type = 'text/trio'
+        mapping_dict = {
+            'turtle': 'text/turtle',
+            'csv': 'text/csv',
+            'json': 'application/json',
+            'json-ld': 'application/ld+json',
+            'zinc': 'text/zinc',
+            'trio': 'text/trio'
+        }
+
+        if format in mapping_dict:
+            accept_type = mapping_dict[format]
         else:
-            accept_type = 'application/json'  # use json if no other matches
+            accept_type = 'application/json'  # use json as default if no matches
 
         return requests.get(
             self.api_url_endpoint,
