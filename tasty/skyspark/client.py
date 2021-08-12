@@ -12,7 +12,6 @@ class SkysparkClient:
     to generate the proper axon query.
     """
 
-    # -- Class Constructor --
     def __init__(self, api_url_endpoint):
         self.api_url_endpoint = api_url_endpoint
 
