@@ -80,7 +80,8 @@
     {
         "name": "HeatingCapacitySensorShape",
         "types": ["point"],
-        "tags": ["heatingCapacity", "sensor"]
+        "tags": ["sensor"],
+        "tags-cusom": ["heatingCapacity"]
     },
     {
         "name": "CoolingCapacitySensorShape",
