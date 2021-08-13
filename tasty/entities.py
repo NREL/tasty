@@ -262,14 +262,17 @@ class EntityType:
             return False
         self.relationships.add((predicate, obj))
 
-    def sync(self):
+    def sync(self, touched_nodes=[]):
+        if self not in touched_nodes:
+            touched_nodes.append(self)
         self.set_node_name()
         if not self.graph:
             return False
         # Make sure all the objects have node names set
         for pred, obj in self.relationships:
             self.graph.add((self.node, pred._type_uri, obj.node))
-            obj.sync()
+            if obj not in touched_nodes:
+                obj.sync(touched_nodes)
         if self.schema == tc.HAYSTACK:
             for tag in self.tags:
                 self.graph.add((self.node, tc.PH_DEFAULT.hasTag, tag))

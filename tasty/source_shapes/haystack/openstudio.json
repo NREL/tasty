@@ -33,6 +33,11 @@
         "tags": ["hotWaterHeating"]
     },
     {
+        "name": "WaterCoolingCoilShape",
+        "types": ["coolingCoil"],
+        "tags": ["chilledWaterCooling"]
+    },
+    {
         "name": "DXHeatingCoilShape",
         "types": ["heatingCoil"],
         "tags": ["dxHeating"]
@@ -91,6 +96,21 @@
         "name": "MinAirFractionSetpointShape",
         "types": ["point"],
         "tags": ["minVal", "damper", "sp"]
+    },
+    {
+        "name": "HeatRecoveryShape",
+        "types": ["equip"],
+        "tags": ["heatRecovery"]
+    },
+    {
+        "name": "HeatRecoveryAirLeavingShape",
+        "types": ["point"],
+        "tags": ["air", "sensor", "leaving", "heatRecovery"]
+    },
+    {
+        "name": "HeatRecoveryAirEnteringShape",
+        "types": ["point"],
+        "tags": ["air", "sensor", "entering", "heatRecovery"]
     }
     ]
 }
