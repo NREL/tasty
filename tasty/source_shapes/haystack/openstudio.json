@@ -101,17 +101,19 @@
     {
         "name": "HeatRecoveryShape",
         "types": ["equip"],
-        "tags": ["heatRecovery"]
+        "tags-custom": ["heatRecovery"]
     },
     {
         "name": "HeatRecoveryAirLeavingShape",
         "types": ["point"],
-        "tags": ["air", "sensor", "leaving", "heatRecovery"]
+        "tags": ["air", "sensor", "leaving"],
+        "tags-custom": ["heatRecovery"]
     },
     {
         "name": "HeatRecoveryAirEnteringShape",
         "types": ["point"],
-        "tags": ["air", "sensor", "entering", "heatRecovery"]
+        "tags": ["air", "sensor", "entering"],
+        "tags-custom":  ["heatRecovery"]
     }
     ]
 }
