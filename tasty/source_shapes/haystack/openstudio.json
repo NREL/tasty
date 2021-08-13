@@ -1,0 +1,119 @@
+{
+    "prefix": "phOpenStudio",
+    "namespace": "https://project-haystack.org/datashapes/openstudio#",
+    "shapes": [
+    {
+        "name": "DischargeFanShape",
+        "types": ["fan-motor"],
+        "tags": ["discharge"]
+    },
+    {
+        "name": "CAVFanShape",
+        "types": ["fan-motor"],
+        "tags": ["constantAirVolume"]
+    },
+    {
+        "name": "VAVFanShape",
+        "types": ["fan-motor"],
+        "tags": ["variableAirVolume"]
+    },
+    {
+        "name": "GasHeatingCoilShape",
+        "types": ["heatingCoil"],
+        "tags": ["naturalGasHeating"]
+    },
+    {
+        "name": "ElecHeatingCoilShape",
+        "types": ["heatingCoil"],
+        "tags": ["elecHeating"]
+    },
+    {
+        "name": "WaterHeatingCoilShape",
+        "types": ["heatingCoil"],
+        "tags": ["hotWaterHeating"]
+    },
+    {
+        "name": "WaterCoolingCoilShape",
+        "types": ["coolingCoil"],
+        "tags": ["chilledWaterCooling"]
+    },
+    {
+        "name": "DXHeatingCoilShape",
+        "types": ["heatingCoil"],
+        "tags": ["dxHeating"]
+    },
+    {
+        "name": "OSDXCoolingCoilShape",
+        "types": ["coolingCoil"],
+        "tags": ["dxCooling"]
+    },
+    {
+        "name": "HVACZoneShape",
+        "types": ["hvac-zone-space"],
+        "tags": []
+    },
+    {
+        "name": "VAVReheatShape",
+        "types": ["vav"],
+        "tags": ["reheat"]
+    },
+    {
+        "name": "SiteShape",
+        "types": ["site"],
+        "tags": []
+    },
+    {
+        "name": "ElecHeatingPowerSensorShape",
+        "types": ["point"],
+        "tags": ["elecHeating", "power"]
+    },
+    {
+        "name": "ElecPowerSensorShape",
+        "types": ["point"],
+        "tags": ["elec", "power", "sensor"]
+    },
+    {
+        "name": "GasEnergySensorShape",
+        "types": ["point"],
+        "tags": ["naturalGas", "energy", "sensor"]
+    },
+    {
+        "name": "HeatingCapacitySensorShape",
+        "types": ["point"],
+        "tags": ["sensor"],
+        "tags-cusom": ["heatingCapacity"]
+    },
+    {
+        "name": "CoolingCapacitySensorShape",
+        "types": ["point"],
+        "tags": ["coolingCapacity", "sensor"]
+    },
+    {
+        "name": "DamperCmdShape",
+        "types": ["point"],
+        "tags": ["damper", "cmd"]
+    },
+    {
+        "name": "MinAirFractionSetpointShape",
+        "types": ["point"],
+        "tags": ["minVal", "damper", "sp"]
+    },
+    {
+        "name": "HeatRecoveryShape",
+        "types": ["equip"],
+        "tags-custom": ["heatRecovery"]
+    },
+    {
+        "name": "HeatRecoveryAirLeavingShape",
+        "types": ["point"],
+        "tags": ["air", "sensor", "leaving"],
+        "tags-custom": ["heatRecovery"]
+    },
+    {
+        "name": "HeatRecoveryAirEnteringShape",
+        "types": ["point"],
+        "tags": ["air", "sensor", "entering"],
+        "tags-custom":  ["heatRecovery"]
+    }
+    ]
+}

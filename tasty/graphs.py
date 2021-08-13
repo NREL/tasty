@@ -205,6 +205,18 @@ def graph_to_hayson_string(graph: Graph) -> str:
                         if k == "@id":
                             t = v.split("/")[1]
                             json_ld_dict.update({"airRef": v})
+            elif uri_fragment_list[1] == "siteRef":
+                for ref in val:
+                    for k, v in ref.items():
+                        if k == "@id":
+                            t = v.split("/")[1]
+                            json_ld_dict.update({"siteRef": v})
+            elif uri_fragment_list[1] == "spaceRef":
+                for ref in val:
+                    for k, v in ref.items():
+                        if k == "@id":
+                            t = v.split("/")[1]
+                            json_ld_dict.update({"spaceRef": v})
 
             hayson_dict["rows"].append(json_ld_dict)
 

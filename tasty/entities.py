@@ -262,14 +262,17 @@ class EntityType:
             return False
         self.relationships.add((predicate, obj))
 
-    def sync(self):
+    def sync(self, touched_nodes=[]):
+        if self not in touched_nodes:
+            touched_nodes.append(self)
         self.set_node_name()
         if not self.graph:
             return False
         # Make sure all the objects have node names set
         for pred, obj in self.relationships:
             self.graph.add((self.node, pred._type_uri, obj.node))
-            obj.sync()
+            if obj not in touched_nodes:
+                obj.sync(touched_nodes)
         if self.schema == tc.HAYSTACK:
             for tag in self.tags:
                 self.graph.add((self.node, tc.PH_DEFAULT.hasTag, tag))
@@ -408,5 +411,69 @@ class BrickEquipmentDefs(EntityDefs):
         super().__init__(tc.BRICK, version)
         self.query = '''SELECT ?n ?doc WHERE {
             ?n rdfs:subClassOf* brick:Equipment .
+            ?n rdfs:label ?doc .
+        }'''
+
+class BrickZoneDefs(EntityDefs):
+    """
+    A class with attributes corresponding to first class Brick equipment types.
+    Attributes are only added upon calling the 'bind' method.
+    """
+
+    def __init__(self, version):
+        super().__init__(tc.BRICK, version)
+        self.query = '''SELECT ?n ?doc WHERE {
+            ?n rdfs:subClassOf* brick:Zone .
+            ?n rdfs:label ?doc .
+        }'''
+
+class BrickLocationDefs(EntityDefs):
+    """
+    A class with attributes corresponding to first class Brick equipment types.
+    Attributes are only added upon calling the 'bind' method.
+    """
+
+    def __init__(self, version):
+        super().__init__(tc.BRICK, version)
+        self.query = '''SELECT ?n ?doc WHERE {
+            ?n rdfs:subClassOf* brick:Location .
+            ?n rdfs:label ?doc .
+        }'''
+
+class BrickRefDefs(EntityDefs):
+    """
+    A class with attributes corresponding to Haystack object properties
+    Attributes are only added upon calling the 'bind' method.
+    """
+
+    def __init__(self, version):
+        super().__init__(tc.BRICK, version)
+        self.query = '''SELECT ?r ?doc WHERE {
+            ?r a owl:ObjectProperty .
+            ?n skos:definition ?doc .
+        }'''
+
+    def bind(self) -> None:
+        """
+        Create an attribute for each first class type. The value of each
+        attribute is an EntityType.
+        :return:
+        """
+        assert self.query is not None, 'A query string must be defined'
+        self.result = self.ontology.query(self.query)
+        for node in self.result:
+            name = node[0].split('#')[1]
+            self.__setattr__(name.replace('-', '_'), RefType(node[0], node[1]))
+
+class BrickSystemDefs(EntityDefs):
+    """
+    A class with attributes corresponding to first class Brick equipment types.
+    Attributes are only added upon calling the 'bind' method.
+    """
+
+    def __init__(self, version):
+        super().__init__(tc.BRICK, version)
+        self.query = '''SELECT ?n ?doc WHERE {
+            ?n rdfs:subClassOf* brick:System .
             ?n rdfs:label ?doc .
         }'''
