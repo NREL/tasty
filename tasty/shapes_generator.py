@@ -174,7 +174,7 @@ class ShapesGenerator:
         for each_path in predicates:
             path = each_path.get('path')
             namespaced_path = tg.get_namespaced_term(self.ontology, path)
-            self.add_shapes_and_types(namespaced_shape, namespaced_path, each_path)
+            self.add_shapes_and_types(namespaced_shape, namespaced_path, each_path, required)
             if required:
                 self.add_min_count_for_required_nodes(each_path, namespaced_shape, namespaced_path)
 
