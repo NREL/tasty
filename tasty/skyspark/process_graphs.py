@@ -263,19 +263,23 @@ class SkysparkGraphProcessor:
         for subject, predicate, object in results_graph.triples((None, RDF.type, SH.ValidationResult)):
             # get the severity of the failure
             severity = results_graph.value(subject=subject, predicate=SH.resultSeverity)
-            # check if Validation result points to a BNode
-            for node in results_graph.objects(subject=subject, predicate=SH.sourceShape):
-                # if it points to a BNode wee assume it's a constraint on a functional group has a `sh:qualifiedValueShape`
-                # which should be a URI of one of the simple shapes - our missing point
-                if isinstance(node, BNode):
-                    point = results_graph.value(subject=node, predicate=SH.qualifiedValueShape)
+            source_constraint_componenet = results_graph.value(subject=subject, predicate=SH.sourceConstraintComponent)
 
-                    # if the severity is a violation, it's a required point
-                    if(severity == SH.Violation):
-                        missing_required_points.append(point)
-                    # if the severity is a warning, it's an optional point
-                    elif(severity == SH.Warning):
-                        missing_optional_points.append(point)
+            # continue only if the violation is from a "qualified min count" constraint
+            if(source_constraint_componenet == SH.QualifiedMinCountConstraintComponent):
+                # check if Validation result points to a BNode
+                for node in results_graph.objects(subject=subject, predicate=SH.sourceShape):
+                    # if it points to a BNode wee assume it's a constraint on a functional group has a `sh:qualifiedValueShape`
+                    # which should be a URI of one of the simple shapes - our missing point
+                    if isinstance(node, BNode):
+                        point = results_graph.value(subject=node, predicate=SH.qualifiedValueShape)
+
+                        # if the severity is a violation, it's a required point
+                        if(severity == SH.Violation):
+                            missing_required_points.append(point)
+                        # if the severity is a warning, it's an optional point
+                        elif(severity == SH.Warning):
+                            missing_optional_points.append(point)
 
         missing_point_dict = {
             'required': missing_required_points,
