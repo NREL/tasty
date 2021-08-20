@@ -13,6 +13,18 @@ def save_data_to_file(data, filename):
         file.write(data)
 
 
+def append_data_to_file(data, filename):
+    """
+    Save the given data to the given file
+
+    :param data: the data to be saved
+    :param filename: the filepath/filename in which to save the data
+    """
+    with open(filename, 'a') as file:
+        file.write(data)
+        file.close()
+
+
 def parse_file_to_graph(filename, schema=tc.HAYSTACK, version=tc.V3_9_10, format_type='turtle'):
     """
     Parse the data from the given file to a graph (rdflib) with the given schema.
