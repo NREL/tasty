@@ -1,3 +1,4 @@
+import json
 import requests
 
 # TODO:
@@ -54,10 +55,10 @@ class SkysparkClient:
 
     def generate_axon_query_for_equip(self, nav_name: str, site: str = None):
         """
-        This method generates a query for a given peice of a equipment. Given the equipment's "navName" the query string
-        will query for the equipment itself and all points that have it as an equipRef.
+        This method generates a query for a given peice of a equipment. Given the equipment's "navName" and the site's
+        "dis" (optional), the query string will query for the equipment itself and all points that have it as an equipRef.
 
-        :nav_name: the navName (from Skyspark) of the equipment for which to generate the query'
+        :nav_name: the navName (from Skyspark) of the equipment for which to generate the query
         :site: the siteRef "dis" (from Skyspark)
         """
         query_string = "((point and equipRef->navName==\"" + nav_name + "\") or (equip and navName==\"" + nav_name + "\"))"
@@ -65,3 +66,35 @@ class SkysparkClient:
             query_string += " and siteRef->dis==\"" + site + "\""
 
         return query_string
+
+    def generate_axon_query_for_equip_type(self, equip_tag: str, site: str = None):
+        """
+        This method generates a query to retreive a list of the given equipment type. Given the equipment type tag and the site's
+        "dis" (optional), the query string will query for all equipment of this type.
+
+        :equip_tag: the equipment tag (from Skyspark) of the equipment to search for
+        :site: the siteRef "dis" (from Skyspark)
+        """
+        query_string = equip_tag
+        if(site is not None):
+            query_string += " and siteRef->dis==\"" + site + "\""
+
+        return query_string
+
+    def get_equip_id(self, nav_name: str, site: str = None):
+        """
+        This method queries the Skyspark instance for a given peice of a equipment and parses the result to determine the id.
+        Given the equipment's "navName" and the site's "dis" (optional), this method will return the equipment's id.
+
+        :nav_name: the navName (from Skyspark) of the equipment for which to generate the query'
+        :site: the siteRef "dis" (from Skyspark)
+        """
+        query_string = "equip and navName==\"" + nav_name + "\""
+        if(site is not None):
+            query_string += " and siteRef->dis==\"" + site + "\""
+
+        response = self.make_get_request(query_string, 'json')
+        data = json.loads(response.text)
+        raw_id = data['rows'][0]['id']
+        id = raw_id.split(" ")[0][raw_id.rfind(':') + 1:]
+        return id
