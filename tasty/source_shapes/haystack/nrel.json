@@ -1762,6 +1762,43 @@
         "sensor"
       ]
     },
+    {
+      "name": "FanRunCommandShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "fan",
+        "run",
+        "cmd"
+      ]
+    },
+    {
+      "name": "FanRunStatusShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "fan",
+        "run",
+        "sensor"
+      ]
+    },
+    {
+      "name": "ZoneTemperatureSetpointUserAdjustmentShape",
+      "types": [
+        "point"
+      ],
+      "tags": [
+        "zone",
+        "air",
+        "temp",
+        "cmd"
+      ],
+      "tags-custom": [
+        "adjust"
+      ]
+    },
 
 
     {
@@ -2616,6 +2653,60 @@
         ]
       }
     },
+    {
+      "name": "ConstantSpeedFanShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "FanRunCommandShape",
+              "FanRunStatusShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "FCUAirTemperatureControlShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DischargeAirTemperatureShape",
+              "DischargeAirTemperatureSetpointShape"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "FCUConstantSpeedAirFlowControlShape",
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "FanRunCommandShape",
+              "FanRunStatusShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "DischargeAirFlowShape"
+            ]
+          }
+        ]
+      }
+    },
 
     {
       "name": "NREL-VAV-SD-Cooling-Only-Shape",
@@ -2652,6 +2743,25 @@
       ]
     },
     {
+      "name": "NREL-VAV-Fan-Powered-HW-Reheat-Shape",
+      "types": [
+        "vav"
+      ],
+      "shape-mixins": [
+        "ZoneThermalComfortSensorsShape",
+        "ZoneOccupancySensorsShape",
+        "ZoneDemandControlledVentilationShape",
+        "ZoneCoolingSetpointsShape",
+        "ZoneHeatingSetpointsShape",
+        "ZoneModeControlShape",
+        "VAVReheatAirTemperatureControlShape",
+        "VAVAirFlowControlShape",
+        "VAVAirFlowReheatShape",
+        "HWHeatingCoilShape",
+        "ConstantSpeedFanShape"
+      ]
+    },
+    {
       "name": "NREL-VAV-SD-Elec-Reheat-Shape",
       "types": [
         "vav"
@@ -2667,6 +2777,34 @@
         "VAVAirFlowControlShape",
         "ElectricHeatingCoilShape",
         "VAVAirFlowReheatShape"
+      ]
+    },
+    {
+      "name": "NREL-FCU-CS-HW-CHW-Shape",
+      "types": [
+        "fcu"
+      ],
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "ZoneTemperatureSetpointUserAdjustmentShape"
+            ]
+          }
+        ]
+      },
+      "shape-mixins": [
+        "ZoneThermalComfortSensorsShape",
+        "ZoneOccupancySensorsShape",
+        "ZoneCoolingSetpointsShape",
+        "ZoneHeatingSetpointsShape",
+        "ZoneModeControlShape",
+        "FCUAirTemperatureControlShape",
+        "FCUConstantSpeedAirFlowControlShape",
+        "HWHeatingCoilShape",
+        "CHWCoolingCoilShape"
       ]
     },
     {
@@ -2785,6 +2923,85 @@
         "SupplyAirPlenumStaticPressureControlShape",
         "FaceBypassModulatingDamperControlShape"
       ]
+    },
+    {
+      "name": "NREL-AHU-VAV-MZ-HW-Evap-Shape",
+      "types": [
+        "ahu"
+      ],
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "FreezeStatSensorShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "FilterDifferentialPressureSensorShape"
+            ]
+          }
+        ]
+      },
+      "shape-mixins": [
+        "OccupancyModeIndicatorShape",
+        "AHUModeControlShape",
+        "SupplyAirSectionShape",
+        "MixedAirSectionShape",
+        "OutsideAirSectionShape",
+        "ReturnAirSectionShape",
+        "SupplyFanShape",
+        "HWHeatingCoilShape",
+        "EvaporativeCoolingControlShape",
+        "SupplyAirPlenumStaticPressureControlShape"
+      ]
+    },
+    {
+      "name": "NREL-AHU-VAV-MZ-HW-CHW-Evap-Shape",
+      "types": [
+        "ahu"
+      ],
+      "predicates": {
+        "requires": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "FreezeStatSensorShape"
+            ]
+          }
+        ],
+        "optional": [
+          {
+            "path": "equipRef",
+            "path-type": "inverse",
+            "shapes": [
+              "FilterDifferentialPressureSensorShape"
+            ]
+          }
+        ]
+      },
+      "shape-mixins": [
+        "OccupancyModeIndicatorShape",
+        "AHUModeControlShape",
+        "SupplyAirSectionShape",
+        "MixedAirSectionShape",
+        "OutsideAirSectionShape",
+        "ReturnAirSectionShape",
+        "SupplyFanShape",
+        "CHWCoolingCoilShape",
+        "HWHeatingCoilShape",
+        "EvaporativeCoolingControlShape",
+        "SupplyAirPlenumStaticPressureControlShape"
+      ]
     }
+
+
   ]
 }
