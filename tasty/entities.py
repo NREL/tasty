@@ -253,12 +253,12 @@ class EntityType:
             self.set_node_name()
         elif obj.graph:
             self.bind_to_graph(obj.graph)
-            print(f"Bound {self.node} to graph")
+            #print(f"Bound {self.node} to graph")
         elif self.graph:
             obj.bind_to_graph(self.graph)
-            print(f"Bound {obj.node} to graph")
+            #print(f"Bound {obj.node} to graph")
         else:
-            print("Atleast one of the nodes must be bound to a graph")
+            print(f"Atleast one of the nodes {self.node}, {obj.node} must be bound to a graph")
             return False
         self.relationships.add((predicate, obj))
 
@@ -346,6 +346,18 @@ class HaystackPointDefs(EntityDefs):
             ?n rdfs:comment ?doc .
         }'''
 
+    def bind(self) -> None:
+        """
+        Create an attribute for each first class type. The value of each
+        attribute is an EntityType.
+        :return:
+        """
+        assert self.query is not None, 'A query string must be defined'
+        self.result = self.ontology.query(self.query)
+        for node in self.result:
+            name = node[0].split('#')[1]
+            self.__setattr__(name.replace('-', '_'), EntityType(node[0] + "-point", node[1], self.schema, self.version))
+
 
 class HaystackEquipDefs(EntityDefs):
     """
@@ -359,6 +371,18 @@ class HaystackEquipDefs(EntityDefs):
             ?n rdfs:subClassOf* phIoT:equip .
             ?n rdfs:comment ?doc .
         }'''
+
+    def bind(self) -> None:
+        """
+        Create an attribute for each first class type. The value of each
+        attribute is an EntityType.
+        :return:
+        """
+        assert self.query is not None, 'A query string must be defined'
+        self.result = self.ontology.query(self.query)
+        for node in self.result:
+            name = node[0].split('#')[1]
+            self.__setattr__(name.replace('-', '_'), EntityType(node[0] + "-equip", node[1], self.schema, self.version))
 
 
 class HaystackRefDefs(EntityDefs):
@@ -397,7 +421,7 @@ class BrickPointDefs(EntityDefs):
         super().__init__(tc.BRICK, version)
         self.query = '''SELECT ?n ?doc WHERE {
             ?n rdfs:subClassOf* brick:Point .
-            ?n rdfs:label ?doc .
+            OPTIONAL { ?n rdfs:label ?doc }
         }'''
 
 
@@ -411,7 +435,7 @@ class BrickEquipmentDefs(EntityDefs):
         super().__init__(tc.BRICK, version)
         self.query = '''SELECT ?n ?doc WHERE {
             ?n rdfs:subClassOf* brick:Equipment .
-            ?n rdfs:label ?doc .
+            OPTIONAL { ?n rdfs:label ?doc }
         }'''
 
 class BrickZoneDefs(EntityDefs):
@@ -424,7 +448,7 @@ class BrickZoneDefs(EntityDefs):
         super().__init__(tc.BRICK, version)
         self.query = '''SELECT ?n ?doc WHERE {
             ?n rdfs:subClassOf* brick:Zone .
-            ?n rdfs:label ?doc .
+            OPTIONAL { ?n rdfs:label ?doc }
         }'''
 
 class BrickLocationDefs(EntityDefs):
@@ -437,7 +461,7 @@ class BrickLocationDefs(EntityDefs):
         super().__init__(tc.BRICK, version)
         self.query = '''SELECT ?n ?doc WHERE {
             ?n rdfs:subClassOf* brick:Location .
-            ?n rdfs:label ?doc .
+            OPTIONAL { ?n rdfs:label ?doc }
         }'''
 
 class BrickRefDefs(EntityDefs):
@@ -446,11 +470,13 @@ class BrickRefDefs(EntityDefs):
     Attributes are only added upon calling the 'bind' method.
     """
 
-    def __init__(self, version):
+    def __init__(self, version, include_inverse=True):
         super().__init__(tc.BRICK, version)
-        self.query = '''SELECT ?r ?doc WHERE {
-            ?r a owl:ObjectProperty .
-            ?n skos:definition ?doc .
+        self.include_inverse = include_inverse
+        self.query = '''SELECT ?r ?doc ?inv WHERE {
+            ?r a owl:AsymmetricProperty .
+            OPTIONAL { ?r skos:definition ?doc }
+            OPTIONAL { ?r owl:inverseOf ?inv }
         }'''
 
     def bind(self) -> None:
@@ -465,6 +491,13 @@ class BrickRefDefs(EntityDefs):
             name = node[0].split('#')[1]
             self.__setattr__(name.replace('-', '_'), RefType(node[0], node[1]))
 
+        if self.include_inverse:
+            for node in self.result:
+                name = node[0].split('#')[1]
+                if node[2] is not None:
+                    inv_name = node[2].split('#')[1].replace('-','_')
+                    self.__getattribute__(name.replace('-', '_')).__setattr__('inverse', self.__getattribute__(inv_name))
+
 class BrickSystemDefs(EntityDefs):
     """
     A class with attributes corresponding to first class Brick equipment types.
@@ -475,5 +508,5 @@ class BrickSystemDefs(EntityDefs):
         super().__init__(tc.BRICK, version)
         self.query = '''SELECT ?n ?doc WHERE {
             ?n rdfs:subClassOf* brick:System .
-            ?n rdfs:label ?doc .
+            OPTIONAL { ?n rdfs:label ?doc }
         }'''
