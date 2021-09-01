@@ -4,48 +4,48 @@
     "shapes": [
     {
         "name": "DischargeFanShape",
-        "types": ["fan-motor"],
-        "tags": ["discharge"]
+        "types": ["equip"],
+        "tags": ["discharge", "fan-motor"]
     },
     {
         "name": "CAVFanShape",
-        "types": ["fan-motor"],
-        "tags": ["constantAirVolume"]
+        "types": ["equip"],
+        "tags": ["constantAirVolume", "fan-motor"]
     },
     {
         "name": "VAVFanShape",
-        "types": ["fan-motor"],
-        "tags": ["variableAirVolume"]
+        "types": ["equip"],
+        "tags": ["variableAirVolume", "fan-motor"]
     },
     {
         "name": "GasHeatingCoilShape",
-        "types": ["heatingCoil"],
-        "tags": ["naturalGasHeating"]
+        "types": ["equip"],
+        "tags": ["naturalGasHeating", "heatingCoil"]
     },
     {
         "name": "ElecHeatingCoilShape",
-        "types": ["heatingCoil"],
-        "tags": ["elecHeating"]
+        "types": ["equip"],
+        "tags": ["elecHeating", "heatingCoil"]
     },
     {
         "name": "WaterHeatingCoilShape",
-        "types": ["heatingCoil"],
-        "tags": ["hotWaterHeating"]
+        "types": ["equip"],
+        "tags": ["hotWaterHeating", "heatingCoil"]
     },
     {
         "name": "WaterCoolingCoilShape",
-        "types": ["coolingCoil"],
-        "tags": ["chilledWaterCooling"]
+        "types": ["equip"],
+        "tags": ["chilledWaterCooling", "coolingCoil"]
     },
     {
-        "name": "DXHeatingCoilShape",
-        "types": ["heatingCoil"],
-        "tags": ["dxHeating"]
+        "name": "OSDXHeatingCoilShape",
+        "types": ["equip"],
+        "tags": ["dxHeating", "heatingCoil"]
     },
     {
         "name": "OSDXCoolingCoilShape",
-        "types": ["coolingCoil"],
-        "tags": ["dxCooling"]
+        "types": ["equip"],
+        "tags": ["dxCooling", "coolingCoil"]
     },
     {
         "name": "HVACZoneShape",
@@ -54,8 +54,8 @@
     },
     {
         "name": "VAVReheatShape",
-        "types": ["vav"],
-        "tags": ["reheat"]
+        "types": ["equip"],
+        "tags": ["reheat", "vav"]
     },
     {
         "name": "SiteShape",
@@ -111,6 +111,31 @@
         "name": "HeatRecoveryAirEnteringShape",
         "types": ["point"],
         "tags": ["air", "sensor", "entering", "heatRecovery"]
+    },
+    {
+        "name": "LeavingCondenserWaterSensorShape",
+        "types": ["point"],
+        "tags": ["leaving", "condenser", "water", "sensor"]
+    },
+    {
+        "name": "EnteringCondenserWaterSensorShape",
+        "types": ["point"],
+        "tags": ["entering", "condenser", "water", "sensor"]
+    },
+    {
+        "name": "CondenserWaterFlowSensorShape",
+        "types": ["point"],
+        "tags": ["flow", "condenser", "water", "sensor"]
+    },
+    {
+        "name": "CondenserWaterTemperatureSetpointShape",
+        "types": ["point"],
+        "tags": ["sp", "condenser", "temp", "water"]
+    },
+    {
+        "name": "CondenserWaterBypassFlowSensorShape",
+        "types": ["point"],
+        "tags": ["condenser", "flow", "water", "bypass"]
     }
     ]
 }

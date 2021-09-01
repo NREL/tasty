@@ -178,7 +178,7 @@ def graph_to_hayson_string(graph: Graph) -> str:
             elif key == "@type":
                 tags = val[0].split('#')[1]
                 multitag = tags.split("-")
-                [json_ld_dict.update({tag: "m"}) for tag in multitag]
+                [json_ld_dict.update({tag: ":m"}) for tag in multitag]
             elif uri_fragment_list[1] == "hasTag":
                 for tag1 in val:
                     for k, v in tag1.items():
