@@ -17,6 +17,7 @@ V3_9_10 = '3.9.10'
 BRICK = 'Brick'
 V1_1 = '1.1'
 V1_2 = '1.2'
+V1_2_1 = '1.2.1'
 
 # Standard namespaces
 XML = Namespace("http://www.w3.org/1998/namespace#")
@@ -32,6 +33,11 @@ BSH_1_1 = Namespace("https://brickschema.org/schema/1.1/BrickShape#")
 BRICK_1_2 = Namespace("https://brickschema.org/schema/Brick#")
 TAG_1_2 = Namespace("https://brickschema.org/schema/BrickTag#")
 BSH_1_2 = Namespace("https://brickschema.org/schema/BrickShape#")
+
+# 1.2.1
+BRICK_1_2_1 = Namespace("https://brickschema.org/schema/Brick#")
+TAG_1_2_1 = Namespace("https://brickschema.org/schema/BrickTag#")
+BSH_1_2_1 = Namespace("https://brickschema.org/schema/BrickShape#")
 
 # Define versioned Haystack Namespaces
 # 3.9.9
@@ -62,7 +68,7 @@ TAG_DEFAULT = None
 BSH_DEFAULT = None
 
 SUPPORTED_SCHEMAS = {
-    BRICK: [V1_1, V1_2],
+    BRICK: [V1_1, V1_2, V1_2_1],
     HAYSTACK: [V3_9_9, V3_9_10]
 }
 
@@ -88,6 +94,10 @@ def set_default_versions(haystack_version=V3_9_10, brick_version=V1_1):
         BRICK_DEFAULT = BRICK_1_1
         TAG_DEFAULT = TAG_1_1
         BSH_DEFAULT = BSH_1_1
+    elif brick_version == V1_2:
+        BRICK_DEFAULT = BRICK_1_2
+        TAG_DEFAULT = TAG_1_2
+        BSH_DEFAULT = BSH_1_2
     else:
         BRICK_DEFAULT = Namespace("https://brickschema.org/schema/Brick#")
         TAG_DEFAULT = Namespace("https://brickschema.org/schema/BrickTag#")
