@@ -293,9 +293,6 @@
         <http://example.org/building/Room/703638>,
         <http://example.org/building/Room/705378> .
 
-<http://example.org/building/HVACZone/134083> a brick:HVAC_Zone ;
-    rdfs:label "Default" .
-
 <http://example.org/building/Luminaire/1024376> a <http://example.org/building/LuminaireType/A-1> ;
     rdfs:label 1024376 ;
     brick:feeds <http://example.org/building/LightingControlZone/111-1L> ;
