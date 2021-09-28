@@ -8865,7 +8865,7 @@ brick:PowerShape a owl:Class,
     rdfs:label "333" ;
     brick:grossArea <http://example.org/building/Room/698466/Area> .
 
-<http://example.org/building/Room/698468> a brick:Storage_Room%2FIT ;
+<http://example.org/building/Room/698468> a brick:Telecom_Room ;
     rdfs:label "334" ;
     brick:grossArea <http://example.org/building/Room/698468/Area> .
 
@@ -8877,7 +8877,7 @@ brick:PowerShape a owl:Class,
     rdfs:label "302" ;
     brick:grossArea <http://example.org/building/Room/698471/Area> .
 
-<http://example.org/building/Room/698552> a brick:Storage_Room%2FIT ;
+<http://example.org/building/Room/698552> a brick:Telecom_Room ;
     rdfs:label "121" ;
     brick:grossArea <http://example.org/building/Room/698552/Area> .
 
@@ -8911,7 +8911,7 @@ brick:PowerShape a owl:Class,
     rdfs:label "215" ;
     brick:grossArea <http://example.org/building/Room/698366/Area> .
 
-<http://example.org/building/Room/698372> a brick:Storage_Room%2FIT ;
+<http://example.org/building/Room/698372> a brick:Telecom_Room ;
     rdfs:label "212" ;
     brick:grossArea <http://example.org/building/Room/698372/Area> .
 
