@@ -1,7 +1,7 @@
 Sphinx==2.3.0
 readthedocs-sphinx-ext
 
-argparse
+
 copy
 datetime
 frozendict
