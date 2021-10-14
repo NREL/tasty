@@ -1,20 +1,8 @@
 Sphinx==2.3.0
 readthedocs-sphinx-ext
 
-# argparse
-# copy
-# datetime
-frozendict #==1.2
-# itertools
-# json
-jsonschema #==3.2.0
-# logging
-# os
-pandas #==1.2.3
-pyshacl #==0.14.2
-rdflib #==5.0.0
-# sys
-# time
-# typing
-# uuid
-# yaml
+frozendict
+jsonschema
+pandas
+pyshacl
+rdflib
