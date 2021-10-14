@@ -585,7 +585,7 @@ def resolve_to_entity_template(ont, typing_metadata, properties, schema_name, ve
     return et
 
 
-def get_namespaced_terms(ontology: Graph, terms: [str, dict]) -> Set:
+def get_namespaced_terms(ontology: Graph, terms: List[str, dict]) -> Set:
     """
     TODO: document function
     :param ontology: [Graph] A loaded ontology
