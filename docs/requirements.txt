@@ -6,4 +6,4 @@ jsonschema
 pandas
 pyshacl
 rdflib
-yaml
+pyyaml
