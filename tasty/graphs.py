@@ -241,3 +241,11 @@ def graph_to_hayson_string(graph: Graph) -> str:
     hayson_dict["cols"] = hayson_cols_list
     hayson_dict["rows"] = hayson_rows_list
     return json.dumps(hayson_dict)
+
+
+def print_graph(graph):
+    """
+    Print a graph.
+    :param graph: [rdflib.Graph]
+    """
+    print(graph.serialize(format='turtle').decode('utf-8'))
