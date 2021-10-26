@@ -1,4 +1,4 @@
-# tasty
+# tasty [![Documentation Status](https://readthedocs.org/projects/tasty/badge/?version=latest)](https://tasty.readthedocs.io/en/latest/?badge=latest)
 
 Tasty was created to simplify the generation and validation of metadata related to buildings and intends to support the following schemas.
 

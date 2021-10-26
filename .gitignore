@@ -1,3 +1,5 @@
+# https://github.com/github/gitignore/blob/master/Python.gitignore
+
 .idea
 .DS_Store
 __pycache__
@@ -6,7 +8,10 @@ __pycache__
 .tox
 .python-version
 
-# Environments (https://github.com/github/gitignore/blob/master/Python.gitignore)
+# Sphinx documentation
+docs/_build/
+
+# Environments
 .env
 .venv
 env/

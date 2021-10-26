@@ -253,23 +253,26 @@ class EntityType:
             self.set_node_name()
         elif obj.graph:
             self.bind_to_graph(obj.graph)
-            print(f"Bound {self.node} to graph")
+            #print(f"Bound {self.node} to graph")
         elif self.graph:
             obj.bind_to_graph(self.graph)
-            print(f"Bound {obj.node} to graph")
+            #print(f"Bound {obj.node} to graph")
         else:
-            print("Atleast one of the nodes must be bound to a graph")
+            print(f"Atleast one of the nodes {self.node}, {obj.node} must be bound to a graph")
             return False
         self.relationships.add((predicate, obj))
 
-    def sync(self):
+    def sync(self, touched_nodes=[]):
+        if self not in touched_nodes:
+            touched_nodes.append(self)
         self.set_node_name()
         if not self.graph:
             return False
         # Make sure all the objects have node names set
         for pred, obj in self.relationships:
             self.graph.add((self.node, pred._type_uri, obj.node))
-            obj.sync()
+            if obj not in touched_nodes:
+                obj.sync(touched_nodes)
         if self.schema == tc.HAYSTACK:
             for tag in self.tags:
                 self.graph.add((self.node, tc.PH_DEFAULT.hasTag, tag))
@@ -343,6 +346,18 @@ class HaystackPointDefs(EntityDefs):
             ?n rdfs:comment ?doc .
         }'''
 
+    def bind(self) -> None:
+        """
+        Create an attribute for each first class type. The value of each
+        attribute is an EntityType.
+        :return:
+        """
+        assert self.query is not None, 'A query string must be defined'
+        self.result = self.ontology.query(self.query)
+        for node in self.result:
+            name = node[0].split('#')[1]
+            self.__setattr__(name.replace('-', '_'), EntityType(node[0] + "-point", node[1], self.schema, self.version))
+
 
 class HaystackEquipDefs(EntityDefs):
     """
@@ -356,6 +371,18 @@ class HaystackEquipDefs(EntityDefs):
             ?n rdfs:subClassOf* phIoT:equip .
             ?n rdfs:comment ?doc .
         }'''
+
+    def bind(self) -> None:
+        """
+        Create an attribute for each first class type. The value of each
+        attribute is an EntityType.
+        :return:
+        """
+        assert self.query is not None, 'A query string must be defined'
+        self.result = self.ontology.query(self.query)
+        for node in self.result:
+            name = node[0].split('#')[1]
+            self.__setattr__(name.replace('-', '_'), EntityType(node[0] + "-equip", node[1], self.schema, self.version))
 
 
 class HaystackRefDefs(EntityDefs):
@@ -394,7 +421,7 @@ class BrickPointDefs(EntityDefs):
         super().__init__(tc.BRICK, version)
         self.query = '''SELECT ?n ?doc WHERE {
             ?n rdfs:subClassOf* brick:Point .
-            ?n rdfs:label ?doc .
+            OPTIONAL { ?n rdfs:label ?doc }
         }'''
 
 
@@ -408,5 +435,78 @@ class BrickEquipmentDefs(EntityDefs):
         super().__init__(tc.BRICK, version)
         self.query = '''SELECT ?n ?doc WHERE {
             ?n rdfs:subClassOf* brick:Equipment .
-            ?n rdfs:label ?doc .
+            OPTIONAL { ?n rdfs:label ?doc }
+        }'''
+
+class BrickZoneDefs(EntityDefs):
+    """
+    A class with attributes corresponding to first class Brick equipment types.
+    Attributes are only added upon calling the 'bind' method.
+    """
+
+    def __init__(self, version):
+        super().__init__(tc.BRICK, version)
+        self.query = '''SELECT ?n ?doc WHERE {
+            ?n rdfs:subClassOf* brick:Zone .
+            OPTIONAL { ?n rdfs:label ?doc }
+        }'''
+
+class BrickLocationDefs(EntityDefs):
+    """
+    A class with attributes corresponding to first class Brick equipment types.
+    Attributes are only added upon calling the 'bind' method.
+    """
+
+    def __init__(self, version):
+        super().__init__(tc.BRICK, version)
+        self.query = '''SELECT ?n ?doc WHERE {
+            ?n rdfs:subClassOf* brick:Location .
+            OPTIONAL { ?n rdfs:label ?doc }
+        }'''
+
+class BrickRefDefs(EntityDefs):
+    """
+    A class with attributes corresponding to Haystack object properties
+    Attributes are only added upon calling the 'bind' method.
+    """
+
+    def __init__(self, version, include_inverse=True):
+        super().__init__(tc.BRICK, version)
+        self.include_inverse = include_inverse
+        self.query = '''SELECT ?r ?doc ?inv WHERE {
+            ?r a owl:AsymmetricProperty .
+            OPTIONAL { ?r skos:definition ?doc }
+            OPTIONAL { ?r owl:inverseOf ?inv }
+        }'''
+
+    def bind(self) -> None:
+        """
+        Create an attribute for each first class type. The value of each
+        attribute is an EntityType.
+        :return:
+        """
+        assert self.query is not None, 'A query string must be defined'
+        self.result = self.ontology.query(self.query)
+        for node in self.result:
+            name = node[0].split('#')[1]
+            self.__setattr__(name.replace('-', '_'), RefType(node[0], node[1]))
+
+        if self.include_inverse:
+            for node in self.result:
+                name = node[0].split('#')[1]
+                if node[2] is not None:
+                    inv_name = node[2].split('#')[1].replace('-','_')
+                    self.__getattribute__(name.replace('-', '_')).__setattr__('inverse', self.__getattribute__(inv_name))
+
+class BrickSystemDefs(EntityDefs):
+    """
+    A class with attributes corresponding to first class Brick equipment types.
+    Attributes are only added upon calling the 'bind' method.
+    """
+
+    def __init__(self, version):
+        super().__init__(tc.BRICK, version)
+        self.query = '''SELECT ?n ?doc WHERE {
+            ?n rdfs:subClassOf* brick:System .
+            OPTIONAL { ?n rdfs:label ?doc }
         }'''
