@@ -595,6 +595,8 @@ def get_namespaced_terms(ontology: Graph, terms: [str, dict]) -> Set:
     :return:
     """
     valid_namespaced_terms = set()
+    print(valid_namespaced_terms)
+
     if isinstance(terms, str):
         candidate_terms = set(terms.split("-"))
         for candidate in candidate_terms:
@@ -619,6 +621,7 @@ def get_namespaced_terms(ontology: Graph, terms: [str, dict]) -> Set:
                 elif isinstance(meta, (int, float, bool, str)):
                     valid_namespaced_terms.add((candidate_ns[0], candidate, frozendict({'val': meta})))
 
+    print(valid_namespaced_terms)
     return valid_namespaced_terms
 
 

@@ -1,3 +1,4 @@
+from curses import ncurses_version
 import os
 import json
 
@@ -55,6 +56,7 @@ def construct_point_shapes(haystack_ont):
                         tags_custom.append(t['name'])
 
         ns_terms = tt.get_namespaced_terms(haystack_ont, '-'.join(tags))
+        print(ns_terms)
         structured = tt.hget_entity_classes(haystack_ont, ns_terms)
         types = []
         markers = []
