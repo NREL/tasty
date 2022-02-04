@@ -1,0 +1,9 @@
+Sphinx==2.3.0
+readthedocs-sphinx-ext
+
+frozendict
+jsonschema
+pandas
+pyshacl
+rdflib
+pyyaml
