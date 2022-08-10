@@ -44,4 +44,4 @@ def print_graph(graph):
 
     :param graph: the rdflib graph to print
     """
-    print(graph.serialize(format='turtle').decode('utf-8'))
+    print(graph.serialize(format='turtle', encoding='utf-8'))
