@@ -167,7 +167,7 @@ def graph_to_hayson_string(graph: Graph) -> str:
         "cols": [],
         "rows": []
     }
-    json_ld_str = json.loads(graph.serialize(format='json-ld').decode('utf-8'))
+    json_ld_str = json.loads(graph.serialize(format='json-ld', encoding='utf-8'))
     for row in json_ld_str:
         json_ld_dict = {"id": str(uuid.uuid4())}
         for key, val in row.items():

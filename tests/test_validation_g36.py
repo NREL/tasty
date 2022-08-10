@@ -199,7 +199,7 @@ class TestHaystackCoreGeneratedSinglePointShapes:
 
         # -- Assert conforms
         if not conforms:
-            print(results_graph.serialize(format='turtle').decode('utf-8'))
+            print(results_graph.serialize(format='turtle', encoding='utf-8'))
         assert conforms
 
     @pytest.mark.parametrize('shape_name, target_node, remove_markers', [
@@ -245,7 +245,7 @@ class TestHaystackCoreGeneratedSinglePointShapes:
 
         # -- Assert does not conform
         if conforms:
-            print(results_graph.serialize(format='turtle').decode('utf-8'))
+            print(results_graph.serialize(format='turtle', encoding='utf-8'))
         assert not conforms
 
         results_query = results_graph.query(get_single_node_validation_query())
