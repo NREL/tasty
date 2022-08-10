@@ -7,12 +7,12 @@ authors = ["corymosiman12 <cory.mosiman12@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.7.1"
 PyYAML = "^5.3.1"
-rdflib = "^5.0.0"
+rdflib = "^6.0.0"
 importlib-metadata = {version = "^2.0", python = "<3.8"}
 jsonschema = "^3.2.0"
 requests = "^2.24.0"
 frozendict = "^1.2"
-pyshacl = "^0.14.2"
+pyshacl = "^0.17.1"
 pandas = "^1.2.3"
 
 [tool.poetry.dev-dependencies]
