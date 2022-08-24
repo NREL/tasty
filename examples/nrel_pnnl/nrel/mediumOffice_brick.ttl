@@ -1694,62 +1694,92 @@ bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal a brick:RVAV ;
 
 bdg:Core_bottom-ZN a brick:HVAC_Zone ;
     rdfs:label "Core_bottom-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+        brick:value 983.5 ] ;
     brick:isFedBy bdg:Core_bottom-ZN-VAV-Terminal .
 
 bdg:Core_mid-ZN a brick:HVAC_Zone ;
     rdfs:label "Core_mid-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+        brick:value 983.5 ] ;
     brick:isFedBy bdg:Core_mid-ZN-VAV-Terminal .
 
 bdg:Core_top-ZN a brick:HVAC_Zone ;
     rdfs:label "Core_top-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+        brick:value 983.5 ] ;
     brick:isFedBy bdg:Core_top-ZN-VAV-Terminal .
 
 bdg:Perimeter_bot_ZN_1-ZN a brick:HVAC_Zone ;
     rdfs:label "Perimeter_bot_ZN_1-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+        brick:value 207.3 ] ;
     brick:isFedBy bdg:Perimeter_bot_ZN_1-ZN-VAV-Terminal .
 
 bdg:Perimeter_bot_ZN_2-ZN a brick:HVAC_Zone ;
     rdfs:label "Perimeter_bot_ZN_2-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+        brick:value 131.3 ] ;
     brick:isFedBy bdg:Perimeter_bot_ZN_2-ZN-VAV-Terminal .
 
 bdg:Perimeter_bot_ZN_3-ZN a brick:HVAC_Zone ;
     rdfs:label "Perimeter_bot_ZN_3-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+        brick:value 207.3 ] ;
     brick:isFedBy bdg:Perimeter_bot_ZN_3-ZN-VAV-Terminal .
 
 bdg:Perimeter_bot_ZN_4-ZN a brick:HVAC_Zone ;
     rdfs:label "Perimeter_bot_ZN_4-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+        brick:value 131.3 ] ;
     brick:isFedBy bdg:Perimeter_bot_ZN_4-ZN-VAV-Terminal .
 
 bdg:Perimeter_mid_ZN_1-ZN a brick:HVAC_Zone ;
     rdfs:label "Perimeter_mid_ZN_1-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+        brick:value 207.3 ] ;
     brick:isFedBy bdg:Perimeter_mid_ZN_1-ZN-VAV-Terminal .
 
 bdg:Perimeter_mid_ZN_2-ZN a brick:HVAC_Zone ;
     rdfs:label "Perimeter_mid_ZN_2-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+        brick:value 131.3 ] ;
     brick:isFedBy bdg:Perimeter_mid_ZN_2-ZN-VAV-Terminal .
 
 bdg:Perimeter_mid_ZN_3-ZN a brick:HVAC_Zone ;
     rdfs:label "Perimeter_mid_ZN_3-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+        brick:value 207.3 ] ;
     brick:isFedBy bdg:Perimeter_mid_ZN_3-ZN-VAV-Terminal .
 
 bdg:Perimeter_mid_ZN_4-ZN a brick:HVAC_Zone ;
     rdfs:label "Perimeter_mid_ZN_4-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ; 
+        brick:value 131.3 ] ;
     brick:isFedBy bdg:Perimeter_mid_ZN_4-ZN-VAV-Terminal .
 
 bdg:Perimeter_top_ZN_1-ZN a brick:HVAC_Zone ;
     rdfs:label "Perimeter_top_ZN_1-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+        brick:value 207.3 ] ;
     brick:isFedBy bdg:Perimeter_top_ZN_1-ZN-VAV-Terminal .
 
 bdg:Perimeter_top_ZN_2-ZN a brick:HVAC_Zone ;
     rdfs:label "Perimeter_top_ZN_2-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+        brick:value 131.3 ] ;
     brick:isFedBy bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal .
 
 bdg:Perimeter_top_ZN_3-ZN a brick:HVAC_Zone ;
     rdfs:label "Perimeter_top_ZN_3-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+        brick:value 207.3 ] ;
     brick:isFedBy bdg:Perimeter_top_ZN_3-ZN-VAV-Terminal .
 
 bdg:Perimeter_top_ZN_4-ZN a brick:HVAC_Zone ;
     rdfs:label "Perimeter_top_ZN_4-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+        brick:value 131.3 ] ;
     brick:isFedBy bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal .
 
 bdg:5-Zone-PVAV a brick:AHU ;
