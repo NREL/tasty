@@ -1794,3 +1794,152 @@ bdg:5-Zone-PVAV-2 a brick:AHU ;
     rdfs:label "5-Zone-PVAV-2" ;
     brick:hasLocation bdg:bdg .
 
+bdg:Core_top-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Core_top-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 2.2376 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0005 ] ;
+    brick:isPointOf bdg:Core_top-ZN-VAV-Terminal .
+
+bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Perimeter_top_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.9531 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0015 ] ;
+    brick:isPointOf bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal .
+
+bdg:Perimeter_bot_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Perimeter_bot_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.9328 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0009 ] ;
+    brick:isPointOf bdg:Perimeter_bot_ZN_1-ZN-VAV-Terminal .
+
+bdg:Perimeter_bot_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Perimeter_bot_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.894 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0014 ] ;
+    brick:isPointOf bdg:Perimeter_bot_ZN_2-ZN-VAV-Terminal .
+
+bdg:Perimeter_bot_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Perimeter_bot_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.6795 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0008 ] ;
+    brick:isPointOf bdg:Perimeter_bot_ZN_3-ZN-VAV-Terminal .
+
+bdg:Perimeter_top_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Perimeter_top_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.6954 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0007 ] ;
+    brick:isPointOf bdg:Perimeter_top_ZN_3-ZN-VAV-Terminal .
+
+bdg:Core_bottom-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Core_bottom-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 3.7164 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0008 ] ;
+    brick:isPointOf bdg:Core_bottom-ZN-VAV-Terminal .
+
+bdg:Perimeter_mid_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Perimeter_mid_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.9143 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0014 ] ;
+    brick:isPointOf bdg:Perimeter_mid_ZN_2-ZN-VAV-Terminal .
+
+bdg:Perimeter_mid_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Perimeter_mid_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.9172 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0009 ] ;
+    brick:isPointOf bdg:Perimeter_mid_ZN_1-ZN-VAV-Terminal .
+
+bdg:Perimeter_mid_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Perimeter_mid_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.6602 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0007 ] ;
+    brick:isPointOf bdg:Perimeter_mid_ZN_3-ZN-VAV-Terminal .
+
+bdg:Core_mid-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Core_mid-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 2.2091 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0005 ] ;
+    brick:isPointOf bdg:Core_mid-ZN-VAV-Terminal .
+
+bdg:Perimeter_mid_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Perimeter_mid_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.9318 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0015 ] ;
+    brick:isPointOf bdg:Perimeter_mid_ZN_4-ZN-VAV-Terminal .
+
+bdg:Perimeter_bot_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Perimeter_bot_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.9139 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0014 ] ;
+    brick:isPointOf bdg:Perimeter_bot_ZN_4-ZN-VAV-Terminal .
+
+bdg:Perimeter_top_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Perimeter_top_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.9451 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0009 ] ;
+    brick:isPointOf bdg:Perimeter_top_ZN_1-ZN-VAV-Terminal .
+
+bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label 'Perimeter_top_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.9187 ] ;
+    brick:aggregate [ brick:aggregationFunction 'min' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 0.0014 ] ;
+    brick:isPointOf bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal .
