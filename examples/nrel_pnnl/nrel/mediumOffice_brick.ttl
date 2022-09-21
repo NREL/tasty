@@ -1961,3 +1961,21 @@ bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_
         brick:hasUnit unit:M3-PER-SEC ;
         brick:value 0.0014 ] ;
     brick:isPointOf bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal .
+
+bdg:5-Zone-PVAV-2-Outdoor-Air-Node_System_Node_Flow_Rate a brick:Outside_Air_Flow_Sensor ;
+    rdfs:label '5-Zone-PVAV-2-Outdoor-Air-Node_System_Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 5.02 ] .
+
+bdg:5-Zone-PVAV-1-Outdoor-Air-Node_System_Node_Flow_Rate a brick:Outside_Air_Flow_Sensor ;
+    rdfs:label '5-Zone-PVAV-1-Outdoor-Air-Node_System_Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 4.73 ] .
+
+bdg:5-Zone-PVAV-Outdoor-Air-Node_System_Node_Flow_Rate a brick:Outside_Air_Flow_Sensor ;
+    rdfs:label '5-Zone-PVAV-Outdoor-Air-Node_System_Node_Flow_Rate' ;
+    brick:aggregate [ brick:aggregationFunction 'max' ;
+        brick:hasUnit unit:M3-PER-SEC ;
+        brick:value 6.29 ] .
