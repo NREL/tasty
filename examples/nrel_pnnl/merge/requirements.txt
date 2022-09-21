@@ -1,2 +1,2 @@
 brickschema>=0.5.2a3
-dedupe
+dedupe<2.0.9
