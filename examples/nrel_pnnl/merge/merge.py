@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import tabulate
 from difflib import SequenceMatcher
 from colorama import init as colorama_init
 from colorama import Fore, Style
@@ -33,6 +34,9 @@ class EntityFeature:
         score += SequenceMatcher(None, self.label, other.label).ratio()
         return score
 
+    def __repr__(self):
+        return f"Entity[{self.uri[len(self.namespace):]}, \"{self.label}\"]"
+
 
 def validate(g):
     valid, _, report = g.validate()
@@ -58,7 +62,7 @@ def unify_entities(G, e1, e2):
         G.add((s, p, e1))
 
 
-def all_pairs_of_entities(g1ents, g2ents):
+def all_pairs_of_entities(g1ents, g2ents, mapping=None):
     """
     Generate all possible 'matchings'. A matching is
     a pairing of all ents in g1 to a unique eng in g2
@@ -122,37 +126,63 @@ def get_common_types(g1, g2, namespace):
     return list(g1types.intersection(g2types))
 
 
-def get_pairs_by_type(g1, g2, ns) -> List[Tuple[URIRef, URIRef]]:
-    types = get_common_types(g1, g2, ns)
+def get_initial_mapping(g1, g2, typ, ns):
+    g1ents = list(g1.subjects(RDF.type, typ))
+    g1ents = [get_entity_feature_vector(e1, g1, BLDG) for e1 in g1ents]
+
+    g2ents = list(g2.subjects(RDF.type, typ))
+    g2ents = [get_entity_feature_vector(e2, g2, BLDG) for e2 in g2ents]
+
+    mapping = {}
+    while len(g1ents) > 0:
+        print(tabulate.tabulate(zip(range(len(g1ents)), g1ents, g2ents, range(len(g2ents)))))
+        print("Matching pair? type '3 4' to match row 3 in col1 with row 4 in col2")
+        print("Type 'done' to finish")
+        inp = input("> ")
+        if inp == 'done':
+            return mapping
+        parts = inp.split(' ')
+        g1idx, g2idx = int(parts[0]), int(parts[1])
+        mapping[g1ents[g1idx].uri] = g2ents[g2idx].uri
+        g1ents.pop(g1idx)
+        g2ents.pop(g2idx)
+
+
+def get_pairs_by_type(g1, g2, typ, ns, mapping=None) -> List[Tuple[URIRef, URIRef]]:
 
     # assume no covariancy (yet)
-    for typ in types:
-        g1ents = list(g1.subjects(RDF.type, typ))
-        g2ents = list(g2.subjects(RDF.type, typ))
-        if len(g1ents) != len(g2ents):
-            print(
-                Fore.YELLOW + f"Not same # of instances for type {typ} ({len(g1ents)} != {len(g2ents)})" + Style.RESET_ALL,
-                file=sys.stderr,
-            )
-            continue
+    g1ents = list(g1.subjects(RDF.type, typ))
+    g2ents = list(g2.subjects(RDF.type, typ))
+    if len(g1ents) != len(g2ents):
+        print(
+            Fore.YELLOW + f"Not same # of instances for type {typ} ({len(g1ents)} != {len(g2ents)})" + Style.RESET_ALL,
+            file=sys.stderr,
+        )
+        return []
 
-        g1ents = [get_entity_feature_vector(e1, g1, BLDG) for e1 in g1ents]
-        g2ents = [get_entity_feature_vector(e2, g2, BLDG) for e2 in g2ents]
+    already_mapped = set()
+    if mapping is not None:
+        for e1, e2 in mapping.items():
+            already_mapped.add(e1)
+            already_mapped.add(e2)
 
-        # same # of entities of type 'typ' in g1 and g2.
-        # Find the most likely bipartite matching
-        max_score = float('-inf')
-        max_matching = None
-        for matching in all_pairs_of_entities(g1ents, g2ents):
-            score = score_matching(list(matching))
-            if score > max_score:
-                print(matching)
-                print(score)
-                print('-'*30)
-                max_score = score
-                max_matching = matching[:]
-        print(max_matching)
-        print(max_score)
+    g1ents = [get_entity_feature_vector(e1, g1, BLDG) for e1 in g1ents if e1 not in already_mapped]
+    g2ents = [get_entity_feature_vector(e2, g2, BLDG) for e2 in g2ents if e2 not in already_mapped]
+
+    # same # of entities of type 'typ' in g1 and g2.
+    # Find the most likely bipartite matching
+    max_score = float('-inf')
+    max_matching = None
+    for matching in all_pairs_of_entities(g1ents, g2ents):
+        score = score_matching(list(matching))
+        if score > max_score:
+            print(matching)
+            print(score)
+            print('-'*30)
+            max_score = score
+            max_matching = matching[:]
+    print(max_matching)
+    print(max_score)
 
     return []
 
@@ -160,11 +190,11 @@ def get_pairs_by_type(g1, g2, ns) -> List[Tuple[URIRef, URIRef]]:
 g1 = brickschema.Graph().load_file("../nrel/mediumOffice_brick.ttl")
 g2 = brickschema.Graph().load_file("../pnnl/mediumOffice_brick.ttl")
 
-# TODO: incorporate this. Throw out any permutation that violates the initial mapping
-initial_mapping = {}
-
 def merge(g1, g2, ns):
-    get_pairs_by_type(g1, g2, ns)
+    types = get_common_types(g1, g2, ns)
+    for typ in types:
+        mapping = get_initial_mapping(g1, g2, typ, ns)
+        get_pairs_by_type(g1, g2, typ, ns, mapping=mapping)
 
 merge(g1, g2, BLDG)
 
