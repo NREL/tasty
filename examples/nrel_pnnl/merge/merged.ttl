@@ -83,6 +83,13 @@ bdg:5-Zone-PVAV-1-Outdoor-Air-Node_System_Node_Dewpoint_Temperature a brick:Outs
     brick:hasUnit unit:DEG_C ;
     brick:isPointOf bdg:5-Zone-PVAV-1 .
 
+bdg:5-Zone-PVAV-1-Outdoor-Air-Node_System_Node_Flow_Rate a brick:Outside_Air_Flow_Sensor ;
+    rdfs:label "5-Zone-PVAV-1-Outdoor-Air-Node_System_Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 4.73 ] ;
+    brick:isPointOf bdg:5-Zone-PVAV-1 .
+
 bdg:5-Zone-PVAV-1-Outdoor-Air-Node_System_Node_Mass_Flow_Rate a brick:Outside_Air_Flow_Sensor ;
     rdfs:label "5-Zone-PVAV-1-Outdoor-Air-Node_System_Node_Mass_Flow_Rate" ;
     brick:hasUnit unit:KiloGM-PER-SEC ;
@@ -216,6 +223,13 @@ bdg:5-Zone-PVAV-2-Mixed-Air-Node_System_Node_Temperature a brick:Mixed_Air_Tempe
 bdg:5-Zone-PVAV-2-Outdoor-Air-Node_System_Node_Dewpoint_Temperature a brick:Outside_Air_Dewpoint_Sensor ;
     rdfs:label "5-Zone-PVAV-2-Outdoor-Air-Node_System_Node_Dewpoint_Temperature" ;
     brick:hasUnit unit:DEG_C ;
+    brick:isPointOf bdg:5-Zone-PVAV-2 .
+
+bdg:5-Zone-PVAV-2-Outdoor-Air-Node_System_Node_Flow_Rate a brick:Outside_Air_Flow_Sensor ;
+    rdfs:label "5-Zone-PVAV-2-Outdoor-Air-Node_System_Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 5.02 ] ;
     brick:isPointOf bdg:5-Zone-PVAV-2 .
 
 bdg:5-Zone-PVAV-2-Outdoor-Air-Node_System_Node_Mass_Flow_Rate a brick:Outside_Air_Flow_Sensor ;
@@ -353,6 +367,13 @@ bdg:5-Zone-PVAV-Outdoor-Air-Node_System_Node_Dewpoint_Temperature a brick:Outsid
     brick:hasUnit unit:DEG_C ;
     brick:isPointOf bdg:5-Zone-PVAV .
 
+bdg:5-Zone-PVAV-Outdoor-Air-Node_System_Node_Flow_Rate a brick:Outside_Air_Flow_Sensor ;
+    rdfs:label "5-Zone-PVAV-Outdoor-Air-Node_System_Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 6.29 ] ;
+    brick:isPointOf bdg:5-Zone-PVAV .
+
 bdg:5-Zone-PVAV-Outdoor-Air-Node_System_Node_Mass_Flow_Rate a brick:Outside_Air_Flow_Sensor ;
     rdfs:label "5-Zone-PVAV-Outdoor-Air-Node_System_Node_Mass_Flow_Rate" ;
     brick:hasUnit unit:KiloGM-PER-SEC ;
@@ -448,6 +469,16 @@ bdg:Core_bottom-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:D
     brick:hasUnit unit:DEG_C ;
     brick:isPointOf bdg:Core_bottom-ZN-VAV-Terminal .
 
+bdg:Core_bottom-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Core_bottom-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 3.7164 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0008 ] ;
+    brick:isPointOf bdg:Core_bottom-ZN-VAV-Terminal .
+
 bdg:Core_bottom-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
     rdfs:label "Core_bottom-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity" ;
     brick:hasUnit unit:PERCENT_RH ;
@@ -523,6 +554,16 @@ bdg:Core_mid-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Disc
     brick:hasUnit unit:DEG_C ;
     brick:isPointOf bdg:Core_mid-ZN-VAV-Terminal .
 
+bdg:Core_mid-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Core_mid-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 2.2091 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0005 ] ;
+    brick:isPointOf bdg:Core_mid-ZN-VAV-Terminal .
+
 bdg:Core_mid-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
     rdfs:label "Core_mid-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity" ;
     brick:hasUnit unit:PERCENT_RH ;
@@ -596,6 +637,16 @@ bdg:Core_top-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humidity a bric
 bdg:Core_top-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
     rdfs:label "Core_top-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature" ;
     brick:hasUnit unit:DEG_C ;
+    brick:isPointOf bdg:Core_top-ZN-VAV-Terminal .
+
+bdg:Core_top-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Core_top-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 2.2376 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0005 ] ;
     brick:isPointOf bdg:Core_top-ZN-VAV-Terminal .
 
 bdg:Core_top-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
@@ -7631,6 +7682,16 @@ bdg:Perimeter_bot_ZN_1-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a 
     brick:hasUnit unit:DEG_C ;
     brick:isPointOf bdg:Perimeter_bot_ZN_1-ZN-VAV-Terminal .
 
+bdg:Perimeter_bot_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Perimeter_bot_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.9328 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0009 ] ;
+    brick:isPointOf bdg:Perimeter_bot_ZN_1-ZN-VAV-Terminal .
+
 bdg:Perimeter_bot_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
     rdfs:label "Perimeter_bot_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity" ;
     brick:hasUnit unit:PERCENT_RH ;
@@ -7704,6 +7765,16 @@ bdg:Perimeter_bot_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humid
 bdg:Perimeter_bot_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
     rdfs:label "Perimeter_bot_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature" ;
     brick:hasUnit unit:DEG_C ;
+    brick:isPointOf bdg:Perimeter_bot_ZN_2-ZN-VAV-Terminal .
+
+bdg:Perimeter_bot_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Perimeter_bot_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.894 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0014 ] ;
     brick:isPointOf bdg:Perimeter_bot_ZN_2-ZN-VAV-Terminal .
 
 bdg:Perimeter_bot_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
@@ -7781,6 +7852,16 @@ bdg:Perimeter_bot_ZN_3-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a 
     brick:hasUnit unit:DEG_C ;
     brick:isPointOf bdg:Perimeter_bot_ZN_3-ZN-VAV-Terminal .
 
+bdg:Perimeter_bot_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Perimeter_bot_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.6795 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0008 ] ;
+    brick:isPointOf bdg:Perimeter_bot_ZN_3-ZN-VAV-Terminal .
+
 bdg:Perimeter_bot_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
     rdfs:label "Perimeter_bot_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity" ;
     brick:hasUnit unit:PERCENT_RH ;
@@ -7854,6 +7935,16 @@ bdg:Perimeter_bot_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humid
 bdg:Perimeter_bot_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
     rdfs:label "Perimeter_bot_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature" ;
     brick:hasUnit unit:DEG_C ;
+    brick:isPointOf bdg:Perimeter_bot_ZN_4-ZN-VAV-Terminal .
+
+bdg:Perimeter_bot_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Perimeter_bot_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.9139 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0014 ] ;
     brick:isPointOf bdg:Perimeter_bot_ZN_4-ZN-VAV-Terminal .
 
 bdg:Perimeter_bot_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
@@ -7931,6 +8022,16 @@ bdg:Perimeter_mid_ZN_1-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a 
     brick:hasUnit unit:DEG_C ;
     brick:isPointOf bdg:Perimeter_mid_ZN_1-ZN-VAV-Terminal .
 
+bdg:Perimeter_mid_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Perimeter_mid_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.9172 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0009 ] ;
+    brick:isPointOf bdg:Perimeter_mid_ZN_1-ZN-VAV-Terminal .
+
 bdg:Perimeter_mid_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
     rdfs:label "Perimeter_mid_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity" ;
     brick:hasUnit unit:PERCENT_RH ;
@@ -8004,6 +8105,16 @@ bdg:Perimeter_mid_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humid
 bdg:Perimeter_mid_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
     rdfs:label "Perimeter_mid_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature" ;
     brick:hasUnit unit:DEG_C ;
+    brick:isPointOf bdg:Perimeter_mid_ZN_2-ZN-VAV-Terminal .
+
+bdg:Perimeter_mid_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Perimeter_mid_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.9143 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0014 ] ;
     brick:isPointOf bdg:Perimeter_mid_ZN_2-ZN-VAV-Terminal .
 
 bdg:Perimeter_mid_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
@@ -8081,6 +8192,16 @@ bdg:Perimeter_mid_ZN_3-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a 
     brick:hasUnit unit:DEG_C ;
     brick:isPointOf bdg:Perimeter_mid_ZN_3-ZN-VAV-Terminal .
 
+bdg:Perimeter_mid_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Perimeter_mid_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.6602 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0007 ] ;
+    brick:isPointOf bdg:Perimeter_mid_ZN_3-ZN-VAV-Terminal .
+
 bdg:Perimeter_mid_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
     rdfs:label "Perimeter_mid_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity" ;
     brick:hasUnit unit:PERCENT_RH ;
@@ -8154,6 +8275,16 @@ bdg:Perimeter_mid_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humid
 bdg:Perimeter_mid_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
     rdfs:label "Perimeter_mid_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature" ;
     brick:hasUnit unit:DEG_C ;
+    brick:isPointOf bdg:Perimeter_mid_ZN_4-ZN-VAV-Terminal .
+
+bdg:Perimeter_mid_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Perimeter_mid_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.9318 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0015 ] ;
     brick:isPointOf bdg:Perimeter_mid_ZN_4-ZN-VAV-Terminal .
 
 bdg:Perimeter_mid_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
@@ -8231,6 +8362,16 @@ bdg:Perimeter_top_ZN_1-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a 
     brick:hasUnit unit:DEG_C ;
     brick:isPointOf bdg:Perimeter_top_ZN_1-ZN-VAV-Terminal .
 
+bdg:Perimeter_top_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Perimeter_top_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.9451 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0009 ] ;
+    brick:isPointOf bdg:Perimeter_top_ZN_1-ZN-VAV-Terminal .
+
 bdg:Perimeter_top_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
     rdfs:label "Perimeter_top_ZN_1-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity" ;
     brick:hasUnit unit:PERCENT_RH ;
@@ -8304,6 +8445,16 @@ bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humid
 bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
     rdfs:label "Perimeter_top_ZN_2-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature" ;
     brick:hasUnit unit:DEG_C ;
+    brick:isPointOf bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal .
+
+bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Perimeter_top_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.9187 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0014 ] ;
     brick:isPointOf bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal .
 
 bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
@@ -8381,6 +8532,16 @@ bdg:Perimeter_top_ZN_3-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a 
     brick:hasUnit unit:DEG_C ;
     brick:isPointOf bdg:Perimeter_top_ZN_3-ZN-VAV-Terminal .
 
+bdg:Perimeter_top_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Perimeter_top_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.6954 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0007 ] ;
+    brick:isPointOf bdg:Perimeter_top_ZN_3-ZN-VAV-Terminal .
+
 bdg:Perimeter_top_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
     rdfs:label "Perimeter_top_ZN_3-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity" ;
     brick:hasUnit unit:PERCENT_RH ;
@@ -8454,6 +8615,16 @@ bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Relative_Humid
 bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature a brick:Discharge_Air_Temperature_Sensor ;
     rdfs:label "Perimeter_top_ZN_4-ZN-VAV-Terminal-Inlet-Air-Node_System_Node_Temperature" ;
     brick:hasUnit unit:DEG_C ;
+    brick:isPointOf bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal .
+
+bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate a brick:Supply_Air_Flow_Sensor ;
+    rdfs:label "Perimeter_top_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_Flow_Rate" ;
+    brick:aggregate [ brick:aggregationFunction "max" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.9531 ],
+        [ brick:aggregationFunction "min" ;
+            brick:hasUnit unit:M3-PER-SEC ;
+            brick:value 0.0015 ] ;
     brick:isPointOf bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal .
 
 bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal-Outlet-Air-Node_System_Node_Relative_Humidity a brick:Discharge_Air_Humidity_Sensor ;
@@ -17248,83 +17419,8 @@ bdg:5-Zone-PVAV-Main-Gas-Htg-Coil a brick:Heating_Coil ;
     rdfs:label "314" ;
     brick:grossArea <http://example.org/building/Room/792448/Area> .
 
-bdg:Core_bottom-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Core_bottom-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Core_bottom-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV .
-
-bdg:Core_mid-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Core_mid-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Core_mid-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV-1 .
-
-bdg:Core_top-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Core_top-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Core_top-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV-2 .
-
 <http://example.org/building/LightingControlZone/303-4D> a brick:Lighting_Zone ;
     rdfs:label "303-4D" .
-
-bdg:Perimeter_bot_ZN_1-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Perimeter_bot_ZN_1-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Perimeter_bot_ZN_1-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV .
-
-bdg:Perimeter_bot_ZN_2-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Perimeter_bot_ZN_2-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Perimeter_bot_ZN_2-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV .
-
-bdg:Perimeter_bot_ZN_3-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Perimeter_bot_ZN_3-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Perimeter_bot_ZN_3-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV .
-
-bdg:Perimeter_bot_ZN_4-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Perimeter_bot_ZN_4-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Perimeter_bot_ZN_4-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV .
-
-bdg:Perimeter_mid_ZN_1-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Perimeter_mid_ZN_1-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Perimeter_mid_ZN_1-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV-1 .
-
-bdg:Perimeter_mid_ZN_2-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Perimeter_mid_ZN_2-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Perimeter_mid_ZN_2-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV-1 .
-
-bdg:Perimeter_mid_ZN_3-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Perimeter_mid_ZN_3-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Perimeter_mid_ZN_3-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV-1 .
-
-bdg:Perimeter_mid_ZN_4-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Perimeter_mid_ZN_4-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Perimeter_mid_ZN_4-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV-1 .
-
-bdg:Perimeter_top_ZN_1-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Perimeter_top_ZN_1-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Perimeter_top_ZN_1-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV-2 .
-
-bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Perimeter_top_ZN_2-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Perimeter_top_ZN_2-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV-2 .
-
-bdg:Perimeter_top_ZN_3-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Perimeter_top_ZN_3-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Perimeter_top_ZN_3-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV-2 .
-
-bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal a brick:RVAV ;
-    rdfs:label "Perimeter_top_ZN_4-ZN-VAV-Terminal" ;
-    brick:hasLocation bdg:Perimeter_top_ZN_4-ZN ;
-    brick:isFedBy bdg:5-Zone-PVAV-2 .
 
 <http://example.org/building/Room/698132> a brick:Private_Office ;
     rdfs:label "120" ;
@@ -17498,11 +17594,86 @@ bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal a brick:RVAV ;
     rdfs:label "124" ;
     brick:grossArea <http://example.org/building/Room/706051/Area> .
 
+bdg:Core_bottom-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Core_bottom-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Core_bottom-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV .
+
+bdg:Core_mid-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Core_mid-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Core_mid-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV-1 .
+
+bdg:Core_top-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Core_top-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Core_top-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV-2 .
+
 <http://example.org/building/LightingControlZone/229-4E> a brick:Lighting_Zone ;
     rdfs:label "229-4E" .
 
 <http://example.org/building/LightingControlZone/303-6E> a brick:Lighting_Zone ;
     rdfs:label "303-6E" .
+
+bdg:Perimeter_bot_ZN_1-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Perimeter_bot_ZN_1-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Perimeter_bot_ZN_1-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV .
+
+bdg:Perimeter_bot_ZN_2-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Perimeter_bot_ZN_2-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Perimeter_bot_ZN_2-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV .
+
+bdg:Perimeter_bot_ZN_3-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Perimeter_bot_ZN_3-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Perimeter_bot_ZN_3-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV .
+
+bdg:Perimeter_bot_ZN_4-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Perimeter_bot_ZN_4-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Perimeter_bot_ZN_4-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV .
+
+bdg:Perimeter_mid_ZN_1-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Perimeter_mid_ZN_1-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Perimeter_mid_ZN_1-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV-1 .
+
+bdg:Perimeter_mid_ZN_2-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Perimeter_mid_ZN_2-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Perimeter_mid_ZN_2-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV-1 .
+
+bdg:Perimeter_mid_ZN_3-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Perimeter_mid_ZN_3-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Perimeter_mid_ZN_3-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV-1 .
+
+bdg:Perimeter_mid_ZN_4-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Perimeter_mid_ZN_4-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Perimeter_mid_ZN_4-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV-1 .
+
+bdg:Perimeter_top_ZN_1-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Perimeter_top_ZN_1-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Perimeter_top_ZN_1-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV-2 .
+
+bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Perimeter_top_ZN_2-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Perimeter_top_ZN_2-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV-2 .
+
+bdg:Perimeter_top_ZN_3-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Perimeter_top_ZN_3-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Perimeter_top_ZN_3-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV-2 .
+
+bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal a brick:RVAV ;
+    rdfs:label "Perimeter_top_ZN_4-ZN-VAV-Terminal" ;
+    brick:hasLocation bdg:Perimeter_top_ZN_4-ZN ;
+    brick:isFedBy bdg:5-Zone-PVAV-2 .
 
 <http://example.org/building/Room/698152> a brick:Storage_Room ;
     rdfs:label "136" ;
@@ -17519,6 +17690,10 @@ bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal a brick:RVAV ;
 bdg:Core_bottom-ZN a brick:HVAC_Zone ;
     rdfs:label "CORE_BOTTOM",
         "Core_bottom-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 983.5 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 51619.65 ] ;
     brick:hasPart <http://example.org/building/Room/698142>,
         <http://example.org/building/Room/698146>,
         <http://example.org/building/Room/698149>,
@@ -17536,11 +17711,19 @@ bdg:Core_bottom-ZN a brick:HVAC_Zone ;
         <http://example.org/building/Room/700668>,
         <http://example.org/building/Room/700833>,
         <http://example.org/building/Room/706051> ;
-    brick:isFedBy bdg:Core_bottom-ZN-VAV-Terminal .
+    brick:isFedBy bdg:Core_bottom-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 6693.31 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 3.716 ] .
 
 bdg:Core_mid-ZN a brick:HVAC_Zone ;
     rdfs:label "CORE_MID",
         "Core_mid-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 983.5 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 30732.28 ] ;
     brick:hasPart <http://example.org/building/Room/698339>,
         <http://example.org/building/Room/698354>,
         <http://example.org/building/Room/698357>,
@@ -17559,11 +17742,19 @@ bdg:Core_mid-ZN a brick:HVAC_Zone ;
         <http://example.org/building/Room/703025>,
         <http://example.org/building/Room/793134>,
         <http://example.org/building/Room/793137> ;
-    brick:isFedBy bdg:Core_mid-ZN-VAV-Terminal .
+    brick:isFedBy bdg:Core_mid-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 9780.05 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 2.209 ] .
 
 bdg:Core_top-ZN a brick:HVAC_Zone ;
     rdfs:label "CORE_TOP",
         "Core_top-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 983.5 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 31127.19 ] ;
     brick:hasPart <http://example.org/building/Room/698436>,
         <http://example.org/building/Room/698454>,
         <http://example.org/building/Room/698457>,
@@ -17585,7 +17776,11 @@ bdg:Core_top-ZN a brick:HVAC_Zone ;
         <http://example.org/building/Room/703559>,
         <http://example.org/building/Room/703638>,
         <http://example.org/building/Room/705378> ;
-    brick:isFedBy bdg:Core_top-ZN-VAV-Terminal .
+    brick:isFedBy bdg:Core_top-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 17425 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 2.238 ] .
 
 <http://example.org/building/LightingControlZone/110-1E> a brick:Lighting_Zone ;
     rdfs:label "110-1E" .
@@ -17605,59 +17800,110 @@ bdg:Core_top-ZN a brick:HVAC_Zone ;
 bdg:Perimeter_bot_ZN_1-ZN a brick:HVAC_Zone ;
     rdfs:label "PERIMETER_BOT_ZN_1",
         "Perimeter_bot_ZN_1-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 207.3 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 12856.74 ] ;
     brick:hasPart <http://example.org/building/Room/698137>,
         <http://example.org/building/Room/700662> ;
-    brick:isFedBy bdg:Perimeter_bot_ZN_1-ZN-VAV-Terminal .
+    brick:isFedBy bdg:Perimeter_bot_ZN_1-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 6386.06 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 0.933 ] .
 
 bdg:Perimeter_bot_ZN_2-ZN a brick:HVAC_Zone ;
     rdfs:label "PERIMETER_BOT_ZN_2",
         "Perimeter_bot_ZN_2-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 131.3 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 12322.06 ] ;
     brick:hasPart <http://example.org/building/Room/698138>,
         <http://example.org/building/Room/698139>,
         <http://example.org/building/Room/698140>,
         <http://example.org/building/Room/698141>,
         <http://example.org/building/Room/698151>,
         <http://example.org/building/Room/698164> ;
-    brick:isFedBy bdg:Perimeter_bot_ZN_2-ZN-VAV-Terminal .
+    brick:isFedBy bdg:Perimeter_bot_ZN_2-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 4290.38 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 0.894 ] .
 
 bdg:Perimeter_bot_ZN_3-ZN a brick:HVAC_Zone ;
     rdfs:label "PERIMETER_BOT_ZN_3",
         "Perimeter_bot_ZN_3-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 207.3 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 9365.06 ] ;
     brick:hasPart <http://example.org/building/Room/698159>,
         <http://example.org/building/Room/698160>,
         <http://example.org/building/Room/698161>,
         <http://example.org/building/Room/698162>,
         <http://example.org/building/Room/698163>,
         <http://example.org/building/Room/699728> ;
-    brick:isFedBy bdg:Perimeter_bot_ZN_3-ZN-VAV-Terminal .
+    brick:isFedBy bdg:Perimeter_bot_ZN_3-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 6421.44 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 0.679 ] .
 
 bdg:Perimeter_bot_ZN_4-ZN a brick:HVAC_Zone ;
     rdfs:label "PERIMETER_BOT_ZN_4",
         "Perimeter_bot_ZN_4-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 131.3 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 12595.99 ] ;
     brick:hasPart <http://example.org/building/Room/698132>,
         <http://example.org/building/Room/698133>,
         <http://example.org/building/Room/698134>,
         <http://example.org/building/Room/698135>,
         <http://example.org/building/Room/698136>,
         <http://example.org/building/Room/698153> ;
-    brick:isFedBy bdg:Perimeter_bot_ZN_4-ZN-VAV-Terminal .
+    brick:isFedBy bdg:Perimeter_bot_ZN_4-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 4224.59 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 0.914 ] .
 
 bdg:Perimeter_mid_ZN_1-ZN a brick:HVAC_Zone ;
     rdfs:label "PERIMETER_MID_ZN_1",
         "Perimeter_mid_ZN_1-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 207.3 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 12640.86 ] ;
     brick:hasPart <http://example.org/building/Room/702338> ;
-    brick:isFedBy bdg:Perimeter_mid_ZN_1-ZN-VAV-Terminal .
+    brick:isFedBy bdg:Perimeter_mid_ZN_1-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 7182.89 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 0.917 ] .
 
 bdg:Perimeter_mid_ZN_2-ZN a brick:HVAC_Zone ;
-    rdfs:label "PERIMETER_MID_ZN_2",
+    rdfs:label "PERIMETER_MID_ZN_4",
         "Perimeter_mid_ZN_2-ZN" ;
-    brick:hasPart <http://example.org/building/Room/698346>,
-        <http://example.org/building/Room/702344> ;
-    brick:isFedBy bdg:Perimeter_mid_ZN_2-ZN-VAV-Terminal .
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 131.3 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 12601.55 ] ;
+    brick:hasPart <http://example.org/building/Room/702350> ;
+    brick:isFedBy bdg:Perimeter_mid_ZN_2-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 4849.6 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 0.914 ] .
 
 bdg:Perimeter_mid_ZN_3-ZN a brick:HVAC_Zone ;
     rdfs:label "PERIMETER_MID_ZN_3",
         "Perimeter_mid_ZN_3-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 207.3 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 9099.1 ] ;
     brick:hasPart <http://example.org/building/Room/698347>,
         <http://example.org/building/Room/698348>,
         <http://example.org/building/Room/698349>,
@@ -17665,17 +17911,34 @@ bdg:Perimeter_mid_ZN_3-ZN a brick:HVAC_Zone ;
         <http://example.org/building/Room/698351>,
         <http://example.org/building/Room/698352>,
         <http://example.org/building/Room/698353> ;
-    brick:isFedBy bdg:Perimeter_mid_ZN_3-ZN-VAV-Terminal .
+    brick:isFedBy bdg:Perimeter_mid_ZN_3-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 7202.58 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 0.66 ] .
 
 bdg:Perimeter_mid_ZN_4-ZN a brick:HVAC_Zone ;
-    rdfs:label "PERIMETER_MID_ZN_4",
+    rdfs:label "PERIMETER_MID_ZN_2",
         "Perimeter_mid_ZN_4-ZN" ;
-    brick:hasPart <http://example.org/building/Room/702350> ;
-    brick:isFedBy bdg:Perimeter_mid_ZN_4-ZN-VAV-Terminal .
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 131.3 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 12843.24 ] ;
+    brick:hasPart <http://example.org/building/Room/698346>,
+        <http://example.org/building/Room/702344> ;
+    brick:isFedBy bdg:Perimeter_mid_ZN_4-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 4776.82 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 0.932 ] .
 
 bdg:Perimeter_top_ZN_1-ZN a brick:HVAC_Zone ;
     rdfs:label "PERIMETER_TOP_ZN_1",
         "Perimeter_top_ZN_1-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 207.3 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 13025.68 ] ;
     brick:hasPart <http://example.org/building/Room/698437>,
         <http://example.org/building/Room/698441>,
         <http://example.org/building/Room/698442>,
@@ -17685,33 +17948,61 @@ bdg:Perimeter_top_ZN_1-ZN a brick:HVAC_Zone ;
         <http://example.org/building/Room/698446>,
         <http://example.org/building/Room/698447>,
         <http://example.org/building/Room/792448> ;
-    brick:isFedBy bdg:Perimeter_top_ZN_1-ZN-VAV-Terminal .
+    brick:isFedBy bdg:Perimeter_top_ZN_1-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 8635.46 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 0.945 ] .
 
 bdg:Perimeter_top_ZN_2-ZN a brick:HVAC_Zone ;
     rdfs:label "PERIMETER_TOP_ZN_2",
         "Perimeter_top_ZN_2-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 131.3 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 12661.67 ] ;
     brick:hasPart <http://example.org/building/Room/698438>,
         <http://example.org/building/Room/698439>,
         <http://example.org/building/Room/791155> ;
-    brick:isFedBy bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal .
+    brick:isFedBy bdg:Perimeter_top_ZN_2-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 5703.03 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 0.919 ] .
 
 bdg:Perimeter_top_ZN_3-ZN a brick:HVAC_Zone ;
     rdfs:label "PERIMETER_TOP_ZN_3",
         "Perimeter_top_ZN_3-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 207.3 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 9584.08 ] ;
     brick:hasPart <http://example.org/building/Room/698452>,
         <http://example.org/building/Room/703562> ;
-    brick:isFedBy bdg:Perimeter_top_ZN_3-ZN-VAV-Terminal .
+    brick:isFedBy bdg:Perimeter_top_ZN_3-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 8705.69 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 0.695 ] .
 
 bdg:Perimeter_top_ZN_4-ZN a brick:HVAC_Zone ;
     rdfs:label "PERIMETER_TOP_ZN_4",
         "Perimeter_top_ZN_4-ZN" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 131.3 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 13135.92 ] ;
     brick:hasPart <http://example.org/building/Room/698440>,
         <http://example.org/building/Room/698448>,
         <http://example.org/building/Room/698449>,
         <http://example.org/building/Room/698450>,
         <http://example.org/building/Room/698451>,
         <http://example.org/building/Room/698453> ;
-    brick:isFedBy bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal .
+    brick:isFedBy bdg:Perimeter_top_ZN_4-ZN-VAV-Terminal ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 5652.76 ] ;
+    brick:volume [ brick:hasUnit unit:M3 ;
+            brick:value 0.953 ] .
 
 <http://example.org/building/Room/698349> a brick:Private_Office ;
     rdfs:label "224" ;
@@ -17890,23 +18181,41 @@ bdg:Perimeter_top_ZN_4-ZN a brick:HVAC_Zone ;
     rdfs:subClassOf brick:Luminaire ;
     skos:definition "Pendant"@en .
 
-bdg:5-Zone-PVAV a brick:AHU ;
-    rdfs:label "5-Zone-PVAV" ;
-    brick:hasLocation bdg:bdg .
-
-bdg:5-Zone-PVAV-1 a brick:AHU ;
-    rdfs:label "5-Zone-PVAV-1" ;
-    brick:hasLocation bdg:bdg .
-
-bdg:5-Zone-PVAV-2 a brick:AHU ;
-    rdfs:label "5-Zone-PVAV-2" ;
-    brick:hasLocation bdg:bdg .
-
 <http://example.org/building/LightingControlZone/227-1C> a brick:Lighting_Zone ;
     rdfs:label "227-1C" .
 
 <http://example.org/building/LightingControlZone/227-2C> a brick:Lighting_Zone ;
     rdfs:label "227-2C" .
+
+bdg:5-Zone-PVAV a brick:AHU ;
+    rdfs:label "5-Zone-PVAV" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 1660.7 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 146128.6 ] ;
+    brick:hasLocation bdg:bdg ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 5122.3 ] .
+
+bdg:5-Zone-PVAV-1 a brick:AHU ;
+    rdfs:label "5-Zone-PVAV-1" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 1660.7 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 117450.1 ] ;
+    brick:hasLocation bdg:bdg ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 9627.0 ] .
+
+bdg:5-Zone-PVAV-2 a brick:AHU ;
+    rdfs:label "5-Zone-PVAV-2" ;
+    brick:area [ brick:hasUnit unit:M2 ;
+            brick:value 1660.7 ] ;
+    brick:coolingCapacity [ brick:hasUnit unit:W ;
+            brick:value 124354.4 ] ;
+    brick:hasLocation bdg:bdg ;
+    brick:ratedPowerOutput [ brick:hasUnit unit:W ;
+            brick:value 8731.5 ] .
 
 <http://example.org/building/LightingControlZone/303-1C> a brick:Lighting_Zone ;
     rdfs:label "303-1C" .
