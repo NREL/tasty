@@ -148,7 +148,7 @@ def get_initial_mapping(g1, g2, typ, ns):
         g2ents.pop(g2idx)
 
 
-def get_pairs_by_type(g1, g2, typ, ns, mapping=None) -> List[Tuple[URIRef, URIRef]]:
+def get_pairs_by_type(g1, g2, typ, ns, mapping=None) -> List[Tuple[EntityFeature, EntityFeature]]:
 
     # assume no covariancy (yet)
     g1ents = list(g1.subjects(RDF.type, typ))
@@ -172,7 +172,7 @@ def get_pairs_by_type(g1, g2, typ, ns, mapping=None) -> List[Tuple[URIRef, URIRe
     # same # of entities of type 'typ' in g1 and g2.
     # Find the most likely bipartite matching
     max_score = float('-inf')
-    max_matching = None
+    max_matching = []
     for matching in all_pairs_of_entities(g1ents, g2ents):
         score = score_matching(list(matching))
         if score > max_score:
@@ -181,23 +181,28 @@ def get_pairs_by_type(g1, g2, typ, ns, mapping=None) -> List[Tuple[URIRef, URIRe
             print('-'*30)
             max_score = score
             max_matching = matching[:]
-    print(max_matching)
-    print(max_score)
-
-    return []
+    if mapping is not None:
+        for e1, e2 in mapping.items():
+            max_matching.append((get_entity_feature_vector(e1, g1, BLDG), get_entity_feature_vector(e2, g2, BLDG)))
+    return max_matching
 
 
 g1 = brickschema.Graph().load_file("../nrel/mediumOffice_brick.ttl")
 g2 = brickschema.Graph().load_file("../pnnl/mediumOffice_brick.ttl")
 
 def merge(g1, g2, ns):
+    G = g1 + g2
     types = get_common_types(g1, g2, ns)
     for typ in types:
         mapping = get_initial_mapping(g1, g2, typ, ns)
-        get_pairs_by_type(g1, g2, typ, ns, mapping=mapping)
+        matching = get_pairs_by_type(g1, g2, typ, ns, mapping=mapping)
+        for e1, e2 in matching:
+            unify_entities(G, e1.uri, e2.uri)
+    return G
 
-merge(g1, g2, BLDG)
+
+G = merge(g1, g2, BLDG)
 
 # G = merge_type_cluster(g1, g2, BLDG, similarity_threshold=0.1)
-# validate(G)
-# G.serialize("merged.ttl", format="ttl")
+validate(G)
+G.serialize("merged.ttl", format="ttl")
