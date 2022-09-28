@@ -15,7 +15,6 @@ from typing import List, Tuple, Optional
 
 colorama_init()
 DEBUG = False
-BLDG = Namespace("http://example.org/building/")
 
 
 @dataclass
@@ -201,8 +200,8 @@ def merge(g1, g2, ns):
     return G
 
 
-G = merge(g1, g2, BLDG)
-
-# G = merge_type_cluster(g1, g2, BLDG, similarity_threshold=0.1)
-validate(G)
-G.serialize("merged.ttl", format="ttl")
+if __name__ == '__main__':
+    BLDG = Namespace("http://example.org/building/")
+    G = merge(g1, g2, BLDG)
+    validate(G)
+    G.serialize("merged.ttl", format="ttl")
