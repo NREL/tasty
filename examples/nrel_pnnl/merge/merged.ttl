@@ -17884,13 +17884,14 @@ bdg:Perimeter_mid_ZN_1-ZN a brick:HVAC_Zone ;
             brick:value 0.917 ] .
 
 bdg:Perimeter_mid_ZN_2-ZN a brick:HVAC_Zone ;
-    rdfs:label "PERIMETER_MID_ZN_4",
+    rdfs:label "PERIMETER_MID_ZN_2",
         "Perimeter_mid_ZN_2-ZN" ;
     brick:area [ brick:hasUnit unit:M2 ;
             brick:value 131.3 ] ;
     brick:coolingCapacity [ brick:hasUnit unit:W ;
             brick:value 12601.55 ] ;
-    brick:hasPart <http://example.org/building/Room/702350> ;
+    brick:hasPart <http://example.org/building/Room/698346>,
+        <http://example.org/building/Room/702344> ;
     brick:isFedBy bdg:Perimeter_mid_ZN_2-ZN-VAV-Terminal ;
     brick:ratedPowerOutput [ brick:hasUnit unit:W ;
             brick:value 4849.6 ] ;
@@ -17918,14 +17919,13 @@ bdg:Perimeter_mid_ZN_3-ZN a brick:HVAC_Zone ;
             brick:value 0.66 ] .
 
 bdg:Perimeter_mid_ZN_4-ZN a brick:HVAC_Zone ;
-    rdfs:label "PERIMETER_MID_ZN_2",
+    rdfs:label "PERIMETER_MID_ZN_4",
         "Perimeter_mid_ZN_4-ZN" ;
     brick:area [ brick:hasUnit unit:M2 ;
             brick:value 131.3 ] ;
     brick:coolingCapacity [ brick:hasUnit unit:W ;
             brick:value 12843.24 ] ;
-    brick:hasPart <http://example.org/building/Room/698346>,
-        <http://example.org/building/Room/702344> ;
+    brick:hasPart <http://example.org/building/Room/702350> ;
     brick:isFedBy bdg:Perimeter_mid_ZN_4-ZN-VAV-Terminal ;
     brick:ratedPowerOutput [ brick:hasUnit unit:W ;
             brick:value 4776.82 ] ;
