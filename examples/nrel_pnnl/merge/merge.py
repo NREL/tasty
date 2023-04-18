@@ -140,11 +140,14 @@ def get_initial_mapping(g1, g2, typ, ns):
         inp = input("> ")
         if inp == 'done':
             return mapping
+        if not inp:
+            continue
         parts = inp.split(' ')
         g1idx, g2idx = int(parts[0]), int(parts[1])
         mapping[g1ents[g1idx].uri] = g2ents[g2idx].uri
         g1ents.pop(g1idx)
         g2ents.pop(g2idx)
+    return mapping
 
 
 def get_pairs_by_type(g1, g2, typ, ns, mapping=None) -> List[Tuple[EntityFeature, EntityFeature]]:
